@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
     
+/*
+    Test
     Tilemap currentTilemap;
     
     void Awake()
@@ -29,4 +32,34 @@ public class Player : MonoBehaviour
             }
         }
     }
+*/
+
+
+    Rigidbody2D rigidBody2D;
+    float h;
+
+
+    [SerializeField] float speed;
+
+    void Awake()
+    {
+        rigidBody2D = GetComponent<Rigidbody2D>();
+    }
+    
+    void Update()
+    {        
+        
+    }
+
+    void FixedUpdate()
+    {
+        h = Input.GetAxisRaw("Horizontal");
+        Move(h);
+    }
+
+    void Move(float h)
+    {
+        rigidBody2D.velocity = new Vector2(h * speed, rigidBody2D.velocity.y);
+    }
+    
 }
