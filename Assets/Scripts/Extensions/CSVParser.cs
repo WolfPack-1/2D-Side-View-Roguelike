@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
  
-public class CSVParser
+public static class CSVParser
 {
     const string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
     const string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
@@ -35,6 +35,9 @@ public class CSVParser
                 } else if (float.TryParse(value, out f)) {
                     finalvalue = f;
                 }
+
+                if (string.IsNullOrEmpty(finalvalue.ToString()))
+                    finalvalue = "0";
                 entry[header[j]] = finalvalue;
             }
             list.Add (entry);
