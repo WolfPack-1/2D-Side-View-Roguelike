@@ -46,14 +46,23 @@ public class Player : MonoBehaviour
             if (rigidBody2D == null)
                 return false;
 
-            RaycastHit2D[] hits = Physics2D.LinecastAll(transform.position, transform.position + Vector3.down * 1.2f);
+            RaycastHit2D[] hits = Physics2D.LinecastAll(transform.position, transform.position + Vector3.down * 1.1f);
             return hits.Any(hit => hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"));
         }
     }
 
-    [SerializeField] float speed;
-    [SerializeField] float jumpPower;
+    public bool CanJump
+    {
+        get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime; }
+    }
 
+    [SerializeField] [Range(1f, 5f)] float speed;
+    [SerializeField] [Range(5f, 15f)] float jumpPower;
+    [SerializeField] [Range(0.1f, 1f)] float jumpCoolTime;
+
+
+    float lastJumpTime;
+    
     void Awake()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
@@ -61,7 +70,7 @@ public class Player : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && CanJump)
         {
             Jump();
         }
@@ -80,6 +89,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
+        lastJumpTime = Time.time;
         rigidBody2D.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
 
