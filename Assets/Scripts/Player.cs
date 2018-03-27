@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -38,8 +39,20 @@ public class Player : MonoBehaviour
     Rigidbody2D rigidBody2D;
     float h;
 
+    public bool IsGrounded
+    {
+        get
+        {
+            if (rigidBody2D == null)
+                return false;
+
+            RaycastHit2D[] hits = Physics2D.LinecastAll(transform.position, transform.position + Vector3.down * 1.2f);
+            return hits.Any(hit => hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"));
+        }
+    }
 
     [SerializeField] float speed;
+    [SerializeField] float jumpPower;
 
     void Awake()
     {
@@ -47,8 +60,11 @@ public class Player : MonoBehaviour
     }
     
     void Update()
-    {        
-        
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
+        {
+            Jump();
+        }
     }
 
     void FixedUpdate()
@@ -61,5 +77,10 @@ public class Player : MonoBehaviour
     {
         rigidBody2D.velocity = new Vector2(h * speed, rigidBody2D.velocity.y);
     }
-    
+
+    void Jump()
+    {
+        rigidBody2D.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+    }
+
 }
