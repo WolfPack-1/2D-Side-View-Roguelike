@@ -5,6 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
+    DataManager dataManager;
     
+    void Awake()
+    {
+        dataManager = FindObjectOfType<DataManager>();
+        
+        dataManager.LoadData();
+    }
 
 }
