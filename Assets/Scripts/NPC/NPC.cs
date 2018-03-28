@@ -10,6 +10,8 @@ public class NPC : MonoBehaviour
     public void Init(NPCStruct npcStruct)
     {
         this.npcStruct = npcStruct;
+
+        transform.name = npcStruct.nameKor;
     }    
 
 }

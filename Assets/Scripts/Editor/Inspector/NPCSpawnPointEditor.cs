@@ -48,7 +48,7 @@ public class NPCSpawnPointEditor : Editor
         EditorGUILayout.LabelField("CoolTime", spawnPoint.CurrentNpcStruct.coolTime.ToString());
         EditorGUILayout.LabelField("Skill", spawnPoint.CurrentNpcStruct.skill.ToString());
         EditorGUILayout.LabelField("HP", spawnPoint.CurrentNpcStruct.hp.ToString());
-        EditorGUILayout.LabelField("Grade", spawnPoint.CurrentNpcStruct.grade);
+        EditorGUILayout.LabelField("Grade", spawnPoint.CurrentNpcStruct.grade.ToString());
         EditorGUILayout.LabelField("Recognize", spawnPoint.CurrentNpcStruct.recognize.ToString());
         EditorGUILayout.LabelField("Recognize Value", spawnPoint.CurrentNpcStruct.recognizeValue.ToString());
 
@@ -63,6 +63,11 @@ public class NPCSpawnPointEditor : Editor
         StickSpawnerToGround();
         SetTransform();
         serObj.ApplyModifiedProperties();
+    }
+    
+    void OnSceneGUI()
+    {
+        DrawHandle();
     }
 
     void SetTransform()
@@ -94,11 +99,6 @@ public class NPCSpawnPointEditor : Editor
             spawnPoint.transform.position = new Vector2(spawnPoint.transform.position.x, hit.point.y + 1.1f);
         }
         
-    }
-
-    void OnSceneGUI()
-    {
-        DrawHandle();
     }
 
     void DrawHandle()

@@ -1,0 +1,1 @@
+﻿public enum GradeEnum {mob, boss, npc}
