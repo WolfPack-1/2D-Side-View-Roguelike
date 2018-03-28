@@ -1,12 +1,4 @@
-﻿열,컬럼,설명,
-A,cid,기믹을 구분하기 위한 Int형 구분자,
-B,name,기믹을 구분하기 위한 String형 구분자,
-C,fuction_type,기믹의 타입 - String,
-D,fuction_value,기믹의 타입에 종속된 int형 값,
-,,,
-fuction_type의 예시,,,
-fuction_type,,설명,종속된 int 값
-Damage,,PC에게 {int}만큼 데미지를 준다.,
-MovetoRight,,PC를 {int} 타일 만큼 오른쪽으로 밀어낸다.,
-MovetoLeft,,PC를 {int} 타일 만큼 왼쪽으로 밀어낸다.,
-,,,
+cid,name,function_type,function_value
+1000,Spike,Damage,1
+2000,Move_01,MovetoRight,1
+2001,Move_02,MovetoLeft,1

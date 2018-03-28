@@ -1,15 +1,3 @@
-열,컬럼,설명,비고
-A,cid,NPC을 구분하기 위한 Int형 구분자,
-B,name,NPC을 구분하기 위한 String형 구분자,
-C,name_kor,게임에 노출될 Npc의 이름,
-D,animset,Npc에 종속된 Animset,
-E,attack_type,Npc의 공격 타입,"Melee , Range"
-F,attack_value,공격 타입에 따른 사거리,int
-G,attack_fuction,공격의 부가 기능,string
-H,attack_damage,npc의 공격력,int
-I,cooltime,npc의 기본 공격 쿨타임,int
-J,skill,npc가 가지고 있는 스킬,"{(skill_01), (skill_02), …(Skill_n)}"
-K,hp,npc의 총 체력,int
-L,grade,npc의 등급,string
-M,recognize,인식 상태,"TRUE, FALSE"
-N,recognize_value,인식 범위,int
+cid,name,name_kor,animset,attack_type,attack_value,attack_function,attack_damage,cooltime,skill,hp,grade,recognize,recognize_value
+1001,no107_01,넘버107,,melee,1,nontarget,1,1,{(19_DeadlyAttack)},10,mob,TRUE,5
+1002,no107_02,넘버108,,range,1,nontarget,1,1,{(19_CriticalHit)},10,mob,TRUE,5
