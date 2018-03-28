@@ -61,8 +61,26 @@ public class NPCSpawnPointEditor : Editor
         }
         
         StickSpawnerToGround();
-        serObj.targetObject.name = "NPC Spawn Point : " + npcCategory[selectNPCInt];
+        SetTransform();
         serObj.ApplyModifiedProperties();
+    }
+
+    void SetTransform()
+    {
+        serObj.targetObject.name = "NPC Spawn Point : " + npcCategory[selectNPCInt];
+        GameObject holders = GameObject.Find("Holders");
+        if (holders == null)
+        {
+            holders = new GameObject("Holders");
+        }
+        Transform holder = GameObject.Find("Holders").transform.Find("NPC Spawn Point Holder");
+        if (holder == null)
+        {
+            holder = new GameObject("NPC Spawn Point Holder").transform;
+            holder.transform.SetParent(holders.transform);
+        }
+        
+        spawnPoint.transform.SetParent(holder.transform);
     }
 
     void StickSpawnerToGround()
@@ -73,10 +91,19 @@ public class NPCSpawnPointEditor : Editor
         RaycastHit2D hit = Physics2D.Raycast(spawnPoint.transform.position, Vector2.down, 10f);
         if (hit.collider && hit.collider.gameObject.layer == layerMask)
         {
-            spawnPoint.transform.position = new Vector2(spawnPoint.transform.position.x, hit.point.y + 1.2f);
+            spawnPoint.transform.position = new Vector2(spawnPoint.transform.position.x, hit.point.y + 1.1f);
         }
-
+        
     }
-    
+
+    void OnSceneGUI()
+    {
+        DrawHandle();
+    }
+
+    void DrawHandle()
+    {
+        Handles.DrawWireCube(spawnPoint.transform.position, new Vector2(1f, 2f));
+    }
     
 }
