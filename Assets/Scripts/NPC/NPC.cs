@@ -5,6 +5,11 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
 
+    [SerializeField] NPCStruct npcStruct;
     
+    public void Init(NPCStruct npcStruct)
+    {
+        this.npcStruct = npcStruct;
+    }    
 
 }

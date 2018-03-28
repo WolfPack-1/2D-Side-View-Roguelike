@@ -26,6 +26,7 @@ public class NPCSpawnPointEditor : Editor
         serObj = new SerializedObject(target);
         npcStruct = serObj.FindProperty("CurrentNpcStruct");
         npcCategory = data.Select(I => I.nameKor).ToArray();
+        spawnPoint.tag = "NPC Spawn Point";
     }
 
     public override void OnInspectorGUI()
@@ -50,8 +51,32 @@ public class NPCSpawnPointEditor : Editor
         EditorGUILayout.LabelField("Grade", spawnPoint.CurrentNpcStruct.grade);
         EditorGUILayout.LabelField("Recognize", spawnPoint.CurrentNpcStruct.recognize.ToString());
         EditorGUILayout.LabelField("Recognize Value", spawnPoint.CurrentNpcStruct.recognizeValue.ToString());
-                
+
+        if (Application.isPlaying)
+        {
+            if (GUILayout.Button("NPC 스폰"))
+            {
+                spawnPoint.Spawn();
+            }   
+        }
+        
+        StickSpawnerToGround();
         serObj.targetObject.name = "NPC Spawn Point : " + npcCategory[selectNPCInt];
         serObj.ApplyModifiedProperties();
     }
+
+    void StickSpawnerToGround()
+    {
+        spawnPoint.transform.rotation = Quaternion.identity;
+
+        int layerMask = LayerMask.NameToLayer("Ground");
+        RaycastHit2D hit = Physics2D.Raycast(spawnPoint.transform.position, Vector2.down, 10f);
+        if (hit.collider && hit.collider.gameObject.layer == layerMask)
+        {
+            spawnPoint.transform.position = new Vector2(spawnPoint.transform.position.x, hit.point.y + 1.2f);
+        }
+
+    }
+    
+    
 }

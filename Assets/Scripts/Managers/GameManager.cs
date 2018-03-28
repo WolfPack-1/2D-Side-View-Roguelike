@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         dataManager = FindObjectOfType<DataManager>();
-        
-        dataManager.LoadData();
     }
 
 }
