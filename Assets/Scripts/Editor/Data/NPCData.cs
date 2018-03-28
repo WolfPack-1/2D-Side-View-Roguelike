@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -32,7 +33,7 @@ public class NPCData : ScriptableObject
                 float.Parse(line["cooltime"].ToString()),
                 line["skill"],
                 int.Parse(line["hp"].ToString()),
-                line["grade"].ToString(),
+                (GradeEnum)Enum.Parse(typeof(GradeEnum),line["grade"].ToString()),
                 bool.Parse(line["recognize"].ToString()),
                 int.Parse(line["recognize_value"].ToString())
             );
