@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class NPCSpawnPoint : MonoBehaviour
 {
-    
-    
+
+
+    public NPCStruct CurrentNpcStruct;
 
 
 }
