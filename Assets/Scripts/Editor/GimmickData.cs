@@ -22,7 +22,12 @@ public class GimmickData : ScriptableObject
         List<Dictionary<string, object>> csv = CSVParser.Read(Resources.Load<TextAsset>("Data/CSV/Gimmick"));
         foreach (Dictionary<string, object> line in csv)
         {
-            GimmickStruct gimmickStruct = new GimmickStruct((int)line["cid"], (string)line["name"], (string)line["fuction_type"], (int)line["fuction_value"]);
+            GimmickStruct gimmickStruct = new GimmickStruct(
+                (int)line["cid"], 
+                (string)line["name"], 
+                (string)line["function_type"], 
+                (int)line["function_value"]
+            );
             Data.Add(gimmickStruct);    
         }
 

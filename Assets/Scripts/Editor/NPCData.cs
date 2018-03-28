@@ -31,7 +31,8 @@ public class NPCData : ScriptableObject
                 line["attack_function"].ToString(),
                 float.Parse(line["attack_damage"].ToString()),
                 float.Parse(line["cooltime"].ToString()),
-                line["skill"], int.Parse(line["hp"].ToString()),
+                line["skill"],
+                int.Parse(line["hp"].ToString()),
                 line["grade"].ToString(),
                 bool.Parse(line["recognize"].ToString()),
                 int.Parse(line["recognize_value"].ToString())
