@@ -14,7 +14,7 @@ public class NPCSpawnPointEditor : Editor
 
     NPCSpawnPoint spawnPoint;
     SerializedObject serObj;
-    SerializedProperty npcStruct;
+    SerializedProperty npcStructIndex;
     int selectNPCInt;
     string[] npcCategory;
     
@@ -24,10 +24,10 @@ public class NPCSpawnPointEditor : Editor
         data = Resources.Load<NPCData>("Data/ScriptableObject/NPC").Load();
         spawnPoint = (NPCSpawnPoint) target;
         serObj = new SerializedObject(target);
-        npcStruct = serObj.FindProperty("CurrentNpcStruct");
+        npcStructIndex = serObj.FindProperty("npcStructIndex");
         npcCategory = data.Select(I => I.nameKor).ToArray();
         spawnPoint.tag = "NPC Spawn Point";
-        selectNPCInt = data.FindIndex(I => I.name == spawnPoint.CurrentNpcStruct.name);
+        selectNPCInt = npcStructIndex.intValue;
     }
 
     public override void OnInspectorGUI()
@@ -36,7 +36,9 @@ public class NPCSpawnPointEditor : Editor
         
         selectNPCInt = EditorGUILayout.Popup("NPC 선택", selectNPCInt, npcCategory, EditorStyles.popup);
 
+        npcStructIndex.intValue = selectNPCInt;
         spawnPoint.CurrentNpcStruct = data[selectNPCInt];
+        
         
         EditorGUILayout.LabelField("ID", spawnPoint.CurrentNpcStruct.cid.ToString());
         EditorGUILayout.LabelField("Name", spawnPoint.CurrentNpcStruct.name);

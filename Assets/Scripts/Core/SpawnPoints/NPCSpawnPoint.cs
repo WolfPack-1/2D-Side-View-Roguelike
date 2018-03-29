@@ -5,13 +5,21 @@ using UnityEngine;
 public class NPCSpawnPoint : MonoBehaviour
 {
 
-    public NPCStruct CurrentNpcStruct { get; set; }
+    DataManager dataManager;
+    [SerializeField] int npcStructIndex;
+    public NPCStruct CurrentNpcStruct;
     public Vector2 SpawnPosition
     {
         get
         {
             return transform.position;            
         }
+    }
+
+    void Awake()
+    {
+        dataManager = FindObjectOfType<DataManager>();
+        CurrentNpcStruct = dataManager.NPCData.Data[npcStructIndex];
     }
 
     public void Spawn()
