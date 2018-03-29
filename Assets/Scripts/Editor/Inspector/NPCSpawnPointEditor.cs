@@ -27,6 +27,7 @@ public class NPCSpawnPointEditor : Editor
         npcStruct = serObj.FindProperty("CurrentNpcStruct");
         npcCategory = data.Select(I => I.nameKor).ToArray();
         spawnPoint.tag = "NPC Spawn Point";
+        selectNPCInt = data.FindIndex(I => I.name == spawnPoint.CurrentNpcStruct.name);
     }
 
     public override void OnInspectorGUI()
