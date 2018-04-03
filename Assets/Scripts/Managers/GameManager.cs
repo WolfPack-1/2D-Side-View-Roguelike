@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         dataManager = FindObjectOfType<DataManager>();
+        foreach (AttackTypeMelee attackTypeMelee in TypeParser.Parsing("{(melee, 2, 1, 0.5), (melee, 3, 2, 0.1)}", (x) => new AttackTypeMelee(x)))
+        {
+            Debug.Log(attackTypeMelee.Damage);
+        }
     }
 
 }
