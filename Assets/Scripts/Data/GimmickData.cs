@@ -22,10 +22,10 @@ public class GimmickData : ScriptableObject
         foreach (Dictionary<string, object> line in csv)
         {
             GimmickStruct gimmickStruct = new GimmickStruct(
-                (int)line["cid"], 
+                int.Parse(line["cid"].ToString()), 
                 (string)line["name"], 
                 (string)line["function_type"], 
-                (int)line["function_value"]
+                int.Parse(line["function_value"].ToString())
             );
             Data.Add(gimmickStruct);    
         }

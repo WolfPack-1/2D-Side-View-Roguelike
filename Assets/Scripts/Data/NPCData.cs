@@ -28,13 +28,13 @@ public class NPCData : ScriptableObject
                 line["animset"],
                 line["attack_type"].ToString(),
                 int.Parse(line["attack_value"].ToString()),
-                line["attack_function"].ToString(),
+                (TargetEnum) Enum.Parse(typeof(TargetEnum),line["attack_function"].ToString()),
                 float.Parse(line["attack_damage"].ToString()),
                 float.Parse(line["cooltime"].ToString()),
                 line["skill"],
                 int.Parse(line["hp"].ToString()),
                 (GradeEnum)Enum.Parse(typeof(GradeEnum),line["grade"].ToString()),
-                bool.Parse(line["recognize"].ToString()),
+                (line["recognize"].ToString() == "1"),
                 int.Parse(line["recognize_value"].ToString())
             );
             Data.Add(npcStruct);

@@ -46,7 +46,7 @@ public class NPCSpawnPointEditor : Editor
         EditorGUILayout.LabelField("AnimSet", spawnPoint.CurrentNpcStruct.animSet.ToString());
         EditorGUILayout.LabelField("AttackType", spawnPoint.CurrentNpcStruct.attackType);
         EditorGUILayout.LabelField("AttackValue", spawnPoint.CurrentNpcStruct.attackValue.ToString());
-        EditorGUILayout.LabelField("AttackFunction", spawnPoint.CurrentNpcStruct.attackFunction);
+        EditorGUILayout.LabelField("AttackFunction", spawnPoint.CurrentNpcStruct.attackFunction.ToString());
         EditorGUILayout.LabelField("AttackDamage", spawnPoint.CurrentNpcStruct.attackDamage.ToString());
         EditorGUILayout.LabelField("CoolTime", spawnPoint.CurrentNpcStruct.coolTime.ToString());
         EditorGUILayout.LabelField("Skill", spawnPoint.CurrentNpcStruct.skill.ToString());

@@ -20,7 +20,7 @@ public class PlaceDivisionData : ScriptableObject
         {
             PlaceDivisionStruct placeDivisionStruct = new PlaceDivisionStruct
             (
-                (int)line["ID"],
+                int.Parse(line["ID"].ToString()),
                 (string)line["Place"],
                 (string)line["Name"]
             );

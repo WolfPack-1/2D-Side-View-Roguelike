@@ -9,7 +9,7 @@ public struct NPCStruct
     public object animSet;
     public string attackType;
     public int attackValue;
-    public string attackFunction;
+    public TargetEnum attackFunction;
     public float attackDamage;
     public float coolTime;
     public object skill;
@@ -19,7 +19,7 @@ public struct NPCStruct
     public int recognizeValue;
 
 
-    public NPCStruct(int cid, string name, string nameKor, object animSet, string attackType, int attackValue, string attackFunction, float attackDamage, float coolTime, object skill, int hp, GradeEnum grade, bool recognize, int recognizeValue)
+    public NPCStruct(int cid, string name, string nameKor, object animSet, string attackType, int attackValue, TargetEnum attackFunction, float attackDamage, float coolTime, object skill, int hp, GradeEnum grade, bool recognize, int recognizeValue)
     {
         this.cid = cid;
         this.name = name;
