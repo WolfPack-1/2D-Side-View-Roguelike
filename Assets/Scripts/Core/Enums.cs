@@ -1,4 +1,4 @@
-﻿public enum GradeEnum {PC, Normal_NPC, Mob, Boss}
+﻿public enum GradeEnum {PC, NPC, Mob, Boss}
 
 public enum TargetEnum { target, nontarget }
 
