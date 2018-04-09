@@ -160,13 +160,16 @@ MonoBehaviour:
     nameKor: "\uC81C\uC774\uD06C"
     attackType: range
     attackValue: 5
-    attackFunction: target
+    attackFunction: 0
     attackDamage: 5
     coolTime: 1
     hp: 10
-    grade: 0
+    grade: 2
     recognize: 1
     recognizeValue: 5
+    speed: 1
+    attackSpeed: 1
+    dropTable: '{(19101, 100)}'
 --- !u!1 &13243586
 GameObject:
   m_ObjectHideFlags: 0
@@ -3052,13 +3055,16 @@ MonoBehaviour:
     nameKor: "\uB118\uBC84107"
     attackType: melee
     attackValue: 1
-    attackFunction: nontarget
+    attackFunction: 1
     attackDamage: 5
     coolTime: 1
     hp: 10
-    grade: 0
+    grade: 2
     recognize: 1
     recognizeValue: 3
+    speed: 1
+    attackSpeed: 1
+    dropTable: '{(19101, 100)}'
 --- !u!1 &1971158262
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,7 +35,10 @@ public class NPCData : ScriptableObject
                 int.Parse(line["hp"].ToString()),
                 (GradeEnum)Enum.Parse(typeof(GradeEnum),line["grade"].ToString()),
                 (line["recognize"].ToString() == "1"),
-                int.Parse(line["recognize_value"].ToString())
+                int.Parse(line["recognize_value"].ToString()),
+                float.Parse(line["speed"].ToString()),
+                float.Parse(line["attackspeed"].ToString()),
+                line["drop_table"].ToString()
             );
             Data.Add(npcStruct);
         }

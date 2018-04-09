@@ -17,9 +17,12 @@ public struct NPCStruct
     public GradeEnum grade;
     public bool recognize;
     public int recognizeValue;
+    public float speed;
+    public float attackSpeed;
+    public string dropTable;
 
 
-    public NPCStruct(int cid, string name, string nameKor, object animSet, string attackType, int attackValue, TargetEnum attackFunction, float attackDamage, float coolTime, object skill, int hp, GradeEnum grade, bool recognize, int recognizeValue)
+    public NPCStruct(int cid, string name, string nameKor, object animSet, string attackType, int attackValue, TargetEnum attackFunction, float attackDamage, float coolTime, object skill, int hp, GradeEnum grade, bool recognize, int recognizeValue, float speed, float attackSpeed, string dropTable)
     {
         this.cid = cid;
         this.name = name;
@@ -35,10 +38,13 @@ public struct NPCStruct
         this.grade = grade;
         this.recognize = recognize;
         this.recognizeValue = recognizeValue;
+        this.speed = speed;
+        this.attackSpeed = attackSpeed;
+        this.dropTable = dropTable;
     }
 
     public override string ToString()
     {
-        return string.Format("{0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12} | {13}", cid, name, nameKor, animSet, attackType, attackValue, attackFunction, attackDamage, coolTime, skill, hp, grade, recognize, recognizeValue);
+        return string.Format("{0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12} | {13} | {14} | {15} | {16}", cid, name, nameKor, animSet, attackType, attackValue, attackFunction, attackDamage, coolTime, skill, hp, grade, recognize, recognizeValue, speed, attackSpeed, dropTable);
     }
 }

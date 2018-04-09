@@ -7,9 +7,9 @@ public struct AbnormalStruct
     public string name;
     public string nameKor;
     public string abnormalType;
-    public string target;
+    public AbnormalTargetEnum target;
 
-    public AbnormalStruct(int cid, string name, string nameKor, string abnormalType, string target)
+    public AbnormalStruct(int cid, string name, string nameKor, string abnormalType, AbnormalTargetEnum target)
     {
         this.cid = cid;
         this.name = name;

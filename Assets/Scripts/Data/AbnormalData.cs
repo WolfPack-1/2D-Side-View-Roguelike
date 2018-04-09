@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ public class AbnormalData : ScriptableObject
                 line["name"].ToString(),
                 line["name_kor"].ToString(),
                 line["abnormal_Type"].ToString(),
-                line["target"].ToString()
+                (AbnormalTargetEnum)Enum.Parse(typeof(AbnormalTargetEnum), line["target"].ToString())
             );
             Data.Add(abnormalStruct);
         }
