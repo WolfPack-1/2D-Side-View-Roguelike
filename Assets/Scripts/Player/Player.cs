@@ -1,43 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Player : MonoBehaviour
+public class Player : LivingEntity
 {
-    
-/*
-    Test
-    Tilemap currentTilemap;
-    
-    void Awake()
-    {
-        currentTilemap = GameObject.Find("Grid").transform.Find("Ground").GetComponent<Tilemap>();
-    }
-    
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        Vector3 hitPosition = Vector3.zero;
-        if (currentTilemap != null && currentTilemap.gameObject == col.gameObject)
-        {
-            foreach (ContactPoint2D hit in col.contacts)
-            {
-                hitPosition.x = hit.point.x - 0.01f * hit.normal.x;
-                hitPosition.y = hit.point.y - 0.01f * hit.normal.y;
-                Vector3Int cellPosition = currentTilemap.WorldToCell(hitPosition);
-                CustomTile customTile = currentTilemap.GetTile<CustomTile>(cellPosition);
-                if(customTile != null)
-                    customTile.Action();
-            }
-        }
-    }
-*/
-
-
+    DataManager dataManager;
     Rigidbody2D rigidBody2D;
-    float h;
 
     public bool IsGrounded
     {
@@ -50,22 +22,47 @@ public class Player : MonoBehaviour
             return hits.Any(hit => hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"));
         }
     }
-
     public bool CanJump
     {
         get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime; }
     }
 
-    [SerializeField] [Range(1f, 5f)] float speed;
+    [Header("Debug")]
     [SerializeField] [Range(5f, 15f)] float jumpPower;
     [SerializeField] [Range(0.1f, 1f)] float jumpCoolTime;
 
-
     float lastJumpTime;
     
-    void Awake()
+    #region PlayerStats
+    
+    public float HP { get { return Stats[StatsEnum.HP]; } }
+    public float ATK { get { return Stats[StatsEnum.ATK]; } }
+    public float DEF { get { return Stats[StatsEnum.DEF]; } }
+    public float ATS { get { return Stats[StatsEnum.ATS]; } }
+    public float SPD { get { return Stats[StatsEnum.SPD]; } }
+    
+    #endregion
+    
+    public override void Awake()
     {
+        base.Awake();
+        dataManager = FindObjectOfType<DataManager>();
         rigidBody2D = GetComponent<Rigidbody2D>();
+    }
+
+    void Start()
+    {
+        //Debug
+        Init(dataManager.LivingEntityData.Data[0]);
+    }
+
+    public void Init(LivingEntityStruct livingEntityStruct)
+    {
+        AddStat(StatsEnum.HP, livingEntityStruct.hp);
+        AddStat(StatsEnum.ATK, livingEntityStruct.atk);
+        AddStat(StatsEnum.DEF, livingEntityStruct.def);
+        AddStat(StatsEnum.ATS, livingEntityStruct.ats);
+        AddStat(StatsEnum.SPD, livingEntityStruct.spd);
     }
     
     void Update()
@@ -78,13 +75,13 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        h = Input.GetAxisRaw("Horizontal");
+        float h = Input.GetAxisRaw("Horizontal");
         Move(h);
     }
 
     void Move(float h)
     {
-        rigidBody2D.velocity = new Vector2(h * speed, rigidBody2D.velocity.y);
+        rigidBody2D.velocity = new Vector2(h * SPD, rigidBody2D.velocity.y);
     }
 
     void Jump()

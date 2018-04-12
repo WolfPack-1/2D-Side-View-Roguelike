@@ -1041,6 +1041,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5234a65ce7c5f2e4695dc28d2c40003b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  availableDirection:
+    U: 0
+    D: 0
+    L: 0
+    R: 0
 --- !u!1 &673340486
 GameObject:
   m_ObjectHideFlags: 0
@@ -2864,6 +2869,7 @@ GameObject:
   - component: {fileID: 851859358}
   - component: {fileID: 851859361}
   - component: {fileID: 851859362}
+  - component: {fileID: 851859363}
   - component: {fileID: 851859360}
   m_Layer: 0
   m_Name: Player
@@ -2978,6 +2984,19 @@ MonoBehaviour:
   speed: 3
   jumpPower: 10
   jumpCoolTime: 0.5
+--- !u!114 &851859363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 851859357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bfd08bd9fad4baa9090c1846a253a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills:
+  - {fileID: 0}
 --- !u!1 &1173933433
 GameObject:
   m_ObjectHideFlags: 0
