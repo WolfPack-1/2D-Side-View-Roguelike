@@ -170,6 +170,7 @@ MonoBehaviour:
     speed: 1
     attackSpeed: 1
     dropTable: '{(19101, 100)}'
+    armor: 0
 --- !u!1 &13243586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2981,7 +2982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c69c84d249a439429a368ba422bf27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
   jumpPower: 10
   jumpCoolTime: 0.5
 --- !u!114 &851859363
@@ -3084,6 +3084,7 @@ MonoBehaviour:
     speed: 1
     attackSpeed: 1
     dropTable: '{(19101, 100)}'
+    armor: 0
 --- !u!1 &1971158262
 GameObject:
   m_ObjectHideFlags: 0
@@ -3137,6 +3138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcData: {fileID: 11400000, guid: c71dcf9d9ce694b49878bce775300958, type: 2}
+  abnormalData: {fileID: 11400000, guid: a3f224ac13259e644a62b45dd454b74e, type: 2}
   gimmickData: {fileID: 11400000, guid: 6341aeda71fd52442a04b788bca01e9d, type: 2}
   placeDivisionData: {fileID: 11400000, guid: b89c4c6b810533341831974441926490, type: 2}
   skillData: {fileID: 11400000, guid: 2beeb65cae5cd9646beb3691b4b50263, type: 2}
+  livingEntityData: {fileID: 11400000, guid: f4fa5dcb666f8d941a29979c25c215bb, type: 2}

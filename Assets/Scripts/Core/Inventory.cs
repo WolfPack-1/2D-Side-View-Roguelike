@@ -8,6 +8,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] List<Skill> skills;
     public List<Skill> Skills { get { return skills; } }
     public int Capacity { get { return capacity; } }
+    public bool IsFull { get { return skills.Count <= capacity; } }
 
     public delegate void OnInventoryDelegate(Skill skill, bool success);
 

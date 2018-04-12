@@ -6,6 +6,6 @@ public enum SkillAttributeEnum { SB, GN, BM, PS, ET }
 
 public enum StackDecreaseTypeEnum { sec, all }
 
-public enum AbnormalTargetEnum { Target, Self, Faction }
+public enum AbnormalTargetEnum { Target, self, faction }
 
 public enum StatsEnum { HP, ATK, DEF, ATS, SPD, REC }

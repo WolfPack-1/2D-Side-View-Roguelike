@@ -8,9 +8,17 @@ using UnityEngine.Tilemaps;
 
 public class Player : LivingEntity
 {
+        
+    #region Components
+
+    PlayerInventory playerInventory;
     DataManager dataManager;
     Rigidbody2D rigidBody2D;
 
+    #endregion
+    
+    #region Public Variables
+    
     public bool IsGrounded
     {
         get
@@ -27,12 +35,22 @@ public class Player : LivingEntity
         get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime; }
     }
 
+    #endregion
+    
+    #region Private Variables
+    
+    float lastJumpTime;
+    
+    #endregion
+    
+    #region Debug
+    
     [Header("Debug")]
     [SerializeField] [Range(5f, 15f)] float jumpPower;
     [SerializeField] [Range(0.1f, 1f)] float jumpCoolTime;
 
-    float lastJumpTime;
-    
+    #endregion
+        
     #region PlayerStats
     
     public float HP { get { return Stats[StatsEnum.HP]; } }
@@ -43,11 +61,16 @@ public class Player : LivingEntity
     
     #endregion
     
+    //--------------------------------------------------------//
+    
+    #region Initialize
+    
     public override void Awake()
     {
         base.Awake();
         dataManager = FindObjectOfType<DataManager>();
         rigidBody2D = GetComponent<Rigidbody2D>();
+        playerInventory = GetComponent<PlayerInventory>();
     }
 
     void Start()
@@ -65,6 +88,10 @@ public class Player : LivingEntity
         AddStat(StatsEnum.SPD, livingEntityStruct.spd);
     }
     
+    #endregion
+    
+    #region Updates
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && CanJump)
@@ -79,6 +106,10 @@ public class Player : LivingEntity
         Move(h);
     }
 
+    #endregion
+    
+    #region Movements
+
     void Move(float h)
     {
         rigidBody2D.velocity = new Vector2(h * SPD, rigidBody2D.velocity.y);
@@ -89,5 +120,8 @@ public class Player : LivingEntity
         lastJumpTime = Time.time;
         rigidBody2D.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
+    
+    #endregion
+    
 
 }

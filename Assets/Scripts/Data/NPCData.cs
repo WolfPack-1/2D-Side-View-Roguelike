@@ -14,7 +14,7 @@ public class NPCData : ScriptableObject
     {
         ScriptableObjectExtension.CreateAsset<NPCData>();
     }
-
+    
     public List<NPCStruct> Load()
     {
         Data = new List<NPCStruct>();
@@ -38,7 +38,8 @@ public class NPCData : ScriptableObject
                 int.Parse(line["recognize_value"].ToString()),
                 float.Parse(line["speed"].ToString()),
                 float.Parse(line["attackspeed"].ToString()),
-                line["drop_table"].ToString()
+                line["drop_table"].ToString(),
+                float.Parse(line["armor"].ToString())
             );
             Data.Add(npcStruct);
         }
