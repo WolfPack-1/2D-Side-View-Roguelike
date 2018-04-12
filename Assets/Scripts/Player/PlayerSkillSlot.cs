@@ -6,12 +6,21 @@ public class PlayerSkillSlot : MonoBehaviour
 
     PlayerInventory playerInventory;
     public enum PlayerSkillKeySlotEnum { Q, W, E }
+
+    public delegate void OnPlayerSkillslotDelegate(Skill skill, bool success);
+
+    public event OnPlayerSkillslotDelegate OnSetSlot;
+    public event OnPlayerSkillslotDelegate OnDropSlot;
+    public event OnPlayerSkillslotDelegate OnDeleteSlot;
     
     [SerializeField] Skill[] skills = {null, null, null};
 
     void Awake()
     {
         playerInventory = GetComponent<PlayerInventory>();
+        OnSetSlot = delegate { };
+        OnDropSlot = delegate { };
+        OnDeleteSlot = delegate { };
     }
     
     public Skill GetSkill(PlayerSkillKeySlotEnum slotEnum)
@@ -24,11 +33,18 @@ public class PlayerSkillSlot : MonoBehaviour
         if (skills[(int) slotEnum] == null)
         {
             skills[(int) slotEnum] = skill;
+            
+            if(OnSetSlot != null)
+                OnSetSlot(skill, false);
             return false;
         }
 
-        ReturnToInventory(skills[(int) slotEnum]);
+        if (!SlotToInventory(slotEnum))
+            return false;
+        
         skills[(int) slotEnum] = skill;
+        if(OnSetSlot != null)
+            OnSetSlot(skill, true);
         return true;
     }
 
@@ -38,26 +54,31 @@ public class PlayerSkillSlot : MonoBehaviour
         {
             return false;
         }
-
+        
         playerInventory.GetSkill(skills[(int) slotEnum]);
         return true;
     }
 
-    public void DropSlot(PlayerSkillKeySlotEnum slotEnum, bool cube = true)
+    public void DropSlot(PlayerSkillKeySlotEnum slotEnum)
     {
         if (skills[(int) slotEnum] == null)
             return;
 
-        if (cube)
-        {
-            //Todo : 스킬 큐브로 드롭
-        }
+        //Todo : 스킬 큐브로 드롭
+
+        if(OnDropSlot != null)
+            OnDropSlot(skills[(int) slotEnum], true);
         skills[(int) slotEnum] = null;
     }
 
-    void ReturnToInventory(Skill skill)
+    public void DeleteSlot(PlayerSkillKeySlotEnum slotEnum)
     {
-        playerInventory.GetSkill(skill);
+        if (skills[(int) slotEnum] == null)
+            return;
+
+        if(OnDeleteSlot != null)
+            OnDeleteSlot(skills[(int) slotEnum], true);
+        skills[(int) slotEnum] = null; 
     }
-    
+
 }
