@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-
-    int capacity = 30;
+    const int capacity = 30;
     [SerializeField] List<Skill> skills;
     public List<Skill> Skills { get { return skills; } }
     public int Capacity { get { return capacity; } }
@@ -23,47 +22,50 @@ public class Inventory : MonoBehaviour
         OnDeleteSkill = delegate { };
     }
 
-    public virtual void GetSkill(Skill skill)
+    public virtual bool GetSkill(Skill skill)
     {
         if (skills.Count > 30)
         {
             //인벤토리가 꽉 참
             if(OnGetSkill != null)
                 OnGetSkill(skill, false);
-            return;
+            return false;
         }
              
         skills.Add(skill);
         if(OnGetSkill != null)
             OnGetSkill(skill, true);
+        return true;
     }
 
-    public virtual void DropSkill(Skill skill)
+    public virtual bool DropSkill(Skill skill)
     {
         if (!skills.Contains(skill))
         {
             if(OnDropSkill != null)
                 OnDropSkill(skill, false);
-            return;
+            return false;
         }
         
         skills.Remove(skill);
         if(OnDropSkill != null)
             OnDropSkill(skill, true);
+        return true;
     }
 
-    public virtual void DeleteSkill(Skill skill)
+    public virtual bool DeleteSkill(Skill skill)
     {
         if (!skills.Contains(skill))
         {
             if(OnDropSkill != null)
                 OnDropSkill(skill, false);
-            return;
+            return false;
         }
         
         skills.Remove(skill);
         if(OnDeleteSkill != null)
             OnDeleteSkill(skill, true);
+        return true;
     }
 
 }

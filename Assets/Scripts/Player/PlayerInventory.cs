@@ -1,4 +1,6 @@
-﻿
+﻿using UnityEngine;
+
+[RequireComponent(typeof(Player))]
 public class PlayerInventory : Inventory
 {
     Player player;

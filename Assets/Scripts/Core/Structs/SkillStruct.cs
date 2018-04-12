@@ -11,7 +11,6 @@ public struct SkillStruct
     public string attackType;
     public string abnormal;
 
-
     public SkillStruct(int cid, string name, string nameKor, object animSet, string attackType, string abnormal)
     {
         this.cid = cid;

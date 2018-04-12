@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 
 public class Player : LivingEntity
 {
-        
+
     #region Components
 
     PlayerInventory playerInventory;
@@ -16,9 +16,9 @@ public class Player : LivingEntity
     Rigidbody2D rigidBody2D;
 
     #endregion
-    
+
     #region Public Variables
-    
+
     public bool IsGrounded
     {
         get
@@ -27,44 +27,44 @@ public class Player : LivingEntity
                 return false;
 
             RaycastHit2D[] hits = Physics2D.LinecastAll(transform.position, transform.position + Vector3.down * 1.1f);
-            return hits.Any(hit => hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"));
+            return hits.Any(hit =>
+                hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"));
         }
     }
-    public bool CanJump
-    {
-        get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime; }
-    }
+
+    public bool CanJump { get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime; } }
 
     #endregion
-    
+
     #region Private Variables
-    
+
     float lastJumpTime;
-    
+
     #endregion
-    
+
     #region Debug
-    
-    [Header("Debug")]
-    [SerializeField] [Range(5f, 15f)] float jumpPower;
+
+    [Header("Debug")] [SerializeField] [Range(5f, 15f)]
+    float jumpPower;
+
     [SerializeField] [Range(0.1f, 1f)] float jumpCoolTime;
 
     #endregion
-        
+
     #region PlayerStats
-    
+
     public float HP { get { return Stats[StatsEnum.HP]; } }
     public float ATK { get { return Stats[StatsEnum.ATK]; } }
     public float DEF { get { return Stats[StatsEnum.DEF]; } }
     public float ATS { get { return Stats[StatsEnum.ATS]; } }
     public float SPD { get { return Stats[StatsEnum.SPD]; } }
-    
+
     #endregion
-    
+
     //--------------------------------------------------------//
-    
+
     #region Initialize
-    
+
     public override void Awake()
     {
         base.Awake();
@@ -87,11 +87,11 @@ public class Player : LivingEntity
         AddStat(StatsEnum.ATS, livingEntityStruct.ats);
         AddStat(StatsEnum.SPD, livingEntityStruct.spd);
     }
-    
+
     #endregion
-    
+
     #region Updates
-    
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && CanJump)
@@ -107,7 +107,7 @@ public class Player : LivingEntity
     }
 
     #endregion
-    
+
     #region Movements
 
     void Move(float h)
@@ -120,8 +120,32 @@ public class Player : LivingEntity
         lastJumpTime = Time.time;
         rigidBody2D.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
-    
+
     #endregion
     
+    #region Inventory & SkillSlot
+
+    public bool GetSkill(Skill skill)
+    {
+        return playerInventory.GetSkill(skill);
+    }
+
+    public bool DropSkill(Skill skill)
+    {
+        return playerInventory.DropSkill(skill);
+    }
+
+    public bool DeleteSkill(Skill skill)
+    {
+        return playerInventory.DeleteSkill(skill);
+    }
+    
+    public bool SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum slotEnum, Skill skill)
+    {
+        return playerInventory.SetSlot(slotEnum, skill);
+    }
+    
+    #endregion
+
 
 }
