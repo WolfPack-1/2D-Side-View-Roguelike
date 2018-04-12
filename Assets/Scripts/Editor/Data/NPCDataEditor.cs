@@ -21,7 +21,7 @@ public class NPCDataEditor : Editor
         
         GUILayout.BeginHorizontal("BOX");
             
-        EditorGUILayout.LabelField("cid | name | nameKor | animSet | attackType | attackValue | attackFunction | attackDamage | coolTime | skill | hp | grade | recognize | recognizeValue");
+        EditorGUILayout.LabelField("cid | name | nameKor | animSet | attackType | attackValue | attackFunction | ATK | coolTime | skill | hp | grade | recognize | recognizeValue | SPD | ATS | drop_table | DEF");
             
         GUILayout.EndHorizontal();
         

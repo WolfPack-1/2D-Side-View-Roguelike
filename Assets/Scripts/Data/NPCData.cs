@@ -28,18 +28,18 @@ public class NPCData : ScriptableObject
                 line["animset"],
                 line["attack_type"].ToString(),
                 int.Parse(line["attack_value"].ToString()),
-                (TargetEnum) Enum.Parse(typeof(TargetEnum),line["attack_function"].ToString()),
-                float.Parse(line["attack_damage"].ToString()),
+                (TargetEnum) Enum.Parse(typeof(TargetEnum),line["attack_function"].ToString().ToUpper()),
+                float.Parse(line["ATK"].ToString()),
                 float.Parse(line["cooltime"].ToString()),
                 line["skill"],
                 int.Parse(line["hp"].ToString()),
-                (GradeEnum)Enum.Parse(typeof(GradeEnum),line["grade"].ToString()),
+                (GradeEnum)Enum.Parse(typeof(GradeEnum),line["grade"].ToString().ToUpper()),
                 (line["recognize"].ToString() == "1"),
                 int.Parse(line["recognize_value"].ToString()),
-                float.Parse(line["speed"].ToString()),
-                float.Parse(line["attackspeed"].ToString()),
+                float.Parse(line["SPD"].ToString()),
+                float.Parse(line["ATS"].ToString()),
                 line["drop_table"].ToString(),
-                float.Parse(line["armor"].ToString())
+                float.Parse(line["DEF"].ToString())
             );
             Data.Add(npcStruct);
         }

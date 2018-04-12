@@ -1,11 +1,11 @@
-﻿public enum GradeEnum {PC, NPC, Mob, Boss}
+﻿public enum GradeEnum {PC, NPC, MOB, BOSS}
 
-public enum TargetEnum { target, nontarget }
+public enum TargetEnum { TARGET, NONTARGET }
 
 public enum SkillAttributeEnum { SB, GN, BM, PS, ET }
 
-public enum StackDecreaseTypeEnum { sec, all }
+public enum StackDecreaseTypeEnum { SEC, ALL }
 
-public enum AbnormalTargetEnum { Target, self, faction }
+public enum AbnormalTargetEnum { TARGET, SELF, FACTION }
 
 public enum StatsEnum { HP, ATK, DEF, ATS, SPD, REC }

@@ -1,7 +1,7 @@
-cid,name,name_kor,animset,attack_type,abnormal,type
-19101.0,19_DeadlyAttack,데들리 어택,,"{(melee, 2, 2, 2)}",,SB
-19102.0,19_CriticalHit,크리티컬 히트,,"{(melee, 2, 2, 2)}",,SB
-19103.0,19_Badbomb,썩은 폭탄,,"{(Bounce, 4, 4, 5, 5)}",{(19010)},BM
-19200.0,19_MustleMustle,머슬머슬,,"{(Range, 0, 4, 0, 10, target)}",{(19030)},ET
-19201.0,19_HustleHustle,허슬허슬,,"{(Dash, 0, 3, 0, 10)}",,ET
-19202.0,19_CastleCastle,캐슬캐슬,,"{(Instant, 3, 3, 0, 10)}",{(19152)},ET
+cid,name,name_kor,animset,attack_type,cooltime,abnormal,type
+19101.0,19_DeadlyAttack,데들리 어택,,"{(melee, 2, 2, 2)}",0.1,,SB
+19102.0,19_CriticalHit,크리티컬 히트,,"{(melee, 2, 2, 2)}",0.1,,SB
+19103.0,19_Badbomb,썩은 폭탄,,"{(Bounce, 4, 4, 5, 5)}",0.1,{(19010)},BM
+19200.0,19_MustleMustle,머슬머슬,,"{(Range, 0, 4, 0, 10, target)}",0.1,{(19030)},ET
+19201.0,19_HustleHustle,허슬허슬,,"{(Dash, 0, 3, 0, 10)}",0.1,,ET
+19202.0,19_CastleCastle,캐슬캐슬,,"{(Instant, 3, 3, 0, 10)}",0.1,{(19152)},ET

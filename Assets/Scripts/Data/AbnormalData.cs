@@ -29,7 +29,7 @@ public class AbnormalData : ScriptableObject
                 line["name"].ToString(),
                 line["name_kor"].ToString(),
                 line["abnormal_Type"].ToString(),
-                (AbnormalTargetEnum)Enum.Parse(typeof(AbnormalTargetEnum), line["target"].ToString())
+                (AbnormalTargetEnum)Enum.Parse(typeof(AbnormalTargetEnum), line["target"].ToString().ToUpper())
             );
             Data.Add(abnormalStruct);
         }
