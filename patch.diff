@@ -1,0 +1,278 @@
+From 3c48ea11e589e48379b293a4558db1046ab755c1 Mon Sep 17 00:00:00 2001
+From: OptIn <bbtarzan12@gmail.com>
+Date: Fri, 13 Apr 2018 00:53:24 +0900
+Subject: [PATCH] =?UTF-8?q?=EC=88=98=EC=A0=95=EB=90=9C=20NPC=20=EB=8D=B0?=
+ =?UTF-8?q?=EC=9D=B4=ED=84=B0=20=ED=8C=8C=EC=8B=B1=20=EC=9E=91=EC=97=85?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ Assets/Resources/Data/CSV/Npc.csv             |  2 +-
+ Assets/Resources/Data/CSV/Npc_Skill.csv       | 14 +++++++-------
+ Assets/Resources/Data/CSV/abnormal.csv        |  4 ++--
+ Assets/Scripts/Core/Enums.cs                  |  8 ++++----
+ Assets/Scripts/Core/Structs/NPCStruct.cs      | 20 ++++++++++----------
+ Assets/Scripts/Data/AbnormalData.cs           |  2 +-
+ Assets/Scripts/Data/NPCData.cs                | 12 ++++++------
+ Assets/Scripts/Editor/Data/NPCDataEditor.cs   |  2 +-
+ Assets/Scripts/Managers/GameManager.cs        |  2 +-
+ Assets/Scripts/Miscellaneous.meta             |  4 ++--
+ Assets/Scripts/Miscellaneous/SpawnPoints.meta |  9 ---------
+ Assets/Scripts/Miscellaneous/Structs.meta     |  9 ---------
+ Assets/Scripts/NPC/NPC.cs                     |  8 ++++----
+ 13 files changed, 39 insertions(+), 57 deletions(-)
+ delete mode 100644 Assets/Scripts/Miscellaneous/SpawnPoints.meta
+ delete mode 100644 Assets/Scripts/Miscellaneous/Structs.meta
+
+diff --git a/Assets/Resources/Data/CSV/Npc.csv b/Assets/Resources/Data/CSV/Npc.csv
+index d45b97f..eb1c380 100644
+--- a/Assets/Resources/Data/CSV/Npc.csv
++++ b/Assets/Resources/Data/CSV/Npc.csv
+@@ -1,4 +1,4 @@
+-cid,name,name_kor,animset,attack_type,attack_value,attack_function,attack_damage,cooltime,skill,hp,grade,recognize,recognize_value,speed,attackspeed,drop_table,armor
++cid,name,name_kor,animset,attack_type,attack_value,attack_function,ATK,cooltime,skill,hp,grade,recognize,recognize_value,SPD,ATS,drop_table,DEF
+ 19101.0,no107_01,넘버107,,melee,1.0,nontarget,5.0,1.0,{(19_DeadlyAttack)},10.0,Mob,1,3.0,1.0,1.0,"{(19101, 100)}",1.0
+ 19102.0,no107_02,넘버108,,melee,1.0,nontarget,5.0,1.0,{(19_CriticalHit)},10.0,Mob,1,3.0,1.0,1.0,"{(19101, 100)}",1.0
+ 19103.0,Jake,제이크,,range,5.0,target,5.0,1.0,{(19_Badbomb)},10.0,Mob,1,5.0,1.0,1.0,"{(19101, 100)}",1.0
+diff --git a/Assets/Resources/Data/CSV/Npc_Skill.csv b/Assets/Resources/Data/CSV/Npc_Skill.csv
+index 7f3168f..41b4af3 100644
+--- a/Assets/Resources/Data/CSV/Npc_Skill.csv
++++ b/Assets/Resources/Data/CSV/Npc_Skill.csv
+@@ -1,7 +1,7 @@
+-cid,name,name_kor,animset,attack_type,abnormal,type
+-19101.0,19_DeadlyAttack,데들리 어택,,"{(melee, 2, 2, 2)}",,SB
+-19102.0,19_CriticalHit,크리티컬 히트,,"{(melee, 2, 2, 2)}",,SB
+-19103.0,19_Badbomb,썩은 폭탄,,"{(Bounce, 4, 4, 5, 5)}",{(19010)},BM
+-19200.0,19_MustleMustle,머슬머슬,,"{(Range, 0, 4, 0, 10, target)}",{(19030)},ET
+-19201.0,19_HustleHustle,허슬허슬,,"{(Dash, 0, 3, 0, 10)}",,ET
+-19202.0,19_CastleCastle,캐슬캐슬,,"{(Instant, 3, 3, 0, 10)}",{(19152)},ET
++cid,name,name_kor,animset,attack_type,cooltime,abnormal,type
++19101.0,19_DeadlyAttack,데들리 어택,,"{(melee, 2, 2, 2)}",0.1,,SB
++19102.0,19_CriticalHit,크리티컬 히트,,"{(melee, 2, 2, 2)}",0.1,,SB
++19103.0,19_Badbomb,썩은 폭탄,,"{(Bounce, 4, 4, 5, 5)}",0.1,{(19010)},BM
++19200.0,19_MustleMustle,머슬머슬,,"{(Range, 0, 4, 0, 10, target)}",0.1,{(19030)},ET
++19201.0,19_HustleHustle,허슬허슬,,"{(Dash, 0, 3, 0, 10)}",0.1,,ET
++19202.0,19_CastleCastle,캐슬캐슬,,"{(Instant, 3, 3, 0, 10)}",0.1,{(19152)},ET
+diff --git a/Assets/Resources/Data/CSV/abnormal.csv b/Assets/Resources/Data/CSV/abnormal.csv
+index 6cb97cb..b6ed817 100644
+--- a/Assets/Resources/Data/CSV/abnormal.csv
++++ b/Assets/Resources/Data/CSV/abnormal.csv
+@@ -1,4 +1,4 @@
+ cid,name,name_kor,abnormal_Type,target
+-19010.0,19103_slow_01,접착,"{(Slow, -10, 1, 5)}",faction
+-19031.0,19200_snare_04,근육사슬,"{(snare, 2)}",faction
++19010.0,19103_slow_01,접착,"{(Slow, -10, 1, 5)}",target
++19031.0,19200_snare_04,근육사슬,"{(snare, 2)}",target
+ 19152.0,19202_uparmor,캐슬캐슬,"{(upamor, 10, 5, 60)}",faction
+diff --git a/Assets/Scripts/Core/Enums.cs b/Assets/Scripts/Core/Enums.cs
+index b22d155..58c38a7 100644
+--- a/Assets/Scripts/Core/Enums.cs
++++ b/Assets/Scripts/Core/Enums.cs
+@@ -1,11 +1,11 @@
+-﻿public enum GradeEnum {PC, NPC, Mob, Boss}
++﻿public enum GradeEnum {PC, NPC, MOB, BOSS}
+ 
+-public enum TargetEnum { target, nontarget }
++public enum TargetEnum { TARGET, NONTARGET }
+ 
+ public enum SkillAttributeEnum { SB, GN, BM, PS, ET }
+ 
+-public enum StackDecreaseTypeEnum { sec, all }
++public enum StackDecreaseTypeEnum { SEC, ALL }
+ 
+-public enum AbnormalTargetEnum { Target, self, faction }
++public enum AbnormalTargetEnum { TARGET, SELF, FACTION }
+ 
+ public enum StatsEnum { HP, ATK, DEF, ATS, SPD, REC }
+\ No newline at end of file
+diff --git a/Assets/Scripts/Core/Structs/NPCStruct.cs b/Assets/Scripts/Core/Structs/NPCStruct.cs
+index d798ea1..56d5890 100644
+--- a/Assets/Scripts/Core/Structs/NPCStruct.cs
++++ b/Assets/Scripts/Core/Structs/NPCStruct.cs
+@@ -10,20 +10,20 @@ public struct NPCStruct
+     public string attackType;
+     public int attackValue;
+     public TargetEnum attackFunction;
+-    public float attackDamage;
++    public float atk;
+     public float coolTime;
+     public object skill;
+     public int hp;
+     public GradeEnum grade;
+     public bool recognize;
+     public int recognizeValue;
+-    public float speed;
+-    public float attackSpeed;
++    public float spd;
++    public float ats;
+     public string dropTable;
+-    public float armor;
++    public float def;
+ 
+ 
+-    public NPCStruct(int cid, string name, string nameKor, object animSet, string attackType, int attackValue, TargetEnum attackFunction, float attackDamage, float coolTime, object skill, int hp, GradeEnum grade, bool recognize, int recognizeValue, float speed, float attackSpeed, string dropTable, float armor)
++    public NPCStruct(int cid, string name, string nameKor, object animSet, string attackType, int attackValue, TargetEnum attackFunction, float atk, float coolTime, object skill, int hp, GradeEnum grade, bool recognize, int recognizeValue, float spd, float ats, string dropTable, float def)
+     {
+         this.cid = cid;
+         this.name = name;
+@@ -32,21 +32,21 @@ public struct NPCStruct
+         this.attackType = attackType;
+         this.attackValue = attackValue;
+         this.attackFunction = attackFunction;
+-        this.attackDamage = attackDamage;
++        this.atk = atk;
+         this.coolTime = coolTime;
+         this.skill = skill;
+         this.hp = hp;
+         this.grade = grade;
+         this.recognize = recognize;
+         this.recognizeValue = recognizeValue;
+-        this.speed = speed;
+-        this.attackSpeed = attackSpeed;
++        this.spd = spd;
++        this.ats = ats;
+         this.dropTable = dropTable;
+-        this.armor = armor;
++        this.def = def;
+     }
+ 
+     public override string ToString()
+     {
+-        return string.Format("{0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12} | {13} | {14} | {15} | {16} | {17}", cid, name, nameKor, animSet, attackType, attackValue, attackFunction, attackDamage, coolTime, skill, hp, grade, recognize, recognizeValue, speed, attackSpeed, dropTable, armor);
++        return string.Format("{0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12} | {13} | {14} | {15} | {16} | {17}", cid, name, nameKor, animSet, attackType, attackValue, attackFunction, atk, coolTime, skill, hp, grade, recognize, recognizeValue, spd, ats, dropTable, def);
+     }
+ }
+\ No newline at end of file
+diff --git a/Assets/Scripts/Data/AbnormalData.cs b/Assets/Scripts/Data/AbnormalData.cs
+index b208ef7..c2d3ed5 100644
+--- a/Assets/Scripts/Data/AbnormalData.cs
++++ b/Assets/Scripts/Data/AbnormalData.cs
+@@ -29,7 +29,7 @@ public class AbnormalData : ScriptableObject
+                 line["name"].ToString(),
+                 line["name_kor"].ToString(),
+                 line["abnormal_Type"].ToString(),
+-                (AbnormalTargetEnum)Enum.Parse(typeof(AbnormalTargetEnum), line["target"].ToString())
++                (AbnormalTargetEnum)Enum.Parse(typeof(AbnormalTargetEnum), line["target"].ToString().ToUpper())
+             );
+             Data.Add(abnormalStruct);
+         }
+diff --git a/Assets/Scripts/Data/NPCData.cs b/Assets/Scripts/Data/NPCData.cs
+index 5b9514c..4464be4 100644
+--- a/Assets/Scripts/Data/NPCData.cs
++++ b/Assets/Scripts/Data/NPCData.cs
+@@ -28,18 +28,18 @@ public class NPCData : ScriptableObject
+                 line["animset"],
+                 line["attack_type"].ToString(),
+                 int.Parse(line["attack_value"].ToString()),
+-                (TargetEnum) Enum.Parse(typeof(TargetEnum),line["attack_function"].ToString()),
+-                float.Parse(line["attack_damage"].ToString()),
++                (TargetEnum) Enum.Parse(typeof(TargetEnum),line["attack_function"].ToString().ToUpper()),
++                float.Parse(line["ATK"].ToString()),
+                 float.Parse(line["cooltime"].ToString()),
+                 line["skill"],
+                 int.Parse(line["hp"].ToString()),
+-                (GradeEnum)Enum.Parse(typeof(GradeEnum),line["grade"].ToString()),
++                (GradeEnum)Enum.Parse(typeof(GradeEnum),line["grade"].ToString().ToUpper()),
+                 (line["recognize"].ToString() == "1"),
+                 int.Parse(line["recognize_value"].ToString()),
+-                float.Parse(line["speed"].ToString()),
+-                float.Parse(line["attackspeed"].ToString()),
++                float.Parse(line["SPD"].ToString()),
++                float.Parse(line["ATS"].ToString()),
+                 line["drop_table"].ToString(),
+-                float.Parse(line["armor"].ToString())
++                float.Parse(line["DEF"].ToString())
+             );
+             Data.Add(npcStruct);
+         }
+diff --git a/Assets/Scripts/Editor/Data/NPCDataEditor.cs b/Assets/Scripts/Editor/Data/NPCDataEditor.cs
+index e1a813b..5b196be 100644
+--- a/Assets/Scripts/Editor/Data/NPCDataEditor.cs
++++ b/Assets/Scripts/Editor/Data/NPCDataEditor.cs
+@@ -21,7 +21,7 @@ public class NPCDataEditor : Editor
+         
+         GUILayout.BeginHorizontal("BOX");
+             
+-        EditorGUILayout.LabelField("cid | name | nameKor | animSet | attackType | attackValue | attackFunction | attackDamage | coolTime | skill | hp | grade | recognize | recognizeValue");
++        EditorGUILayout.LabelField("cid | name | nameKor | animSet | attackType | attackValue | attackFunction | ATK | coolTime | skill | hp | grade | recognize | recognizeValue | SPD | ATS | drop_table | DEF");
+             
+         GUILayout.EndHorizontal();
+         
+diff --git a/Assets/Scripts/Managers/GameManager.cs b/Assets/Scripts/Managers/GameManager.cs
+index 283cab8..e2d4709 100644
+--- a/Assets/Scripts/Managers/GameManager.cs
++++ b/Assets/Scripts/Managers/GameManager.cs
+@@ -16,4 +16,4 @@ public class GameManager : MonoBehaviour
+         }
+     }
+ 
+-}
++}
+\ No newline at end of file
+diff --git a/Assets/Scripts/Miscellaneous.meta b/Assets/Scripts/Miscellaneous.meta
+index a55df77..0eed57c 100644
+--- a/Assets/Scripts/Miscellaneous.meta
++++ b/Assets/Scripts/Miscellaneous.meta
+@@ -1,7 +1,7 @@
+ fileFormatVersion: 2
+-guid: 9c10c5ff1198c7f49b075f75907fe7d4
++guid: 75951de0958260b4682c24d77abb2ec1
+ folderAsset: yes
+-timeCreated: 1522154019
++timeCreated: 1523547698
+ licenseType: Free
+ DefaultImporter:
+   externalObjects: {}
+diff --git a/Assets/Scripts/Miscellaneous/SpawnPoints.meta b/Assets/Scripts/Miscellaneous/SpawnPoints.meta
+deleted file mode 100644
+index 5ff8574..0000000
+--- a/Assets/Scripts/Miscellaneous/SpawnPoints.meta
++++ /dev/null
+@@ -1,9 +0,0 @@
+-fileFormatVersion: 2
+-guid: 3cc47925ce8b43bd9e29bc15d6ab3d63
+-folderAsset: yes
+-timeCreated: 1522283681
+-DefaultImporter:
+-  externalObjects: {}
+-  userData: 
+-  assetBundleName: 
+-  assetBundleVariant: 
+diff --git a/Assets/Scripts/Miscellaneous/Structs.meta b/Assets/Scripts/Miscellaneous/Structs.meta
+deleted file mode 100644
+index b3f082b..0000000
+--- a/Assets/Scripts/Miscellaneous/Structs.meta
++++ /dev/null
+@@ -1,9 +0,0 @@
+-fileFormatVersion: 2
+-guid: 16fabcf4d6a44addbb4322a0889cb6d1
+-folderAsset: yes
+-timeCreated: 1522283681
+-DefaultImporter:
+-  externalObjects: {}
+-  userData: 
+-  assetBundleName: 
+-  assetBundleVariant: 
+diff --git a/Assets/Scripts/NPC/NPC.cs b/Assets/Scripts/NPC/NPC.cs
+index 9c86b2d..c39393f 100644
+--- a/Assets/Scripts/NPC/NPC.cs
++++ b/Assets/Scripts/NPC/NPC.cs
+@@ -34,10 +34,10 @@ public class NPC : LivingEntity
+         transform.name = npcStruct.nameKor;
+         
+         AddStat(StatsEnum.HP, npcStruct.hp);
+-        AddStat(StatsEnum.ATK, npcStruct.attackDamage);
+-        AddStat(StatsEnum.DEF, npcStruct.armor);
+-        AddStat(StatsEnum.ATS, npcStruct.attackSpeed);
+-        AddStat(StatsEnum.SPD, npcStruct.speed);
++        AddStat(StatsEnum.ATK, npcStruct.atk);
++        AddStat(StatsEnum.DEF, npcStruct.def);
++        AddStat(StatsEnum.ATS, npcStruct.ats);
++        AddStat(StatsEnum.SPD, npcStruct.spd);
+         AddStat(StatsEnum.REC, npcStruct.recognizeValue);
+     }    
+     
+-- 
+2.14.1.windows.1
+
