@@ -34,10 +34,10 @@ public class NPC : LivingEntity
         transform.name = npcStruct.nameKor;
         
         AddStat(StatsEnum.HP, npcStruct.hp);
-        AddStat(StatsEnum.ATK, npcStruct.attackDamage);
-        AddStat(StatsEnum.DEF, npcStruct.armor);
-        AddStat(StatsEnum.ATS, npcStruct.attackSpeed);
-        AddStat(StatsEnum.SPD, npcStruct.speed);
+        AddStat(StatsEnum.ATK, npcStruct.atk);
+        AddStat(StatsEnum.DEF, npcStruct.def);
+        AddStat(StatsEnum.ATS, npcStruct.ats);
+        AddStat(StatsEnum.SPD, npcStruct.spd);
         AddStat(StatsEnum.REC, npcStruct.recognizeValue);
     }    
     
