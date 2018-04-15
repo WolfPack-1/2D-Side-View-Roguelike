@@ -19,6 +19,10 @@ public class NPCSpawnPoint : MonoBehaviour
     void Awake()
     {
         dataManager = FindObjectOfType<DataManager>();
+    }
+
+    void Start()
+    {
         CurrentNpcStruct = dataManager.NPCData.Data[npcStructIndex];
     }
 
