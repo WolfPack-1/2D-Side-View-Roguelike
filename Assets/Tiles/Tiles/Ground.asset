@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e55e92a3471fc248ba65f893026ab6c, type: 3}
+  m_Name: Ground
+  m_EditorClassIdentifier: 
+  DefaultSprite: {fileID: 21300000, guid: d44ab929dd0a8f24094a0d5909717af0, type: 3}
+  DefaultColliderType: 1
+  TilingRules:
+  - Neighbors: 0000000001000000000000000100000002000000000000000200000000000000
+    Sprites:
+    - {fileID: 21300000, guid: aa5e5ba3f1bacac4fa42e099406e20bd, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 0
+    ColliderType: 1
+  - Neighbors: 0000000001000000000000000200000001000000000000000200000000000000
+    Sprites:
+    - {fileID: 21300000, guid: e905fd6506cce204e96411b6c4c3dbb1, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 0
+    ColliderType: 1
+  - Neighbors: 0000000002000000000000000200000001000000000000000100000000000000
+    Sprites:
+    - {fileID: 21300000, guid: 47e79950d3ec1fc4dbc5f73569e4b19f, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 0
+    ColliderType: 1
+  - Neighbors: 0000000002000000000000000100000002000000000000000100000000000000
+    Sprites:
+    - {fileID: 21300000, guid: cc7a06337b4947b4d9a62998748a034e, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 0
+    ColliderType: 1
+  - Neighbors: 0000000001000000000000000100000001000000000000000100000000000000
+    Sprites:
+    - {fileID: 21300000, guid: f87fbbe4540b3c04797d307371279685, type: 3}
+    - {fileID: 21300000, guid: 462ec52ebb4e77e4e80ff671d6c38ddc, type: 3}
+    - {fileID: 21300000, guid: 4b4fc56f2b902f34095a2a540aa98795, type: 3}
+    - {fileID: 21300000, guid: e7576843c01a9d944bb631ff676aaebb, type: 3}
+    - {fileID: 21300000, guid: ee41094c8da552b4f93cb6bb2cff7770, type: 3}
+    - {fileID: 21300000, guid: 558ad2683464afd4daaf3f7c0fd51746, type: 3}
+    - {fileID: 21300000, guid: 3398da113673b294f9f06eb94b1a3558, type: 3}
+    - {fileID: 21300000, guid: 3417b2a57c468204bb2560625cc273ca, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 1
+    ColliderType: 1
+  - Neighbors: 0000000001000000000000000200000001000000000000000000000000000000
+    Sprites:
+    - {fileID: 21300000, guid: d86fbfc8c9b6aaa4f8640ba2f52ec028, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 0
+    ColliderType: 1
+  - Neighbors: 0000000001000000000000000100000002000000000000000000000000000000
+    Sprites:
+    - {fileID: 21300000, guid: 17e6045953f91944a91aadef6a823a6d, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 0
+    ColliderType: 0
+  - Neighbors: 0000000002000000000000000100000001000000000000000200000000000000
+    Sprites:
+    - {fileID: 21300000, guid: d44ab929dd0a8f24094a0d5909717af0, type: 3}
+    - {fileID: 21300000, guid: 65189ff9b5e05464e9564a54259506eb, type: 3}
+    - {fileID: 21300000, guid: 00bfe40111dafb34d971ef9d8fc319df, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 1
+    ColliderType: 1
+  - Neighbors: 0000000001000000000000000000000000000000000000000200000000000000
+    Sprites:
+    - {fileID: 21300000, guid: e581b2c7ca9479041a6bfc6f4a78c33a, type: 3}
+    - {fileID: 21300000, guid: 092060c7b38943b4e967a00cf736e6a3, type: 3}
+    - {fileID: 21300000, guid: 287824fac3a26aa43b539ee1975d3c05, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 1
+    ColliderType: 1
