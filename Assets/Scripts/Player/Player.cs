@@ -112,7 +112,7 @@ public class Player : LivingEntity
 
     void Move(float h)
     {
-        rigidBody2D.velocity = new Vector2(h * SPD, rigidBody2D.velocity.y);
+        rigidBody2D.velocity = new Vector2(h * SPD * 0.1f, rigidBody2D.velocity.y);
     }
 
     void Jump()
