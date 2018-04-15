@@ -18,4 +18,14 @@ public class DataManager : MonoBehaviour
     [SerializeField] SkillData skillData;
     [SerializeField] LivingEntityData livingEntityData;
 
+    void Awake()
+    {
+        npcData.Load();
+        abnormalData.Load();
+        gimmickData.Load();
+        placeDivisionData.Load();
+        skillData.Load();
+        livingEntityData.Load();
+    }
+
 }
