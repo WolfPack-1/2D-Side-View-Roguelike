@@ -125,19 +125,19 @@ public class Player : LivingEntity
     
     #region Inventory & SkillSlot
 
-    public bool GetSkill(Skill skill)
+    public bool GetSkill(SkillStruct skillStruct)
     {
-        return playerInventory.GetSkill(skill);
+        return playerInventory.GetSkill(skillStruct);
     }
 
-    public bool DropSkill(Skill skill)
+    public bool DropSkill(SkillStruct skillStruct)
     {
-        return playerInventory.DropSkill(skill);
+        return playerInventory.DropSkill(skillStruct);
     }
 
-    public bool DeleteSkill(Skill skill)
+    public bool DeleteSkill(SkillStruct skillStruct)
     {
-        return playerInventory.DeleteSkill(skill);
+        return playerInventory.DeleteSkill(skillStruct);
     }
     
     public bool SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum slotEnum, Skill skill)

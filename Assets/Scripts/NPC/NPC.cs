@@ -6,6 +6,10 @@ public class NPC : LivingEntity
 {
 
     [SerializeField] NPCStruct npcStruct;
+    public NPCStruct NPCStruct { get { return npcStruct; } }
+
+    public delegate void NPCDelegate(NPC npc);
+    public NPCDelegate OnNPCInit;
     
     #region NPCStats
     
@@ -24,7 +28,7 @@ public class NPC : LivingEntity
     public override void Awake()
     {
         base.Awake();
-        
+        OnNPCInit = delegate {  };
     }
 
     public void Init(NPCStruct npcStruct)
@@ -39,8 +43,9 @@ public class NPC : LivingEntity
         AddStat(StatsEnum.ATS, npcStruct.ats);
         AddStat(StatsEnum.SPD, npcStruct.spd);
         AddStat(StatsEnum.REC, npcStruct.recognizeValue);
+
+        OnNPCInit(this);
     }    
     
     #endregion
-
 }

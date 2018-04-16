@@ -56,7 +56,7 @@ public class PlayerSkillSlot : MonoBehaviour
             return false;
         }
         
-        playerInventory.GetSkill(skills[(int) slotEnum]);
+        playerInventory.GetSkill(skills[(int) slotEnum].SkillStruct);
         return true;
     }
 

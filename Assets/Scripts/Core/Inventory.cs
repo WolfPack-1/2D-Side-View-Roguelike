@@ -4,12 +4,12 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     const int capacity = 30;
-    [SerializeField] List<Skill> skills;
-    public List<Skill> Skills { get { return skills; } }
+    [SerializeField] List<SkillStruct> skillStructs;
+    public List<SkillStruct> SkillStructs { get { return skillStructs; } }
     public int Capacity { get { return capacity; } }
-    public bool IsFull { get { return skills.Count <= capacity; } }
+    public bool IsFull { get { return skillStructs.Count <= capacity; } }
 
-    public delegate void OnInventoryDelegate(Skill skill, bool success);
+    public delegate void OnInventoryDelegate(SkillStruct skillStruct, bool success);
 
     public event OnInventoryDelegate OnGetSkill;
     public event OnInventoryDelegate OnDropSkill;
@@ -22,49 +22,52 @@ public class Inventory : MonoBehaviour
         OnDeleteSkill = delegate { };
     }
 
-    public virtual bool GetSkill(Skill skill)
+    public virtual bool GetSkill(SkillStruct skillStruct)
     {
-        if (skills.Count > 30)
+        if (skillStructs.Count > 30)
         {
             //인벤토리가 꽉 참
             if(OnGetSkill != null)
-                OnGetSkill(skill, false);
+                OnGetSkill(skillStruct, false);
             return false;
         }
              
-        skills.Add(skill);
+        skillStructs.Add(skillStruct);
         if(OnGetSkill != null)
-            OnGetSkill(skill, true);
+            OnGetSkill(skillStruct, true);
         return true;
     }
 
-    public virtual bool DropSkill(Skill skill)
+    public virtual bool DropSkill(SkillStruct skillStruct)
     {
-        if (!skills.Contains(skill))
+        if (!skillStructs.Contains(skillStruct))
         {
             if(OnDropSkill != null)
-                OnDropSkill(skill, false);
+                OnDropSkill(skillStruct, false);
             return false;
         }
         
-        skills.Remove(skill);
+        //Todo : 스킬 큐브로 드랍
+        Debug.Log("Drop : " + skillStruct.nameKor);
+        
+        skillStructs.Remove(skillStruct);
         if(OnDropSkill != null)
-            OnDropSkill(skill, true);
+            OnDropSkill(skillStruct, true);
         return true;
     }
 
-    public virtual bool DeleteSkill(Skill skill)
+    public virtual bool DeleteSkill(SkillStruct skillStruct)
     {
-        if (!skills.Contains(skill))
+        if (!skillStructs.Contains(skillStruct))
         {
             if(OnDropSkill != null)
-                OnDropSkill(skill, false);
+                OnDropSkill(skillStruct, false);
             return false;
         }
         
-        skills.Remove(skill);
+        skillStructs.Remove(skillStruct);
         if(OnDeleteSkill != null)
-            OnDeleteSkill(skill, true);
+            OnDeleteSkill(skillStruct, true);
         return true;
     }
 
