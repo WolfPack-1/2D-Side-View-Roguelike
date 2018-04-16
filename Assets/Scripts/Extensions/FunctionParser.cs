@@ -9,9 +9,23 @@ public static class FunctionParser
 {
     const string SPLIT_RE = @"[\(*\)]";
 
-    public static T[] ParsingAttackType<T>(string text, Func<string[], T> func)
+    public static T ParsingAttackType<T>(string text, Func<string[], T> func)
     {
-        return Parse(text).Select(func).ToArray();
+        foreach (string[] data in Parse(text))
+        {
+            return func(data);
+        }
+        Debug.Assert(false);
+        return default(T);
+    }
+
+    public static string ParsingAttackType(string text)
+    {
+        foreach (string[] data in Parse(text))
+        {
+            return data[0];
+        }
+        return "";
     }
 
     public static DropStruct[] ParsingDropTable(string text)

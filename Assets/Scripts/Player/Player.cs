@@ -59,6 +59,7 @@ public class Player : LivingEntity
     {
         //Debug
         Init(dataManager.LivingEntityData.Data[0]);
+        SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.A, dataManager.SkillData.GetSkillStruct(19101));
     }
 
     public void Init(LivingEntityStruct livingEntityStruct)
@@ -90,9 +91,9 @@ public class Player : LivingEntity
         return playerInventory.DeleteSkill(skillStruct);
     }
     
-    public bool SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum slotEnum, Skill skill)
+    public bool SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum slotEnum, SkillStruct skillStruct)
     {
-        return playerInventory.SetSlot(slotEnum, skill);
+        return playerInventory.SetSlot(slotEnum, skillStruct);
     }
     
     #endregion

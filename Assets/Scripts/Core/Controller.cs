@@ -44,14 +44,19 @@ public class Controller : MonoBehaviour
         
     }
 
+    public virtual void FixedUpdate()
+    {
+        
+    }
+
     public void SetJumpCoolTime(float value)
     {
         jumpCoolTime = value;
     }
     
-    public virtual void Move(float h, float speed)
+    public virtual void Move(float dir, float speed)
     {
-        rb2d.velocity = new Vector2(h * speed * 0.1f, rb2d.velocity.y);
+        rb2d.velocity = new Vector2(dir * speed * 0.1f, rb2d.velocity.y);
     }
 
     public virtual void Jump(float power)
