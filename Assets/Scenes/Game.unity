@@ -11802,6 +11802,7 @@ GameObject:
   - component: {fileID: 851859363}
   - component: {fileID: 851859365}
   - component: {fileID: 851859364}
+  - component: {fileID: 851859366}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -11879,7 +11880,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.16, y: 0.15999998}
+  m_Size: {x: 0.12, y: 0.14}
   m_Direction: 0
 --- !u!50 &851859361
 Rigidbody2D:
@@ -11925,8 +11926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bfd08bd9fad4baa9090c1846a253a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills:
-  - {fileID: 0}
+  skillStructs: []
 --- !u!114 &851859364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11953,6 +11953,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &851859366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 851859357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b13a02e1ff24317ac4a9d9b85cf1b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpCoolTime: -1
 --- !u!1 &941579340
 GameObject:
   m_ObjectHideFlags: 0

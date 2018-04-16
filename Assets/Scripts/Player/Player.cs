@@ -13,27 +13,7 @@ public class Player : LivingEntity
 
     PlayerInventory playerInventory;
     DataManager dataManager;
-    Rigidbody2D rigidBody2D;
-
-    #endregion
-
-    #region Public Variables
-
-    public bool IsGrounded
-    {
-        get
-        {
-            if (rigidBody2D == null)
-                return false;
-
-            RaycastHit2D[] hits = Physics2D.LinecastAll(transform.position, transform.position + Vector3.down * 1.1f);
-            return hits.Any(hit =>
-                hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"));
-        }
-    }
-
-    public bool CanJump { get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime; } }
-
+    
     #endregion
 
     #region Private Variables
@@ -44,20 +24,23 @@ public class Player : LivingEntity
 
     #region Debug
 
-    [Header("Debug")] [SerializeField] [Range(5f, 15f)]
-    float jumpPower;
+    [Header("Debug")] [SerializeField] [Range(5f, 15f)] float jumpPower;
+    
+    public float JumpPower { get { return jumpPower; } }
 
     [SerializeField] [Range(0.1f, 1f)] float jumpCoolTime;
+    
+    public float JumpCoolTime { get { return jumpCoolTime; } }
 
     #endregion
 
     #region PlayerStats
 
-    public float HP { get { return Stats[StatsEnum.HP]; } }
-    public float ATK { get { return Stats[StatsEnum.ATK]; } }
-    public float DEF { get { return Stats[StatsEnum.DEF]; } }
-    public float ATS { get { return Stats[StatsEnum.ATS]; } }
-    public float SPD { get { return Stats[StatsEnum.SPD]; } }
+    public float HP { get { return !Stats.ContainsKey(StatsEnum.HP) ? 0 : Stats[StatsEnum.HP]; } }
+    public float ATK { get { return !Stats.ContainsKey(StatsEnum.ATK) ? 0 : Stats[StatsEnum.ATK]; } }
+    public float DEF { get { return !Stats.ContainsKey(StatsEnum.DEF) ? 0 : Stats[StatsEnum.DEF]; } }
+    public float ATS { get { return !Stats.ContainsKey(StatsEnum.ATS) ? 0 : Stats[StatsEnum.ATS]; } }
+    public float SPD { get { return !Stats.ContainsKey(StatsEnum.SPD) ? 0 : Stats[StatsEnum.SPD]; } }
 
     #endregion
 
@@ -69,7 +52,6 @@ public class Player : LivingEntity
     {
         base.Awake();
         dataManager = FindObjectOfType<DataManager>();
-        rigidBody2D = GetComponent<Rigidbody2D>();
         playerInventory = GetComponent<PlayerInventory>();
     }
 
@@ -90,38 +72,6 @@ public class Player : LivingEntity
 
     #endregion
 
-    #region Updates
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && CanJump)
-        {
-            Jump();
-        }
-    }
-
-    void FixedUpdate()
-    {
-        float h = Input.GetAxisRaw("Horizontal");
-        Move(h);
-    }
-
-    #endregion
-
-    #region Movements
-
-    void Move(float h)
-    {
-        rigidBody2D.velocity = new Vector2(h * SPD * 0.1f, rigidBody2D.velocity.y);
-    }
-
-    void Jump()
-    {
-        lastJumpTime = Time.time;
-        rigidBody2D.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-    }
-
-    #endregion
     
     #region Inventory & SkillSlot
 
