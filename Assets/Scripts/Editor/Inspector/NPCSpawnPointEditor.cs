@@ -18,7 +18,16 @@ public class NPCSpawnPointEditor : Editor
     SerializedProperty npcStructIndex;
     int selectNPCInt;
     string[] npcCategory;
-    
+
+    [MenuItem("GameObject/Create Other/NPCSpawnPoint")]
+    public static void Create()
+    {
+        GameObject spawnPointGameObject = new GameObject();
+        spawnPointGameObject.AddComponent<NPCSpawnPoint>();
+        EditorGUIUtility.PingObject(spawnPointGameObject);
+        Selection.activeGameObject = spawnPointGameObject;
+        SceneView.lastActiveSceneView.FrameSelected();
+    }
 
     void OnEnable()
     {
