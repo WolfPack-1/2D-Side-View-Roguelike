@@ -58,11 +58,6 @@ public class NPCSpawnPointEditor : Editor
         serObj.ApplyModifiedProperties();
     }
     
-    void OnSceneGUI()
-    {
-        DrawHandle();
-    }
-
     void SetTransform()
     {
         serObj.targetObject.name = "NPC Spawn Point : " + npcCategory[selectNPCInt];
@@ -94,9 +89,14 @@ public class NPCSpawnPointEditor : Editor
         
     }
 
-    void DrawHandle()
+    [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
+    static void DrawHandles(NPCSpawnPoint spawnPoint, GizmoType gizmoType)
     {
+        Handles.color = Color.yellow;
         Handles.DrawWireCube(spawnPoint.transform.position, new Vector2(1f, 2f));
+        GUIStyle guiStyle = GUI.skin.GetStyle("Label");
+        guiStyle.alignment = TextAnchor.MiddleCenter;
+        Handles.Label(spawnPoint.transform.position, spawnPoint.CurrentNpcStruct.nameKor, guiStyle);
     }
     
 }
