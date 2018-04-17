@@ -31,7 +31,7 @@ public class NPC : LivingEntity
         OnNPCInit = delegate {  };
     }
 
-    public void Init(NPCStruct npcStruct)
+    public virtual void Init(NPCStruct npcStruct)
     {
         this.npcStruct = npcStruct;
 
