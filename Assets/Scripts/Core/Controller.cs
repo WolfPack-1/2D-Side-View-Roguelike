@@ -16,8 +16,8 @@ public class Controller : MonoBehaviour
         {
             if (rb2d == null)
                 return false;
-            Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position - Vector3.up * (col.bounds.extents.y), col.bounds.extents.x);
-            return cols.Any(col =>col.transform.gameObject.layer == LayerMask.NameToLayer("Ground"));
+            Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position - Vector3.up * (col.bounds.extents.y), col.bounds.extents.x, 1 << LayerMask.NameToLayer("Ground"));
+            return cols.Any();
         }
     }
     

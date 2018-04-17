@@ -39,4 +39,48 @@ public class LivingEntity : MonoBehaviour
         return Stats[StatsEnum.HP] <= 0;
     }
 
+    public virtual Collider2D[] GetEntity(Vector2 position, int radius)
+    {
+        return GetEntity(position, radius, null);
+    }
+
+    public virtual Collider2D[] GetEntity(Vector2 position, int width, int height)
+    {
+        return GetEntity(position, width, height, null);
+    }
+
+    public virtual Collider2D[] GetEntity(Vector2 position, int radius, string layerName)
+    {
+        Area area;
+        Transform areaTransform = transform.Find("Area");
+        if (areaTransform != null)
+        {
+            area = areaTransform.GetComponent<Area>();
+        }
+        else
+        {
+            area = Area.Create(position, radius);
+            area.transform.SetParent(transform);
+            area.transform.localPosition = Vector3.zero;
+        }
+        return area.GetEntity(Area.AreaModeEnum.Circle, layerName);
+    }
+    
+    public virtual Collider2D[] GetEntity(Vector2 position, int width, int height, string layerName)
+    {
+        Area area;
+        Transform areaTransform = transform.Find("Area");
+        if (areaTransform != null)
+        {
+            area = areaTransform.GetComponent<Area>();
+        }
+        else
+        {
+            area = Area.Create(position, width, height);
+            area.transform.SetParent(transform);   
+            area.transform.localPosition = Vector3.zero;
+        }
+        return area.GetEntity(Area.AreaModeEnum.Box, layerName);
+    }
+
 }

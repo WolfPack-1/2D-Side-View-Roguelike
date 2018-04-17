@@ -28,7 +28,12 @@ public class NPCSpawnPoint : MonoBehaviour
 
     public void Spawn()
     {
-        NPC npcPrefab = Resources.Load<NPC>("Prefabs/NPC");
+        NPC npcPrefab = Resources.Load<NPC>("Prefabs/" + CurrentNpcStruct.name);
+        if (npcPrefab == null)
+        {
+            Debug.LogError("스폰할 NPC Prefab을 찾을 수 없습니다");
+            return;
+        }
         NPC npc = Instantiate(npcPrefab, SpawnPosition, Quaternion.identity);
         npc.Init(CurrentNpcStruct);
     }
