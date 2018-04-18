@@ -73,11 +73,15 @@ public class No107 : NPC
         IsBattle = false;
         while (true)
         {
+            //탐색 범위 안으로 들어오면 IdleBT로 전환
             foreach (Collider2D col in GetEntity(transform.position, (int)REC, 5, "Player"))
             {
                 state = State.IdleBT;
                 yield break;
             }
+            
+            //탐색 범위 안에 PC가 없으면 랜덤 이동
+            
             yield return new WaitForSeconds(1f);
         }
     }
