@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e55e92a3471fc248ba65f893026ab6c, type: 3}
+  m_Name: Treshyuard_celing
+  m_EditorClassIdentifier: 
+  DefaultSprite: {fileID: 21300000, guid: 027b770651487d8489b3a858b59346f4, type: 3}
+  DefaultColliderType: 0
+  TilingRules:
+  - Neighbors: 0000000000000000000000000100000001000000000000000000000000000000
+    Sprites:
+    - {fileID: 21300000, guid: 027b770651487d8489b3a858b59346f4, type: 3}
+    - {fileID: 21300000, guid: e905fd6506cce204e96411b6c4c3dbb1, type: 3}
+    - {fileID: 21300000, guid: e581b2c7ca9479041a6bfc6f4a78c33a, type: 3}
+    - {fileID: 21300000, guid: 092060c7b38943b4e967a00cf736e6a3, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 1
+    ColliderType: 0
+  - Neighbors: 0000000000000000000000000100000002000000000000000000000000000000
+    Sprites:
+    - {fileID: 21300000, guid: f87fbbe4540b3c04797d307371279685, type: 3}
+    - {fileID: 21300000, guid: d86fbfc8c9b6aaa4f8640ba2f52ec028, type: 3}
+    - {fileID: 21300000, guid: e7576843c01a9d944bb631ff676aaebb, type: 3}
+    - {fileID: 21300000, guid: ee41094c8da552b4f93cb6bb2cff7770, type: 3}
+    - {fileID: 21300000, guid: 558ad2683464afd4daaf3f7c0fd51746, type: 3}
+    - {fileID: 21300000, guid: 3398da113673b294f9f06eb94b1a3558, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 1
+    ColliderType: 0
+  - Neighbors: 0000000000000000000000000200000001000000000000000000000000000000
+    Sprites:
+    - {fileID: 21300000, guid: d86fbfc8c9b6aaa4f8640ba2f52ec028, type: 3}
+    - {fileID: 21300000, guid: f87fbbe4540b3c04797d307371279685, type: 3}
+    - {fileID: 21300000, guid: e7576843c01a9d944bb631ff676aaebb, type: 3}
+    - {fileID: 21300000, guid: ee41094c8da552b4f93cb6bb2cff7770, type: 3}
+    - {fileID: 21300000, guid: 558ad2683464afd4daaf3f7c0fd51746, type: 3}
+    - {fileID: 21300000, guid: 3398da113673b294f9f06eb94b1a3558, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 1
+    ColliderType: 0

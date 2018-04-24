@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e55e92a3471fc248ba65f893026ab6c, type: 3}
+  m_Name: Treshyard_ground
+  m_EditorClassIdentifier: 
+  DefaultSprite: {fileID: 21300000, guid: 47e79950d3ec1fc4dbc5f73569e4b19f, type: 3}
+  DefaultColliderType: 0
+  TilingRules:
+  - Neighbors: 0000000000000000000000000100000001000000000000000000000000000000
+    Sprites:
+    - {fileID: 21300000, guid: 47e79950d3ec1fc4dbc5f73569e4b19f, type: 3}
+    - {fileID: 21300000, guid: d44ab929dd0a8f24094a0d5909717af0, type: 3}
+    AnimationSpeed: 1
+    PerlinScale: 0.5
+    AutoTransform: 0
+    Output: 1
+    ColliderType: 0
