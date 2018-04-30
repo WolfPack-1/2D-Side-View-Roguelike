@@ -5,6 +5,7 @@ using UnityEngine;
 public class No107 : NPC
 {
     Animator animator;
+    NPCController controller;
 
     bool isWalk;
     bool isBattle;
@@ -46,11 +47,13 @@ public class No107 : NPC
     public enum State { Idle, IdleBT, Walk, Attack, Skill, Die }
 
     [SerializeField] State state;
+    [SerializeField] LivingEntity targetEntity;
 
     public override void Awake()
     {
         base.Awake();
         animator = GetComponent<Animator>();
+        controller = GetComponent<NPCController>();
     }
 
     public override void Init(NPCStruct npcStruct)
@@ -73,16 +76,19 @@ public class No107 : NPC
         IsBattle = false;
         while (true)
         {
+            yield return new WaitForSeconds(1f);
+            
             //탐색 범위 안으로 들어오면 IdleBT로 전환
             foreach (Collider2D col in GetEntity(transform.position, (int)REC, 5, "Player"))
             {
+                targetEntity = col.GetComponent<LivingEntity>();
                 state = State.IdleBT;
                 yield break;
             }
             
             //탐색 범위 안에 PC가 없으면 랜덤 이동
-            
-            yield return new WaitForSeconds(1f);
+            targetEntity = null;
+            state = State.Walk;
         }
     }
 
@@ -99,11 +105,12 @@ public class No107 : NPC
     IEnumerator Walk()
     {
         IsWalk = true;
-        while (true)
-        {
-
-            yield return null;
-        }
+        if (targetEntity == null)
+            yield return controller.MoveToRandomPosition();
+        else
+            yield return controller.MoveToTarget(targetEntity, 1f, REC);
+        IsWalk = false;
+        state = isBattle ? State.IdleBT : State.Idle;
     }
 
     IEnumerator Attack()

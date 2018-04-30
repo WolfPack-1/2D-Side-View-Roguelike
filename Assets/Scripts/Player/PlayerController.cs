@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(PlayerSkillSlot))]
@@ -7,8 +8,7 @@ public class PlayerController : Controller
 
     Player player;
     PlayerSkillSlot playerSkillSlot;
-    float dir;
-    public float Dir { get { return dir; } }
+    int inputDir;
 
     public override void Awake()
     {
@@ -24,10 +24,10 @@ public class PlayerController : Controller
 
     void KeyInput()
     {
-        dir = 0;
+        inputDir = 0;
         if (InputExtensions.GetKey(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow))
         {
-            dir = Input.GetAxisRaw("Horizontal");
+            inputDir = (int)Input.GetAxisRaw("Horizontal");
         }
         
         if (Input.GetKeyDown(KeyCode.Space) && CanJump)
@@ -95,7 +95,7 @@ public class PlayerController : Controller
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        Move(dir, player.SPD);
+        Move(inputDir, player.SPD);
     }
 
 }
