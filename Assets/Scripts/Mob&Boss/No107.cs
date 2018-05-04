@@ -5,7 +5,7 @@ using UnityEngine;
 public class No107 : NPC
 {
     Animator animator;
-    NPCController controller;
+   // NPCController controller;
 
     bool isWalk;
     bool isBattle;
@@ -53,7 +53,7 @@ public class No107 : NPC
     {
         base.Awake();
         animator = GetComponent<Animator>();
-        controller = GetComponent<NPCController>();
+        //controller = GetComponent<NPCController>();
     }
 
     public override void Init(NPCStruct npcStruct)
@@ -105,10 +105,11 @@ public class No107 : NPC
     IEnumerator Walk()
     {
         IsWalk = true;
-        if (targetEntity == null)
-            yield return controller.MoveToRandomPosition();
-        else
-            yield return controller.MoveToTarget(targetEntity, 1f, REC);
+//        if (targetEntity == null)
+//            yield return controller.MoveToRandomPosition();
+//        else
+//            yield return controller.MoveToTarget(targetEntity, 1f, REC); 
+        yield return null;
         IsWalk = false;
         state = isBattle ? State.IdleBT : State.Idle;
     }
