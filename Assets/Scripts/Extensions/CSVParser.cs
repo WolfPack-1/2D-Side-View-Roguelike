@@ -14,6 +14,7 @@ public static class CSVParser
     const string LINE_SPLIT_RE = @"(((?<x>(?=[,\r\n]+))|""(?<x>([^""]|"""")+)""|(?<x>[^,\r\n]+)),?)";
     static readonly char[] TRIM_CHARS = { '\"' };
  
+    [Obsolete]
     public static List<Dictionary<string, object>> Read(TextAsset data)
     {
         var list = new List<Dictionary<string, object>>();
@@ -90,7 +91,7 @@ public static class CSVParser
         {
             using (TextReader reader = new StreamReader(stream))
             {
-                LoadObject<T>(reader, ref targetObject);
+                LoadObject(reader, ref targetObject);
             }
         }
     }
@@ -158,6 +159,13 @@ public static class CSVParser
 
     static object ParseString(string stringValue, Type t)
     {
+        if (t == typeof(bool))
+        {
+            if (stringValue == "0")
+                stringValue = "False";
+            else if (stringValue == "1")
+                stringValue = "True";
+        }
         TypeConverter typeConverter = TypeDescriptor.GetConverter(t);
         return typeConverter.ConvertFromInvariantString(stringValue);
     }
