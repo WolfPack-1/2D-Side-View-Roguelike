@@ -10,11 +10,9 @@ using System.ComponentModel;
 public static class CSVParser
 {
     const string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
-    static char[] SPLIT_CHARS = new char[]{','};
-    const string LINE_SPLIT_RE = @"(((?<x>(?=[,\r\n]+))|""(?<x>([^""]|"""")+)""|(?<x>[^,\r\n]+)),?)";
+    const string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
     static readonly char[] TRIM_CHARS = { '\"' };
  
-    [Obsolete]
     public static List<Dictionary<string, object>> Read(TextAsset data)
     {
         var list = new List<Dictionary<string, object>>();
