@@ -53,14 +53,14 @@ public class Skill
 
     public static Skill CreateSkill(SkillStruct skillStruct, LivingEntity owner)
     {
-        string attackType = FunctionParser.ParsingAttackType(skillStruct.attackType);
+        string attackType = FunctionParser.ParsingAttackType(skillStruct.attack_type);
         if (string.IsNullOrEmpty(attackType))
             return null;
         switch (attackType)
         {
             case "melee":
             {
-                return new MeleeSkill(skillStruct, owner, FunctionParser.ParsingAttackType(skillStruct.attackType, (x) => new AttackTypeMelee(x)));
+                return new MeleeSkill(skillStruct, owner, FunctionParser.ParsingAttackType(skillStruct.attack_type, (x) => new AttackTypeMelee(x)));
             }
 
             default:

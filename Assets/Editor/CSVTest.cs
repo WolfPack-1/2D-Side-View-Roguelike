@@ -1,7 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections;
+using NUnit.Framework;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class CSVTest
@@ -36,159 +39,78 @@ public class CSVTest
 		}
 	}
 
-	[Test]
-	public void TestNPCStruct()
+	int TestStruct<T>(string fileName) where T : new()
 	{
-		List<NPCStruct> npcStructs = CSVParser.LoadObjects<NPCStruct>("NPC_.csv");
-		
-		Assert.IsNotEmpty(npcStructs);
-	}
+		List<T> structs = CSVParser.LoadObjects<T>(fileName + ".csv");
+		int lineCount = File.ReadAllLines("Assets/Resources/Data/CSV/" + fileName + ".csv").Length;
+		Assert.IsNotEmpty(structs);
+		Assert.IsTrue(structs.Count == lineCount - 1);
 
-	[Test]
-	public void TestLoadSingle()
-	{
-		// It's ok to have newline with padding at start, should trim field names (not values)
-		// Include spaces in string field value to prove all content preserved
-		// Also put fields out of order
-		string csvData = @"StringField, Hello World  ,This is an ignored description,also ignored
-			EnumField,Blue,Something Something
-			IntField,1234,Comment here
-			FloatField,1.5,More commenting";
-
-		TestObject t = new TestObject();
-
-		using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(csvData)))
+		foreach (T t in structs)
 		{
-			using (TextReader sr = new StreamReader(ms))
-			{
-				CSVParser.LoadObject(sr, ref t);
-			}
+			Debug.Log(t.ToString());
 		}
 
-		Assert.AreEqual(" Hello World  ", t.StringField);
-		Assert.AreEqual(1234, t.IntField);
-		Assert.That(t.FloatField, Is.InRange(1.4999f, 1.5001f)); // float imprecision
-		Assert.AreEqual(TestObject.Colour.Blue, t.EnumField);
+		return structs.Count;
+	}
+
+	int TestScriptableObject<T>(string name) where T : ScriptableObject
+	{
+		T data = Resources.Load<T>("Data/ScriptableObject/" + name);
+		MethodInfo methodInfo = data.GetType().GetMethod("Load");
+		Assert.IsNotNull(data);
+		Assert.IsNotNull(methodInfo);
+		IList list = (IList) methodInfo.Invoke(data, null);
+		Assert.IsNotNull(list);
+		return list.Count;
 	}
 
 	[Test]
-	public void TestLoadSingleWithHeader()
+	public void TestNPCData()
 	{
-		// Test that we can include a header line if we want
-		string csvData = @"#Field,#Value,#Description
-			StringField, Hello World  ,This is an ignored description,also ignored
-			EnumField,Blue,Something Something
-			IntField,1234,Comment here
-			FloatField,1.5,More commenting";
-
-		TestObject t = new TestObject();
-
-		using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(csvData)))
-		{
-			using (var sr = new StreamReader(ms))
-			{
-				CSVParser.LoadObject(sr, ref t);
-			}
-		}
-
-		Assert.AreEqual(" Hello World  ", t.StringField);
-		Assert.AreEqual(1234, t.IntField);
-		Assert.That(t.FloatField, Is.InRange(1.4999f, 1.5001f)); // float imprecision
-		Assert.AreEqual(TestObject.Colour.Blue, t.EnumField);
+		Assert.AreEqual(
+			TestStruct<NPCStruct>("NPC"),
+			TestScriptableObject<NPCData>("NPC")
+		);
 	}
 
 	[Test]
-	public void TestLoadSingleEmbeddedCommas()
+	public void TestAbnormalData()
 	{
-		// It's ok to have newline with padding at start, should trim field names (not values)
-		// Include spaces in string field value to prove all content preserved
-		// Also put fields out of order
-		string csvData = @"StringField,""Commas, commas everywhere,abcd"",Ignored,ignored
-			EnumField,Purple,Something Something
-			IntField,-5002,Comment here
-			FloatField,-3.142,Pi Pi Baby";
-
-		TestObject t = new TestObject();
-
-		using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(csvData)))
-		{
-			using (var sr = new StreamReader(ms))
-			{
-				CSVParser.LoadObject(sr, ref t);
-			}
-		}
-
-		Assert.AreEqual("Commas, commas everywhere,abcd", t.StringField);
-		Assert.AreEqual(-5002, t.IntField);
-		Assert.That(t.FloatField, Is.InRange(-3.142001f, -3.141999f)); // float imprecision
-		Assert.AreEqual(TestObject.Colour.Purple, t.EnumField);
+		Assert.AreEqual
+		(
+			TestStruct<AbnormalStruct>("abnormal"),
+			TestScriptableObject<AbnormalData>("abnormal")
+		);
 	}
 
 	[Test]
-	public void TestLoadMulti()
+	public void TestGimmickData()
 	{
-		// Header first, then N values
-		// #Field headers are ignored
-		// This time we don't want any prefixing since not trimmed
-		string csvData = @"StringField,FloatField,#Description,IntField,EnumField
-""This,has,commas,in it"",2.34,Something ignored,35,Red
-Hello World,256.25,""Notes here"",10003,Purple
-Zaphod Beeblebrox,3.1,""Amazingly amazing"",000359,Green";
-
-		List<TestObject> objs;
-		using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(csvData)))
-		{
-			using (var sr = new StreamReader(ms))
-			{
-				objs = CSVParser.LoadObjects<TestObject>(sr);
-			}
-		}
-
-		Assert.That(objs, Has.Count.EqualTo(3));
-		TestObject t = objs[0];
-		Assert.AreEqual("This,has,commas,in it", t.StringField);
-		Assert.AreEqual(35, t.IntField);
-		Assert.That(t.FloatField, Is.InRange(2.33999f, 2.340001f)); // float imprecision
-		Assert.AreEqual(TestObject.Colour.Red, t.EnumField);
-		t = objs[1];
-		Assert.AreEqual("Hello World", t.StringField);
-		Assert.AreEqual(10003, t.IntField);
-		Assert.That(t.FloatField, Is.InRange(256.24999f, 256.25001f)); // float imprecision
-		Assert.AreEqual(TestObject.Colour.Purple, t.EnumField);
-		t = objs[2];
-		Assert.AreEqual("Zaphod Beeblebrox", t.StringField);
-		Assert.AreEqual(359, t.IntField);
-		Assert.That(t.FloatField, Is.InRange(3.09999f, 3.10001f)); // float imprecision
-		Assert.AreEqual(TestObject.Colour.Green, t.EnumField);
-
-	}
-
-	public struct TestStruct
-	{
-		public float f;
-		public string s;
+		Assert.AreEqual
+		(
+			TestStruct<GimmickStruct>("Gimmick"),
+			TestScriptableObject<GimmickData>("Gimmick")
+		);
 	}
 
 	[Test]
-	public void TestLoadStruct()
+	public void TestPlaceDivisionData()
 	{
-		string csvData = @"s, Hello World  ,This is an ignored description,also ignored
-			f,1234.5,Comment here";
-
-		TestStruct t = new TestStruct();
-
-		using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(csvData)))
-		{
-			using (var sr = new StreamReader(ms))
-			{
-				CSVParser.LoadObject(sr, ref t);
-			}
-		}
-
-		Assert.AreEqual(" Hello World  ", t.s);
-		Assert.That(t.f, Is.InRange(1234.4999f, 1234.5001f)); // float imprecision
-
+		Assert.AreEqual
+		(
+			TestStruct<PlaceDivisionStruct>("Place_Division"),
+			TestScriptableObject<PlaceDivisionData>("Place_Division")
+		);
 	}
 
-
+	[Test]
+	public void TestSkillData()
+	{
+		Assert.AreEqual
+		(
+			TestStruct<SkillStruct>("Skill"),
+			TestScriptableObject<SkillData>("Skill")
+		);
+	}
 }

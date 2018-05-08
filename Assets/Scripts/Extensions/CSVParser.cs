@@ -10,13 +10,15 @@ using System.ComponentModel;
 public static class CSVParser
 {
     const string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
-    const string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
+    const string _LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
+    const string LINE_SPLIT_RE = @"(((?<x>(?=[,\r\n]+))|""(?<x>([^""]|"""")+)""|(?<x>[^,\r\n]+)),?)";
     static readonly char[] TRIM_CHARS = { '\"' };
- 
+
+    [Obsolete]
     public static List<Dictionary<string, object>> Read(TextAsset data)
     {
         var list = new List<Dictionary<string, object>>();
-        var lines = Regex.Split (data.text, LINE_SPLIT_RE);
+        var lines = Regex.Split (data.text, _LINE_SPLIT_RE);
  
         if(lines.Length <= 1) return list;
  
@@ -147,7 +149,6 @@ public static class CSVParser
         foreach (FieldInfo field in fieldInfos)
         {
             if (string.Compare(fieldName, field.Name, true) != 0) continue;
-            Debug.Log(value);
             object typedVal = field.FieldType == typeof(string) ? value : ParseString(value, field.FieldType);
             field.SetValue(targetObject, typedVal);
             return true;

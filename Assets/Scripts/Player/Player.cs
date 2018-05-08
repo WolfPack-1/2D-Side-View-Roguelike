@@ -58,8 +58,8 @@ public class Player : LivingEntity
     void Start()
     {
         //Debug
-        Init(dataManager.LivingEntityData.Data[0]);
-        SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.A, dataManager.SkillData.GetSkillStruct(19101));
+        //Init(dataManager.LivingEntityData.Data[0]);
+        //SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.A, dataManager.SkillData.GetSkillStruct(19101));
     }
 
     public void Init(LivingEntityStruct livingEntityStruct)

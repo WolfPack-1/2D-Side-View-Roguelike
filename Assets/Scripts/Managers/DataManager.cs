@@ -18,16 +18,13 @@ public class DataManager : MonoBehaviour
     [SerializeField] SkillData skillData;
     [SerializeField] LivingEntityData livingEntityData;
 
-    [SerializeField] List<NPCStruct> npcs;
-
     void Awake()
     {
-        npcs = CSVParser.LoadObjects<NPCStruct>("NPC_.csv");
         npcData.Load();
         abnormalData.Load();
         gimmickData.Load();
         placeDivisionData.Load();
-        skillData.Load();
+        //skillData.Load();
         livingEntityData.Load();
     }
 

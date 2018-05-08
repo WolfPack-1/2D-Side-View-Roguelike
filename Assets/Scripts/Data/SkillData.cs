@@ -17,21 +17,7 @@ public class SkillData : ScriptableObject
 
     public List<SkillStruct> Load()
     {
-        Data = new List<SkillStruct>();
-        List<Dictionary<string, object>> csv = CSVParser.Read(Resources.Load<TextAsset>("Data/CSV/Skill"));
-        foreach (Dictionary<string, object> line in csv)
-        {
-            SkillStruct skillStruct = new SkillStruct(
-                int.Parse(line["cid"].ToString()),
-                line["name"].ToString(),
-                line["name_kor"].ToString(),
-                line["animset"],
-                line["attack_type"].ToString(),
-                line["abnormal"].ToString()
-            );
-            Data.Add(skillStruct);
-        }
-
+        Data = CSVParser.LoadObjects<SkillStruct>("Skill.csv");
         return Data;
     }
 
