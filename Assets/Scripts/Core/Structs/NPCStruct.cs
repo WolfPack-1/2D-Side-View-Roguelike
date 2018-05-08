@@ -6,13 +6,13 @@ public struct NPCStruct
     public int cid;
     public string name;
     public string nameKor;
-    public object animSet;
+    public string animSet;
     public string attackType;
     public int attackValue;
     public TargetEnum attackFunction;
     public float atk;
     public float coolTime;
-    public object skill;
+    public string skill;
     public int hp;
     public GradeEnum grade;
     public bool recognize;
@@ -23,7 +23,7 @@ public struct NPCStruct
     public float def;
 
 
-    public NPCStruct(int cid, string name, string nameKor, object animSet, string attackType, int attackValue, TargetEnum attackFunction, float atk, float coolTime, object skill, int hp, GradeEnum grade, bool recognize, int recognizeValue, float spd, float ats, string dropTable, float def)
+    public NPCStruct(int cid, string name, string nameKor, string animSet, string attackType, int attackValue, TargetEnum attackFunction, float atk, float coolTime, string skill, int hp, GradeEnum grade, bool recognize, int recognizeValue, float spd, float ats, string dropTable, float def)
     {
         this.cid = cid;
         this.name = name;
