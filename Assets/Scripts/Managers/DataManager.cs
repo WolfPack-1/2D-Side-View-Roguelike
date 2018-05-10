@@ -24,7 +24,7 @@ public class DataManager : MonoBehaviour
         abnormalData.Load();
         gimmickData.Load();
         placeDivisionData.Load();
-        skillData.Load();
+        //skillData.Load();
         livingEntityData.Load();
     }
 

@@ -11,6 +11,16 @@ public class LivingEntity : MonoBehaviour
     public event LivingEntityFloatDelegate OnGetDamaged;
 
 
+    public bool IsAlive
+    {
+        get
+        {
+            if (Stats == null || !Stats.ContainsKey(StatsEnum.HP))
+                return false;
+            return Stats[StatsEnum.HP] > 0;
+        }
+    }
+
     public virtual void Awake()
     {
         Stats = new Dictionary<StatsEnum, float>();
@@ -65,7 +75,7 @@ public class LivingEntity : MonoBehaviour
         }
         return area.GetEntity(Area.AreaModeEnum.Circle, layerName);
     }
-    
+
     public virtual Collider2D[] GetEntity(Vector2 position, int width, int height, string layerName)
     {
         Area area;
@@ -77,10 +87,10 @@ public class LivingEntity : MonoBehaviour
         else
         {
             area = Area.Create(position, width, height);
-            area.transform.SetParent(transform);   
+            area.transform.SetParent(transform);
             area.transform.localPosition = Vector3.zero;
         }
+
         return area.GetEntity(Area.AreaModeEnum.Box, layerName);
     }
-
 }

@@ -98,6 +98,13 @@ public class TileRulesEditor : Editor
 		reorderableList.drawElementCallback = OnDrawElement;
 		reorderableList.elementHeightCallback = GetElementHeight;
 		reorderableList.onReorderCallback = ListUpdated;
+		reorderableList.onAddCallback = ListAdd;
+	}
+
+	void ListAdd(ReorderableList list)
+	{
+		TilingRule tilingRule = new TilingRule {ColliderType = tile.DefaultColliderType};
+		tile.TilingRules.Add(tilingRule);	
 	}
 
 	void ListUpdated(ReorderableList list)

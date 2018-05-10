@@ -16,7 +16,7 @@ public class MeleeSkill : Skill
         if (!CanUseSkill)
             return;
         base.Use();
-        Debug.Log(Owner + " : " + SkillStruct.nameKor + ", " + skillData.Damage);
+        Debug.Log(Owner + " : " + SkillStruct.name_kor + ", " + skillData.Damage);
     }
 
     public override void Stop()

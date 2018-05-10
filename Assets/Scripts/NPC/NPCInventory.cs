@@ -22,7 +22,7 @@ public class NPCInventory : Inventory
 
     void InitInventory(NPC npc)
     {
-        string rawDropTable = npc.NPCStruct.dropTable;
+        string rawDropTable = npc.NPCStruct.drop_table;
         DropStruct[] dropStructs = FunctionParser.ParsingDropTable(rawDropTable);
         foreach (DropStruct dropStruct in dropStructs)
         {

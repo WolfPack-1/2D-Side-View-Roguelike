@@ -14,19 +14,7 @@ public class PlaceDivisionData : ScriptableObject
 
     public List<PlaceDivisionStruct> Load()
     {
-        Data = new List<PlaceDivisionStruct>();
-        List<Dictionary<string, object>> csv = CSVParser.Read(Resources.Load<TextAsset>("Data/CSV/Place_Division"));
-        foreach (Dictionary<string, object> line in csv)
-        {
-            PlaceDivisionStruct placeDivisionStruct = new PlaceDivisionStruct
-            (
-                int.Parse(line["ID"].ToString()),
-                (string)line["Place"],
-                (string)line["Name"]
-            );
-            Data.Add(placeDivisionStruct);
-        }
-
+        Data = CSVParser.LoadObjects<PlaceDivisionStruct>("Place_Division.csv");
         return Data;
     }
     
