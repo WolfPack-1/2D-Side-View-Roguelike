@@ -35,7 +35,7 @@ public class NPCSpawnPointEditor : Editor
         spawnPoint = (NPCSpawnPoint) target;
         serObj = new SerializedObject(target);
         npcStructIndex = serObj.FindProperty("npcStructIndex");
-        npcCategory = data.Select(I => I.name_kor).ToArray();
+        npcCategory = data.Select(I => I.nameKor).ToArray();
         spawnPoint.tag = "NPC Spawn Point";
         selectNPCInt = npcStructIndex.intValue;
     }
@@ -105,7 +105,7 @@ public class NPCSpawnPointEditor : Editor
         Handles.DrawWireCube(spawnPoint.transform.position, new Vector2(1f, 2f));
         GUIStyle guiStyle = GUI.skin.GetStyle("Label");
         guiStyle.alignment = TextAnchor.MiddleCenter;
-        Handles.Label(spawnPoint.transform.position, spawnPoint.CurrentNpcStruct.name_kor, guiStyle);
+        Handles.Label(spawnPoint.transform.position, spawnPoint.CurrentNpcStruct.nameKor, guiStyle);
     }
     
 }

@@ -9,48 +9,9 @@ using System.ComponentModel;
  
 public static class CSVParser
 {
-    const string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
-    const string _LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
     const string LINE_SPLIT_RE = @"(((?<x>(?=[,\r\n]+))|""(?<x>([^""]|"""")+)""|(?<x>[^,\r\n]+)),?)";
-    static readonly char[] TRIM_CHARS = { '\"' };
 
-    [Obsolete]
-    public static List<Dictionary<string, object>> Read(TextAsset data)
-    {
-        var list = new List<Dictionary<string, object>>();
-        var lines = Regex.Split (data.text, _LINE_SPLIT_RE);
- 
-        if(lines.Length <= 1) return list;
- 
-        var header = Regex.Split(lines[0], SPLIT_RE);
-        for(var i=1; i < lines.Length; i++) {
- 
-            var values = Regex.Split(lines[i], SPLIT_RE);
-            if(values.Length == 0 ||values[0] == "") continue;
- 
-            var entry = new Dictionary<string, object>();
-            for(var j=0; j < header.Length && j < values.Length; j++ ) {
-                string value = values[j];
-                value = value.TrimStart(TRIM_CHARS).TrimEnd(TRIM_CHARS).Replace("\\", "");
-                object finalvalue = value;
-                int n;
-                float f;
-                if(int.TryParse(value, out n)) {
-                    finalvalue = n;
-                } else if (float.TryParse(value, out f)) {
-                    finalvalue = f;
-                }
-
-                if (string.IsNullOrEmpty(finalvalue.ToString()))
-                    finalvalue = "0";
-                entry[header[j]] = finalvalue;
-            }
-            list.Add (entry);
-        }
-        return list;
-    }
-
-    public static List<T> LoadObjects<T>(string fileName, bool strict = true) where T : new()
+    public static List<T> LoadObjects<T>(string fileName, bool strict = false) where T : new()
     {
         using (FileStream stream = File.Open("Assets/Resources/Data/CSV/"+fileName, FileMode.Open))
         {
@@ -61,7 +22,7 @@ public static class CSVParser
         }
     }
 
-    public static List<T> LoadObjects<T>(TextReader reader, bool strict = true) where T : new()
+    public static List<T> LoadObjects<T>(TextReader reader, bool strict = false) where T : new()
     {
         List<T> list = new List<T>();
         string header = reader.ReadLine();
@@ -166,7 +127,7 @@ public static class CSVParser
                 stringValue = "True";
         }
         TypeConverter typeConverter = TypeDescriptor.GetConverter(t);
-        return typeConverter.ConvertFromInvariantString(stringValue);
+        return string.IsNullOrEmpty(stringValue) ? null : typeConverter.ConvertFromInvariantString(stringValue);
     }
 
     static Dictionary<string, int> ParseHeader(string header)

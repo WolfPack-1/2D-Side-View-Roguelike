@@ -1,4 +1,6 @@
-﻿public enum GradeEnum {PC, NPC, MOB, BOSS}
+﻿public enum EntityGradeEnum {PC, NPC, MOB, BOSS}
+
+public enum TubeGradeEnum { WEAKNESS, GANGSTER }
 
 public enum TargetEnum { TARGET, NONTARGET }
 
@@ -9,3 +11,5 @@ public enum StackDecreaseTypeEnum { SEC, ALL }
 public enum AbnormalTargetEnum { TARGET, SELF, FACTION }
 
 public enum StatsEnum { HP, ATK, DEF, ATS, SPD, REC }
+
+public enum SocketEnum { STYLE, ENHANCER, COOLER, RELIC }

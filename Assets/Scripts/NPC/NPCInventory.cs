@@ -22,11 +22,11 @@ public class NPCInventory : Inventory
 
     void InitInventory(NPC npc)
     {
-        string rawDropTable = npc.NPCStruct.drop_table;
+        string rawDropTable = npc.NPCStruct.dropTable;
         DropStruct[] dropStructs = FunctionParser.ParsingDropTable(rawDropTable);
         foreach (DropStruct dropStruct in dropStructs)
         {
-            SkillStruct skill = dataManager.SkillData.GetSkillStruct(dropStruct.cid);
+            SkillStruct skill = dataManager.SkillData.GetStructByID(dropStruct.cid);
             GetSkill(skill, dropStruct.prob);
         }
     }

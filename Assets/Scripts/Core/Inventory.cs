@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour
         }
         
         //Todo : 스킬 큐브로 드랍
-        Debug.Log("Drop : " + skillStruct.name_kor);
+        Debug.Log("Drop : " + skillStruct.nameKor);
         
         skillStructs.Remove(skillStruct);
         if(OnDropSkill != null)

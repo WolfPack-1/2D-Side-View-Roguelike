@@ -79,8 +79,8 @@ public class CSVTest
 	{
 		Assert.AreEqual
 		(
-			TestStruct<AbnormalStruct>("abnormal"),
-			TestScriptableObject<AbnormalData>("abnormal")
+			TestStruct<AbnormalStruct>("Abnormal"),
+			TestScriptableObject<AbnormalData>("Abnormal")
 		);
 	}
 
@@ -99,8 +99,18 @@ public class CSVTest
 	{
 		Assert.AreEqual
 		(
-			TestStruct<PlaceDivisionStruct>("Place_Division"),
-			TestScriptableObject<PlaceDivisionData>("Place_Division")
+			TestStruct<PlaceDivisionStruct>("PlaceDivision"),
+			TestScriptableObject<PlaceDivisionData>("PlaceDivision")
+		);
+	}
+
+	[Test]
+	public void TestLivingEntityData()
+	{
+		Assert.AreEqual
+		(
+			TestStruct<LivingEntityStruct>("PC"),
+			TestScriptableObject<LivingEntityData>("LivingEntity")
 		);
 	}
 
@@ -111,6 +121,16 @@ public class CSVTest
 		(
 			TestStruct<SkillStruct>("Skill"),
 			TestScriptableObject<SkillData>("Skill")
+		);
+	}
+	
+	[Test]
+	public void TestTubeData()
+	{
+		Assert.AreEqual
+		(
+			TestStruct<TubeStruct>("Tube"),
+			TestScriptableObject<TubeData>("Tube")
 		);
 	}
 }

@@ -35,14 +35,14 @@ public class NPC : LivingEntity
     {
         this.npcStruct = npcStruct;
 
-        transform.name = npcStruct.name_kor;
+        transform.name = npcStruct.nameKor;
         
         AddStat(StatsEnum.HP, npcStruct.hp);
-        AddStat(StatsEnum.ATK, npcStruct.ATK);
-        AddStat(StatsEnum.DEF, npcStruct.DEF);
-        AddStat(StatsEnum.ATS, npcStruct.ATS);
-        AddStat(StatsEnum.SPD, npcStruct.SPD);
-        AddStat(StatsEnum.REC, npcStruct.recognize_value);
+//        AddStat(StatsEnum.ATK, npcStruct.ATK);
+//        AddStat(StatsEnum.DEF, npcStruct.DEF);
+//        AddStat(StatsEnum.ATS, npcStruct.ATS);
+//        AddStat(StatsEnum.SPD, npcStruct.SPD);
+        AddStat(StatsEnum.REC, npcStruct.recognizeValue);
 
         OnNPCInit(this);
     }    

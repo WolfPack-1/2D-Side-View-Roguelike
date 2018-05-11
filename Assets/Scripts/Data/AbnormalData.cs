@@ -21,7 +21,7 @@ public class AbnormalData : ScriptableObject
 
     public List<AbnormalStruct> Load()
     {
-        Data = CSVParser.LoadObjects<AbnormalStruct>("abnormal.csv");
+        Data = CSVParser.LoadObjects<AbnormalStruct>("Abnormal.csv");
         return Data;
     }
 }

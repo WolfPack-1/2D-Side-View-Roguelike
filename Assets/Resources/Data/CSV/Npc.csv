@@ -1,4 +1,6 @@
-cid,name,name_kor,animset,attack_type,attack_value,attack_function,ATK,cooltime,skill,hp,grade,recognize,recognize_value,SPD,ATS,drop_table,DEF
-19101,no107_01,넘버107,,melee,1,nontarget,5,1,{(19_DeadlyAttack)},10,Mob,1,3,1,1,"{(19101, 100)}",1
-19102,no107_02,넘버108,,melee,1,nontarget,5,1,{(19_CriticalHit)},10,Mob,1,3,1,1,"{(19101, 100)}",1
-19103,Jake,제이크,,range,5,target,5,1,{(19_Badbomb)},10,Mob,1,5,1,1,"{(19101, 100)}",1
+cid,name,nameKor,hp,grade,recognize,recognizeValue,skillValue,dropTable
+19100,no107_01,넘버107,50,Mob,1,3,{(19_DeadlyAttack)},"{(1100,5),(2100,5),(3100,5)}"
+19101,no107_02,넘버108,50,Mob,1,3,{(19_CriticalHit)},"{(1100,5),(2101,5),(3100,5)}"
+19102,Jake_B,썩은쥐돌이,30,Mob,1,5,{(19_jakebounce)},"{(1102,5),(2102,5),(3101,5)}"
+19103,jake_R,엉성한쥐돌이,30,Mob,1,5,{(19_jakerange)},"{(1101,5),(2101,5),(3102,5)}"
+19200,doncina,돈시나,100,Boss,1,10,"{(19_MustleMustle),(19_HustleHustle)}","{(1103,5),(2100,5),(3101,5),(1101,5),(2101,5),(3100,5),(4101,5)}"

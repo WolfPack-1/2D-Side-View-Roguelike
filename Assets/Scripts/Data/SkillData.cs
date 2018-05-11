@@ -21,7 +21,7 @@ public class SkillData : ScriptableObject
         return Data;
     }
 
-    public SkillStruct GetSkillStruct(int cid)
+    public SkillStruct GetStructByID(int cid)
     {
         return Data.Find(s => s.cid == cid);
     }
