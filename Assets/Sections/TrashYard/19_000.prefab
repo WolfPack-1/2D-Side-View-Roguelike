@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 2113883505465934958}
   - component: {fileID: 50002845809100162}
   - component: {fileID: 66976322882712266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1496612132593176
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,85 +172,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 2113883505465934958}
-    m_ColliderPaths:
-    - - X: 130000000
-        Y: 70000000
-      - X: -170000000
-        Y: 70000000
-      - X: -170000000
-        Y: -90000000
-      - X: 130000000
-        Y: -90000000
-    - - X: 109843752
-        Y: -50000000
-      - X: 90000000
-        Y: -50000000
-      - X: 90000000
-        Y: -50156248
-      - X: 89843752
-        Y: -50000000
-      - X: 80000000
-        Y: -50000000
-      - X: 80000000
-        Y: -50156248
-      - X: 79843752
-        Y: -50000000
-      - X: 60000000
-        Y: -50000000
-      - X: 60000000
-        Y: -50156248
-      - X: 59843752
-        Y: -50000000
-      - X: -59687500
-        Y: -50000000
-      - X: -60000000
-        Y: -50156248
-      - X: -60000000
-        Y: -50000000
-      - X: -110000000
-        Y: -50000000
-      - X: -110000000
-        Y: -50156248
-      - X: -110156248
-        Y: -50000000
-      - X: -120000000
-        Y: -50000000
-      - X: -120000000
-        Y: -50156248
-      - X: -120156248
-        Y: -50000000
-      - X: -150000000
-        Y: -50000000
-      - X: -150000000
-        Y: 40000000
-      - X: -148593744
-        Y: 40000000
-      - X: -142812496
-        Y: 43750000
-      - X: -140000000
-        Y: 48593752
-      - X: -140000000
-        Y: 50000000
-      - X: 100000000
-        Y: 50000000
-      - X: 100000000
-        Y: 49062500
-      - X: 100781248
-        Y: 47500000
-      - X: 103281248
-        Y: 44062500
-      - X: 105000000
-        Y: 42656248
-      - X: 107968752
-        Y: 40156248
-      - X: 108906248
-        Y: 40000000
-      - X: 110000000
-        Y: 40000000
-      - X: 110000000
-        Y: -50156248
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 13, y: 7}
@@ -349,7 +271,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
@@ -388,7 +310,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
