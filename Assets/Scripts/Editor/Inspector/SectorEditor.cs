@@ -34,6 +34,7 @@ public class SectorEditor : Editor
         if(spawnPointHolder == null)
         {
             spawnPointHolder = new GameObject("NPC Spawn Point Holder").transform;
+            spawnPointHolder.gameObject.AddComponent<NPCSpawnPointHolder>();
             spawnPointHolder.SetParent(holdersTransform, false);
         }
     }
