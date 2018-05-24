@@ -16,7 +16,6 @@ public class GridEditor : Editor
                TilemapRenderer tilemapRenderer = childTransform.GetComponent<TilemapRenderer>();
                if (tilemapRenderer == null)
                {
-                    Debug.LogError("Grid의 자식은 무조건 tilemap 이어야 합니다.");
                     continue;
                }
 

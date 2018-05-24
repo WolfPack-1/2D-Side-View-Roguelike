@@ -19,14 +19,11 @@ public class NPCSpawnPointEditor : Editor
     int selectNPCInt;
     string[] npcCategory;
 
-    [MenuItem("GameObject/Create Other/NPCSpawnPoint")]
-    public static void Create()
+    public static GameObject Create()
     {
         GameObject spawnPointGameObject = new GameObject();
         spawnPointGameObject.AddComponent<NPCSpawnPoint>();
-        EditorGUIUtility.PingObject(spawnPointGameObject);
-        Selection.activeGameObject = spawnPointGameObject;
-        SceneView.lastActiveSceneView.FrameSelected();
+        return spawnPointGameObject;
     }
 
     void OnEnable()
@@ -70,19 +67,6 @@ public class NPCSpawnPointEditor : Editor
     void SetTransform()
     {
         serObj.targetObject.name = "NPC Spawn Point : " + npcCategory[selectNPCInt];
-        GameObject holders = GameObject.Find("Holders");
-        if (holders == null)
-        {
-            holders = new GameObject("Holders");
-        }
-        Transform holder = GameObject.Find("Holders").transform.Find("NPC Spawn Point Holder");
-        if (holder == null)
-        {
-            holder = new GameObject("NPC Spawn Point Holder").transform;
-            holder.transform.SetParent(holders.transform);
-        }
-        
-        spawnPoint.transform.SetParent(holder.transform);
     }
 
     void StickSpawnerToGround()
