@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class StateUIController : MonoBehaviour
 {
-    [SerializeField] [ReadOnlyAttribute(true)] [Range(0, 1)] float hpPercent;
-    [SerializeField] [ReadOnlyAttribute(true)] [Range(0, 1)] float gaugePercent;
+    [SerializeField] [Range(0, 1)] float hpPercent;
+    [SerializeField] [Range(0, 1)] float gaugePercent;
     
     public float HpPercent { get { return hpPercent; }}
     public float GaugePercent { get { return gaugePercent; }}

@@ -6,12 +6,10 @@ using UnityEngine;
 public class StateUIEditor : Editor
 {
     StateUIController ui;
-    SerializedObject serObj;
 
     void OnEnable()
     {
         ui = (StateUIController) target;
-        serObj = new SerializedObject(ui);
         EditorApplication.update += UpdateUI;
     }
 
