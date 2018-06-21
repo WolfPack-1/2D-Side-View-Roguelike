@@ -57,7 +57,7 @@ public class Controller : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
-        
+
     }
 
     public void SetJumpCoolTime(float value)
@@ -100,6 +100,7 @@ public class Controller : MonoBehaviour
         Vector3 scale = transform.localScale;
         float scaleX = Mathf.Abs(scale.x);
         scale.x = dir == 1 ? -scaleX : scaleX;
+        transform.localScale = scale;
     }
 
     /// <summary>
