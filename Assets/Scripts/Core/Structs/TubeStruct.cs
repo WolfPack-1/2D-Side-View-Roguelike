@@ -1,59 +1,17 @@
 ﻿using System;
 
-[Serializable]
-public struct TubeStruct
+public interface ITube
 {
-    public int cid;
-    public string name;
-    public string nameKor;
-    public SocketEnum socket;
-    public TubeGradeEnum grade;
-    public string company;
-    public string motion;
-    public string hitValue;
-    public string attackType;
-    public string position;
-    public float damage;
-    public string melee;
-    public string range;
-    public string bounce;
-    public string instant;
-    public string splash;
-    public float cooltime;
-    public string abnormalValue;
-    public float distance;
-
-    public TubeStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, string motion, string hitValue, string attackType, string position, float damage, string melee, string range, string bounce, string instant, string splash, float cooltime, string abnormalValue, float distance)
-    {
-        this.cid = cid;
-        this.name = name;
-        this.nameKor = nameKor;
-        this.socket = socket;
-        this.grade = grade;
-        this.company = company;
-        this.motion = motion;
-        this.hitValue = hitValue;
-        this.attackType = attackType;
-        this.position = position;
-        this.damage = damage;
-        this.melee = melee;
-        this.range = range;
-        this.bounce = bounce;
-        this.instant = instant;
-        this.splash = splash;
-        this.cooltime = cooltime;
-        this.abnormalValue = abnormalValue;
-        this.distance = distance;
-    }
-
-    public override string ToString()
-    {
-        return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12} | {13} | {14} | {15} | {16} | {17} | {18}" , cid, name, nameKor, socket, grade, company, motion, hitValue, attackType, position, damage, melee, range, bounce, instant, splash, cooltime, abnormalValue, distance);
-    }
+    int Cid { get; }
+    string Name { get; }
+    string NameKor { get; }
+    SocketEnum Socket { get; }
+    TubeGradeEnum Grade { get; }
+    string Company { get; }
 }
 
 [Serializable]
-public struct TubeStyleStruct
+public struct TubeStyleStruct : ITube
 {
     public int cid;
     public string name;
@@ -92,10 +50,17 @@ public struct TubeStyleStruct
     {
         return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12} | {13}" , cid, name, nameKor, socket, grade, company, motion, hitValue, attackType, position, damage, combo, hold, holdmotion);
     }
+
+    public int Cid { get { return cid; } }
+    public string Name { get { return name; } }
+    public string NameKor { get { return nameKor; } }
+    public SocketEnum Socket { get { return socket; } }
+    public TubeGradeEnum Grade { get { return grade; } }
+    public string Company { get { return company; } }
 }
 
 [Serializable]
-public struct TubeCoolerStruct
+public struct TubeCoolerStruct : ITube
 {
     public int cid;
     public string name;
@@ -120,10 +85,17 @@ public struct TubeCoolerStruct
     {
         return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6}" , cid, name, nameKor, socket, grade, company, cooltime);
     }
+    
+    public int Cid { get { return cid; } }
+    public string Name { get { return name; } }
+    public string NameKor { get { return nameKor; } }
+    public SocketEnum Socket { get { return socket; } }
+    public TubeGradeEnum Grade { get { return grade; } }
+    public string Company { get { return company; } }
 }
 
 [Serializable]
-public struct TubeEnhancerStruct
+public struct TubeEnhancerStruct : ITube
 {
     public int cid;
     public string name;
@@ -156,10 +128,17 @@ public struct TubeEnhancerStruct
     {
         return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10}" , cid, name, nameKor, socket, grade, company, melee, range, bounce, instant, splash);
     }
+    
+    public int Cid { get { return cid; } }
+    public string Name { get { return name; } }
+    public string NameKor { get { return nameKor; } }
+    public SocketEnum Socket { get { return socket; } }
+    public TubeGradeEnum Grade { get { return grade; } }
+    public string Company { get { return company; } }
 }
 
 [Serializable]
-public struct TubeRelicStruct
+public struct TubeRelicStruct : ITube
 {
     public int cid;
     public string name;
@@ -186,4 +165,11 @@ public struct TubeRelicStruct
     {
         return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7}" , cid, name, nameKor, socket, grade, company, abnormalValue, distance);
     }
+    
+    public int Cid { get { return cid; } }
+    public string Name { get { return name; } }
+    public string NameKor { get { return nameKor; } }
+    public SocketEnum Socket { get { return socket; } }
+    public TubeGradeEnum Grade { get { return grade; } }
+    public string Company { get { return company; } }
 }

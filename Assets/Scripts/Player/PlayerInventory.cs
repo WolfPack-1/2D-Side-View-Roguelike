@@ -5,19 +5,17 @@ public class PlayerInventory : Inventory
 {
     Player player;
     PlayerSkillSlot skillSlot;
-    DataManager dataManager;
 
     public override void Awake()
     {
         base.Awake();
         player = GetComponent<Player>();
-        skillSlot = GetComponent<PlayerSkillSlot>();
-        dataManager = FindObjectOfType<DataManager>();
+        skillSlot = player.GetComponent<PlayerSkillSlot>();
     }
 
-    public bool SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum slotEnum, SkillStruct skillStruct)
+    public bool SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum slotEnum, Skill skill)
     {
-        return skillSlot.SetSlot(slotEnum, Skill.CreateSkill(skillStruct, player));
+        return skillSlot.SetSlot(slotEnum, skill);
     }
     
 }

@@ -57,9 +57,21 @@ public class Player : LivingEntity
 
     void Start()
     {
-        //Debug
+        // Debug
         Init(dataManager.LivingEntityData.Data[0]);
-        //SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.A, dataManager.SkillData.GetSkillStruct(19101));
+        
+        // Debug Tubes
+        Tube styleTube = new Tube(dataManager.TubeData.StyleData[0]);
+        Tube enhancerTube = new Tube(dataManager.TubeData.EnhancerData[0]);
+        Tube coolerTube = new Tube(dataManager.TubeData.CoolerData[0]);
+        Tube relicTube = new Tube(dataManager.TubeData.RelicData[0]);
+
+        GetTube(styleTube);
+        GetTube(enhancerTube);
+        GetTube(coolerTube);
+        GetTube(relicTube);
+
+        CreateSkill(styleTube.Cid, enhancerTube.Cid, coolerTube.Cid);
     }
 
     public void Init(LivingEntityStruct livingEntityStruct)
@@ -76,24 +88,39 @@ public class Player : LivingEntity
     
     #region Inventory & SkillSlot
 
-    public bool GetSkill(SkillStruct skillStruct)
+    public bool GetTube(Tube tube)
     {
-        return playerInventory.GetSkill(skillStruct);
+        return playerInventory.GetTube(tube);
     }
 
-    public bool DropSkill(SkillStruct skillStruct)
+    public bool DropTube(int cid)
     {
-        return playerInventory.DropSkill(skillStruct);
+        return playerInventory.DropTube(cid);
     }
 
-    public bool DeleteSkill(SkillStruct skillStruct)
+    public bool DeleteTube(int cid)
     {
-        return playerInventory.DeleteSkill(skillStruct);
+        return playerInventory.DeleteTube(cid);
+    }
+
+    public bool GetSkill(Skill skill)
+    {
+        return playerInventory.GetSkill(skill);
+    }
+
+    public bool DeleteSkill(Skill skill)
+    {
+        return playerInventory.DeleteSkill(skill);
     }
     
-    public bool SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum slotEnum, SkillStruct skillStruct)
+    public bool SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum slotEnum, Skill skill)
     {
-        return playerInventory.SetSlot(slotEnum, skillStruct);
+        return playerInventory.SetSlot(slotEnum, skill);
+    }
+
+    public bool CreateSkill(int styleCid, int enhancerCid, int coolerCid, int relicCid = -1)
+    {
+        return playerInventory.CreateSkill(styleCid, enhancerCid, coolerCid, relicCid);
     }
     
     #endregion

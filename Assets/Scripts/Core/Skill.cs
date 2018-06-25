@@ -2,7 +2,8 @@
 using UnityEngine;
 
 [Serializable]
-public class Skill
+[Obsolete]
+public class OldSkill
 {
 
     [SerializeField] SkillStruct skillStruct;
@@ -28,7 +29,7 @@ public class Skill
     
     public bool CanUseSkill { get { return IsCoolTimeAvailable; } }
 
-    public Skill(SkillStruct skillStruct, LivingEntity owner)
+    public OldSkill(SkillStruct skillStruct, LivingEntity owner)
     {
         this.skillStruct = skillStruct;
         this.owner = owner;
@@ -51,7 +52,7 @@ public class Skill
 
     }
 
-    public static Skill CreateSkill(SkillStruct skillStruct, LivingEntity owner)
+    public static OldSkill CreateSkill(SkillStruct skillStruct, LivingEntity owner)
     {
         string attackType = FunctionParser.ParsingAttackType(skillStruct.attackType);
         if (string.IsNullOrEmpty(attackType))
@@ -60,7 +61,7 @@ public class Skill
         {
             case "melee":
             {
-                return new MeleeSkill(skillStruct, owner, FunctionParser.ParsingAttackType(skillStruct.attackType, (x) => new AttackTypeMelee(x)));
+                return new MeleeOldSkill(skillStruct, owner, FunctionParser.ParsingAttackType(skillStruct.attackType, (x) => new AttackTypeMelee(x)));
             }
 
             default:
@@ -68,5 +69,79 @@ public class Skill
                 return null;
             }
         }
+    }
+}
+
+[Serializable]
+public class Skill
+{
+    [SerializeField] TubeStyleStruct styleStruct;
+    [SerializeField] TubeEnhancerStruct enhancerStruct;
+    [SerializeField] TubeCoolerStruct coolerStruct;
+    [SerializeField] TubeRelicStruct relicStruct;
+    [SerializeField] float lastSkillTime;
+    
+    public string Name 
+    {
+        get
+        {
+            // Todo : 임시로 grade 를 한글로 직접 바꿔줌
+            string grade = "";
+            switch (styleStruct.grade)
+            {
+                case TubeGradeEnum.WEAKNESS:
+                    grade = "애송이의";
+                    break;
+                case TubeGradeEnum.GANGSTER:
+                    grade = "길거리의";
+                    break;
+                case TubeGradeEnum.FIGHT:
+                    grade = "무술가의";
+                    break;
+                case TubeGradeEnum.MASTER:
+                    grade = "달인의";
+                    break;
+            }
+            return grade + " " + enhancerStruct.nameKor + " " + styleStruct.nameKor;
+        } 
+    }
+    public float CoolTime { get { return coolerStruct.cooltime; } }
+    public float LastSkillTime { get { return lastSkillTime; } }
+    public bool IsCoolTimeAvailable
+    {
+        get
+        {
+            if (CoolTime < 0) return true;
+            return Time.time - LastSkillTime >= CoolTime;
+
+        }
+    }
+    public bool CanUseSkill { get { return IsCoolTimeAvailable; } }
+    
+    public Skill(TubeStyleStruct styleStruct, TubeEnhancerStruct enhancerStruct, TubeCoolerStruct coolerStruct)
+    {
+        this.styleStruct = styleStruct;
+        this.enhancerStruct = enhancerStruct;
+        this.coolerStruct = coolerStruct;
+    }
+    
+    public Skill(TubeStyleStruct styleStruct, TubeEnhancerStruct enhancerStruct, TubeCoolerStruct coolerStruct, TubeRelicStruct relicStruct)
+    {
+        this.styleStruct = styleStruct;
+        this.enhancerStruct = enhancerStruct;
+        this.coolerStruct = coolerStruct;
+        this.relicStruct = relicStruct;
+    }
+    
+    public virtual void Use()
+    {
+        if (!CanUseSkill)
+            return;
+        lastSkillTime = Time.time;
+    }
+
+    public virtual void Stop()
+    {
+
     }
 }

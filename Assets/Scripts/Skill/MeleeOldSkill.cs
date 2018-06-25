@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class MeleeSkill : Skill
+public class MeleeOldSkill : OldSkill
 {
     AttackTypeMelee skillData;
     
-    public MeleeSkill(SkillStruct skillStruct, LivingEntity owner, AttackTypeMelee attackTypeMelee) : base(skillStruct, owner)
+    public MeleeOldSkill(SkillStruct skillStruct, LivingEntity owner, AttackTypeMelee attackTypeMelee) : base(skillStruct, owner)
     {
         skillData = attackTypeMelee;
         SetSkillCoolTime(skillData.CoolTime);

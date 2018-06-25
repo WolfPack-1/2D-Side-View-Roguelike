@@ -1,6 +1,7 @@
 ﻿using System;
 
 [Serializable]
+[Obsolete]
 public struct SkillStruct
 {
 

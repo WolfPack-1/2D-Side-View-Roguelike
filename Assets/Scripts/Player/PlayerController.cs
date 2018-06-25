@@ -55,16 +55,6 @@ public class PlayerController : Controller
             playerSkillSlot.Use(PlayerSkillSlot.PlayerSkillKeySlotEnum.R);
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            playerSkillSlot.Use(PlayerSkillSlot.PlayerSkillKeySlotEnum.A);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            playerSkillSlot.Use(PlayerSkillSlot.PlayerSkillKeySlotEnum.S);
-        }
-
         if (Input.GetKeyDown(KeyCode.F))
         {
             
