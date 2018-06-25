@@ -10,6 +10,7 @@ public class DataManager : MonoBehaviour
     public PlaceDivisionData PlaceDivisionData { get { return placeDivisionData; } }
     public SkillData SkillData { get { return skillData; } }
     public LivingEntityData LivingEntityData { get { return livingEntityData; } }
+    public TubeData TubeData { get { return tubeData; } }
 
     [SerializeField] NPCData npcData;
     [SerializeField] AbnormalData abnormalData;
@@ -17,6 +18,7 @@ public class DataManager : MonoBehaviour
     [SerializeField] PlaceDivisionData placeDivisionData;
     [SerializeField] SkillData skillData;
     [SerializeField] LivingEntityData livingEntityData;
+    [SerializeField] TubeData tubeData;
 
     void Awake()
     {
@@ -24,8 +26,8 @@ public class DataManager : MonoBehaviour
         abnormalData.Load();
         gimmickData.Load();
         placeDivisionData.Load();
-        //skillData.Load();
         livingEntityData.Load();
+        tubeData.LoadAll();
     }
 
 }

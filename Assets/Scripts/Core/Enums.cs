@@ -1,6 +1,6 @@
 ﻿public enum EntityGradeEnum {PC, NPC, MOB, BOSS}
 
-public enum TubeGradeEnum { WEAKNESS, GANGSTER }
+public enum TubeGradeEnum { WEAKNESS, GANGSTER, FIGHT, MASTER }
 
 public enum TargetEnum { TARGET, NONTARGET }
 
