@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(LivingEntity))]
 [RequireComponent(typeof(CapsuleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Controller : MonoBehaviour

@@ -21,14 +21,14 @@ public struct TubeStyleStruct : ITube
     public string company;
     public string motion;
     public string hitValue;
-    public string attackType;
+    public AttackTypeEnum attackType;
     public string position;
     public float damage;
     public object combo;
     public bool hold;
-    public object holdmotion;
+    public string holdmotion;
     
-    public TubeStyleStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, string motion, string hitValue, string attackType, string position, float damage, object combo, bool hold, bool holdmotion)
+    public TubeStyleStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, string motion, string hitValue, AttackTypeEnum attackType, string position, float damage, object combo, bool hold, string holdmotion)
     {
         this.cid = cid;
         this.name = name;
@@ -107,9 +107,9 @@ public struct TubeEnhancerStruct : ITube
     public string range;
     public string bounce;
     public string instant;
-    public string splash;
+    public int splash;
     
-    public TubeEnhancerStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, string melee, string range, string bounce, string instant, string splash)
+    public TubeEnhancerStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, string melee, string range, string bounce, string instant, int splash)
     {
         this.cid = cid;
         this.name = name;

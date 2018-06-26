@@ -4,13 +4,10 @@ using UnityEngine;
 public class LivingEntity : MonoBehaviour
 {
 
+    Controller controller;
     public Dictionary<StatsEnum, float> Stats;
-
     public delegate void LivingEntityFloatDelegate(float value);
-
     public event LivingEntityFloatDelegate OnGetDamaged;
-
-
     public bool IsAlive
     {
         get
@@ -20,9 +17,12 @@ public class LivingEntity : MonoBehaviour
             return Stats[StatsEnum.HP] > 0;
         }
     }
+    public Controller Controller { get { return controller; } }
+    public int Dir { get { return controller.Dir; } }
 
     public virtual void Awake()
     {
+        controller = GetComponent<Controller>();
         Stats = new Dictionary<StatsEnum, float>();
         OnGetDamaged = delegate { };
     }

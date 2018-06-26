@@ -22,7 +22,6 @@ public class NPC : LivingEntity
     
     #endregion
     
-    
     #region Initialize
 
     public override void Awake()

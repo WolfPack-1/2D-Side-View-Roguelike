@@ -9,10 +9,10 @@ public struct SkillStruct
     public string name;
     public string nameKor;
     public string animset;
-    public string attackType;
+    public AttackTypeEnum attackType;
     public string abnormal;
 
-    public SkillStruct(int cid, string name, string nameKor, string animSet, string attackType, string abnormal)
+    public SkillStruct(int cid, string name, string nameKor, string animSet, AttackTypeEnum attackType, string abnormal)
     {
         this.cid = cid;
         this.name = name;

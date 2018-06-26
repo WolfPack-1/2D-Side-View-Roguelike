@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Runtime.Serialization.Formatters;
-using UnityEngine;
-using UnityEngine.Tilemaps;
+﻿using UnityEngine;
 
 public class Player : LivingEntity
 {
@@ -13,7 +7,8 @@ public class Player : LivingEntity
 
     PlayerInventory playerInventory;
     DataManager dataManager;
-    
+    PlayerSkillSlot skillSlot;
+
     #endregion
 
     #region Private Variables
@@ -53,6 +48,7 @@ public class Player : LivingEntity
         base.Awake();
         dataManager = FindObjectOfType<DataManager>();
         playerInventory = GetComponent<PlayerInventory>();
+        skillSlot = GetComponent<PlayerSkillSlot>();
     }
 
     void Start()
@@ -72,6 +68,8 @@ public class Player : LivingEntity
         GetTube(relicTube);
 
         CreateSkill(styleTube.Cid, enhancerTube.Cid, coolerTube.Cid);
+
+        SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.Q, playerInventory.GetRandomSkill(true));
     }
 
     public void Init(LivingEntityStruct livingEntityStruct)
@@ -85,7 +83,6 @@ public class Player : LivingEntity
 
     #endregion
 
-    
     #region Inventory & SkillSlot
 
     public bool GetTube(Tube tube)
@@ -112,18 +109,16 @@ public class Player : LivingEntity
     {
         return playerInventory.DeleteSkill(skill);
     }
-    
-    public bool SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum slotEnum, Skill skill)
-    {
-        return playerInventory.SetSlot(slotEnum, skill);
-    }
 
     public bool CreateSkill(int styleCid, int enhancerCid, int coolerCid, int relicCid = -1)
     {
         return playerInventory.CreateSkill(styleCid, enhancerCid, coolerCid, relicCid);
     }
-    
+
+    public bool SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum slotEnum, Skill skill)
+    {
+        return skillSlot.SetSlot(slotEnum, skill);
+    }
+
     #endregion
-
-
 }

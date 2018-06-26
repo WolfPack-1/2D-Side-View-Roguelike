@@ -13,3 +13,5 @@ public enum AbnormalTargetEnum { TARGET, SELF, FACTION }
 public enum StatsEnum { HP, ATK, DEF, ATS, SPD, REC }
 
 public enum SocketEnum { STYLE, ENHANCER, COOLER, RELIC }
+
+public enum AttackTypeEnum { MELEE, RANGE, BOUNCE }

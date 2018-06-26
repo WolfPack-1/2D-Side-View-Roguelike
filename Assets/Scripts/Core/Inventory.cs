@@ -75,6 +75,16 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
+    public virtual Skill GetRandomSkill(bool delete = false)
+    {
+        if (skills.Count <= 0)
+            return null;
+        Skill skill = skills[Random.Range(0, skills.Count)];
+        if (delete)
+            DeleteSkill(skill);
+        return skill;
+    }
+
     public virtual Tube FindTube(int cid)
     {
         return tubes.Find(t => t.Cid == cid);

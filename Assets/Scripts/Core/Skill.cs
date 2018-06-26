@@ -2,79 +2,9 @@
 using UnityEngine;
 
 [Serializable]
-[Obsolete]
-public class OldSkill
-{
-
-    [SerializeField] SkillStruct skillStruct;
-    [SerializeField] LivingEntity owner;
-
-    public SkillStruct SkillStruct { get { return skillStruct; } }
-    public LivingEntity Owner { get { return owner; } }
-
-    [SerializeField] float lastSkillTime;
-    public float LastSkillTime { get { return lastSkillTime; } }
-
-    [SerializeField] float skillCoolTime = -1f;
-
-    public bool IsCoolTimeAvailable
-    {
-        get
-        {
-            if (skillCoolTime < 0) return true;
-            return Time.time - lastSkillTime >= skillCoolTime;
-
-        }
-    }
-    
-    public bool CanUseSkill { get { return IsCoolTimeAvailable; } }
-
-    public OldSkill(SkillStruct skillStruct, LivingEntity owner)
-    {
-        this.skillStruct = skillStruct;
-        this.owner = owner;
-    }
-
-    public void SetSkillCoolTime(float value)
-    {
-        skillCoolTime = value;
-    }
-
-    public virtual void Use()
-    {
-        if (!CanUseSkill)
-            return;
-        lastSkillTime = Time.time;
-    }
-
-    public virtual void Stop()
-    {
-
-    }
-
-    public static OldSkill CreateSkill(SkillStruct skillStruct, LivingEntity owner)
-    {
-        string attackType = FunctionParser.ParsingAttackType(skillStruct.attackType);
-        if (string.IsNullOrEmpty(attackType))
-            return null;
-        switch (attackType)
-        {
-            case "melee":
-            {
-                return new MeleeOldSkill(skillStruct, owner, FunctionParser.ParsingAttackType(skillStruct.attackType, (x) => new AttackTypeMelee(x)));
-            }
-
-            default:
-            {
-                return null;
-            }
-        }
-    }
-}
-
-[Serializable]
 public class Skill
 {
+    [SerializeField] LivingEntity owner;
     [SerializeField] TubeStyleStruct styleStruct;
     [SerializeField] TubeEnhancerStruct enhancerStruct;
     [SerializeField] TubeCoolerStruct coolerStruct;
@@ -123,14 +53,17 @@ public class Skill
         this.styleStruct = styleStruct;
         this.enhancerStruct = enhancerStruct;
         this.coolerStruct = coolerStruct;
+        lastSkillTime = float.MinValue;
     }
     
-    public Skill(TubeStyleStruct styleStruct, TubeEnhancerStruct enhancerStruct, TubeCoolerStruct coolerStruct, TubeRelicStruct relicStruct)
+    public Skill(TubeStyleStruct styleStruct, TubeEnhancerStruct enhancerStruct, TubeCoolerStruct coolerStruct, TubeRelicStruct relicStruct) : this(styleStruct, enhancerStruct, coolerStruct)
     {
-        this.styleStruct = styleStruct;
-        this.enhancerStruct = enhancerStruct;
-        this.coolerStruct = coolerStruct;
         this.relicStruct = relicStruct;
+    }
+
+    public void SetOwner(LivingEntity owner)
+    {
+        this.owner = owner;
     }
     
     public virtual void Use()
@@ -138,6 +71,30 @@ public class Skill
         if (!CanUseSkill)
             return;
         lastSkillTime = Time.time;
+        Debug.Log("Use Skill : " + Name);
+
+        // Class를 SubClass로 나누지 않고 그냥 switch 돌림
+        switch (styleStruct.attackType)
+        {
+            case AttackTypeEnum.MELEE:
+                // Todo : Style의 position을 이용하게 바꾸자
+                Area area = Area.Create(owner.transform.position + (owner.Dir == 1 ? 1 : -1) * Vector3.right, enhancerStruct.splash, 2);
+                Collider2D[] colliders = area.GetEntity(Area.AreaModeEnum.Box, "NPC");
+                foreach(Collider2D col in colliders)
+                {
+                    LivingEntity livingEntity = col.GetComponent<LivingEntity>();
+                    if (livingEntity == null)
+                        continue;
+                    livingEntity.GetDamaged(styleStruct.damage);
+                    Debug.Log(livingEntity.name + "에게 " + styleStruct.damage + "의 데미지를 주었습니다.");
+                }
+                area.Delete();
+                break;
+            case AttackTypeEnum.RANGE:
+                break;
+            case AttackTypeEnum.BOUNCE:
+                break;
+        }
     }
 
     public virtual void Stop()
