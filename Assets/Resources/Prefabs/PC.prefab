@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 70524428912243908}
   - component: {fileID: 114249867406752286}
   - component: {fileID: 114828431477627400}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: PC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cef3204d7fa4d8a8489a7e5594d81d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillStructs: []
+  tubes: []
+  skills: []
 --- !u!212 &212666366476590070
 SpriteRenderer:
   m_ObjectHideFlags: 1
