@@ -5,11 +5,18 @@ using UnityEngine;
 [CustomEditor(typeof(TubeData))]
 public class TubeDataEditor : Editor
 {
-    List<TubeStruct> data;
-
+    List<TubeStyleStruct> styleData;
+    List<TubeEnhancerStruct> enhancerData;
+    List<TubeCoolerStruct> coolerData;
+    List<TubeRelicStruct> relicData;
+    
     void OnEnable()
     {
-        data = Resources.Load<TubeData>("Data/ScriptableObject/Tube").Load();
+        styleData = Resources.Load<TubeData>("Data/ScriptableObject/Tube").LoadStyle();
+        enhancerData = Resources.Load<TubeData>("Data/ScriptableObject/Tube").LoadEnhancer();
+        coolerData = Resources.Load<TubeData>("Data/ScriptableObject/Tube").LoadCooler();
+        relicData = Resources.Load<TubeData>("Data/ScriptableObject/Tube").LoadRelic();
+
     }
 
     public override void OnInspectorGUI()
@@ -19,15 +26,66 @@ public class TubeDataEditor : Editor
         
         GUILayout.BeginHorizontal("BOX");
             
-        EditorGUILayout.LabelField("cid | name | nameKor | socket | grade | company | motion | hitValue | attackType | position | damage | melee | range | bounce | instant | Splash | cooltime | abnormalValue | distance");
+        EditorGUILayout.LabelField("Style");
             
         GUILayout.EndHorizontal();
         
-        foreach (TubeStruct tubeStruct in data)
+        foreach (TubeStyleStruct data in styleData)
         {
             GUILayout.BeginHorizontal("BOX");
             
-            EditorGUILayout.LabelField(tubeStruct.ToString());
+            EditorGUILayout.LabelField(data.ToString());
+            
+            GUILayout.EndHorizontal();
+        }
+        
+        EditorGUILayout.Space ();
+        
+        GUILayout.BeginHorizontal("BOX");
+            
+        EditorGUILayout.LabelField("Enhancer");
+            
+        GUILayout.EndHorizontal();
+        
+        foreach (TubeEnhancerStruct data in enhancerData)
+        {
+            GUILayout.BeginHorizontal("BOX");
+            
+            EditorGUILayout.LabelField(data.ToString());
+            
+            GUILayout.EndHorizontal();
+        }
+        
+        EditorGUILayout.Space ();
+        
+        GUILayout.BeginHorizontal("BOX");
+            
+        EditorGUILayout.LabelField("Cooler");
+            
+        GUILayout.EndHorizontal();
+        
+        foreach (TubeCoolerStruct data in coolerData)
+        {
+            GUILayout.BeginHorizontal("BOX");
+            
+            EditorGUILayout.LabelField(data.ToString());
+            
+            GUILayout.EndHorizontal();
+        }
+        
+        EditorGUILayout.Space ();
+        
+        GUILayout.BeginHorizontal("BOX");
+            
+        EditorGUILayout.LabelField("Relic");
+            
+        GUILayout.EndHorizontal();
+        
+        foreach (TubeRelicStruct data in relicData)
+        {
+            GUILayout.BeginHorizontal("BOX");
+            
+            EditorGUILayout.LabelField(data.ToString());
             
             GUILayout.EndHorizontal();
         }

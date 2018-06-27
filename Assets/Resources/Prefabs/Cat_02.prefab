@@ -23,7 +23,9 @@ GameObject:
   - component: {fileID: 95010290719070862}
   - component: {fileID: 70869248488597948}
   - component: {fileID: 50440706762888914}
-  m_Layer: 0
+  - component: {fileID: 114484043596971380}
+  - component: {fileID: 114328814833692564}
+  m_Layer: 18
   m_Name: Cat_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,6 +97,40 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114328814833692564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212901172091860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cef3204d7fa4d8a8489a7e5594d81d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tubes: []
+  skills: []
+--- !u!114 &114484043596971380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212901172091860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ee40dfba59ec94c9ec9ea35e8074d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcStruct:
+    cid: 0
+    name: 
+    nameKor: 
+    hp: 0
+    EntityGrade: 0
+    recognize: 0
+    recognizeValue: 0
+    skillValue: 
+    dropTable: 
 --- !u!212 &212765366671495282
 SpriteRenderer:
   m_ObjectHideFlags: 1

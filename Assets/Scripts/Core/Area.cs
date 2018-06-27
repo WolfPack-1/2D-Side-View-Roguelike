@@ -7,15 +7,18 @@ public class Area : MonoBehaviour
 
     [SerializeField] Vector2Int size;
     [SerializeField] int radius;
+    [SerializeField] AreaModeEnum areaMode;
 
     public Vector2Int Size { get { return size; } }
     public int Radius { get { return radius; } }
+    public AreaModeEnum AreaMode { get { return areaMode; } }
 
     public Area SetSize(int width, int height)
     {
         size.x = width;
         size.y = height;
         radius = 0;
+        areaMode = AreaModeEnum.Box;
         return this;
     }
 
@@ -23,12 +26,8 @@ public class Area : MonoBehaviour
     {
         this.radius = radius;
         size = Vector2Int.zero;
+        areaMode = AreaModeEnum.Circle;
         return this;
-    }
-
-    public virtual Collider2D[] GetEntity(AreaModeEnum areaModeEnum)
-    {
-        return GetEntity(areaModeEnum, null);
     }
 
     public virtual Collider2D[] GetEntity(AreaModeEnum areaModeEnum, string layerName)
@@ -65,6 +64,11 @@ public class Area : MonoBehaviour
         return Physics2D.OverlapCircleAll(transform.position, radius, 1 << layerMask.value);
     }
 
+    public void Delete()
+    {
+        Destroy(gameObject);
+    }
+
     public static Area Create(Vector2 position, int width, int height)
     {
         return Create(position).SetSize(width, height);
@@ -78,6 +82,7 @@ public class Area : MonoBehaviour
     public static Area Create(Vector2 position)
     {
         GameObject areaGameObject = new GameObject("Area");
+        areaGameObject.transform.position = position;
         return areaGameObject.AddComponent<Area>();
     }
 }

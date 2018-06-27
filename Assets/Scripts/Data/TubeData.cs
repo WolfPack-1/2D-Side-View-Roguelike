@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class TubeData : ScriptableObject
 {
-    public List<TubeStruct> Data { get; private set; }
+    public List<TubeStyleStruct> StyleData { get; private set; }
+    public List<TubeCoolerStruct> CoolerData { get; private set; }
+    public List<TubeEnhancerStruct> EnhancerData { get; private set; }
+    public List<TubeRelicStruct> RelicData { get; private set; }
 
     [MenuItem("Assets/Data/Tube")]
     public static void CreateAsset()
@@ -12,9 +15,43 @@ public class TubeData : ScriptableObject
         ScriptableObjectExtension.CreateAsset<TubeData>();
     }
 
-    public List<TubeStruct> Load()
+    public void LoadAll()
     {
-        Data = CSVParser.LoadObjects<TubeStruct>("Tube.csv");
-        return Data;
+        StyleData = CSVParser.LoadObjects<TubeStyleStruct>("TubeStyle.csv");
+        CoolerData = CSVParser.LoadObjects<TubeCoolerStruct>("TubeCooler.csv");
+        EnhancerData = CSVParser.LoadObjects<TubeEnhancerStruct>("TubeEnhancer.csv");
+        RelicData = CSVParser.LoadObjects<TubeRelicStruct>("TubeRelic.csv");
+    }
+
+    public List<TubeStyleStruct> LoadStyle()
+    {
+        if (StyleData != null)
+            return StyleData;
+        StyleData = CSVParser.LoadObjects<TubeStyleStruct>("TubeStyle.csv");
+        return StyleData;
+    }
+    
+    public List<TubeCoolerStruct> LoadCooler()
+    {
+        if (CoolerData != null)
+            return CoolerData;
+        CoolerData = CSVParser.LoadObjects<TubeCoolerStruct>("TubeCooler.csv");
+        return CoolerData;
+    }
+    
+    public List<TubeEnhancerStruct> LoadEnhancer()
+    {
+        if (EnhancerData != null)
+            return EnhancerData;
+        EnhancerData = CSVParser.LoadObjects<TubeEnhancerStruct>("TubeEnhancer.csv");
+        return EnhancerData;
+    }
+    
+    public List<TubeRelicStruct> LoadRelic()
+    {
+        if (RelicData != null)
+            return RelicData;
+        RelicData = CSVParser.LoadObjects<TubeRelicStruct>("TubeRelic.csv");
+        return RelicData;
     }
 }

@@ -23,7 +23,9 @@ GameObject:
   - component: {fileID: 95693549668483942}
   - component: {fileID: 70189615896230866}
   - component: {fileID: 50886505289846928}
-  m_Layer: 0
+  - component: {fileID: 114919343483947208}
+  - component: {fileID: 114083621487463520}
+  m_Layer: 18
   m_Name: MadBuddy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,6 +97,40 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114083621487463520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1289705385477702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cef3204d7fa4d8a8489a7e5594d81d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tubes: []
+  skills: []
+--- !u!114 &114919343483947208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1289705385477702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ee40dfba59ec94c9ec9ea35e8074d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcStruct:
+    cid: 0
+    name: 
+    nameKor: 
+    hp: 0
+    EntityGrade: 0
+    recognize: 0
+    recognizeValue: 0
+    skillValue: 
+    dropTable: 
 --- !u!212 &212273963621657620
 SpriteRenderer:
   m_ObjectHideFlags: 1

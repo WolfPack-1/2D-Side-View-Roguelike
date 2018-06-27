@@ -8,9 +8,14 @@ public class AreaEditor : Editor
     static void DrawHandles(Area area, GizmoType gizmoType)
     {
         Handles.color = Color.green;
-        if(area.Size != Vector2Int.zero)
-            Handles.DrawWireCube(area.transform.position, new Vector3(area.Size.x, area.Size.y));
-        else if(area.Radius > 0)
-            Handles.DrawWireDisc(area.transform.position, Vector3.back, area.Radius);
+        switch (area.AreaMode)
+        {
+            case Area.AreaModeEnum.Box:
+                Handles.DrawWireCube(area.transform.position, new Vector3(area.Size.x, area.Size.y));
+                break;
+            case Area.AreaModeEnum.Circle:
+                Handles.DrawWireDisc(area.transform.position, Vector3.back, area.Radius);
+                break;
+        }
     }
 }

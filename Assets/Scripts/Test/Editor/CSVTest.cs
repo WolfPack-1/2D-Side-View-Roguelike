@@ -124,13 +124,13 @@ public class CSVTest
 		);
 	}
 	
-	[Test]
-	public void TestTubeData()
-	{
-		Assert.AreEqual
-		(
-			TestStruct<TubeStruct>("Tube"),
-			TestScriptableObject<TubeData>("Tube")
-		);
-	}
+//	[Test]
+//	public void TestTubeData()
+//	{
+//		Assert.AreEqual
+//		(
+//			TestStruct<tube>("Tube"),
+//			TestScriptableObject<TubeData>("Tube")
+//		);
+//	}
 }

@@ -1,72 +1,119 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [Serializable]
 public class Skill
 {
-
-    [SerializeField] SkillStruct skillStruct;
+    Coroutine updator;
+    
     [SerializeField] LivingEntity owner;
-
-    public SkillStruct SkillStruct { get { return skillStruct; } }
-    public LivingEntity Owner { get { return owner; } }
-
+    [SerializeField] TubeStyleStruct styleStruct;
+    [SerializeField] TubeEnhancerStruct enhancerStruct;
+    [SerializeField] TubeCoolerStruct coolerStruct;
+    [SerializeField] TubeRelicStruct relicStruct;
     [SerializeField] float lastSkillTime;
+    
+    public string Name 
+    {
+        get
+        {
+            // Todo : 임시로 grade 를 한글로 직접 바꿔줌
+            string grade = "";
+            switch (styleStruct.grade)
+            {
+                case TubeGradeEnum.WEAKNESS:
+                    grade = "애송이의";
+                    break;
+                case TubeGradeEnum.GANGSTER:
+                    grade = "길거리의";
+                    break;
+                case TubeGradeEnum.FIGHT:
+                    grade = "무술가의";
+                    break;
+                case TubeGradeEnum.MASTER:
+                    grade = "달인의";
+                    break;
+            }
+            return grade + " " + enhancerStruct.nameKor + " " + styleStruct.nameKor;
+        } 
+    }
+    public float CoolTime { get { return coolerStruct.cooltime; } }
     public float LastSkillTime { get { return lastSkillTime; } }
-
-    [SerializeField] float skillCoolTime = -1f;
-
     public bool IsCoolTimeAvailable
     {
         get
         {
-            if (skillCoolTime < 0) return true;
-            return Time.time - lastSkillTime >= skillCoolTime;
+            if (CoolTime < 0) return true;
+            return Time.time - LastSkillTime >= CoolTime;
 
         }
     }
+    public bool CanUseSkill { get { return IsCoolTimeAvailable && updator == null; } }
     
-    public bool CanUseSkill { get { return IsCoolTimeAvailable; } }
-
-    public Skill(SkillStruct skillStruct, LivingEntity owner)
+    public Skill(TubeStyleStruct styleStruct, TubeEnhancerStruct enhancerStruct, TubeCoolerStruct coolerStruct)
     {
-        this.skillStruct = skillStruct;
+        this.styleStruct = styleStruct;
+        this.enhancerStruct = enhancerStruct;
+        this.coolerStruct = coolerStruct;
+        lastSkillTime = float.MinValue;
+    }
+    
+    public Skill(TubeStyleStruct styleStruct, TubeEnhancerStruct enhancerStruct, TubeCoolerStruct coolerStruct, TubeRelicStruct relicStruct) : this(styleStruct, enhancerStruct, coolerStruct)
+    {
+        this.relicStruct = relicStruct;
+    }
+
+    public void SetOwner(LivingEntity owner)
+    {
         this.owner = owner;
     }
-
-    public void SetSkillCoolTime(float value)
-    {
-        skillCoolTime = value;
-    }
-
-    public virtual void Use()
+    
+    public void Use()
     {
         if (!CanUseSkill)
             return;
+        updator = owner.StartCoroutine(KillUpdator());
+    }
+
+    IEnumerator KillUpdator()
+    {
+        Debug.Log("스킬 사용 시작 : " + Name);
+        yield return new WaitForSeconds(styleStruct.hitValue);
+        Debug.Log(styleStruct.hitValue + "초 만큼 기다림");
         lastSkillTime = Time.time;
-    }
 
-    public virtual void Stop()
-    {
-
-    }
-
-    public static Skill CreateSkill(SkillStruct skillStruct, LivingEntity owner)
-    {
-        string attackType = FunctionParser.ParsingAttackType(skillStruct.attackType);
-        if (string.IsNullOrEmpty(attackType))
-            return null;
-        switch (attackType)
+        // Class를 SubClass로 나누지 않고 그냥 switch 돌림
+        switch (styleStruct.attackType)
         {
-            case "melee":
-            {
-                return new MeleeSkill(skillStruct, owner, FunctionParser.ParsingAttackType(skillStruct.attackType, (x) => new AttackTypeMelee(x)));
-            }
-
-            default:
-            {
-                return null;
-            }
+            case AttackTypeEnum.MELEE:
+                // Todo : Style의 position을 이용하게 바꾸자
+                Area area = Area.Create(owner.transform.position + owner.Dir * Vector3.right, enhancerStruct.splash, 2);
+                Collider2D[] colliders = area.GetEntity(Area.AreaModeEnum.Box, "NPC");
+                foreach(Collider2D col in colliders)
+                {
+                    LivingEntity livingEntity = col.GetComponent<LivingEntity>();
+                    if (livingEntity == null)
+                        continue;
+                    livingEntity.GetDamaged(styleStruct.damage);
+                    Debug.Log(livingEntity.name + "에게 " + styleStruct.damage + "의 데미지를 주었습니다.");
+                }
+                area.Delete();
+                break;
+            case AttackTypeEnum.RANGE:
+                Projectile
+                    .Create(owner.transform.position, styleStruct.damage, enhancerStruct.splash, owner)
+                    .Fire(owner.transform.position + owner.Dir * Vector3.right);
+                break;
+            case AttackTypeEnum.BOUNCE:
+                break;
         }
+
+        updator = null;
+    }
+
+    public void Stop()
+    {
+
     }
 }

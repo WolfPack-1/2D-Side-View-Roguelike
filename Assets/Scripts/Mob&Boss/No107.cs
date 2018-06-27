@@ -65,6 +65,11 @@ public class No107 : NPC
         state = State.Idle;
     }
 
+    void Update()
+    {
+        animator.SetInteger("HpRatio", (int)(HP / NPCStruct.hp * 100));
+    }
+
     IEnumerator Selector()
     {
         while (true)
