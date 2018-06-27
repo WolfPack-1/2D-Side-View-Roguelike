@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 95576552905147088}
   - component: {fileID: 70680994375488820}
   - component: {fileID: 50199759303239792}
+  - component: {fileID: 114789095255879198}
+  - component: {fileID: 114416615662962848}
   m_Layer: 18
   m_Name: Crow
   m_TagString: Untagged
@@ -95,6 +97,40 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114416615662962848
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1980039647701490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cef3204d7fa4d8a8489a7e5594d81d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tubes: []
+  skills: []
+--- !u!114 &114789095255879198
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1980039647701490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ee40dfba59ec94c9ec9ea35e8074d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcStruct:
+    cid: 0
+    name: 
+    nameKor: 
+    hp: 0
+    EntityGrade: 0
+    recognize: 0
+    recognizeValue: 0
+    skillValue: 
+    dropTable: 
 --- !u!212 &212653406718665878
 SpriteRenderer:
   m_ObjectHideFlags: 1

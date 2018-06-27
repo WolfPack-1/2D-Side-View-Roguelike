@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4589192579580188}
   - component: {fileID: 212426923597871698}
   - component: {fileID: 95478702674805960}
+  - component: {fileID: 114282792709071730}
+  - component: {fileID: 114931020850759792}
   m_Layer: 18
   m_Name: No108
   m_TagString: Untagged
@@ -58,6 +60,40 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114282792709071730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1301310305187072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ee40dfba59ec94c9ec9ea35e8074d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcStruct:
+    cid: 0
+    name: 
+    nameKor: 
+    hp: 0
+    EntityGrade: 0
+    recognize: 0
+    recognizeValue: 0
+    skillValue: 
+    dropTable: 
+--- !u!114 &114931020850759792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1301310305187072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cef3204d7fa4d8a8489a7e5594d81d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tubes: []
+  skills: []
 --- !u!212 &212426923597871698
 SpriteRenderer:
   m_ObjectHideFlags: 1
