@@ -7,6 +7,7 @@ public class NPCSpawnPoint : MonoBehaviour
 
     DataManager dataManager;
     [SerializeField] int npcStructIndex;
+    [SerializeField] int dir;
     public NPCStruct CurrentNpcStruct;
     public Vector2 SpawnPosition
     {
@@ -36,6 +37,10 @@ public class NPCSpawnPoint : MonoBehaviour
         }
         NPC npc = Instantiate(npcPrefab, SpawnPosition, Quaternion.identity);
         npc.Init(CurrentNpcStruct);
+        
+        Vector3 scale = npc.transform.localScale;
+        float scaleX = Mathf.Abs(scale.x);
+        scale.x = dir == 1 ? -scaleX : scaleX;
+        npc.transform.localScale = scale;
     }
-
 }

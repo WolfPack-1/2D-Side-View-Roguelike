@@ -16,8 +16,10 @@ public class NPCSpawnPointEditor : Editor
     NPCSpawnPoint spawnPoint;
     SerializedObject serObj;
     SerializedProperty npcStructIndex;
+    SerializedProperty npcDir;
     int selectNPCInt;
     string[] npcCategory;
+    string[] dirCategory = {"왼쪽", "오른쪽"};
 
     public static GameObject Create()
     {
@@ -32,6 +34,7 @@ public class NPCSpawnPointEditor : Editor
         spawnPoint = (NPCSpawnPoint) target;
         serObj = new SerializedObject(target);
         npcStructIndex = serObj.FindProperty("npcStructIndex");
+        npcDir = serObj.FindProperty("dir");
         npcCategory = data.Select(I => I.nameKor).ToArray();
         spawnPoint.tag = "NPC Spawn Point";
         selectNPCInt = npcStructIndex.intValue;
@@ -40,8 +43,9 @@ public class NPCSpawnPointEditor : Editor
     public override void OnInspectorGUI()
     {               
         serObj.Update();
-        
+
         selectNPCInt = EditorGUILayout.Popup("NPC 선택", selectNPCInt, npcCategory, EditorStyles.popup);
+        npcDir.intValue = EditorGUILayout.Popup("방향 선택", npcDir.intValue, dirCategory, EditorStyles.popup);
 
         npcStructIndex.intValue = selectNPCInt;
         spawnPoint.CurrentNpcStruct = data[selectNPCInt];
