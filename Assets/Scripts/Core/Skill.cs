@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [Serializable]
 public class Skill
 {
+    Coroutine updator;
+    
     [SerializeField] LivingEntity owner;
     [SerializeField] TubeStyleStruct styleStruct;
     [SerializeField] TubeEnhancerStruct enhancerStruct;
@@ -46,7 +49,7 @@ public class Skill
 
         }
     }
-    public bool CanUseSkill { get { return IsCoolTimeAvailable; } }
+    public bool CanUseSkill { get { return IsCoolTimeAvailable && updator == null; } }
     
     public Skill(TubeStyleStruct styleStruct, TubeEnhancerStruct enhancerStruct, TubeCoolerStruct coolerStruct)
     {
@@ -66,19 +69,26 @@ public class Skill
         this.owner = owner;
     }
     
-    public virtual void Use()
+    public void Use()
     {
         if (!CanUseSkill)
             return;
+        updator = owner.StartCoroutine(KillUpdator());
+    }
+
+    IEnumerator KillUpdator()
+    {
+        Debug.Log("스킬 사용 시작 : " + Name);
+        yield return new WaitForSeconds(styleStruct.hitValue);
+        Debug.Log(styleStruct.hitValue + "초 만큼 기다림");
         lastSkillTime = Time.time;
-        Debug.Log("Use Skill : " + Name);
 
         // Class를 SubClass로 나누지 않고 그냥 switch 돌림
         switch (styleStruct.attackType)
         {
             case AttackTypeEnum.MELEE:
                 // Todo : Style의 position을 이용하게 바꾸자
-                Area area = Area.Create(owner.transform.position + (owner.Dir == 1 ? 1 : -1) * Vector3.right, enhancerStruct.splash, 2);
+                Area area = Area.Create(owner.transform.position + owner.Dir * Vector3.right, enhancerStruct.splash, 2);
                 Collider2D[] colliders = area.GetEntity(Area.AreaModeEnum.Box, "NPC");
                 foreach(Collider2D col in colliders)
                 {
@@ -91,13 +101,18 @@ public class Skill
                 area.Delete();
                 break;
             case AttackTypeEnum.RANGE:
+                Projectile
+                    .Create(owner.transform.position, styleStruct.damage, enhancerStruct.splash, owner)
+                    .Fire(owner.transform.position + owner.Dir * Vector3.right);
                 break;
             case AttackTypeEnum.BOUNCE:
                 break;
         }
+
+        updator = null;
     }
 
-    public virtual void Stop()
+    public void Stop()
     {
 
     }

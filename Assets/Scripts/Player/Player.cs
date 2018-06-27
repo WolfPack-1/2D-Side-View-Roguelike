@@ -57,7 +57,7 @@ public class Player : LivingEntity
         Init(dataManager.LivingEntityData.Data[0]);
         
         // Debug Tubes
-        Tube styleTube = new Tube(dataManager.TubeData.StyleData[0]);
+        Tube styleTube = new Tube(dataManager.TubeData.StyleData[1]);
         Tube enhancerTube = new Tube(dataManager.TubeData.EnhancerData[0]);
         Tube coolerTube = new Tube(dataManager.TubeData.CoolerData[0]);
         Tube relicTube = new Tube(dataManager.TubeData.RelicData[0]);
