@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4088876062849494}
   - component: {fileID: 114041597816369650}
   m_Layer: 0
-  m_Name: "NPC Spawn Point : \uCF54\uBC43"
+  m_Name: "NPC Spawn Point : \uBC0D\uD0A4\uC988"
   m_TagString: NPC Spawn Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 4676984329309152}
   - component: {fileID: 114290942527058980}
   m_Layer: 0
-  m_Name: "NPC Spawn Point : \uACE0\uC7A5\uB09C \uCF54\uBC43"
+  m_Name: "NPC Spawn Point : \uB7AB\uBCF4\uC774"
   m_TagString: NPC Spawn Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,7 +287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1847956131928380
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +345,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1348195156134806}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5, y: -1.9000001, z: 0}
+  m_LocalPosition: {x: 10, y: 1.1000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4701621944871684}
@@ -481,7 +481,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1467046479401362}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5, y: -1.9000001, z: 0}
+  m_LocalPosition: {x: -3, y: 1.1000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4701621944871684}
@@ -494,7 +494,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1392051579738114}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.5, y: 3.5, z: 0}
+  m_LocalPosition: {x: -0.5, y: 3.5, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4234559147852368}
@@ -520,7 +520,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1858176395294420}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: -1.9000001, z: 0}
+  m_LocalPosition: {x: -0.5, y: 1.1000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4701621944871684}
@@ -546,7 +546,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1743318094370370}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.5, y: 0.10000038, z: 0}
+  m_LocalPosition: {x: -9.5, y: -2.11875, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4701621944871684}
@@ -1093,17 +1093,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 0
+  npcStructIndex: 7
+  dir: 0
   CurrentNpcStruct:
-    cid: 19100
-    name: no107_01
-    nameKor: "\uCF54\uBC43"
+    cid: 19106
+    name: Mingkies
+    nameKor: "\uBC0D\uD0A4\uC988"
     hp: 50
     EntityGrade: 0
     recognize: 1
-    recognizeValue: 3
-    skillValue: '{(19_DeadlyAttack)}'
-    dropTable: '{(1100,2),(1106,2),(2100,2),(2101,2),(3100,1),(3101,1),(3102,1),(3103,1),(3104,1),(3105,1)}'
+    recognizeValue: 30
+    skillValue: '{(19_mingkies)}'
+    dropTable: '{(1101,2),(1107,2),(2103,2),(2104,2),(3100,2),(3101,2)}'
 --- !u!114 &114225632424005928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1128,6 +1129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcStructIndex: 0
+  dir: 0
   CurrentNpcStruct:
     cid: 19100
     name: no107_01
@@ -1149,17 +1151,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 1
+  npcStructIndex: 2
+  dir: 0
   CurrentNpcStruct:
-    cid: 19101
-    name: no107_02
-    nameKor: "\uACE0\uC7A5\uB09C \uCF54\uBC43"
-    hp: 50
+    cid: 19102
+    name: Jake_B
+    nameKor: "\uB7AB\uBCF4\uC774"
+    hp: 30
     EntityGrade: 0
     recognize: 1
-    recognizeValue: 3
-    skillValue: '{(19_CriticalHit)}'
-    dropTable: '{(1104,2),(1109,2),(2102,2),(2103,2),(3100,1),(3101,1),(3102,1),(3103,1),(3104,1),(3105,1)}'
+    recognizeValue: 5
+    skillValue: '{(19_jakebounce)}'
+    dropTable: '{(1102,2),(1108,2),(2106,2),(2107,2),(3100,1),(3101,1),(3102,1),(3103,1),(3104,1),(3105,1)}'
 --- !u!114 &114352309838219240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1172,6 +1175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcStructIndex: 0
+  dir: 0
   CurrentNpcStruct:
     cid: 19100
     name: no107_01

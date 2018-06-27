@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 4903705611807328}
   - component: {fileID: 114186992479233648}
   m_Layer: 0
-  m_Name: "NPC Spawn Point : \uCCAD\uC18C\uBD80"
+  m_Name: "NPC Spawn Point : \uBC0D\uD0A4\uC988"
   m_TagString: NPC Spawn Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1388,6 +1388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcStructIndex: 0
+  dir: 0
   CurrentNpcStruct:
     cid: 19100
     name: no107_01
@@ -1409,17 +1410,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 5
+  npcStructIndex: 7
+  dir: 1
   CurrentNpcStruct:
-    cid: 19104
-    name: Cleaner
-    nameKor: "\uCCAD\uC18C\uBD80"
-    hp: 70
+    cid: 19106
+    name: Mingkies
+    nameKor: "\uBC0D\uD0A4\uC988"
+    hp: 50
     EntityGrade: 0
     recognize: 1
-    recognizeValue: 3
-    skillValue: '{(19_cleaner)}'
-    dropTable: '{(1101,2),(1107,2),(2101,2),(2103,2),(3100,1),(3101,1),(3102,1),(3103,1),(3104,1),(3105,1)}'
+    recognizeValue: 30
+    skillValue: '{(19_mingkies)}'
+    dropTable: '{(1101,2),(1107,2),(2103,2),(2104,2),(3100,2),(3101,2)}'
 --- !u!114 &114259214206848512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1432,6 +1434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcStructIndex: 3
+  dir: 0
   CurrentNpcStruct:
     cid: 19103
     name: jake_R
@@ -1454,6 +1457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcStructIndex: 3
+  dir: 0
   CurrentNpcStruct:
     cid: 19103
     name: jake_R
@@ -1476,6 +1480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcStructIndex: 5
+  dir: 0
   CurrentNpcStruct:
     cid: 19104
     name: Cleaner
