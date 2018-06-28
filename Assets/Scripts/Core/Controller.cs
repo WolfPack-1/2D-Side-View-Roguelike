@@ -17,7 +17,17 @@ public class Controller : MonoBehaviour
     /// <summary>
     /// 왼쪽 -1 오른쪽 1
     /// </summary>
-    public int Dir { get { return dir; } }
+    public int Dir
+    {
+        get
+        {
+            if (dir != 0) return dir;
+            Vector3 scale = transform.localScale;
+            dir = scale.x > 0 ? -1 : 1;
+            Flip(dir);
+            return dir;
+        }
+    }
 
     /// <summary>
     /// 0 미만이면 점프 불가능

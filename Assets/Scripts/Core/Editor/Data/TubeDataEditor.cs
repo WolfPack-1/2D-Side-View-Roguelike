@@ -16,7 +16,7 @@ public class TubeDataEditor : Editor
         enhancerData = Resources.Load<TubeData>("Data/ScriptableObject/Tube").LoadEnhancer();
         coolerData = Resources.Load<TubeData>("Data/ScriptableObject/Tube").LoadCooler();
         relicData = Resources.Load<TubeData>("Data/ScriptableObject/Tube").LoadRelic();
-
+    
     }
 
     public override void OnInspectorGUI()

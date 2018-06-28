@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 
 [Serializable]
 public class Skill
@@ -79,8 +80,8 @@ public class Skill
     IEnumerator KillUpdator()
     {
         Debug.Log("스킬 사용 시작 : " + Name);
-        yield return new WaitForSeconds(styleStruct.hitValue);
-        Debug.Log(styleStruct.hitValue + "초 만큼 기다림");
+        yield return new WaitForSeconds(styleStruct.motionDelay);
+        Debug.Log(styleStruct.motionDelay + "초 만큼 기다림");
         lastSkillTime = Time.time;
 
         // Class를 SubClass로 나누지 않고 그냥 switch 돌림
@@ -106,6 +107,12 @@ public class Skill
                     .Fire(owner.transform.position + owner.Dir * Vector3.right);
                 break;
             case AttackTypeEnum.BOUNCE:
+                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                worldPosition.z = 0;
+                Debug.Log(worldPosition);
+                Projectile
+                    .Create(owner.transform.position, styleStruct.damage, enhancerStruct.splash, owner)
+                    .Launch(owner.transform.position + owner.Dir * Vector3.right);
                 break;
         }
 
