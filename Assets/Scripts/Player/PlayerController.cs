@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Experimental.UIElements;
+using UnityEngineInternal.Input;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(PlayerSkillSlot))]
@@ -8,18 +9,51 @@ public class PlayerController : Controller
 
     Player player;
     PlayerSkillSlot playerSkillSlot;
+    Animator animator;
     int inputDir;
+    
+    public bool IsMove { get { return rb2d.velocity.sqrMagnitude > 0; } }
+
+    public bool IsWalk
+    {
+        get
+        {
+            return IsMove && (inputDir != 0);
+        }
+    }
 
     public override void Awake()
     {
         base.Awake();
         player = GetComponent<Player>();
         playerSkillSlot = GetComponent<PlayerSkillSlot>();
+        animator = GetComponent<Animator>();
     }
 
     void Start()
     {
         SetJumpCoolTime(player.JumpCoolTime);
+    }
+
+    public override void Update()
+    {
+        base.Update();
+        KeyInput();
+        animator.SetInteger("HpRatio", (int)(player.HP / player.LivingEntityStruct.hp * 100));
+        animator.SetBool("IsWalk", IsWalk);
+        animator.SetBool("IsJump", !IsGrounded);
+    }
+    
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        Move(inputDir, player.SPD);
+    }
+
+    public override void Jump(float power)
+    {
+        base.Jump(power);
+        animator.SetTrigger("DoJump");
     }
 
     void KeyInput()
@@ -74,18 +108,6 @@ public class PlayerController : Controller
         {
             
         }
-    }
-    
-    public override void Update()
-    {
-        base.Update();
-        KeyInput();
-    }
-
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-        Move(inputDir, player.SPD);
     }
 
 }

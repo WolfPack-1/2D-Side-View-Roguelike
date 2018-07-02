@@ -12,8 +12,11 @@ public class Player : LivingEntity
 
     #endregion
 
-    #region Private Variables
+    #region Variables
 
+    public LivingEntityStruct LivingEntityStruct { get { return livingEntityStruct; } }
+
+    LivingEntityStruct livingEntityStruct;
     float lastJumpTime;
 
     #endregion
@@ -75,6 +78,7 @@ public class Player : LivingEntity
 
     public void Init(LivingEntityStruct livingEntityStruct)
     {
+        this.livingEntityStruct = livingEntityStruct;
         AddStat(StatsEnum.HP, livingEntityStruct.hp);
         AddStat(StatsEnum.ATK, livingEntityStruct.atk);
         AddStat(StatsEnum.DEF, livingEntityStruct.def);
