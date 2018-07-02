@@ -7,7 +7,7 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
 
-    Rigidbody2D rb2d;
+    protected Rigidbody2D rb2d;
     CapsuleCollider2D col;
     float lastJumpTime;
     int dir;
@@ -40,11 +40,11 @@ public class Controller : MonoBehaviour
         {
             if (rb2d == null)
                 return false;
-            Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position - Vector3.up * (col.bounds.extents.y), col.bounds.extents.x, 1 << LayerMask.NameToLayer("Ground"));
+            Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position - Vector3.up * (col.bounds.extents.y) + new Vector3(col.offset.x * -Dir, col.offset.y), col.bounds.extents.x * 0.9f, 1 << LayerMask.NameToLayer("Ground"));
             return cols.Any();
         }
     }
-    
+
     public bool CanJump
     {
         get
