@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4007516741136338}
   - component: {fileID: 2569400266233806868}
+  - component: {fileID: 114850794704447378}
   m_Layer: 0
   m_Name: 19_001
   m_TagString: Untagged
@@ -1157,6 +1158,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+--- !u!114 &114850794704447378
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1030096930206766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5234a65ce7c5f2e4695dc28d2c40003b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  availableDirection:
+    U: 0
+    D: 0
+    L: 0
+    R: 0
 --- !u!114 &114946856937254676
 MonoBehaviour:
   m_ObjectHideFlags: 1
