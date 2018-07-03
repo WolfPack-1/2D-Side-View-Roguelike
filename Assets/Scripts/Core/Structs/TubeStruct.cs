@@ -19,7 +19,6 @@ public struct TubeStyleStruct : ITube
     public SocketEnum socket;
     public TubeGradeEnum grade;
     public string company;
-    public string motion;
     public float motionDelay;
     public float range;
     public AttackTypeEnum attackType;
@@ -30,7 +29,7 @@ public struct TubeStyleStruct : ITube
     public string holdmotion;
     
     
-    public TubeStyleStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, string motion, float motionDelay, float range, AttackTypeEnum attackType, string position, float damage, object combo, bool hold, string holdmotion)
+    public TubeStyleStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, float motionDelay, float range, AttackTypeEnum attackType, string position, float damage, object combo, bool hold, string holdmotion)
     {
         this.cid = cid;
         this.name = name;
@@ -38,7 +37,6 @@ public struct TubeStyleStruct : ITube
         this.socket = socket;
         this.grade = grade;
         this.company = company;
-        this.motion = motion;
         this.motionDelay = motionDelay;
         this.range = range;
         this.attackType = attackType;
@@ -51,7 +49,7 @@ public struct TubeStyleStruct : ITube
 
     public override string ToString()
     {
-        return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12} | {13}" , cid, name, nameKor, socket, grade, company, motion, motionDelay, attackType, position, damage, combo, hold, holdmotion);
+        return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12}" , cid, name, nameKor, socket, grade, company, motionDelay, attackType, position, damage, combo, hold, holdmotion);
     }
 
     public int Cid { get { return cid; } }

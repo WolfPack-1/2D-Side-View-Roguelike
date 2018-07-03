@@ -11,9 +11,9 @@ public class PlayerController : Controller
     PlayerSkillSlot playerSkillSlot;
     Animator animator;
     int inputDir;
+
     
     public bool IsMove { get { return rb2d.velocity.sqrMagnitude > 0; } }
-
     public bool IsWalk
     {
         get
@@ -21,6 +21,8 @@ public class PlayerController : Controller
             return IsMove && (inputDir != 0);
         }
     }
+    public bool IsUsingSkill { get { return playerSkillSlot.IsUsingSkill; } }
+    public bool CanWalk { get { return !IsUsingSkill; } }
 
     public override void Awake()
     {
@@ -48,6 +50,16 @@ public class PlayerController : Controller
     {
         base.FixedUpdate();
         Move(inputDir, player.SPD);
+    }
+
+    public override void Move(int dir, float speed)
+    {
+        if (!CanWalk)
+        {
+            base.Move(dir, 0);
+            return;
+        }
+        base.Move(dir, speed);
     }
 
     public override void Jump(float power)

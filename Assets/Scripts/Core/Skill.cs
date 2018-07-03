@@ -9,6 +9,7 @@ public class Skill
     Coroutine updator;
     
     [SerializeField] LivingEntity owner;
+    [SerializeField] Animator animator;
     [SerializeField] TubeStyleStruct styleStruct;
     [SerializeField] TubeEnhancerStruct enhancerStruct;
     [SerializeField] TubeCoolerStruct coolerStruct;
@@ -67,19 +68,31 @@ public class Skill
 
     public void SetOwner(LivingEntity owner)
     {
+        Debug.Assert(owner);
         this.owner = owner;
+        animator = owner.GetComponent<Animator>();
     }
     
-    public void Use()
+    public void Use(Action<bool> callback)
     {
         if (!CanUseSkill)
+        {
+            callback(false);
             return;
-        updator = owner.StartCoroutine(KillUpdator());
+        }
+
+        updator = owner.StartCoroutine(KillUpdator(callback));
     }
 
-    IEnumerator KillUpdator()
+    IEnumerator KillUpdator(Action<bool> callback)
     {
+        callback(true);
         Debug.Log("스킬 사용 시작 : " + Name);
+        if (animator != null)
+        {
+            animator.SetInteger("StyleNum", styleStruct.cid);
+            animator.SetTrigger("DoSkill");
+        }
         yield return new WaitForSeconds(styleStruct.motionDelay);
         Debug.Log(styleStruct.motionDelay + "초 만큼 기다림");
         lastSkillTime = Time.time;
@@ -115,8 +128,9 @@ public class Skill
                     .Launch(owner.transform.position + owner.Dir * Vector3.right);
                 break;
         }
-
+        yield return new WaitForSeconds(0.3f);
         updator = null;
+        callback(false);
     }
 
     public void Stop()

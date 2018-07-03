@@ -7,12 +7,15 @@ public class PlayerSkillSlot : MonoBehaviour
     Player player;
     PlayerInventory playerInventory;
     public enum PlayerSkillKeySlotEnum { Q, W, E, R}
+    bool isUsingSkill;
 
     public delegate void OnPlayerSkillslotDelegate(Skill skill, bool success);
 
     public event OnPlayerSkillslotDelegate OnSetSlot;
     public event OnPlayerSkillslotDelegate OnDropSlot;
     public event OnPlayerSkillslotDelegate OnDeleteSlot;
+    
+    public bool IsUsingSkill { get { return isUsingSkill; } }
     
     [SerializeField] Skill[] skillSlots;
 
@@ -36,7 +39,7 @@ public class PlayerSkillSlot : MonoBehaviour
         Skill skill = GetSkill(slotEnum);
         if (skill == null)
             return;
-        skill.Use();
+        skill.Use(b => isUsingSkill = b);
     }
 
     public bool SetSlot(PlayerSkillKeySlotEnum slotEnum, Skill skill)
