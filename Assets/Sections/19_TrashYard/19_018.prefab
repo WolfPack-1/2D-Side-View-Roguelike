@@ -263,6 +263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4826432775192084}
   - component: {fileID: 2569400266151103130}
+  - component: {fileID: 114448721004301506}
   m_Layer: 0
   m_Name: 19_018
   m_TagString: Untagged
@@ -2464,6 +2465,22 @@ MonoBehaviour:
     recognizeValue: 5
     skillValue: '{(19_jakebounce)}'
     dropTable: '{(1102,2),(1108,2),(2106,2),(2107,2),(3100,1),(3101,1),(3102,1),(3103,1),(3104,1),(3105,1)}'
+--- !u!114 &114448721004301506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1599467415710024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5234a65ce7c5f2e4695dc28d2c40003b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  availableDirection:
+    U: 0
+    D: 0
+    L: 0
+    R: 0
 --- !u!114 &114496859253020162
 MonoBehaviour:
   m_ObjectHideFlags: 1

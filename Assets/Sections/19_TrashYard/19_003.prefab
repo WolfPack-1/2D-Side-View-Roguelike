@@ -250,6 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4860166312294096}
   - component: {fileID: 2569400265261342988}
+  - component: {fileID: 114980576389867568}
   m_Layer: 0
   m_Name: 19_003
   m_TagString: Untagged
@@ -1066,6 +1067,22 @@ MonoBehaviour:
     recognizeValue: 3
     skillValue: '{(19_DeadlyAttack)}'
     dropTable: '{(1100,2),(1106,2),(2100,2),(2101,2),(3100,1),(3101,1),(3102,1),(3103,1),(3104,1),(3105,1)}'
+--- !u!114 &114980576389867568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1837787761865898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5234a65ce7c5f2e4695dc28d2c40003b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  availableDirection:
+    U: 0
+    D: 0
+    L: 0
+    R: 0
 --- !u!19719996 &2113883506045697446
 TilemapCollider2D:
   m_ObjectHideFlags: 1
