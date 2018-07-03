@@ -5,15 +5,15 @@ public class Area : MonoBehaviour
 {
     public enum AreaModeEnum { Box, Circle }
 
-    [SerializeField] Vector2Int size;
-    [SerializeField] int radius;
+    [SerializeField] Vector2 size;
+    [SerializeField] float radius;
     [SerializeField] AreaModeEnum areaMode;
 
-    public Vector2Int Size { get { return size; } }
-    public int Radius { get { return radius; } }
+    public Vector2 Size { get { return size; } }
+    public float Radius { get { return radius; } }
     public AreaModeEnum AreaMode { get { return areaMode; } }
 
-    public Area SetSize(int width, int height)
+    public Area SetSize(float width, float height)
     {
         size.x = width;
         size.y = height;
@@ -22,7 +22,7 @@ public class Area : MonoBehaviour
         return this;
     }
 
-    public Area SetRadius(int radius)
+    public Area SetRadius(float radius)
     {
         this.radius = radius;
         size = Vector2Int.zero;
@@ -69,12 +69,12 @@ public class Area : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public static Area Create(Vector2 position, int width, int height)
+    public static Area Create(Vector2 position, float width, float height)
     {
         return Create(position).SetSize(width, height);
     }
 
-    public static Area Create(Vector2 position, int radius)
+    public static Area Create(Vector2 position, float radius)
     {
         return Create(position).SetRadius(radius);   
     }

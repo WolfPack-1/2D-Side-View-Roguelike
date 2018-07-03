@@ -97,12 +97,12 @@ public class Skill
         Debug.Log(styleStruct.motionDelay + "초 만큼 기다림");
         lastSkillTime = Time.time;
 
+        Vector2 areaPosition = owner.GetPosition(styleStruct.position);
         // Class를 SubClass로 나누지 않고 그냥 switch 돌림
         switch (styleStruct.attackType)
         {
             case AttackTypeEnum.MELEE:
-                // Todo : Style의 position을 이용하게 바꾸자
-                Area area = Area.Create(owner.transform.position + owner.Dir * Vector3.right, enhancerStruct.splash, 2);
+                Area area = Area.Create(areaPosition, enhancerStruct.splash / 2f, enhancerStruct.splash);
                 Collider2D[] colliders = area.GetEntity(Area.AreaModeEnum.Box, "NPC");
                 foreach(Collider2D col in colliders)
                 {
@@ -116,16 +116,16 @@ public class Skill
                 break;
             case AttackTypeEnum.RANGE:
                 Projectile
-                    .Create(owner.transform.position, styleStruct.damage, enhancerStruct.splash, owner)
-                    .Fire(owner.transform.position + owner.Dir * Vector3.right);
+                    .Create(areaPosition, styleStruct.damage, enhancerStruct.splash, owner)
+                    .Fire(areaPosition);
                 break;
             case AttackTypeEnum.BOUNCE:
                 Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 worldPosition.z = 0;
                 Debug.Log(worldPosition);
                 Projectile
-                    .Create(owner.transform.position, styleStruct.damage, enhancerStruct.splash, owner)
-                    .Launch(owner.transform.position + owner.Dir * Vector3.right);
+                    .Create(areaPosition, styleStruct.damage, enhancerStruct.splash, owner)
+                    .Launch(areaPosition);
                 break;
         }
         yield return new WaitForSeconds(0.3f);

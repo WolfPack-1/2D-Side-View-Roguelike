@@ -5,7 +5,9 @@ public class LivingEntity : MonoBehaviour
 {
 
     Controller controller;
+    
     public Dictionary<StatsEnum, float> Stats;
+    Dictionary<string, Transform> positionsDic;
     public delegate void LivingEntityFloatDelegate(float value);
     public event LivingEntityFloatDelegate OnGetDamaged;
     public bool IsAlive
@@ -24,7 +26,21 @@ public class LivingEntity : MonoBehaviour
     {
         controller = GetComponent<Controller>();
         Stats = new Dictionary<StatsEnum, float>();
+        positionsDic = new Dictionary<string, Transform>();
         OnGetDamaged = delegate { };
+        
+        // Positions
+        Transform positions = transform.Find("Positions");
+        if (positions == null)
+        {
+            positions = new GameObject("Positions").transform;
+            positions.SetParent(transform);
+        }
+
+        foreach (Transform position in positions)
+        {
+            positionsDic.Add(position.name, position);
+        }
     }
 
     public virtual bool AddStat(StatsEnum statsEnum, float value)
@@ -92,5 +108,14 @@ public class LivingEntity : MonoBehaviour
         }
 
         return area.GetEntity(Area.AreaModeEnum.Box, layerName);
+    }
+
+    public Vector2 GetPosition(string positionName)
+    {
+        if (positionsDic.ContainsKey(positionName))
+            return positionsDic[positionName].position;
+        
+        Debug.LogWarning(transform.name + " : " + positionName + "이 Positions 내에 없습니다");
+        return Vector2.zero;
     }
 }
