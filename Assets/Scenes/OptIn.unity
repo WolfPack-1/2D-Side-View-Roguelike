@@ -239,22 +239,22 @@ Prefab:
     - target: {fileID: 224230189735551374, guid: f34105728744fe446a5962d2eb9199a9,
         type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.76091486
+      value: 0.7716758
       objectReference: {fileID: 0}
     - target: {fileID: 224230189735551374, guid: f34105728744fe446a5962d2eb9199a9,
         type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.6488518
+      value: 0.63601613
       objectReference: {fileID: 0}
     - target: {fileID: 224657652246961116, guid: f34105728744fe446a5962d2eb9199a9,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.477
       objectReference: {fileID: 0}
     - target: {fileID: 224657652246961116, guid: f34105728744fe446a5962d2eb9199a9,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114615099566024428, guid: f34105728744fe446a5962d2eb9199a9,
         type: 2}
@@ -627,7 +627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &630514916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -831,7 +831,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1963536221}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 4.73
+    OrthographicSize: 2.5
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -2399,7 +2399,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 4.73
+  orthographic size: 2.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
