@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+
 
 public class SkillData : ScriptableObject
 {
 
     public List<SkillStruct> Data { get; private set; }
 
+#if UNITY_EDITOR
     [MenuItem("Assets/Data/Skill")]
     public static void CreateAsset()
     {
         ScriptableObjectExtension.CreateAsset<SkillData>();
     }
+#endif
 
     public List<SkillStruct> Load()
     {
@@ -25,5 +30,5 @@ public class SkillData : ScriptableObject
     {
         return Data.Find(s => s.cid == cid);
     }
-    
+
 }

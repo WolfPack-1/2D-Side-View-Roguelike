@@ -1,6 +1,11 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+
 
 public class TubeData : ScriptableObject
 {
@@ -9,11 +14,13 @@ public class TubeData : ScriptableObject
     public List<TubeEnhancerStruct> EnhancerData { get; private set; }
     public List<TubeRelicStruct> RelicData { get; private set; }
 
+#if UNITY_EDITOR
     [MenuItem("Assets/Data/Tube")]
     public static void CreateAsset()
     {
         ScriptableObjectExtension.CreateAsset<TubeData>();
     }
+#endif
 
     public void LoadAll()
     {
@@ -30,7 +37,7 @@ public class TubeData : ScriptableObject
         StyleData = CSVParser.LoadObjects<TubeStyleStruct>("TubeStyle.csv");
         return StyleData;
     }
-    
+
     public List<TubeCoolerStruct> LoadCooler()
     {
         if (CoolerData != null)
@@ -38,7 +45,7 @@ public class TubeData : ScriptableObject
         CoolerData = CSVParser.LoadObjects<TubeCoolerStruct>("TubeCooler.csv");
         return CoolerData;
     }
-    
+
     public List<TubeEnhancerStruct> LoadEnhancer()
     {
         if (EnhancerData != null)
@@ -46,7 +53,7 @@ public class TubeData : ScriptableObject
         EnhancerData = CSVParser.LoadObjects<TubeEnhancerStruct>("TubeEnhancer.csv");
         return EnhancerData;
     }
-    
+
     public List<TubeRelicStruct> LoadRelic()
     {
         if (RelicData != null)

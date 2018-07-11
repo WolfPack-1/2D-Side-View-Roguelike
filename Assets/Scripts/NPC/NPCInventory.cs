@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net.Configuration;
-using NUnit.Framework.Api;
 using UnityEngine;
 
 [RequireComponent(typeof(NPC))]

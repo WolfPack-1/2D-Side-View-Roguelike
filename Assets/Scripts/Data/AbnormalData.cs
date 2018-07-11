@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class AbnormalData : ScriptableObject
 {
@@ -13,12 +14,14 @@ public class AbnormalData : ScriptableObject
         return Data.Find(d => d.cid == cid);
     }
 
+#if UNITY_EDITOR
     [MenuItem("Assets/Data/Abnormal")]
     public static void CreateAsset()
     {
         ScriptableObjectExtension.CreateAsset<AbnormalData>();
     }
-
+#endif
+    
     public List<AbnormalStruct> Load()
     {
         Data = CSVParser.LoadObjects<AbnormalStruct>("Abnormal.csv");

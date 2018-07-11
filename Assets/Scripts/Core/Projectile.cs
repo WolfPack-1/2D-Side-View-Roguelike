@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -35,7 +34,7 @@ public class Projectile : MonoBehaviour
         {
             spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
             // 임시로 Knob 사용
-            spriteRenderer.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+            spriteRenderer.sprite = Resources.GetBuiltinResource<Sprite>("UI/Skin/Knob.psd");
             spriteRenderer.sortingOrder = 500;
         }
         
