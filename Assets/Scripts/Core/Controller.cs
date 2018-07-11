@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(LivingEntity))]
@@ -12,7 +13,7 @@ public class Controller : MonoBehaviour
     float lastJumpTime;
     int dir;
     [SerializeField] float jumpCoolTime = -1f;
-
+    Vector2 velocity;
     
     /// <summary>
     /// 왼쪽 -1 오른쪽 1
@@ -38,14 +39,14 @@ public class Controller : MonoBehaviour
     {
         get
         {
-            if (rb2d == null)
+            if (rb2d == null || velocity.y > 0)
                 return false;
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position - Vector3.up * (col.bounds.extents.y) + new Vector3(col.offset.x * -Dir, col.offset.y), col.bounds.extents.x * 0.9f, 1 << LayerMask.NameToLayer("Ground"));
             return cols.Any();
         }
     }
 
-    public bool CanJump
+    public virtual bool CanJump
     {
         get
         {
@@ -68,7 +69,7 @@ public class Controller : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
-
+        velocity = rb2d.velocity;
     }
 
     public void SetJumpCoolTime(float value)

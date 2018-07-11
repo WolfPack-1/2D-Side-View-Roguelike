@@ -11,8 +11,10 @@ public class PlayerController : Controller
     PlayerSkillSlot playerSkillSlot;
     Animator animator;
     int inputDir;
+    bool isSit;
 
-    
+    Platform currentPlatform;
+
     public bool IsMove { get { return rb2d.velocity.sqrMagnitude > 0; } }
     public bool IsWalk
     {
@@ -22,7 +24,8 @@ public class PlayerController : Controller
         }
     }
     public bool IsUsingSkill { get { return playerSkillSlot.IsUsingSkill; } }
-    public bool CanWalk { get { return !IsUsingSkill; } }
+    public bool IsSit { get { return isSit && IsGrounded; } }
+    public bool CanWalk { get { return !IsUsingSkill && !isSit; } }
 
     public override void Awake()
     {
@@ -44,6 +47,7 @@ public class PlayerController : Controller
         animator.SetInteger("HpRatio", (int)(player.HP / player.LivingEntityStruct.hp * 100));
         animator.SetBool("IsWalk", IsWalk);
         animator.SetBool("IsJump", !IsGrounded);
+        animator.SetBool("IsSit", IsSit);
     }
     
     public override void FixedUpdate()
@@ -64,16 +68,32 @@ public class PlayerController : Controller
 
     public override void Jump(float power)
     {
-        base.Jump(power);
-        animator.SetTrigger("DoJump");
+        if (IsSit && currentPlatform != null)
+        {
+            // 아래 점프
+            currentPlatform.DownJump();
+            currentPlatform = null;
+        }
+        else if(!IsSit)
+        {
+            // 일반 점프
+            base.Jump(power);
+            animator.SetTrigger("DoJump");   
+        }
     }
 
     void KeyInput()
     {
+        isSit = false;
         inputDir = 0;
         if (InputExtensions.GetKey(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow))
         {
             inputDir = (int)Input.GetAxisRaw("Horizontal");
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            isSit = true;
         }
         
         if (Input.GetKeyDown(KeyCode.Space) && CanJump)
@@ -122,4 +142,16 @@ public class PlayerController : Controller
         }
     }
 
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        Platform platform = other.gameObject.GetComponent<Platform>();
+
+        if (platform != null)
+            currentPlatform = platform;
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        currentPlatform = null;
+    }
 }
