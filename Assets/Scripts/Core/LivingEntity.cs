@@ -4,7 +4,7 @@ using UnityEngine;
 public class LivingEntity : MonoBehaviour
 {
 
-    Controller controller;
+    Controller2D controller;
     
     public Dictionary<StatsEnum, float> Stats;
     Dictionary<string, Transform> positionsDic;
@@ -19,12 +19,11 @@ public class LivingEntity : MonoBehaviour
             return Stats[StatsEnum.HP] > 0;
         }
     }
-    public Controller Controller { get { return controller; } }
-    public int Dir { get { return controller.Dir; } }
+    public Controller2D Controller { get { return controller; } }
 
     public virtual void Awake()
     {
-        controller = GetComponent<Controller>();
+        controller = GetComponent<Controller2D>();
         Stats = new Dictionary<StatsEnum, float>();
         positionsDic = new Dictionary<string, Transform>();
         OnGetDamaged = delegate { };

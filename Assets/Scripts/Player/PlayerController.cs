@@ -1,95 +1,81 @@
 ﻿using UnityEngine;
-using UnityEngine.Experimental.UIElements;
-using UnityEngineInternal.Input;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(PlayerSkillSlot))]
-public class PlayerController : Controller
+public class PlayerController : Controller2D
 {
+    [SerializeField] float minJumpHeight = 4;
+    [SerializeField] float maxJumpHeight = 4;
+    [SerializeField] float timeToJumpapex = 0.4f;
+    [SerializeField] float moveSpeed = 6;
+    [SerializeField] float jumpCoolTime = 1f;
+
+    float gravity;
+    float maxJumpVelocity;
+    float minJumpVelocity;
+    Vector2 velocity;
+    Vector2 input;
 
     Player player;
     PlayerSkillSlot playerSkillSlot;
     Animator animator;
-    int inputDir;
+    
     bool isSit;
-
-    Platform currentPlatform;
-
-    public bool IsMove { get { return rb2d.velocity.sqrMagnitude > 0; } }
-    public bool IsWalk
-    {
-        get
-        {
-            return IsMove && (inputDir != 0);
-        }
-    }
+    float lastJumpTime;
+    
+    public bool IsWalk { get { return input.x != 0 && velocity.x != 0; } }
+    public bool IsSit { get { return isSit && collisions.below; } }
     public bool IsUsingSkill { get { return playerSkillSlot.IsUsingSkill; } }
-    public bool IsSit { get { return isSit && IsGrounded; } }
-    public bool CanWalk { get { return !IsUsingSkill && !isSit; } }
+    public bool IsGrounded { get { return collisions.below; } }
+    public bool CanWalk { get { return !IsUsingSkill && !IsSit; } }
+    public bool CanJump { get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime; } }
 
-    public override void Awake()
+    protected override void Awake()
     {
         base.Awake();
+        animator = GetComponent<Animator>();
         player = GetComponent<Player>();
         playerSkillSlot = GetComponent<PlayerSkillSlot>();
-        animator = GetComponent<Animator>();
     }
 
-    void Start()
+    protected override void Start()
     {
-        SetJumpCoolTime(player.JumpCoolTime);
+        base.Start();
+
+        gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpapex, 2);
+        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpapex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
     }
 
-    public override void Update()
+    protected override void Update()
     {
         base.Update();
         KeyInput();
+        CalculateVelocity();
+        Move(velocity * Time.deltaTime, input);
+        if (collisions.above || collisions.below)
+            velocity.y = 0;
+        SetAnimationParameters();
+    }
+
+    void SetAnimationParameters()
+    {
         animator.SetInteger("HpRatio", (int)(player.HP / player.LivingEntityStruct.hp * 100));
         animator.SetBool("IsWalk", IsWalk);
         animator.SetBool("IsJump", !IsGrounded);
         animator.SetBool("IsSit", IsSit);
     }
-    
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-        Move(inputDir, player.SPD);
-    }
 
-    public override void Move(int dir, float speed)
+    void CalculateVelocity()
     {
-        if (!CanWalk)
-        {
-            base.Move(dir, 0);
-            return;
-        }
-        base.Move(dir, speed);
-    }
-
-    public override void Jump(float power)
-    {
-        if (IsSit && currentPlatform != null)
-        {
-            // 아래 점프
-            currentPlatform.DownJump();
-            currentPlatform = null;
-        }
-        else if(!IsSit)
-        {
-            // 일반 점프
-            base.Jump(power);
-            animator.SetTrigger("DoJump");   
-        }
+        velocity.x = CanWalk ? input.x * moveSpeed : 0;
+        velocity.y += gravity * Time.deltaTime;
     }
 
     void KeyInput()
     {
+        input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         isSit = false;
-        inputDir = 0;
-        if (InputExtensions.GetKey(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow))
-        {
-            inputDir = (int)Input.GetAxisRaw("Horizontal");
-        }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
@@ -98,9 +84,14 @@ public class PlayerController : Controller
         
         if (Input.GetKeyDown(KeyCode.Space) && CanJump)
         {
-            Jump(player.JumpPower);
+            OnJumpDown();
         }
-        
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            OnJumpUp();
+        }
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             playerSkillSlot.Use(PlayerSkillSlot.PlayerSkillKeySlotEnum.Q);
@@ -142,16 +133,15 @@ public class PlayerController : Controller
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnJumpDown()
     {
-        Platform platform = other.gameObject.GetComponent<Platform>();
-
-        if (platform != null)
-            currentPlatform = platform;
+        velocity.y = maxJumpVelocity;
+        animator.SetTrigger("DoJump");
     }
 
-    void OnCollisionExit2D(Collision2D other)
+    void OnJumpUp()
     {
-        currentPlatform = null;
+        if(velocity.y > minJumpVelocity)
+            velocity.y = minJumpVelocity;
     }
 }
