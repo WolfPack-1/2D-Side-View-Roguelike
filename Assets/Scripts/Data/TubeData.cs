@@ -61,4 +61,9 @@ public class TubeData : ScriptableObject
         RelicData = CSVParser.LoadObjects<TubeRelicStruct>("TubeRelic.csv");
         return RelicData;
     }
+
+    public TubeStyleStruct FindStyleStruct(int cid)
+    {
+        return StyleData.Find(t => t.cid == cid);
+    }
 }

@@ -7,7 +7,7 @@ public class PlayerController : Controller2D
     [SerializeField] float minJumpHeight = 4;
     [SerializeField] float maxJumpHeight = 4;
     [SerializeField] float timeToJumpapex = 0.4f;
-    [SerializeField] float moveSpeed = 6;
+    [SerializeField] float moveSpeed = 3;
     [SerializeField] float jumpCoolTime = 1f;
 
     float gravity;
@@ -26,8 +26,9 @@ public class PlayerController : Controller2D
     public bool IsWalk { get { return input.x != 0 && velocity.x != 0; } }
     public bool IsSit { get { return isSit && collisions.below; } }
     public bool IsUsingSkill { get { return playerSkillSlot.IsUsingSkill; } }
+    public bool IsDoingCombo { get { return playerSkillSlot.IsDoingCombo; } }
     public bool IsGrounded { get { return collisions.below; } }
-    public bool CanWalk { get { return !IsUsingSkill && !IsSit; } }
+    public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit; } }
     public bool CanJump { get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime; } }
 
     protected override void Awake()
@@ -50,6 +51,7 @@ public class PlayerController : Controller2D
     protected override void Update()
     {
         base.Update();
+        moveSpeed = playerSkillSlot.IsUsingSkill ? 0.3f : 3;
         KeyInput();
         CalculateVelocity();
         Move(velocity * Time.deltaTime, input);

@@ -16,7 +16,15 @@ public class PlayerSkillSlot : MonoBehaviour
     public event OnPlayerSkillslotDelegate OnDeleteSlot;
     
     public bool IsUsingSkill { get { return isUsingSkill; } }
-    
+    public bool IsDoingCombo
+    {
+        get
+        {
+            return currentSkill != null && currentSkill.IsDoingCombo;
+        }
+    }
+
+    Skill currentSkill;
     [SerializeField] Skill[] skillSlots;
 
     void Awake()
@@ -39,7 +47,8 @@ public class PlayerSkillSlot : MonoBehaviour
         Skill skill = GetSkill(slotEnum);
         if (skill == null)
             return;
-        skill.Use(b => isUsingSkill = b);
+        currentSkill = skill;
+        skill.Use(b => isUsingSkill = b, skill.IsFirstSkill);
     }
 
     public bool SetSlot(PlayerSkillKeySlotEnum slotEnum, Skill skill)
@@ -76,4 +85,8 @@ public class PlayerSkillSlot : MonoBehaviour
         return true;
     }
 
+    public void AnimationFinished()
+    {
+        currentSkill.AnimationFinished();
+    }
 }

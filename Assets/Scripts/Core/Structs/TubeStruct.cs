@@ -7,7 +7,6 @@ public interface ITube
     string NameKor { get; }
     SocketEnum Socket { get; }
     TubeGradeEnum Grade { get; }
-    string Company { get; }
 }
 
 [Serializable]
@@ -19,17 +18,16 @@ public struct TubeStyleStruct : ITube
     public SocketEnum socket;
     public TubeGradeEnum grade;
     public string company;
-    public float motionDelay;
     public float range;
     public AttackTypeEnum attackType;
     public string position;
     public float damage;
-    public object combo;
+    public int combo;
     public bool hold;
     public string holdmotion;
     
     
-    public TubeStyleStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, float motionDelay, float range, AttackTypeEnum attackType, string position, float damage, object combo, bool hold, string holdmotion)
+    public TubeStyleStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, float range, AttackTypeEnum attackType, string position, float damage, int combo, bool hold, string holdmotion)
     {
         this.cid = cid;
         this.name = name;
@@ -37,7 +35,6 @@ public struct TubeStyleStruct : ITube
         this.socket = socket;
         this.grade = grade;
         this.company = company;
-        this.motionDelay = motionDelay;
         this.range = range;
         this.attackType = attackType;
         this.position = position;
@@ -49,7 +46,7 @@ public struct TubeStyleStruct : ITube
 
     public override string ToString()
     {
-        return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12}" , cid, name, nameKor, socket, grade, company, motionDelay, attackType, position, damage, combo, hold, holdmotion);
+        return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11}" , cid, name, nameKor, socket, grade, company, attackType, position, damage, combo, hold, holdmotion);
     }
 
     public int Cid { get { return cid; } }
@@ -103,39 +100,44 @@ public struct TubeEnhancerStruct : ITube
     public string nameKor;
     public SocketEnum socket;
     public TubeGradeEnum grade;
-    public string company;
-    public string melee;
-    public string range;
-    public string bounce;
-    public string instant;
-    public int splash;
+    public bool meleeSocket;
+    public bool rangeSocket;
+    public bool bounceSocket;
+    public bool dashSocket;
+    public float range;
+    public int abnormalValue;
     
-    public TubeEnhancerStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, string melee, string range, string bounce, string instant, int splash)
+    public TubeEnhancerStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, bool meleeSocket, bool rangeSocket, bool bounceSocket, bool dashSocket, float range, int abnormalValue)
     {
         this.cid = cid;
         this.name = name;
         this.nameKor = nameKor;
         this.socket = socket;
         this.grade = grade;
-        this.company = company;
-        this.melee = melee;
+        this.meleeSocket = meleeSocket;
+        this.rangeSocket = rangeSocket;
+        this.bounceSocket = bounceSocket;
+        this.dashSocket = dashSocket;
         this.range = range;
-        this.bounce = bounce;
-        this.instant = instant;
-        this.splash = splash;
+        this.abnormalValue = abnormalValue;
     }
 
     public override string ToString()
     {
-        return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10}" , cid, name, nameKor, socket, grade, company, melee, range, bounce, instant, splash);
+        return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9}" , cid, name, nameKor, socket, meleeSocket, rangeSocket, bounceSocket, dashSocket, range, abnormalValue);
     }
-    
-    public int Cid { get { return cid; } }
-    public string Name { get { return name; } }
-    public string NameKor { get { return nameKor; } }
-    public SocketEnum Socket { get { return socket; } }
+
+    public int Cid { get { return cid; } set { cid = value; } }
+    public string Name { get { return name; } set { name = value; } }
+    public string NameKor { get { return nameKor; } set { nameKor = value; } }
+    public SocketEnum Socket { get { return socket; } set { socket = value; } }
+    public bool MeleeSocket { get { return meleeSocket; } set { meleeSocket = value; } }
+    public bool RangeSocket { get { return rangeSocket; } set { rangeSocket = value; } }
+    public bool BounceSocket { get { return bounceSocket; } set { bounceSocket = value; } }
+    public bool DashSocket { get { return dashSocket; } set { dashSocket = value; } }
+    public float Range { get { return range; } set { range = value; } }
+    public int AbnormalValue { get { return abnormalValue; } set { abnormalValue = value; } }
     public TubeGradeEnum Grade { get { return grade; } }
-    public string Company { get { return company; } }
 }
 
 [Serializable]

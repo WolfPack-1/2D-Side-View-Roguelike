@@ -12,7 +12,6 @@ public class Tube
     public string NameKor { get { return tubeData.NameKor; } }
     public SocketEnum Socket { get { return tubeData.Socket; } }
     public TubeGradeEnum Grade { get { return tubeData.Grade; } }
-    public string Company { get { return tubeData.Company; } }
 
     public Tube(ITube tube)
     {

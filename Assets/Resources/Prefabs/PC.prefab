@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1701643566638892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.54, y: -3.66, z: 0}
+  m_LocalPosition: {x: 9.45, y: 5.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4032893529520428}
@@ -197,11 +197,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
-  maxClimbAngle: 0
-  maxDescendAngle: 0
-  minJumpHeight: 4
-  maxJumpHeight: 4
+    m_Bits: 256
+  maxClimbAngle: 80
+  maxDescendAngle: 75
+  minJumpHeight: 1
+  maxJumpHeight: 3
   timeToJumpapex: 0.4
   moveSpeed: 6
   jumpCoolTime: 1

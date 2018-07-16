@@ -7,6 +7,9 @@ public class Inventory : MonoBehaviour
     const int skillCapacity = 30;
     [SerializeField] List<Tube> tubes;
     [SerializeField] List<Skill> skills;
+
+    TubeData tubeData;
+    
     public List<Tube> Tubes { get { return tubes; } }
     public int TubeCapacity { get { return tubeCapacity; } }
     public bool IsFull { get { return tubes.Count <= tubeCapacity; } }
@@ -30,6 +33,8 @@ public class Inventory : MonoBehaviour
         OnGetSkill = delegate { };
         OnDeleteSkill = delegate { };
         OnCreateSkill = delegate { };
+
+        tubeData = FindObjectOfType<DataManager>().TubeData;
 
         tubes = new List<Tube>();
         skills = new List<Skill>();
@@ -172,14 +177,24 @@ public class Inventory : MonoBehaviour
             return false;
         }
 
+        List<TubeStyleStruct> styleStructs = new List<TubeStyleStruct>();
         TubeStyleStruct styleStruct = (TubeStyleStruct) styleTube.TubeData;
+        styleStructs.Add(styleStruct);
+        while (true)
+        {
+            if (styleStruct.combo == 0)
+                break;
+            Debug.Log(styleStruct.combo);
+            styleStruct = tubeData.FindStyleStruct(styleStruct.combo);
+            styleStructs.Add(styleStruct);
+        }
         TubeEnhancerStruct enhancerStruct = (TubeEnhancerStruct) enhancerTube.TubeData;
         TubeCoolerStruct coolerStruct = (TubeCoolerStruct) coolerTube.TubeData;
         TubeRelicStruct relicStruct = default(TubeRelicStruct);
         if(relicTube != null)
             relicStruct = (TubeRelicStruct) relicTube.TubeData;
 
-        Skill skill = relicTube == null ? new Skill(styleStruct, enhancerStruct, coolerStruct) : new Skill(styleStruct, enhancerStruct, coolerStruct, relicStruct);
+        Skill skill = relicTube == null ? new Skill(styleStructs.ToArray(), enhancerStruct, coolerStruct) : new Skill(styleStructs.ToArray(), enhancerStruct, coolerStruct, relicStruct);
         GetSkill(skill);
         DeleteTube(styleTube);
         DeleteTube(enhancerTube);
@@ -187,7 +202,6 @@ public class Inventory : MonoBehaviour
         DeleteTube(relicTube);
         if (OnCreateSkill != null)
             OnCreateSkill(skill, true);
-        Debug.Log("Create : " + skill.Name);
         return true;
     }
 }
