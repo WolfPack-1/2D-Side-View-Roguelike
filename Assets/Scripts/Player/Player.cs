@@ -9,6 +9,7 @@ public class Player : LivingEntity
     PlayerInventory playerInventory;
     DataManager dataManager;
     PlayerSkillSlot skillSlot;
+    AudioSource audioSource;
 
     #endregion
 
@@ -53,6 +54,7 @@ public class Player : LivingEntity
         dataManager = FindObjectOfType<DataManager>();
         playerInventory = GetComponent<PlayerInventory>();
         skillSlot = GetComponent<PlayerSkillSlot>();
+        audioSource = GetComponent<AudioSource>();
     }
     
     void Start()
@@ -126,4 +128,9 @@ public class Player : LivingEntity
     }
 
     #endregion
+
+    public void PlaySound(string name)
+    {
+        audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/"+name));
+    }
 }

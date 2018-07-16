@@ -7,7 +7,7 @@ public class PlayerController : Controller2D
     [SerializeField] float minJumpHeight = 4;
     [SerializeField] float maxJumpHeight = 4;
     [SerializeField] float timeToJumpapex = 0.4f;
-    [SerializeField] float moveSpeed = 3;
+    [SerializeField] float moveSpeed = 2;
     [SerializeField] float jumpCoolTime = 1f;
 
     float gravity;
@@ -51,7 +51,7 @@ public class PlayerController : Controller2D
     protected override void Update()
     {
         base.Update();
-        moveSpeed = playerSkillSlot.IsUsingSkill ? 0.3f : 3;
+        moveSpeed = playerSkillSlot.IsUsingSkill ? 0.4f : 2;
         KeyInput();
         CalculateVelocity();
         Move(velocity * Time.deltaTime, input);

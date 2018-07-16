@@ -19,14 +19,10 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300104, guid: a8c1763bfd0ca254b8172ee695cf7041, type: 3}
-    - time: 0.1
-      value: {fileID: 21300106, guid: a8c1763bfd0ca254b8172ee695cf7041, type: 3}
-    - time: 0.2
       value: {fileID: 21300108, guid: a8c1763bfd0ca254b8172ee695cf7041, type: 3}
-    - time: 0.3
+    - time: 0.1
       value: {fileID: 21300110, guid: a8c1763bfd0ca254b8172ee695cf7041, type: 3}
-    - time: 0.4
+    - time: 0.2
       value: {fileID: 21300112, guid: a8c1763bfd0ca254b8172ee695cf7041, type: 3}
     attribute: m_Sprite
     path: 
@@ -47,8 +43,6 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300104, guid: a8c1763bfd0ca254b8172ee695cf7041, type: 3}
-    - {fileID: 21300106, guid: a8c1763bfd0ca254b8172ee695cf7041, type: 3}
     - {fileID: 21300108, guid: a8c1763bfd0ca254b8172ee695cf7041, type: 3}
     - {fileID: 21300110, guid: a8c1763bfd0ca254b8172ee695cf7041, type: 3}
     - {fileID: 21300112, guid: a8c1763bfd0ca254b8172ee695cf7041, type: 3}
@@ -57,7 +51,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5
+    m_StopTime: 0.3
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -78,7 +72,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: 0.5
+  - time: 0
+    functionName: PlaySound
+    data: pc_punch01
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.2
     functionName: AnimationFinished
     data: 
     objectReferenceParameter: {fileID: 0}

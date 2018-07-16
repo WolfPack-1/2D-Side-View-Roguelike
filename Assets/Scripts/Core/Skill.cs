@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
 
 [Serializable]
 public class Skill
@@ -125,6 +125,20 @@ public class Skill
             animator.SetTrigger("DoSkill");
         }
 
+        // OnStart Fx 출력
+        List<Transform> onStartFXs = new List<Transform>();
+        int index = 0;
+        while (true)
+        {
+            Transform fxTransform = Resources.Load<Transform>("FX/" + enhancerStruct.Cid+ "_" + "OnStart" + index);
+            if (fxTransform == null)
+                break;
+            onStartFXs.Add(fxTransform);
+            index++;
+        }
+
+        GameObject.Instantiate(onStartFXs[UnityEngine.Random.Range(0, onStartFXs.Count)], owner.transform.Find("Positions").Find(styleStructs[currentSkillIndex].position)).localPosition = Vector3.zero;
+        
         Vector2 areaPosition = owner.GetPosition(styleStructs[currentSkillIndex].position);
         // Class를 SubClass로 나누지 않고 그냥 switch 돌림
         switch (styleStructs[currentSkillIndex].attackType)
