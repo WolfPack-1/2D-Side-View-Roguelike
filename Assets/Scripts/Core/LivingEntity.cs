@@ -20,6 +20,7 @@ public class LivingEntity : MonoBehaviour
         }
     }
     public Controller2D Controller { get { return controller; } }
+    
 
     public virtual void Awake()
     {

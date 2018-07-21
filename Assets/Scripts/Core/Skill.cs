@@ -63,7 +63,47 @@ public class Skill
     public bool CanCombo { get { return comboUpdator != null; } }
     public bool IsDoingCombo { get { return currentSkillIndex < styleStructs.Length; } }
     public int CurrentSkillIndex { get { return currentSkillIndex; } }
+
+    List<Transform> onStartFXs;
+    List<Transform> onHitFxs;
+    List<Transform> projectileFxs;
     
+    void InitFxs()
+    {
+        onStartFXs = new List<Transform>();
+        onHitFxs = new List<Transform>();
+        projectileFxs = new List<Transform>();
+        
+        int index = 0;
+        while (true)
+        {
+            Transform fxTransform = Resources.Load<Transform>("FX/" + enhancerStruct.Cid+ "_" + "OnStart" + index);
+            if (fxTransform == null)
+                break;
+            onStartFXs.Add(fxTransform);
+            index++;
+        }
+        
+        index = 0;
+        while (true)
+        {
+            Transform fxTransform = Resources.Load<Transform>("FX/" + enhancerStruct.Cid+ "_" + "OnHit" + index);
+            if (fxTransform == null)
+                break;
+            onHitFxs.Add(fxTransform);
+            index++;
+        }
+        
+        index = 0;
+        while (true)
+        {
+            Transform fxTransform = Resources.Load<Transform>("FX/" + enhancerStruct.Cid+ "_" + "Projectile" + index);
+            if (fxTransform == null)
+                break;
+            projectileFxs.Add(fxTransform);
+            index++;
+        }
+    }
     
     public Skill(TubeStyleStruct[] styleStructs, TubeEnhancerStruct enhancerStruct, TubeCoolerStruct coolerStruct)
     {
@@ -72,6 +112,7 @@ public class Skill
         this.coolerStruct = coolerStruct;
         lastSkillTime = float.MinValue;
         currentSkillIndex = 0;
+        InitFxs();
     }
     
     public Skill(TubeStyleStruct[] styleStructs, TubeEnhancerStruct enhancerStruct, TubeCoolerStruct coolerStruct, TubeRelicStruct relicStruct) : this(styleStructs, enhancerStruct, coolerStruct)
@@ -126,21 +167,10 @@ public class Skill
         }
 
         // OnStart Fx 출력
-        List<Transform> onStartFXs = new List<Transform>();
-        int index = 0;
-        while (true)
-        {
-            Transform fxTransform = Resources.Load<Transform>("FX/" + enhancerStruct.Cid+ "_" + "OnStart" + index);
-            if (fxTransform == null)
-                break;
-            onStartFXs.Add(fxTransform);
-            index++;
-        }
-
-        GameObject.Instantiate(onStartFXs[UnityEngine.Random.Range(0, onStartFXs.Count)], owner.transform.Find("Positions").Find(styleStructs[currentSkillIndex].position)).localPosition = Vector3.zero;
+        SpawnRandomSkill(SkillFxEnum.OnStart);
         
         Vector2 areaPosition = owner.GetPosition(styleStructs[currentSkillIndex].position);
-        // Class를 SubClass로 나누지 않고 그냥 switch 돌림
+        // AttackType을 SubClass로 나누지 않고 그냥 switch 돌림
         switch (styleStructs[currentSkillIndex].attackType)
         {
             case AttackTypeEnum.MELEE:
@@ -152,22 +182,23 @@ public class Skill
                     if (livingEntity == null)
                         continue;
                     livingEntity.GetDamaged(styleStructs[currentSkillIndex].damage);
+                    SpawnRandomSkill(SkillFxEnum.OnHit);
                     Debug.Log(livingEntity.name + "에게 " + styleStructs[currentSkillIndex].damage + "의 데미지를 주었습니다.");
                 }
                 area.Delete();
                 break;
             case AttackTypeEnum.RANGE:
                 Projectile
-                    .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range, owner)
-                    .Fire(areaPosition);
+                    .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range, owner, SpawnRandomSkill(SkillFxEnum.Projectile))
+                    .Fire(areaPosition + Mathf.Sign(owner.transform.localScale.x) * Vector2.left );
                 break;
             case AttackTypeEnum.BOUNCE:
                 Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 worldPosition.z = 0;
                 Debug.Log(worldPosition);
                 Projectile
-                    .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range, owner)
-                    .Launch(areaPosition);
+                    .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range, owner, SpawnRandomSkill(SkillFxEnum.Projectile))
+                    .Launch(areaPosition + Mathf.Sign(owner.transform.localScale.x) * Vector2.left);
                 break;
         }
         if(comboUpdator != null)
@@ -223,6 +254,37 @@ public class Skill
 
     public void AnimationFinished()
     {
+        Debug.Log("True");
         isAnimationFinished = true;
+    }
+
+    GameObject SpawnRandomSkill(SkillFxEnum skillFxEnum)
+    {
+        GameObject fx = null;
+        switch (skillFxEnum)
+        {
+            case SkillFxEnum.OnStart:
+                if(onStartFXs.Count > 0)
+                    fx = onStartFXs[UnityEngine.Random.Range(0, onStartFXs.Count)].gameObject;
+                break;
+            case SkillFxEnum.OnHit:
+                if(onHitFxs.Count > 0)
+                    fx = onHitFxs[UnityEngine.Random.Range(0, onHitFxs.Count)].gameObject;
+                break;
+            case SkillFxEnum.Projectile:
+                if(projectileFxs.Count > 0)
+                    fx = projectileFxs[UnityEngine.Random.Range(0, projectileFxs.Count)].gameObject;
+                break;
+        }
+
+        if (fx == null)
+        {
+            Debug.LogWarning(skillFxEnum + " Fx가 없습니다.");
+            return null;
+        }
+
+        fx = GameObject.Instantiate(fx, owner.GetPosition(styleStructs[currentSkillIndex].position), Quaternion.identity);
+        fx.transform.localScale = owner.transform.localScale;
+        return fx;
     }
 }

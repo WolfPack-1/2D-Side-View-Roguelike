@@ -11,11 +11,11 @@ public class FxAutoDestroy : MonoBehaviour
 	{
 		animator = GetComponent<Animator>();
 		if(animator == null)
-			Destroy(this);
+			Destroy(gameObject);
 	}
 
-	void Start ()
+	void Start()
 	{
-		Destroy (gameObject, animator.GetCurrentAnimatorStateInfo(0).length); 	
+		Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
 	}
 }

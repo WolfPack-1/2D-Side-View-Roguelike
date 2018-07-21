@@ -42,9 +42,6 @@ public class Projectile : MonoBehaviour
         if (circleCollider == null)
         {
             circleCollider = gameObject.AddComponent<CircleCollider2D>();
-            circleCollider.isTrigger = true;
-            Vector3 spriteHalfSize = spriteRenderer.sprite.bounds.extents;
-            circleCollider.radius = spriteHalfSize.x > spriteHalfSize.y ? spriteHalfSize.x : spriteHalfSize.y;
         }
 
         rigid.bodyType = RigidbodyType2D.Dynamic;
@@ -76,18 +73,26 @@ public class Projectile : MonoBehaviour
         rigid.AddForce(velocity, ForceMode2D.Impulse);
     }
 
-    public static Projectile Create(Vector2 position, float damage, float speed, LivingEntity owner)
+    public static Projectile Create(Vector2 position, float damage, float speed, LivingEntity owner, GameObject fx)
     {
         // Todo : Sprite를 인자로 받아서 처리, 필요하다면 오브젝트풀 사용
-        Projectile projectile = new GameObject("Projectile").AddComponent<Projectile>();
-        projectile.Init(damage,speed,owner);
+        Projectile projectile = fx.AddComponent<Projectile>();
+        projectile.Init(damage, speed, owner);
         projectile.transform.position = position;
+        projectile.CalculateCircleCollider();
         return projectile;
     }
-    
+
     public static Projectile Create()
     {
-        return Create(Vector2.zero, 0, 0, null);
+        return Create(Vector2.zero, 0, 0, null, new GameObject("Proejctile"));
+    }
+
+    void CalculateCircleCollider()
+    {
+        circleCollider.isTrigger = true;
+        Vector3 spriteHalfSize = spriteRenderer.sprite.bounds.extents;
+        circleCollider.radius = spriteHalfSize.x > spriteHalfSize.y ? spriteHalfSize.x : spriteHalfSize.y;
     }
     
     Vector3 CalculateThrowVelocity(Vector3 origin, Vector3 target)

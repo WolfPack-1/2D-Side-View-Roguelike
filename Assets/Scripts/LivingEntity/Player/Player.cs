@@ -18,19 +18,6 @@ public class Player : LivingEntity
     public LivingEntityStruct LivingEntityStruct { get { return livingEntityStruct; } }
 
     LivingEntityStruct livingEntityStruct;
-    float lastJumpTime;
-
-    #endregion
-
-    #region Debug
-
-    [Header("Debug")] [SerializeField] [Range(5f, 15f)] float jumpPower;
-    
-    public float JumpPower { get { return jumpPower; } }
-
-    [SerializeField] [Range(0.1f, 1f)] float jumpCoolTime;
-    
-    public float JumpCoolTime { get { return jumpCoolTime; } }
 
     #endregion
 
@@ -56,12 +43,16 @@ public class Player : LivingEntity
         skillSlot = GetComponent<PlayerSkillSlot>();
         audioSource = GetComponent<AudioSource>();
     }
-    
+
     void Start()
     {
         // Debug
         Init(dataManager.LivingEntityData.Data[0]);
-        
+        DebugCreateSkill();
+    }
+
+    void DebugCreateSkill()
+    {
         // Debug Tubes
         Tube styleTube = new Tube(dataManager.TubeData.StyleData[0]);
         Tube enhancerTube = new Tube(dataManager.TubeData.EnhancerData[0]);
@@ -76,6 +67,34 @@ public class Player : LivingEntity
         CreateSkill(styleTube.Cid, enhancerTube.Cid, coolerTube.Cid);
 
         SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.Q, playerInventory.GetRandomSkill(true));
+        
+        styleTube = new Tube(dataManager.TubeData.StyleData[6]);
+        enhancerTube = new Tube(dataManager.TubeData.EnhancerData[8]);
+        coolerTube = new Tube(dataManager.TubeData.CoolerData[0]);
+        relicTube = new Tube(dataManager.TubeData.RelicData[0]);
+
+        GetTube(styleTube);
+        GetTube(enhancerTube);
+        GetTube(coolerTube);
+        GetTube(relicTube);
+
+        CreateSkill(styleTube.Cid, enhancerTube.Cid, coolerTube.Cid);
+
+        SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.W, playerInventory.GetRandomSkill(true));
+        
+        styleTube = new Tube(dataManager.TubeData.StyleData[7]);
+        enhancerTube = new Tube(dataManager.TubeData.EnhancerData[5]);
+        coolerTube = new Tube(dataManager.TubeData.CoolerData[0]);
+        relicTube = new Tube(dataManager.TubeData.RelicData[0]);
+
+        GetTube(styleTube);
+        GetTube(enhancerTube);
+        GetTube(coolerTube);
+        GetTube(relicTube);
+
+        CreateSkill(styleTube.Cid, enhancerTube.Cid, coolerTube.Cid);
+
+        SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.E, playerInventory.GetRandomSkill(true));
     }
 
     public void Init(LivingEntityStruct livingEntityStruct)
@@ -131,6 +150,6 @@ public class Player : LivingEntity
 
     public void PlaySound(string name)
     {
-        audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/"+name));
+        audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/" + name));
     }
 }

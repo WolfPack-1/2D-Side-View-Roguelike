@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4529981260403328}
   - component: {fileID: 212609646817937550}
   - component: {fileID: 95930543543654860}
-  - component: {fileID: 114749642784492292}
   m_Layer: 0
   m_Name: 2011_Projectile2
   m_TagString: Untagged
@@ -59,17 +58,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114749642784492292
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1746710062460168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ed8ff4864a15a94784ca7c890571745, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212609646817937550
 SpriteRenderer:
   m_ObjectHideFlags: 1
