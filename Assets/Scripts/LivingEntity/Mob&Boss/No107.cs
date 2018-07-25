@@ -145,11 +145,8 @@ public class No107 : NPC
 
     IEnumerator Die()
     {
-        while (true)
-        {
-            //Todo : 사망 시 처리
-            yield return null;
-        }
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
     }
 
     void OnGetDamagedHandle(float damage)
