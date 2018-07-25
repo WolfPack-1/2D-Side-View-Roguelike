@@ -14,6 +14,11 @@ public class NPCController : Controller2D
     Vector2 velocity;
     Vector2 input;
 
+    Skill currentSkill;
+    bool isUsingSkill;
+    
+    public bool IsUsingSkill { get { return isUsingSkill; } }
+
     protected override void Awake()
     {
         base.Awake();
@@ -48,6 +53,14 @@ public class NPCController : Controller2D
         return input;
     }
 
+    public IEnumerator UseSkill(Skill skill, bool canStop)
+    {
+        currentSkill = skill;
+        skill.Use(b => isUsingSkill = b, skill.IsFirstSkill);
+        yield return new WaitUntil(() => !isUsingSkill);
+        currentSkill = null;
+    }
+
     public IEnumerator MoveToRandomPosition()
     {
         float time = Random.Range(0.5f, 1f);
@@ -77,5 +90,10 @@ public class NPCController : Controller2D
         }
 
         input = Vector2.zero;
+    }
+
+    public void AnimationFinished()
+    {
+        currentSkill.AnimationFinished();
     }
 }

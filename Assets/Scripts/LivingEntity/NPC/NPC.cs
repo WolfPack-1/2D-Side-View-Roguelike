@@ -35,6 +35,10 @@ public class NPC : LivingEntity
         this.npcStruct = npcStruct;
         transform.name = npcStruct.nameKor;
         Skills = FunctionParser.ParsingSkillTable(npcStruct.skillValue, dataManager);
+        foreach (Skill skill in Skills.Values)
+        {
+            skill.SetOwner(this);
+        }
         OnNPCInit(this);
     }
 

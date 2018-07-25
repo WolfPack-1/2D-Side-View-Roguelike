@@ -123,7 +123,7 @@ public class Skill
         TubeNPCStyleStruct style = dataManager.NPCTubeData.StyleData.Find(t => t.name == skillStruct.styleTube);
         TubeNPCEnhancerStruct enhancer = dataManager.NPCTubeData.EnhancerData.Find(t => t.name == skillStruct.enhancerTube);
         TubeNPCCoolerStruct cooler = dataManager.NPCTubeData.CoolerData.Find(t => t.name == skillStruct.coolerTube);
-
+        
         styleStructs = new[] { new TubeStyleStruct(style)};
         enhancerStruct = new TubeEnhancerStruct(enhancer);
         coolerStruct = new TubeCoolerStruct(cooler);
@@ -192,7 +192,8 @@ public class Skill
         {
             case AttackTypeEnum.MELEE:
                 Area area = Area.Create(areaPosition, enhancerStruct.range / 2f, enhancerStruct.range);
-                Collider2D[] colliders = area.GetEntity(Area.AreaModeEnum.Box, "NPC");
+                string layerName = owner.GetType() == typeof(Player) ? "NPC" : "Player";
+                Collider2D[] colliders = area.GetEntity(Area.AreaModeEnum.Box, layerName);
                 foreach(Collider2D col in colliders)
                 {
                     LivingEntity livingEntity = col.GetComponent<LivingEntity>();
@@ -271,7 +272,7 @@ public class Skill
 
     public void AnimationFinished()
     {
-        Debug.Log("True");
+        Debug.Log(owner.transform.name + " : Skill Finished");
         isAnimationFinished = true;
     }
 
@@ -296,7 +297,7 @@ public class Skill
 
         if (fx == null)
         {
-            Debug.LogWarning(skillFxEnum + " Fx가 없습니다.");
+            Debug.LogWarning(owner.transform.name + " : " +skillFxEnum + " Fx가 없습니다.");
             return null;
         }
 

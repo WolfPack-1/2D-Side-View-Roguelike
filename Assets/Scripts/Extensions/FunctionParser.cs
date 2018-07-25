@@ -17,7 +17,7 @@ public static class FunctionParser
 
     public static Dictionary<string, Skill> ParsingSkillTable(string text, DataManager dataManager)
     {
-        return Parse(text).ToDictionary(name => name, name => new Skill(text, dataManager));
+        return Parse(text).ToDictionary(name => name, name => new Skill(name, dataManager));
     }
 
     static IEnumerable<string> Parse(string text)

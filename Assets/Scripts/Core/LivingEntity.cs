@@ -101,6 +101,8 @@ public class LivingEntity : MonoBehaviour
 
     public Vector2 GetPosition(string positionName)
     {
+        if (string.IsNullOrEmpty(positionName))
+            positionName = "Mid";
         if (positionsDic.ContainsKey(positionName))
             return positionsDic[positionName].position;
         

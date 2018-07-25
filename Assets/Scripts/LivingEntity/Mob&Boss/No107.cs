@@ -60,6 +60,7 @@ public class No107 : NPC
     {
         StopAllCoroutines();
         this.state = state;
+        Controller.SetInput(Vector2.zero);
         StartCoroutine("Selector");
     }
 
@@ -110,7 +111,6 @@ public class No107 : NPC
     IEnumerator IdleBT()
     {
         IsBattle = true;
-        yield return new WaitForSeconds(1f);
         float distance = Vector2.Distance(targetEntity.transform.position, transform.position);
         if (distance <= Skills["19_DeadlyAttack"].CurrentRange + 1)
         {
@@ -119,6 +119,7 @@ public class No107 : NPC
             yield break;
         }
 
+        yield return null;
         state = State.Walk;
     }
 
@@ -136,11 +137,10 @@ public class No107 : NPC
 
     IEnumerator DeadlyAttack()
     {
-        animator.SetTrigger("DoSkill");
-        animator.SetInteger("SkillNum",0);
-        yield return null;
-       // yield return new WaitUntil(() => Skills["19_DeadlyAttack"].IsAnimationFinished);
+        Debug.Log("Skill Start");
+        yield return Controller.UseSkill(Skills["19_DeadlyAttack"], true);
         state = State.IdleBT;
+        Debug.Log("Skill End");
     }
 
     IEnumerator Die()
