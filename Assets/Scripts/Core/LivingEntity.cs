@@ -4,28 +4,25 @@ using UnityEngine;
 public class LivingEntity : MonoBehaviour
 {
 
-    Controller2D controller;
+    protected DataManager dataManager;
     
-    public Dictionary<StatsEnum, float> Stats;
     Dictionary<string, Transform> positionsDic;
     public delegate void LivingEntityFloatDelegate(float value);
-    public event LivingEntityFloatDelegate OnGetDamaged;
-    public bool IsAlive
-    {
-        get
-        {
-            if (Stats == null || !Stats.ContainsKey(StatsEnum.HP))
-                return false;
-            return Stats[StatsEnum.HP] > 0;
-        }
-    }
-    public Controller2D Controller { get { return controller; } }
+    public event LivingEntityFloatDelegate OnGetDamaged;    
     
+    
+    float currentHp;
+    [SerializeField] float baseHp = 100;
+    [SerializeField] float baseMoveSpeed = 5;
+    
+    public float CurrentHp { get { return currentHp; } }
+    public float MaxHp { get { return baseHp; } }
+    public float MoveSpeed { get { return baseMoveSpeed; } }
+    public bool IsDead { get { return CurrentHp <= 0; } }
 
     public virtual void Awake()
     {
-        controller = GetComponent<Controller2D>();
-        Stats = new Dictionary<StatsEnum, float>();
+        dataManager = FindObjectOfType<DataManager>();
         positionsDic = new Dictionary<string, Transform>();
         OnGetDamaged = delegate { };
         
@@ -41,28 +38,20 @@ public class LivingEntity : MonoBehaviour
         {
             positionsDic.Add(position.name, position);
         }
+        currentHp = MaxHp;
     }
 
-    public virtual bool AddStat(StatsEnum statsEnum, float value)
+    public virtual void Start()
     {
-        if (Stats.ContainsKey(statsEnum))
-        {
-            Stats[statsEnum] = value;
-            return false;
-        }
-
-        Stats.Add(statsEnum, value);
-        return true;
     }
-
+    
     public virtual bool GetDamaged(float damage)
     {
-        Debug.Assert(Stats.ContainsKey(StatsEnum.HP));
-        Stats[StatsEnum.HP] = Mathf.Clamp(Stats[StatsEnum.HP] - damage, 0, float.MaxValue);
-
+        currentHp = Mathf.Clamp(currentHp - damage, 0, float.MaxValue);
+        
         if (OnGetDamaged != null)
             OnGetDamaged(damage);
-        return Stats[StatsEnum.HP] <= 0;
+        return CurrentHp <= 0;
     }
 
     public virtual Collider2D[] GetEntity(Vector2 position, int radius)

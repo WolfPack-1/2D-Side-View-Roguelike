@@ -2,49 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(NPCController))]
 public class NPC : LivingEntity
 {
 
+    NPCController controller;
     [SerializeField] NPCStruct npcStruct;
+    
+    public Dictionary<string, Skill> Skills { get; private set; }
     public NPCStruct NPCStruct { get { return npcStruct; } }
+    public NPCController Controller { get { return controller; } }
 
     public delegate void NPCDelegate(NPC npc);
+
     public NPCDelegate OnNPCInit;
     
-    #region NPCStats
-    
-    public float HP { get { return Stats[StatsEnum.HP]; } }
-    public float ATK { get { return Stats[StatsEnum.ATK]; } }
-    public float DEF { get { return Stats[StatsEnum.DEF]; } }
-    public float ATS { get { return Stats[StatsEnum.ATS]; } }
-    public float SPD { get { return Stats[StatsEnum.SPD]; } }
-    public float REC { get { return Stats[StatsEnum.REC]; } }
-    
-    #endregion
-    
+    public float Recognize { get { return npcStruct.recognizeValue; } }
+    public bool IsAggresive { get { return npcStruct.recognize; } }
+    public bool CanWalk { get { return true; } }
+
     #region Initialize
 
     public override void Awake()
     {
         base.Awake();
-        OnNPCInit = delegate {  };
+        OnNPCInit = delegate { };
+        controller = GetComponent<NPCController>();
     }
 
     public virtual void Init(NPCStruct npcStruct)
     {
         this.npcStruct = npcStruct;
-
         transform.name = npcStruct.nameKor;
-        
-        AddStat(StatsEnum.HP, npcStruct.hp);
-//        AddStat(StatsEnum.ATK, npcStruct.ATK);
-//        AddStat(StatsEnum.DEF, npcStruct.DEF);
-//        AddStat(StatsEnum.ATS, npcStruct.ATS);
-//        AddStat(StatsEnum.SPD, npcStruct.SPD);
-        AddStat(StatsEnum.REC, npcStruct.recognizeValue);
-
+        Skills = FunctionParser.ParsingSkillTable(npcStruct.skillValue, dataManager);
         OnNPCInit(this);
-    }    
-    
+    }
+
     #endregion
 }

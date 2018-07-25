@@ -62,7 +62,7 @@ public class PlayerController : Controller2D
 
     void SetAnimationParameters()
     {
-        animator.SetInteger("HpRatio", (int)(player.HP / player.LivingEntityStruct.hp * 100));
+        animator.SetInteger("HpRatio", (int)(player.CurrentHp / player.MaxHp * 100));
         animator.SetBool("IsWalk", IsWalk);
         animator.SetBool("IsJump", !IsGrounded);
         animator.SetBool("IsSit", IsSit);

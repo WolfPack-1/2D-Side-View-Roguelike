@@ -3,13 +3,14 @@ using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
-      #endif
+#endif
 
 
 public class NPCData : ScriptableObject
 {
 
-    public List<NPCStruct> Data { get; private set; }
+    public List<NPCStruct> NPC { get; private set; }
+    public List<NPCSkillStruct> Skill { get; private set; }
 
 #if UNITY_EDITOR
     [MenuItem("Assets/Data/NPC")]
@@ -19,10 +20,23 @@ public class NPCData : ScriptableObject
     }
 #endif
 
-    public List<NPCStruct> Load()
+    public List<NPCStruct> LoadNpc()
     {
-        Data = CSVParser.LoadObjects<NPCStruct>("NPC.csv");
-        return Data;
+        NPC = CSVParser.LoadObjects<NPCStruct>("NPC.csv");
+        return NPC;
+    }
+
+    public List<NPCSkillStruct> LoadSkill()
+    {
+        Skill = CSVParser.LoadObjects<NPCSkillStruct>("NpcSkill.csv");
+        return Skill;
+    }
+
+    public NPCData LoadAll()
+    {
+        NPC = LoadNpc();
+        Skill = LoadSkill();
+        return this;
     }
 
 }

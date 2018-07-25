@@ -25,9 +25,10 @@ public struct TubeStyleStruct : ITube
     public int combo;
     public bool hold;
     public string holdmotion;
+    public float coolTime;
     
     
-    public TubeStyleStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, float range, AttackTypeEnum attackType, string position, float damage, int combo, bool hold, string holdmotion)
+    public TubeStyleStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, float range, AttackTypeEnum attackType, string position, float damage, int combo, bool hold, string holdmotion, float coolTime)
     {
         this.cid = cid;
         this.name = name;
@@ -42,6 +43,25 @@ public struct TubeStyleStruct : ITube
         this.combo = combo;
         this.hold = hold;
         this.holdmotion = holdmotion;
+        this.coolTime = coolTime;
+    }
+
+    public TubeStyleStruct(TubeNPCStyleStruct styleStruct)
+    {
+        cid = styleStruct.cid;
+        name = styleStruct.name;
+        nameKor = styleStruct.nameKor;
+        socket = styleStruct.socket;
+        grade = styleStruct.grade;
+        company = styleStruct.company;
+        range = styleStruct.range;
+        attackType = styleStruct.attackType;
+        position = styleStruct.position;
+        damage = styleStruct.damage;
+        combo = styleStruct.combo;
+        hold = styleStruct.hold;
+        holdmotion = styleStruct.holdmotion;
+        coolTime = styleStruct.coolTime;
     }
 
     public override string ToString()
@@ -67,8 +87,10 @@ public struct TubeCoolerStruct : ITube
     public TubeGradeEnum grade;
     public string company;
     public float cooltime;
+    public float hp;
+    public float steam;
     
-    public TubeCoolerStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, float cooltime)
+    public TubeCoolerStruct(int cid, string name, string nameKor, SocketEnum socket, TubeGradeEnum grade, string company, float cooltime, float hp, float steam)
     {
         this.cid = cid;
         this.name = name;
@@ -77,6 +99,21 @@ public struct TubeCoolerStruct : ITube
         this.grade = grade;
         this.company = company;
         this.cooltime = cooltime;
+        this.hp = hp;
+        this.steam = steam;
+    }
+
+    public TubeCoolerStruct(TubeNPCCoolerStruct coolerStruct)
+    {
+        cid = coolerStruct.cid;
+        name = coolerStruct.name;
+        nameKor = coolerStruct.nameKor;
+        socket = coolerStruct.socket;
+        grade = coolerStruct.grade;
+        cooltime = coolerStruct.cooltime;
+        hp = coolerStruct.hp;
+        steam = coolerStruct.steam;
+        company = "";
     }
 
     public override string ToString()
@@ -120,6 +157,21 @@ public struct TubeEnhancerStruct : ITube
         this.dashSocket = dashSocket;
         this.range = range;
         this.abnormalValue = abnormalValue;
+    }
+
+    public TubeEnhancerStruct(TubeNPCEnhancerStruct enhancerStruct)
+    {
+        cid = enhancerStruct.cid;
+        name = enhancerStruct.name;
+        nameKor = enhancerStruct.nameKor;
+        socket = enhancerStruct.socket;
+        grade = enhancerStruct.grade;
+        meleeSocket = true;
+        rangeSocket = true;
+        bounceSocket = true;
+        dashSocket = true;
+        range = enhancerStruct.range;
+        abnormalValue = 0;
     }
 
     public override string ToString()

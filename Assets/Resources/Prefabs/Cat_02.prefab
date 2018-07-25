@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 50440706762888914}
   - component: {fileID: 114484043596971380}
   - component: {fileID: 114328814833692564}
+  - component: {fileID: 61015639339115404}
+  - component: {fileID: 114738092263890606}
   m_Layer: 18
   m_Name: Cat_02
   m_TagString: Untagged
@@ -65,6 +67,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &61015639339115404
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212901172091860}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.0001, y: 0.0001}
+  m_EdgeRadius: 0
 --- !u!70 &70869248488597948
 CapsuleCollider2D:
   m_ObjectHideFlags: 1
@@ -125,12 +152,29 @@ MonoBehaviour:
     cid: 0
     name: 
     nameKor: 
-    hp: 0
-    EntityGrade: 0
+    grade: 0
     recognize: 0
     recognizeValue: 0
     skillValue: 
     dropTable: 
+  baseHp: 100
+  baseMoveSpeed: 5
+--- !u!114 &114738092263890606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212901172091860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d832679e289c0fe48aee6b6f39a312c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  maxClimbAngle: 80
+  maxDescendAngle: 80
 --- !u!212 &212765366671495282
 SpriteRenderer:
   m_ObjectHideFlags: 1

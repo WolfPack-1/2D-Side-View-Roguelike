@@ -24,7 +24,7 @@ public class NPCSpawnPoint : MonoBehaviour
 
     void Start()
     {
-        CurrentNpcStruct = dataManager.NPCData.Data[npcStructIndex];
+        CurrentNpcStruct = dataManager.NPCData.NPC[npcStructIndex];
     }
 
     public void Spawn()

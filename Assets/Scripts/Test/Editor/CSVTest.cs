@@ -103,26 +103,6 @@ public class CSVTest
 			TestScriptableObject<PlaceDivisionData>("PlaceDivision")
 		);
 	}
-
-	[Test]
-	public void TestLivingEntityData()
-	{
-		Assert.AreEqual
-		(
-			TestStruct<LivingEntityStruct>("PC"),
-			TestScriptableObject<LivingEntityData>("LivingEntity")
-		);
-	}
-
-	[Test]
-	public void TestSkillData()
-	{
-		Assert.AreEqual
-		(
-			TestStruct<SkillStruct>("Skill"),
-			TestScriptableObject<SkillData>("Skill")
-		);
-	}
 	
 //	[Test]
 //	public void TestTubeData()

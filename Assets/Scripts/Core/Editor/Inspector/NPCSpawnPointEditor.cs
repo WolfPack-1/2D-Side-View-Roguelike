@@ -30,7 +30,7 @@ public class NPCSpawnPointEditor : Editor
 
     void OnEnable()
     {
-        data = Resources.Load<NPCData>("Data/ScriptableObject/NPC").Load();
+        data = Resources.Load<NPCData>("Data/ScriptableObject/NPC").LoadAll().NPC;
         spawnPoint = (NPCSpawnPoint) target;
         serObj = new SerializedObject(target);
         npcStructIndex = serObj.FindProperty("npcStructIndex");

@@ -5,11 +5,9 @@ using UnityEngine;
 public class No107 : NPC
 {
     Animator animator;
-   // NPCController controller;
 
     bool isWalk;
     bool isBattle;
-    bool isDead;
 
     public bool IsWalk
     {
@@ -32,19 +30,8 @@ public class No107 : NPC
             isBattle = value;
         }
     }
-
-    public bool IsDead
-    {
-        get { return isDead; }
-        private set
-        {
-            if (animator == null) return;
-            animator.SetBool("IsDead", value);
-            isDead = value;
-        }
-    }
     
-    public enum State { Idle, IdleBT, Walk, Attack, Skill, Die }
+    enum State { Idle, IdleBT, Walk, DeadlyAttack, Die }
 
     [SerializeField] State state;
     [SerializeField] LivingEntity targetEntity;
@@ -53,7 +40,6 @@ public class No107 : NPC
     {
         base.Awake();
         animator = GetComponent<Animator>();
-        //controller = GetComponent<NPCController>();
     }
 
     public override void Init(NPCStruct npcStruct)
@@ -61,17 +47,51 @@ public class No107 : NPC
         base.Init(npcStruct);
         OnGetDamaged += OnGetDamagedHandle;
 
-        StartCoroutine("Selector");
         state = State.Idle;
+        StartCoroutine("Selector");
     }
 
     void Update()
     {
-        animator.SetInteger("HpRatio", (int)(HP / NPCStruct.hp * 100));
+        animator.SetInteger("HpRatio", (int)(CurrentHp / MaxHp * 100));
+    }
+
+    void Reset(State state)
+    {
+        StopAllCoroutines();
+        this.state = state;
+        StartCoroutine("Selector");
+    }
+
+    IEnumerator PlayerFinder()
+    {
+        while (true)
+        {
+            if (IsBattle)
+                yield return new WaitForSeconds(0.1f);
+            //탐색 범위 안으로 들어오면 IdleBT로 전환
+            foreach (Collider2D col in GetEntity(transform.position, (int) Recognize, 5, "Player"))
+            {
+                Debug.Log("Find");
+                targetEntity = col.GetComponent<LivingEntity>();
+                IsBattle = true;
+                Reset(State.IdleBT);
+                yield break;
+            }
+
+            targetEntity = null;
+            yield return new WaitForSeconds(0.3f);
+        }
     }
 
     IEnumerator Selector()
     {
+        if (!IsDead && !IsBattle)
+        {
+            Debug.Log("Player Finder Start");
+            StartCoroutine("PlayerFinder");
+        }
+
         while (true)
             yield return StartCoroutine(state.ToString());
     }
@@ -79,59 +99,52 @@ public class No107 : NPC
     IEnumerator Idle()
     {
         IsBattle = false;
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-            
-            //탐색 범위 안으로 들어오면 IdleBT로 전환
-            foreach (Collider2D col in GetEntity(transform.position, (int)REC, 5, "Player"))
-            {
-                targetEntity = col.GetComponent<LivingEntity>();
-                state = State.IdleBT;
-                yield break;
-            }
-            
-            //탐색 범위 안에 PC가 없으면 랜덤 이동
-            targetEntity = null;
-            state = State.Walk;
-        }
+
+        yield return new WaitForSeconds(Random.Range(1f, 2f));
+
+        //탐색 범위 안에 PC가 없으면 랜덤 이동
+        targetEntity = null;
+        state = State.Walk;
     }
 
     IEnumerator IdleBT()
     {
         IsBattle = true;
-        while (true)
+        yield return new WaitForSeconds(1f);
+        float distance = Vector2.Distance(targetEntity.transform.position, transform.position);
+        if (distance <= Skills["19_DeadlyAttack"].CurrentRange + 1)
         {
-            
-            yield return new WaitForSeconds(1f);
+            Debug.Log(distance + " " + Skills["19_DeadlyAttack"].CurrentRange + 1);
+            state = State.DeadlyAttack;
+            yield break;
         }
+
+        state = State.Walk;
     }
 
     IEnumerator Walk()
     {
         IsWalk = true;
-//        if (targetEntity == null)
-//            yield return controller.MoveToRandomPosition();
-//        else
-//            yield return controller.MoveToTarget(targetEntity, 1f, REC); 
+        if (targetEntity == null)
+            yield return Controller.MoveToRandomPosition();
+        else
+            yield return Controller.MoveToTarget(targetEntity, 0.5f); 
         yield return null;
         IsWalk = false;
-        state = isBattle ? State.IdleBT : State.Idle;
+        state = IsBattle ? State.IdleBT : State.Idle;
     }
 
-    IEnumerator Attack()
+    IEnumerator DeadlyAttack()
     {
-        yield return new WaitForSeconds(1f);
-    }
-
-    IEnumerator Skill()
-    {
-        yield return new WaitForSeconds(1f);
+        animator.SetTrigger("DoSkill");
+        animator.SetInteger("SkillNum",0);
+        yield return null;
+       // yield return new WaitUntil(() => Skills["19_DeadlyAttack"].IsAnimationFinished);
+        state = State.IdleBT;
     }
 
     IEnumerator Die()
     {
-        IsDead = true;
         while (true)
         {
             //Todo : 사망 시 처리
@@ -141,10 +154,13 @@ public class No107 : NPC
 
     void OnGetDamagedHandle(float damage)
     {
-        if (HP > 0)
+        if (IsDead)
+        {
+            Reset(State.Die);
             return;
-
-        StopAllCoroutines();
-        StartCoroutine("Die");
+        }
+        
+        if(!IsBattle)
+            Reset(State.IdleBT);
     }
 }

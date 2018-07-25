@@ -62,7 +62,9 @@ public class Skill
     public bool IsLastSkill { get { return currentSkillIndex == styleStructs.Length; } }
     public bool CanCombo { get { return comboUpdator != null; } }
     public bool IsDoingCombo { get { return currentSkillIndex < styleStructs.Length; } }
+    public bool IsAnimationFinished { get { return isAnimationFinished; } }
     public int CurrentSkillIndex { get { return currentSkillIndex; } }
+    public float CurrentRange { get { return styleStructs[currentSkillIndex].range; } }
 
     List<Transform> onStartFXs;
     List<Transform> onHitFxs;
@@ -110,6 +112,21 @@ public class Skill
         this.styleStructs = styleStructs;
         this.enhancerStruct = enhancerStruct;
         this.coolerStruct = coolerStruct;
+        lastSkillTime = float.MinValue;
+        currentSkillIndex = 0;
+        InitFxs();
+    }
+
+    public Skill(string text, DataManager dataManager)
+    {
+        NPCSkillStruct skillStruct = dataManager.NPCData.Skill.Find(t => t.name == text);
+        TubeNPCStyleStruct style = dataManager.NPCTubeData.StyleData.Find(t => t.name == skillStruct.styleTube);
+        TubeNPCEnhancerStruct enhancer = dataManager.NPCTubeData.EnhancerData.Find(t => t.name == skillStruct.enhancerTube);
+        TubeNPCCoolerStruct cooler = dataManager.NPCTubeData.CoolerData.Find(t => t.name == skillStruct.coolerTube);
+
+        styleStructs = new[] { new TubeStyleStruct(style)};
+        enhancerStruct = new TubeEnhancerStruct(enhancer);
+        coolerStruct = new TubeCoolerStruct(cooler);
         lastSkillTime = float.MinValue;
         currentSkillIndex = 0;
         InitFxs();

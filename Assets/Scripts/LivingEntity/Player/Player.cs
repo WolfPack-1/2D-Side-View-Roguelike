@@ -7,7 +7,6 @@ public class Player : LivingEntity
     #region Components
 
     PlayerInventory playerInventory;
-    DataManager dataManager;
     PlayerSkillSlot skillSlot;
     AudioSource audioSource;
 
@@ -15,19 +14,7 @@ public class Player : LivingEntity
 
     #region Variables
 
-    public LivingEntityStruct LivingEntityStruct { get { return livingEntityStruct; } }
-
-    LivingEntityStruct livingEntityStruct;
-
-    #endregion
-
-    #region PlayerStats
-
-    public float HP { get { return !Stats.ContainsKey(StatsEnum.HP) ? 0 : Stats[StatsEnum.HP]; } }
-    public float ATK { get { return !Stats.ContainsKey(StatsEnum.ATK) ? 0 : Stats[StatsEnum.ATK]; } }
-    public float DEF { get { return !Stats.ContainsKey(StatsEnum.DEF) ? 0 : Stats[StatsEnum.DEF]; } }
-    public float ATS { get { return !Stats.ContainsKey(StatsEnum.ATS) ? 0 : Stats[StatsEnum.ATS]; } }
-    public float SPD { get { return !Stats.ContainsKey(StatsEnum.SPD) ? 0 : Stats[StatsEnum.SPD]; } }
+    
 
     #endregion
 
@@ -44,10 +31,10 @@ public class Player : LivingEntity
         audioSource = GetComponent<AudioSource>();
     }
 
-    void Start()
+    public override void Start()
     {
         // Debug
-        Init(dataManager.LivingEntityData.Data[0]);
+        base.Start();
         DebugCreateSkill();
     }
 
@@ -95,16 +82,6 @@ public class Player : LivingEntity
         CreateSkill(styleTube.Cid, enhancerTube.Cid, coolerTube.Cid);
 
         SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.E, playerInventory.GetRandomSkill(true));
-    }
-
-    public void Init(LivingEntityStruct livingEntityStruct)
-    {
-        this.livingEntityStruct = livingEntityStruct;
-        AddStat(StatsEnum.HP, livingEntityStruct.hp);
-        AddStat(StatsEnum.ATK, livingEntityStruct.atk);
-        AddStat(StatsEnum.DEF, livingEntityStruct.def);
-        AddStat(StatsEnum.ATS, livingEntityStruct.ats);
-        AddStat(StatsEnum.SPD, livingEntityStruct.spd);
     }
 
     #endregion

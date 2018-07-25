@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 95641729290666760}
   - component: {fileID: 61631236093896680}
   - component: {fileID: 114967789105056468}
+  - component: {fileID: 114923612474835630}
   m_Layer: 17
   m_Name: PC
   m_TagString: Untagged
@@ -157,8 +158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c69c84d249a439429a368ba422bf27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 10
-  jumpCoolTime: 0.5
 --- !u!114 &114211784433599116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -184,6 +183,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tubes: []
   skills: []
+--- !u!114 &114923612474835630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701643566638892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d832679e289c0fe48aee6b6f39a312c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  maxClimbAngle: 80
+  maxDescendAngle: 80
 --- !u!114 &114967789105056468
 MonoBehaviour:
   m_ObjectHideFlags: 1
