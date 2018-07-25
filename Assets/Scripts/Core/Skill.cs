@@ -146,7 +146,7 @@ public class Skill
     
     public void Use(Action<bool> callback, bool firstSkill)
     {
-        if (!IsCoolTimeAvailable)
+        if (!IsCoolTimeAvailable || owner.IsDead)
         {
             callback(false);
             return;

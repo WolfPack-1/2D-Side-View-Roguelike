@@ -24,12 +24,12 @@ public class PlayerController : Controller2D
     float lastJumpTime;
     
     public bool IsWalk { get { return input.x != 0 && velocity.x != 0; } }
-    public bool IsSit { get { return isSit && collisions.below; } }
+    public bool IsSit { get { return isSit && collisions.below && !player.IsDead; } }
     public bool IsUsingSkill { get { return playerSkillSlot.IsUsingSkill; } }
     public bool IsDoingCombo { get { return playerSkillSlot.IsDoingCombo; } }
     public bool IsGrounded { get { return collisions.below; } }
-    public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit; } }
-    public bool CanJump { get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime; } }
+    public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit && !player.IsDead; } }
+    public bool CanJump { get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime && !player.IsDead; } }
 
     protected override void Awake()
     {
