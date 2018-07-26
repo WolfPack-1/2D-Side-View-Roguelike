@@ -4,9 +4,11 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     const int tubeCapacity = 100;
-    const int skillCapacity = 30;
+    const int skillCapacity = 12;
     [SerializeField] List<Tube> tubes;
     [SerializeField] List<Skill> skills;
+    
+    public List<Skill> Skills { get { return skills; } }
 
     TubeData tubeData;
     
@@ -85,6 +87,16 @@ public class Inventory : MonoBehaviour
         if (skills.Count <= 0)
             return null;
         Skill skill = skills[Random.Range(0, skills.Count)];
+        if (delete)
+            DeleteSkill(skill);
+        return skill;
+    }
+
+    public virtual Skill GetSkill(TubeStyleStruct[] styleStructs, TubeEnhancerStruct enhancerStruct, TubeCoolerStruct coolerStruct, bool delete = false)
+    {
+        if (skills.Count <= 0)
+            return null;
+        Skill skill = skills.Find(t => t.StyleStructs == styleStructs && t.EnhancerStruct.cid == enhancerStruct.cid && t.CoolerStruct.cid == coolerStruct.cid);
         if (delete)
             DeleteSkill(skill);
         return skill;
@@ -203,5 +215,10 @@ public class Inventory : MonoBehaviour
         if (OnCreateSkill != null)
             OnCreateSkill(skill, true);
         return true;
+    }
+
+    public virtual int GetCount(SocketEnum socket)
+    {
+        return tubes.FindAll(t => t.Socket == socket).Count;
     }
 }

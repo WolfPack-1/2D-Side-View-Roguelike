@@ -12,11 +12,16 @@ public class LivingEntity : MonoBehaviour
     
     
     float currentHp;
+    float currentSteam;
+
     [SerializeField] float baseHp = 100;
     [SerializeField] float baseMoveSpeed = 5;
+    [SerializeField] float baseSteam = 100;
     
     public float CurrentHp { get { return currentHp; } }
     public float MaxHp { get { return baseHp; } }
+    public float CurrentSteam { get { return currentSteam; } }
+    public float MaxSteam { get { return baseSteam; } }
     public float MoveSpeed { get { return baseMoveSpeed; } }
     public bool IsDead { get { return CurrentHp <= 0; } }
 
@@ -39,6 +44,7 @@ public class LivingEntity : MonoBehaviour
             positionsDic.Add(position.name, position);
         }
         currentHp = MaxHp;
+        currentSteam = MaxSteam;
     }
 
     public virtual void Start()

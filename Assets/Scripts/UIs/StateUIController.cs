@@ -1,16 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿ using UnityEngine;
 using UnityEngine.UI;
 
 public class StateUIController : MonoBehaviour
 {
-    [SerializeField] [Range(0, 1)] float hpPercent;
-    [SerializeField] [Range(0, 1)] float gaugePercent;
-    
-    public float HpPercent { get { return hpPercent; }}
-    public float GaugePercent { get { return gaugePercent; }}
-
     [SerializeField] Slider hpSlider;
     [SerializeField] Transform gaugeTransform;
     Quaternion gaugeRotation;
@@ -18,18 +10,28 @@ public class StateUIController : MonoBehaviour
     [SerializeField] float gaugeSpeed = 3;
     [SerializeField] float gaugeRandomness = 10;
 
-    public void UpdateUI()
+    Player player;
+
+    public void Init(Player player)
     {
-        hpSlider.value = HpPercent;
-        gaugeRotation = gaugeTransform.localRotation;
-        Vector3 gaugeEuler = gaugeRotation.eulerAngles;
-        gaugeEuler.z  = 270 * gaugePercent - 45 + Random.Range(-gaugeRandomness, gaugeRandomness);
-        gaugeRotation.eulerAngles = gaugeEuler;
-        gaugeTransform.rotation = Quaternion.Slerp(gaugeTransform.rotation, gaugeRotation, Time.deltaTime * gaugeSpeed);
+        this.player = player;
     }
 
     void Update()
     {
         UpdateUI();
+    }
+    
+    public void UpdateUI()
+    {
+        if (!player)
+            return;
+        
+        hpSlider.value = player.CurrentHp / player.MaxHp;
+        gaugeRotation = gaugeTransform.localRotation;
+        Vector3 gaugeEuler = gaugeRotation.eulerAngles;
+        gaugeEuler.z  = 270 * (player.CurrentSteam / player.MaxSteam) - 45 + Random.Range(-gaugeRandomness, gaugeRandomness);
+        gaugeRotation.eulerAngles = gaugeEuler;
+        gaugeTransform.rotation = Quaternion.Slerp(gaugeTransform.rotation, gaugeRotation, Time.deltaTime * gaugeSpeed);
     }
 }

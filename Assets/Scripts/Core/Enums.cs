@@ -17,3 +17,5 @@ public enum SocketEnum { STYLE, ENHANCER, COOLER, RELIC }
 public enum AttackTypeEnum { MELEE, RANGE, BOUNCE }
 
 public enum SkillFxEnum { OnStart, OnHit, Projectile }
+
+public enum UIEnum {State, Inventory, Crafting}

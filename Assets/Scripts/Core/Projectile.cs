@@ -33,8 +33,8 @@ public class Projectile : MonoBehaviour
         if (spriteRenderer == null)
         {
             spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-            // 임시로 Knob 사용
-            spriteRenderer.sprite = Resources.GetBuiltinResource<Sprite>("UI/Skin/Knob.psd");
+//            // 임시로 Knob 사용
+//            spriteRenderer.sprite = Resources.GetBuiltinResource<Sprite>("UI/Skin/Knob.psd");
             spriteRenderer.sortingOrder = 500;
         }
         

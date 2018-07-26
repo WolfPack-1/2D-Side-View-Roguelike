@@ -46,6 +46,12 @@ public class Skill
 //            return grade + " " + enhancerStruct.nameKor + " " + styleStruct.nameKor;
 //        } 
 //    }
+    
+    public TubeStyleStruct[] StyleStructs { get { return styleStructs; } set { styleStructs = value; } }
+    public TubeEnhancerStruct EnhancerStruct { get { return enhancerStruct; } set { enhancerStruct = value; } }
+    public TubeCoolerStruct CoolerStruct { get { return coolerStruct; } set { coolerStruct = value; } }
+    public TubeRelicStruct RelicStruct { get { return relicStruct; } set { relicStruct = value; } }
+    
     public float CoolTime { get { return coolerStruct.cooltime; } }
     public float LastSkillTime { get { return lastSkillTime; } }
     public bool IsCoolTimeAvailable
@@ -139,7 +145,8 @@ public class Skill
 
     public void SetOwner(LivingEntity owner)
     {
-        Debug.Assert(owner);
+        if (!owner)
+            return;
         this.owner = owner;
         animator = owner.GetComponent<Animator>();
     }
@@ -206,16 +213,22 @@ public class Skill
                 area.Delete();
                 break;
             case AttackTypeEnum.RANGE:
+                GameObject rangeFx = SpawnRandomSkill(SkillFxEnum.Projectile);
+                if (!rangeFx)
+                    break;
                 Projectile
-                    .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range, owner, SpawnRandomSkill(SkillFxEnum.Projectile))
+                    .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range, owner, rangeFx)
                     .Fire(areaPosition + Mathf.Sign(owner.transform.localScale.x) * Vector2.left );
                 break;
             case AttackTypeEnum.BOUNCE:
                 Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 worldPosition.z = 0;
+                GameObject bounceFx = SpawnRandomSkill(SkillFxEnum.Projectile);
+                if (!bounceFx)
+                    break;
                 Debug.Log(worldPosition);
                 Projectile
-                    .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range, owner, SpawnRandomSkill(SkillFxEnum.Projectile))
+                    .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range, owner, bounceFx)
                     .Launch(areaPosition + Mathf.Sign(owner.transform.localScale.x) * Vector2.left);
                 break;
         }

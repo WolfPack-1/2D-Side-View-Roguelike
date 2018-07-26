@@ -36,6 +36,11 @@ public class PlayerSkillSlot : MonoBehaviour
         OnDropSlot = delegate { };
         OnDeleteSlot = delegate { };
     }
+
+    public bool IsSlotEmpty(PlayerSkillKeySlotEnum slotEnum)
+    {
+        return skillSlots[(int) slotEnum] == null;
+    }
     
     public Skill GetSkill(PlayerSkillKeySlotEnum slotEnum)
     {
@@ -53,7 +58,7 @@ public class PlayerSkillSlot : MonoBehaviour
 
     public bool SetSlot(PlayerSkillKeySlotEnum slotEnum, Skill skill)
     {
-        if (skillSlots[(int) slotEnum] == null)
+        if (IsSlotEmpty(slotEnum))
         {
             // 슬롯이 비어있음
             skillSlots[(int) slotEnum] = skill;
@@ -74,7 +79,7 @@ public class PlayerSkillSlot : MonoBehaviour
 
     public bool DeleteSlot(PlayerSkillKeySlotEnum slotEnum)
     {
-        if (skillSlots[(int) slotEnum] == null)
+        if (IsSlotEmpty(slotEnum))
             return false;
         
         playerInventory.GetSkill(skillSlots[(int) slotEnum]);

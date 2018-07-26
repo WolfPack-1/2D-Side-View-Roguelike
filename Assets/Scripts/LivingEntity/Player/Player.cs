@@ -1,20 +1,19 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public class Player : LivingEntity
 {
-
     #region Components
 
+    GameManager gameManager;
     PlayerInventory playerInventory;
     PlayerSkillSlot skillSlot;
     AudioSource audioSource;
 
-    #endregion
-
-    #region Variables
-
-    
+    public PlayerInventory Inventory { get { return playerInventory; }}
+    public PlayerSkillSlot SkillSlot { get { return skillSlot; } }
+    public GameManager GameManager { get { return gameManager; }}
 
     #endregion
 
@@ -25,6 +24,7 @@ public class Player : LivingEntity
     public override void Awake()
     {
         base.Awake();
+        gameManager = FindObjectOfType<GameManager>();
         dataManager = FindObjectOfType<DataManager>();
         playerInventory = GetComponent<PlayerInventory>();
         skillSlot = GetComponent<PlayerSkillSlot>();
@@ -50,38 +50,26 @@ public class Player : LivingEntity
         GetTube(enhancerTube);
         GetTube(coolerTube);
         GetTube(relicTube);
-
-        CreateSkill(styleTube.Cid, enhancerTube.Cid, coolerTube.Cid);
-
-        SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.Q, playerInventory.GetRandomSkill(true));
         
         styleTube = new Tube(dataManager.TubeData.StyleData[6]);
         enhancerTube = new Tube(dataManager.TubeData.EnhancerData[8]);
-        coolerTube = new Tube(dataManager.TubeData.CoolerData[0]);
-        relicTube = new Tube(dataManager.TubeData.RelicData[0]);
+        coolerTube = new Tube(dataManager.TubeData.CoolerData[1]);
+        relicTube = new Tube(dataManager.TubeData.RelicData[1]);
 
         GetTube(styleTube);
         GetTube(enhancerTube);
         GetTube(coolerTube);
         GetTube(relicTube);
-
-        CreateSkill(styleTube.Cid, enhancerTube.Cid, coolerTube.Cid);
-
-        SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.W, playerInventory.GetRandomSkill(true));
         
         styleTube = new Tube(dataManager.TubeData.StyleData[7]);
         enhancerTube = new Tube(dataManager.TubeData.EnhancerData[5]);
-        coolerTube = new Tube(dataManager.TubeData.CoolerData[0]);
-        relicTube = new Tube(dataManager.TubeData.RelicData[0]);
+        coolerTube = new Tube(dataManager.TubeData.CoolerData[2]);
+        relicTube = new Tube(dataManager.TubeData.RelicData[2]);
 
         GetTube(styleTube);
         GetTube(enhancerTube);
         GetTube(coolerTube);
         GetTube(relicTube);
-
-        CreateSkill(styleTube.Cid, enhancerTube.Cid, coolerTube.Cid);
-
-        SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.E, playerInventory.GetRandomSkill(true));
     }
 
     #endregion
@@ -125,8 +113,40 @@ public class Player : LivingEntity
 
     #endregion
 
+    
+    #region UnityEvent
+    
     public void PlaySound(string name)
     {
         audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/" + name));
     }
+    
+    #endregion
+    
+    #region UI
+
+    public void OpenUI(UIEnum uiEnum)
+    {
+        switch (uiEnum)
+        {
+            case UIEnum.State:
+                
+                break;
+            case UIEnum.Inventory:
+                gameManager.InventoryController.Open();
+                break;
+            case UIEnum.Crafting:
+                gameManager.CraftingController.Open();
+                break;
+        }
+    }
+
+    public void CloseAllUI()
+    {
+        gameManager.InventoryController.Close();
+        gameManager.CraftingController.Close();
+    }
+    
+    #endregion
+    
 }

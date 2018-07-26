@@ -121,17 +121,17 @@ public class PlayerController : Controller2D
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            
+            player.OpenUI(UIEnum.Crafting);
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            
+            player.OpenUI(UIEnum.Inventory);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            
+            player.CloseAllUI();
         }
     }
 
