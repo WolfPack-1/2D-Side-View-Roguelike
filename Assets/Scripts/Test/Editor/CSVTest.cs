@@ -42,7 +42,7 @@ public class CSVTest
 	int TestStruct<T>(string fileName) where T : new()
 	{
 		List<T> structs = CSVParser.LoadObjects<T>(fileName + ".csv");
-		int lineCount = File.ReadAllLines("Assets/Resources/Data/CSV/" + fileName + ".csv").Length;
+		int lineCount = File.ReadAllLines("Assets/Resources/Data/CSV/" + fileName).Length;
 		Assert.IsNotEmpty(structs);
 		Assert.IsTrue(structs.Count == lineCount - 1);
 

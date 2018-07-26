@@ -13,16 +13,10 @@ public static class CSVParser
 
     public static List<T> LoadObjects<T>(string fileName, bool strict = false) where T : new()
     {
-        using (FileStream stream = File.Open("Assets/Resources/Data/CSV/"+fileName, FileMode.Open))
-        {
-            using (TextReader reader = new StreamReader(stream))
-            {
-                return LoadObjects<T>(reader, strict);
-            }
-        }
+        return LoadObjects<T>(new StringReader(Resources.Load<TextAsset>("Data/CSV/"+fileName).text),strict);
     }
 
-    public static List<T> LoadObjects<T>(TextReader reader, bool strict = false) where T : new()
+    public static List<T> LoadObjects<T>(StringReader reader, bool strict = false) where T : new()
     {
         List<T> list = new List<T>();
         string header = reader.ReadLine();
@@ -44,44 +38,6 @@ public static class CSVParser
             }
         }
         return list;
-    }
-
-    public static void LoadObject<T>(string fileName, ref T targetObject)
-    {
-        using (FileStream stream = File.Open(fileName, FileMode.Open))
-        {
-            using (TextReader reader = new StreamReader(stream))
-            {
-                LoadObject(reader, ref targetObject);
-            }
-        }
-    }
-
-    public static void LoadObject<T>(TextReader reader, ref T targetObject)
-    {
-        FieldInfo[] fieldInfos = typeof(T).GetFields();
-        object nonValueObject = targetObject;
-        string line;
-        while ((line = reader.ReadLine()) != null)
-        {
-            if(line.StartsWith("#"))
-                continue;
-
-            string[] values = EnumerateCSVLine(line).ToArray();
-            if (values.Length >= 2)
-            {
-                SetField(values[0].Trim(), values[1], fieldInfos, nonValueObject);
-            }
-            else
-            {
-                Debug.LogWarning(string.Format("CSVParser : {0}번째 줄을 무시합니다. Fields가 충분하지 않습니다.", line));
-            }
-        }
-
-        if (typeof(T).IsValueType)
-        {
-            targetObject = (T) nonValueObject;
-        }
     }
 
     static bool ParseLineToObject(string line, Dictionary<string, int> fieldDictionary, FieldInfo[] fieldInfos,

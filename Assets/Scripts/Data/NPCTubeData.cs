@@ -30,19 +30,19 @@ public class NPCTubeData : ScriptableObject
 
     public List<TubeNPCStyleStruct> LoadStyle()
     {
-        StyleData = CSVParser.LoadObjects<TubeNPCStyleStruct>("NPCTubeStyle.csv");
+        StyleData = CSVParser.LoadObjects<TubeNPCStyleStruct>("NPCTubeStyle");
         return StyleData;
     }
 
     public List<TubeNPCCoolerStruct> LoadCooler()
     {
-        CoolerData = CSVParser.LoadObjects<TubeNPCCoolerStruct>("NPCTubeCooler.csv");
+        CoolerData = CSVParser.LoadObjects<TubeNPCCoolerStruct>("NPCTubeCooler");
         return CoolerData;
     }
 
     public List<TubeNPCEnhancerStruct> LoadEnhancer()
     {
-        EnhancerData = CSVParser.LoadObjects<TubeNPCEnhancerStruct>("NPCTubeEnhancer.csv");
+        EnhancerData = CSVParser.LoadObjects<TubeNPCEnhancerStruct>("NPCTubeEnhancer");
         return EnhancerData;
     }
 

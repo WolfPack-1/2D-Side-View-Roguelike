@@ -22,13 +22,13 @@ public class NPCData : ScriptableObject
 
     public List<NPCStruct> LoadNpc()
     {
-        NPC = CSVParser.LoadObjects<NPCStruct>("NPC.csv");
+        NPC = CSVParser.LoadObjects<NPCStruct>("NPC");
         return NPC;
     }
 
     public List<NPCSkillStruct> LoadSkill()
     {
-        Skill = CSVParser.LoadObjects<NPCSkillStruct>("NpcSkill.csv");
+        Skill = CSVParser.LoadObjects<NPCSkillStruct>("NpcSkill");
         return Skill;
     }
 

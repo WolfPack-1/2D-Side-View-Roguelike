@@ -21,7 +21,7 @@ public class PlaceDivisionData : ScriptableObject
 
     public List<PlaceDivisionStruct> Load()
     {
-        Data = CSVParser.LoadObjects<PlaceDivisionStruct>("PlaceDivision.csv");
+        Data = CSVParser.LoadObjects<PlaceDivisionStruct>("PlaceDivision");
         return Data;
     }
 

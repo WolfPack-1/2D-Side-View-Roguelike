@@ -21,7 +21,7 @@ public class GimmickData : ScriptableObject
 
     public List<GimmickStruct> Load()
     {
-        Data = CSVParser.LoadObjects<GimmickStruct>("Gimmick.csv");
+        Data = CSVParser.LoadObjects<GimmickStruct>("Gimmick");
         return Data;
     }
 

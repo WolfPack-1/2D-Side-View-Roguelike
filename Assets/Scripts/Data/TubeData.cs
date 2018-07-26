@@ -24,17 +24,17 @@ public class TubeData : ScriptableObject
 
     public void LoadAll()
     {
-        StyleData = CSVParser.LoadObjects<TubeStyleStruct>("TubeStyle.csv");
-        CoolerData = CSVParser.LoadObjects<TubeCoolerStruct>("TubeCooler.csv");
-        EnhancerData = CSVParser.LoadObjects<TubeEnhancerStruct>("TubeEnhancer.csv");
-        RelicData = CSVParser.LoadObjects<TubeRelicStruct>("TubeRelic.csv");
+        StyleData = CSVParser.LoadObjects<TubeStyleStruct>("TubeStyle");
+        CoolerData = CSVParser.LoadObjects<TubeCoolerStruct>("TubeCooler");
+        EnhancerData = CSVParser.LoadObjects<TubeEnhancerStruct>("TubeEnhancer");
+        RelicData = CSVParser.LoadObjects<TubeRelicStruct>("TubeRelic");
     }
 
     public List<TubeStyleStruct> LoadStyle()
     {
         if (StyleData != null)
             return StyleData;
-        StyleData = CSVParser.LoadObjects<TubeStyleStruct>("TubeStyle.csv");
+        StyleData = CSVParser.LoadObjects<TubeStyleStruct>("TubeStyle");
         return StyleData;
     }
 
@@ -42,7 +42,7 @@ public class TubeData : ScriptableObject
     {
         if (CoolerData != null)
             return CoolerData;
-        CoolerData = CSVParser.LoadObjects<TubeCoolerStruct>("TubeCooler.csv");
+        CoolerData = CSVParser.LoadObjects<TubeCoolerStruct>("TubeCooler");
         return CoolerData;
     }
 
@@ -50,7 +50,7 @@ public class TubeData : ScriptableObject
     {
         if (EnhancerData != null)
             return EnhancerData;
-        EnhancerData = CSVParser.LoadObjects<TubeEnhancerStruct>("TubeEnhancer.csv");
+        EnhancerData = CSVParser.LoadObjects<TubeEnhancerStruct>("TubeEnhancer");
         return EnhancerData;
     }
 
@@ -58,7 +58,7 @@ public class TubeData : ScriptableObject
     {
         if (RelicData != null)
             return RelicData;
-        RelicData = CSVParser.LoadObjects<TubeRelicStruct>("TubeRelic.csv");
+        RelicData = CSVParser.LoadObjects<TubeRelicStruct>("TubeRelic");
         return RelicData;
     }
 

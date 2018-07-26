@@ -20,7 +20,7 @@ public class FxData : ScriptableObject
 
     public List<FxStruct> Load()
     {
-        Data = CSVParser.LoadObjects<FxStruct>("Fx.csv");
+        Data = CSVParser.LoadObjects<FxStruct>("Fx");
         return Data;
     }
 
