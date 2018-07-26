@@ -150,10 +150,15 @@ public class Skill
         this.owner = owner;
         animator = owner.GetComponent<Animator>();
     }
+
+    public LivingEntity GetOwner()
+    {
+        return owner;
+    }
     
     public void Use(Action<bool> callback, bool firstSkill)
     {
-        if (!IsCoolTimeAvailable || owner.IsDead)
+        if (!IsCoolTimeAvailable || !owner || owner.IsDead)
         {
             callback(false);
             return;
@@ -169,7 +174,7 @@ public class Skill
         {
             owner.StopCoroutine(comboUpdator);
         }
-        else if (firstSkill)
+        if (firstSkill)
             currentSkillIndex = 0;
 
         if (IsLastSkill)
@@ -217,7 +222,8 @@ public class Skill
                 if (!rangeFx)
                     break;
                 Projectile
-                    .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range, owner, rangeFx)
+                    .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range * 5, owner, rangeFx)
+                    .SetHitFx(onHitFxs)
                     .Fire(areaPosition + Mathf.Sign(owner.transform.localScale.x) * Vector2.left );
                 break;
             case AttackTypeEnum.BOUNCE:
@@ -229,6 +235,7 @@ public class Skill
                 Debug.Log(worldPosition);
                 Projectile
                     .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range, owner, bounceFx)
+                    .SetHitFx(onHitFxs)
                     .Launch(areaPosition + Mathf.Sign(owner.transform.localScale.x) * Vector2.left);
                 break;
         }

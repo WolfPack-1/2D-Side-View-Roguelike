@@ -72,12 +72,14 @@ public class CraftingUIController : MonoBehaviour
             skillDiscription.text = "Current Selected Tubes\n" +
                                     styleTubes[styleIndex].Name + "\n" +
                                     enhancerTubes[enhancerIndex].Name + "\n" +
-                                    coolerTubes[coolerIndex].Name + "\n" +
-                                    relicTubes[relicIndex].Name;
+                                    coolerTubes[coolerIndex].Name;
             skillIcon.SetTube(styleTubes[styleIndex], enhancerTubes[enhancerIndex], coolerTubes[coolerIndex]);
         }
         else
+        {
             skillDiscription.text = "Need More Tubes";
+            skillIcon.Disable();
+        }
     }
 
     public void Open()

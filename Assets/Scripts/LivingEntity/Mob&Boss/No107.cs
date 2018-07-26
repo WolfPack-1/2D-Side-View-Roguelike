@@ -110,6 +110,9 @@ public class No107 : NPC
 
     IEnumerator IdleBT()
     {
+        if (!targetEntity)
+            targetEntity = FindObjectOfType<Player>(); //Todo : 나중에 빼야함
+        
         IsBattle = true;
         float distance = Vector2.Distance(targetEntity.transform.position, transform.position);
         if (distance <= Skills["19_DeadlyAttack"].CurrentRange + 1)

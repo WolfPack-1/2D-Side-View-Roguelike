@@ -18,6 +18,8 @@ public class Projectile : MonoBehaviour
     public float Damage { get { return damage; } }
     public LivingEntity Owner { get { return owner; } }
 
+    List<Transform> onHitFxs;
+
     void Awake()
     {
         if (projectileMaterial == null)
@@ -83,6 +85,12 @@ public class Projectile : MonoBehaviour
         return projectile;
     }
 
+    public Projectile SetHitFx(List<Transform> fxs)
+    {
+        onHitFxs = fxs;
+        return this;
+    }
+
     public static Projectile Create()
     {
         return Create(Vector2.zero, 0, 0, null, new GameObject("Proejctile"));
@@ -113,5 +121,36 @@ public class Projectile : MonoBehaviour
 
         float t = T_lowEnergy;
         return toTarget / t - Physics.gravity * t / 2f;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Transform fx;
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {        
+            fx = Instantiate(onHitFxs[Random.Range(0, onHitFxs.Count)], transform.position, Quaternion.identity);
+            fx.localScale = owner.transform.localScale;
+            Destroy(gameObject);
+        }
+
+        LivingEntity livingEntity = other.GetComponent<LivingEntity>();
+        if(!livingEntity)
+            return;
+
+        if (owner.GetType() == typeof(Player) && livingEntity.GetType() != typeof(Player))
+        {
+            livingEntity.GetDamaged(damage);
+            Destroy(gameObject);
+        }
+        else if (owner.GetType() != typeof(Player) && livingEntity.GetType() == typeof(Player))
+        {
+            livingEntity.GetDamaged(damage);
+            Destroy(gameObject);
+        }
+
+        if (onHitFxs == null)
+            return;
+        fx = Instantiate(onHitFxs[Random.Range(0, onHitFxs.Count)], transform.position, Quaternion.identity);
+        fx.localScale = owner.transform.localScale;
     }
 }

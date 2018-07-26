@@ -32,6 +32,10 @@ public class PlayerSkillSlot : MonoBehaviour
         player = GetComponent<Player>();
         playerInventory = GetComponent<PlayerInventory>();
         skillSlots = new Skill[4];
+        for (int i = 0; i < skillSlots.Length; i++)
+        {
+            skillSlots[i] = null;
+        }
         OnSetSlot = delegate { };
         OnDropSlot = delegate { };
         OnDeleteSlot = delegate { };
@@ -44,14 +48,16 @@ public class PlayerSkillSlot : MonoBehaviour
     
     public Skill GetSkill(PlayerSkillKeySlotEnum slotEnum)
     {
-        return skillSlots[(int) slotEnum] != null ? skillSlots[(int) slotEnum] : null;
+        return IsSlotEmpty(slotEnum) ? null : skillSlots[(int) slotEnum];
     }
 
     public void Use(PlayerSkillKeySlotEnum slotEnum)
     {
         Skill skill = GetSkill(slotEnum);
-        if (skill == null)
+        if (skill == null || (isUsingSkill && !IsDoingCombo))
             return;
+        if (currentSkill != null && currentSkill != skill)
+            currentSkill.Stop(b => isUsingSkill = b);
         currentSkill = skill;
         skill.Use(b => isUsingSkill = b, skill.IsFirstSkill);
     }

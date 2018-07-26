@@ -44,32 +44,26 @@ public class Player : LivingEntity
         Tube styleTube = new Tube(dataManager.TubeData.StyleData[0]);
         Tube enhancerTube = new Tube(dataManager.TubeData.EnhancerData[0]);
         Tube coolerTube = new Tube(dataManager.TubeData.CoolerData[0]);
-        Tube relicTube = new Tube(dataManager.TubeData.RelicData[0]);
 
         GetTube(styleTube);
         GetTube(enhancerTube);
         GetTube(coolerTube);
-        GetTube(relicTube);
         
         styleTube = new Tube(dataManager.TubeData.StyleData[6]);
-        enhancerTube = new Tube(dataManager.TubeData.EnhancerData[8]);
-        coolerTube = new Tube(dataManager.TubeData.CoolerData[1]);
-        relicTube = new Tube(dataManager.TubeData.RelicData[1]);
+        enhancerTube = new Tube(dataManager.TubeData.EnhancerData[1]);
+        coolerTube = new Tube(dataManager.TubeData.CoolerData[0]);
 
         GetTube(styleTube);
         GetTube(enhancerTube);
         GetTube(coolerTube);
-        GetTube(relicTube);
         
-        styleTube = new Tube(dataManager.TubeData.StyleData[7]);
-        enhancerTube = new Tube(dataManager.TubeData.EnhancerData[5]);
-        coolerTube = new Tube(dataManager.TubeData.CoolerData[2]);
-        relicTube = new Tube(dataManager.TubeData.RelicData[2]);
+        styleTube = new Tube(dataManager.TubeData.StyleData[3]);
+        enhancerTube = new Tube(dataManager.TubeData.EnhancerData[22]);
+        coolerTube = new Tube(dataManager.TubeData.CoolerData[0]);
 
         GetTube(styleTube);
         GetTube(enhancerTube);
         GetTube(coolerTube);
-        GetTube(relicTube);
     }
 
     #endregion
@@ -113,7 +107,6 @@ public class Player : LivingEntity
 
     #endregion
 
-    
     #region UnityEvent
     
     public void PlaySound(string name)

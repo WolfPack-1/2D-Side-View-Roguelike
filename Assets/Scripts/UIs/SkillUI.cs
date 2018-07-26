@@ -65,6 +65,11 @@ public class SkillUI : MonoBehaviour
 
     public void SetSkill(Skill skill)
     {
+        if (skill == null)
+        {
+            Disable();
+            return;
+        }
         styleStructs = skill.StyleStructs;
         enhancerStruct = skill.EnhancerStruct;
         coolerStruct = skill.CoolerStruct;

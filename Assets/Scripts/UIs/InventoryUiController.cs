@@ -33,15 +33,13 @@ public class InventoryUiController : MonoBehaviour
 			skillDiscription.text += inventory.Skills[i].StyleStructs[0].name + "\n";
 		}
 
-		foreach (Transform slotHolder in skillSlotHolder)
-		{
-			slotHolder.GetComponent<SkillUI>().Disable();
-		}
-
 		for (int i = 0; i < 4; i++)
 		{
 			if (skillSlot.IsSlotEmpty((PlayerSkillSlot.PlayerSkillKeySlotEnum) i))
+			{
+				skillSlotHolder.GetChild(i).GetComponent<SkillUI>().Disable();
 				continue;
+			}
 			
 			skillSlotHolder.GetChild(i).GetComponent<SkillUI>().SetSkill(skillSlot.GetSkill((PlayerSkillSlot.PlayerSkillKeySlotEnum)i));
 		}
