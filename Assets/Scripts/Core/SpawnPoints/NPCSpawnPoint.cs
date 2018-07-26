@@ -8,6 +8,7 @@ public class NPCSpawnPoint : MonoBehaviour
     DataManager dataManager;
     [SerializeField] int npcStructIndex;
     [SerializeField] int dir;
+    [SerializeField] bool spawnOnAwake;
     public NPCStruct CurrentNpcStruct;
     public Vector2 SpawnPosition
     {
@@ -25,6 +26,8 @@ public class NPCSpawnPoint : MonoBehaviour
     void Start()
     {
         CurrentNpcStruct = dataManager.NPCData.NPC[npcStructIndex];
+        if(spawnOnAwake)
+            Spawn();
     }
 
     public void Spawn()

@@ -6,17 +6,16 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-[CanEditMultipleObjects]
-[CustomEditor(typeof(NPCSpawnPoint))]
+[CustomEditor(typeof(NPCSpawnPoint)), CanEditMultipleObjects]
 public class NPCSpawnPointEditor : Editor
 {
 
     List<NPCStruct> data;
 
     NPCSpawnPoint spawnPoint;
-    SerializedObject serObj;
     SerializedProperty npcStructIndex;
     SerializedProperty npcDir;
+    SerializedProperty spawnOnAwake;
     int selectNPCInt;
     string[] npcCategory;
     string[] dirCategory = {"왼쪽", "오른쪽"};
@@ -32,9 +31,9 @@ public class NPCSpawnPointEditor : Editor
     {
         data = Resources.Load<NPCData>("Data/ScriptableObject/NPC").LoadAll().NPC;
         spawnPoint = (NPCSpawnPoint) target;
-        serObj = new SerializedObject(target);
-        npcStructIndex = serObj.FindProperty("npcStructIndex");
-        npcDir = serObj.FindProperty("dir");
+        npcStructIndex = serializedObject.FindProperty("npcStructIndex");
+        npcDir = serializedObject.FindProperty("dir");
+        spawnOnAwake = serializedObject.FindProperty("spawnOnAwake");
         npcCategory = data.Select(I => I.nameKor).ToArray();
         spawnPoint.tag = "NPC Spawn Point";
         selectNPCInt = npcStructIndex.intValue;
@@ -42,11 +41,12 @@ public class NPCSpawnPointEditor : Editor
 
     public override void OnInspectorGUI()
     {               
-        serObj.Update();
+        base.serializedObject.Update();
 
         selectNPCInt = EditorGUILayout.Popup("NPC 선택", selectNPCInt, npcCategory, EditorStyles.popup);
         npcDir.intValue = EditorGUILayout.Popup("방향 선택", npcDir.intValue, dirCategory, EditorStyles.popup);
-
+        EditorGUILayout.PropertyField(spawnOnAwake, new GUIContent("게임 시작 시 자동 스폰(테스트용)"));
+        
         npcStructIndex.intValue = selectNPCInt;
         spawnPoint.CurrentNpcStruct = data[selectNPCInt];
         
@@ -65,12 +65,12 @@ public class NPCSpawnPointEditor : Editor
         
         StickSpawnerToGround();
         SetTransform();
-        serObj.ApplyModifiedProperties();
+        serializedObject.ApplyModifiedProperties();
     }
     
     void SetTransform()
     {
-        serObj.targetObject.name = "NPC Spawn Point : " + npcCategory[selectNPCInt];
+        serializedObject.targetObject.name = "NPC Spawn Point : " + npcCategory[selectNPCInt];
     }
 
     void StickSpawnerToGround()
