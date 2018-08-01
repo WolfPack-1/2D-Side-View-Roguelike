@@ -51,8 +51,9 @@ public class No107 : NPC
         StartCoroutine("Selector");
     }
 
-    void Update()
+    public override void Update()
     {
+        base.Update();
         animator.SetInteger("HpRatio", (int)(CurrentHp / MaxHp * 100));
     }
 

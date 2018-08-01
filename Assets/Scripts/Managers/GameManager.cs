@@ -29,4 +29,58 @@ public class GameManager : MonoBehaviour
         craftingController.Init(player);
     }
 
+    public Tube FindTubeByCid(int cid)
+    {
+        int index;
+        
+        index = dataManager.TubeData.StyleData.FindIndex(t => t.cid == cid);
+        if (index != -1)
+        {
+            return new Tube(dataManager.TubeData.StyleData[index]);
+        }
+
+        index = dataManager.TubeData.EnhancerData.FindIndex(t => t.cid == cid);
+        if (index != -1)
+        {
+            return new Tube(dataManager.TubeData.StyleData[index]);
+        }
+        
+        index = dataManager.TubeData.CoolerData.FindIndex(t => t.cid == cid);
+        if (index != -1)
+        {
+            return new Tube(dataManager.TubeData.CoolerData[index]);
+        }
+        
+        index = dataManager.TubeData.RelicData.FindIndex(t => t.cid == cid);
+        if (index != -1)
+        {
+            return new Tube(dataManager.TubeData.RelicData[index]);
+        }
+        
+        index = dataManager.NPCTubeData.StyleData.FindIndex(t => t.cid == cid);
+        if (index != -1)
+        {
+            return new Tube(dataManager.NPCTubeData.StyleData[index]);
+        }
+
+        index = dataManager.NPCTubeData.EnhancerData.FindIndex(t => t.cid == cid);
+        if (index != -1)
+        {
+            return new Tube(dataManager.NPCTubeData.StyleData[index]);
+        }
+        
+        index = dataManager.NPCTubeData.CoolerData.FindIndex(t => t.cid == cid);
+        if (index != -1)
+        {
+            return new Tube(dataManager.NPCTubeData.CoolerData[index]);
+        }
+        
+//        index = dataManager.NPCTubeData.RelicData.FindIndex(t => t.cid == cid);
+//        if (index != -1)
+//        {
+//            return new Tube(dataManager.NPCTubeData.RelicData[index]);
+//        }
+
+        return null;
+    }
 }

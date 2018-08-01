@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(PlayerSkillSlot))]
@@ -31,6 +33,33 @@ public class PlayerController : Controller2D
     public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit && !player.IsDead; } }
     public bool CanJump { get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime && !player.IsDead; } }
 
+    IInteractable currentInteractable;
+
+    IEnumerator InteractableFinder()
+    {
+        while (true)
+        {
+            RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, 0.5f, Vector2.up);
+            float distance = float.MaxValue;
+            float temp;
+            foreach (RaycastHit2D hit in hits)
+            {
+                temp = Vector2.Distance(transform.position, hit.transform.position);
+                if(distance < temp)
+                    continue;
+                
+                IInteractable interactable = hit.transform.GetComponent<IInteractable>();
+                if (interactable == null)
+                    continue;
+
+                Debug.Log(interactable);
+                currentInteractable = interactable;
+                distance = temp;
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+    
     protected override void Awake()
     {
         base.Awake();
@@ -46,14 +75,15 @@ public class PlayerController : Controller2D
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpapex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpapex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+        StartCoroutine("InteractableFinder");
     }
 
     protected override void Update()
     {
         base.Update();
-        moveSpeed = playerSkillSlot.IsUsingSkill ? 0.4f : 2;
+        float speed = playerSkillSlot.IsUsingSkill ? moveSpeed * 0.3f : moveSpeed;
         KeyInput();
-        CalculateVelocity();
+        CalculateVelocity(speed);
         Move(velocity * Time.fixedDeltaTime, input);
         if (collisions.above || collisions.below)
             velocity.y = 0;
@@ -68,7 +98,7 @@ public class PlayerController : Controller2D
         animator.SetBool("IsSit", IsSit);
     }
 
-    void CalculateVelocity()
+    void CalculateVelocity(float speed)
     {
         velocity.x = CanWalk ? input.x * moveSpeed : 0;
         velocity.y += gravity * Time.deltaTime;
@@ -116,7 +146,7 @@ public class PlayerController : Controller2D
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            
+            currentInteractable.Interact();
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -145,5 +175,10 @@ public class PlayerController : Controller2D
     {
         if(velocity.y > minJumpVelocity)
             velocity.y = minJumpVelocity;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, 0.5f);
     }
 }

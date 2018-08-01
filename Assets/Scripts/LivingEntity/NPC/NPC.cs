@@ -42,5 +42,11 @@ public class NPC : LivingEntity
         OnNPCInit(this);
     }
 
+    public virtual void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+            GetComponent<NPCInventory>().DropRandomTube();
+    }
+
     #endregion
 }

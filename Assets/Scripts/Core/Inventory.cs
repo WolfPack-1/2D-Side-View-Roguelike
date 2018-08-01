@@ -8,10 +8,10 @@ public class Inventory : MonoBehaviour
     [SerializeField] List<Tube> tubes;
     [SerializeField] List<Skill> skills;
     
-    public List<Skill> Skills { get { return skills; } }
 
     TubeData tubeData;
     
+    public List<Skill> Skills { get { return skills; } }
     public List<Tube> Tubes { get { return tubes; } }
     public int TubeCapacity { get { return tubeCapacity; } }
     public bool IsFull { get { return tubes.Count <= tubeCapacity; } }
@@ -142,7 +142,7 @@ public class Inventory : MonoBehaviour
         }
         
         Debug.Log("Drop : " + tube.NameKor);
-        // Todo : 스킬 튜브로 드랍
+        new GameObject(tube.NameKor).AddComponent<TubeItem>().Init(tube).Drop(transform.position);
 
         tubes.Remove(tube);
         if (OnDropTube != null)

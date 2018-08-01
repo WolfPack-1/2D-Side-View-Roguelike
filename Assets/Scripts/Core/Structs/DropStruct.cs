@@ -11,7 +11,6 @@ public struct DropStruct
 
     public DropStruct(string text)
     {
-        Debug.Log(text);
         string[] data = text.Split(',');
         Assert.AreEqual(data.Length, 2);
         cid = int.Parse(data[0]);

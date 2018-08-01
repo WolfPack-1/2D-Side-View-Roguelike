@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Configuration;
 using UnityEngine;
@@ -7,84 +8,49 @@ using UnityEngine;
 public class NPCInventory : Inventory
 {
     // Todo : 나중에 하기
-//    NPC npc;
-//    Dictionary<Tube, int> dropDic;
-//    DataManager dataManager;
-//    
-//    public override void Awake()
-//    {
-//        base.Awake();
-//        dataManager = FindObjectOfType<DataManager>();
-//        npc = GetComponent<NPC>();
-//        dropDic = new Dictionary<Tube, int>();
-//        npc.OnNPCInit += InitInventory;
-//    }
-//
-//    void InitInventory(NPC npc)
-//    {
-//        string rawDropTable = npc.NPCStruct.dropTable;
-//        DropStruct[] dropStructs = FunctionParser.ParsingDropTable(rawDropTable);
-//        foreach (DropStruct dropStruct in dropStructs)
-//        {
-//            Tube tube = dataManager.SkillData.GetStructByID(dropStruct.cid);
-//            GetTube(tube, dropStruct.prob);
-//        }
-//    }
-//
-//    public override bool GetTube(Tube tube)
-//    {
-//        dropDic.Add(tube, 100);
-//        return base.GetTube(tube);
-//    }
-//
-//    public bool GetTube(Tube tube, int prob)
-//    {
-//        if (dropDic.ContainsKey(tube))
-//            return false;
-//        dropDic.Add(tube, prob);
-//        return base.GetTube(tube);
-//    }
-//
-//    public bool DropRandomTube()
-//    {
-//        if (dropDic.Count <= 0)
-//            return false;
-//
-//        Tube randomTube = RandomIndex();
-//        return DropTube(randomTube);
-//    }
-//
-//    SkillStruct RandomIndex()
-//    {
-//        int range = 0;
-//
-//        foreach (int probs in dropDic.Values)
-//        {
-//            range += probs;
-//        }
-//
-//        int rand = Random.Range(0, range);
-//        int top = 0;
-//
-//        foreach (KeyValuePair<SkillStruct, int> data in dropDic)
-//        {
-//            top += data.Value;
-//            if (rand < top)
-//                return data.Key;
-//        }
-//        Debug.Assert(false);
-//        return default(SkillStruct);
-//    }
-//    
-//    public override bool DropSkill(SkillStruct skillStruct)
-//    {
-//        dropDic.Remove(skillStruct);
-//        return base.DropSkill(skillStruct);
-//    }
-//
-//    public override bool DeleteSkill(SkillStruct skillStruct)
-//    {
-//        dropDic.Remove(skillStruct);
-//        return base.DeleteSkill(skillStruct);
-//    }
+
+    NPC npc;
+    DropStruct[] drops;
+    GameManager gameManager;
+
+    public override void Awake()
+    {
+        base.Awake();
+        gameManager = FindObjectOfType<GameManager>();
+        npc = GetComponent<NPC>();
+        npc.OnNPCInit += InitInventory;
+    }
+
+    void InitInventory(NPC npc)
+    {
+        Debug.Log(npc.NPCStruct.nameKor + " : Initialize Inventory");
+        drops = FunctionParser.ParsingDropTable(npc.NPCStruct.dropTable);
+        foreach (DropStruct drop in drops)
+        {
+            Tube tube = gameManager.FindTubeByCid(drop.cid);
+            if (tube == null)
+            {
+                Debug.LogWarning(npc.NPCStruct.nameKor + " : " + drop.cid + "이 드롭 테이블에 있는데 실제 튜브 데이터에서 찾을 수 없어요.");
+                continue;
+            }
+            GetTube(tube);
+            Debug.Log(npc.NPCStruct.nameKor + " : Add to Inventory " + tube.NameKor);
+        }
+    }
+
+    public bool DropRandomTube()
+    {
+        foreach (Tube tube in Tubes)
+        {
+            int prob = Array.Find(drops, t => t.cid == tube.Cid).prob;
+            int random = UnityEngine.Random.Range(1, 101);
+            Debug.Log(npc.NPCStruct.nameKor + " : 튜브 드랍 확률 계산 " + prob + " " + random);
+            if (prob >= random)
+            {
+                Debug.Log(npc.NPCStruct.nameKor + " : 튜브 드랍 " + tube.NameKor);
+                return DropTube(tube.Cid);
+            }
+        }
+        return DropTube(-1);
+    }
 }
