@@ -12,8 +12,7 @@ public class RaycastController : MonoBehaviour
     protected float verticalRaySpacing;
 
     protected new BoxCollider2D collider;
-    protected RaycastOrigins raycastOrigins;
-    
+    protected RaycastOrigins raycastOrigins;    
     
     public struct RaycastOrigins
     {
@@ -56,8 +55,8 @@ public class RaycastController : MonoBehaviour
         float boundsWidth = bounds.size.x;
         float boundsHeight = bounds.size.y;
 
-        horizontalRayCount = Mathf.Max(Mathf.RoundToInt(boundsHeight / distanceBetweenRays),2);
-        verticalRayCount = Mathf.Max(Mathf.RoundToInt(boundsWidth / distanceBetweenRays),2);
+        horizontalRayCount = Mathf.Max(Mathf.RoundToInt(boundsHeight / distanceBetweenRays),5);
+        verticalRayCount = Mathf.Max(Mathf.RoundToInt(boundsWidth / distanceBetweenRays),5);
 
         horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
         verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);

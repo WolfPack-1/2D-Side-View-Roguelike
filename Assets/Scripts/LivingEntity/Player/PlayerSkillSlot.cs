@@ -25,17 +25,13 @@ public class PlayerSkillSlot : MonoBehaviour
     }
 
     Skill currentSkill;
-    [SerializeField] Skill[] skillSlots;
+    Skill[] skillSlots;
 
     void Awake()
     {
         player = GetComponent<Player>();
         playerInventory = GetComponent<PlayerInventory>();
         skillSlots = new Skill[4];
-        for (int i = 0; i < skillSlots.Length; i++)
-        {
-            skillSlots[i] = null;
-        }
         OnSetSlot = delegate { };
         OnDropSlot = delegate { };
         OnDeleteSlot = delegate { };

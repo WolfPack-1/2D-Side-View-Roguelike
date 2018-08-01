@@ -54,7 +54,7 @@ public class PlayerController : Controller2D
         moveSpeed = playerSkillSlot.IsUsingSkill ? 0.4f : 2;
         KeyInput();
         CalculateVelocity();
-        Move(velocity * Time.deltaTime, input);
+        Move(velocity * Time.fixedDeltaTime, input);
         if (collisions.above || collisions.below)
             velocity.y = 0;
         SetAnimationParameters();

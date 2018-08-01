@@ -27,12 +27,6 @@ public class InventoryUiController : MonoBehaviour
 			skillHolder.GetComponent<SkillUI>().Disable();
 		}
 		
-		for (int i = 0; i < inventory.Skills.Count; i++)
-		{
-			skillInventoryHolder.GetChild(i).GetComponent<SkillUI>().SetSkill(inventory.Skills[i]);
-			skillDiscription.text += inventory.Skills[i].StyleStructs[0].name + "\n";
-		}
-
 		for (int i = 0; i < 4; i++)
 		{
 			if (skillSlot.IsSlotEmpty((PlayerSkillSlot.PlayerSkillKeySlotEnum) i))
@@ -42,6 +36,12 @@ public class InventoryUiController : MonoBehaviour
 			}
 			
 			skillSlotHolder.GetChild(i).GetComponent<SkillUI>().SetSkill(skillSlot.GetSkill((PlayerSkillSlot.PlayerSkillKeySlotEnum)i));
+		}
+		
+		for (int i = 0; i < inventory.Skills.Count; i++)
+		{
+			skillInventoryHolder.GetChild(i).GetComponent<SkillUI>().SetSkill(inventory.Skills[i]);
+			skillDiscription.text += inventory.Skills[i].StyleStructs[0].name + "\n";
 		}
 	}
 

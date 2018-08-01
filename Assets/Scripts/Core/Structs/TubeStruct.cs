@@ -46,24 +46,6 @@ public struct TubeStyleStruct : ITube
         this.coolTime = coolTime;
     }
 
-    public TubeStyleStruct(TubeNPCStyleStruct styleStruct)
-    {
-        cid = styleStruct.cid;
-        name = styleStruct.name;
-        nameKor = styleStruct.nameKor;
-        socket = styleStruct.socket;
-        grade = styleStruct.grade;
-        company = styleStruct.company;
-        range = styleStruct.range;
-        attackType = styleStruct.attackType;
-        position = styleStruct.position;
-        damage = styleStruct.damage;
-        combo = styleStruct.combo;
-        hold = styleStruct.hold;
-        holdmotion = styleStruct.holdmotion;
-        coolTime = styleStruct.coolTime;
-    }
-
     public override string ToString()
     {
         return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11}" , cid, name, nameKor, socket, grade, company, attackType, position, damage, combo, hold, holdmotion);
@@ -101,19 +83,6 @@ public struct TubeCoolerStruct : ITube
         this.cooltime = cooltime;
         this.hp = hp;
         this.steam = steam;
-    }
-
-    public TubeCoolerStruct(TubeNPCCoolerStruct coolerStruct)
-    {
-        cid = coolerStruct.cid;
-        name = coolerStruct.name;
-        nameKor = coolerStruct.nameKor;
-        socket = coolerStruct.socket;
-        grade = coolerStruct.grade;
-        cooltime = coolerStruct.cooltime;
-        hp = coolerStruct.hp;
-        steam = coolerStruct.steam;
-        company = "";
     }
 
     public override string ToString()
@@ -158,22 +127,7 @@ public struct TubeEnhancerStruct : ITube
         this.range = range;
         this.abnormalValue = abnormalValue;
     }
-
-    public TubeEnhancerStruct(TubeNPCEnhancerStruct enhancerStruct)
-    {
-        cid = enhancerStruct.cid;
-        name = enhancerStruct.name;
-        nameKor = enhancerStruct.nameKor;
-        socket = enhancerStruct.socket;
-        grade = enhancerStruct.grade;
-        meleeSocket = true;
-        rangeSocket = true;
-        bounceSocket = true;
-        dashSocket = true;
-        range = enhancerStruct.range;
-        abnormalValue = 0;
-    }
-
+    
     public override string ToString()
     {
         return string.Format(" {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9}" , cid, name, nameKor, socket, meleeSocket, rangeSocket, bounceSocket, dashSocket, range, abnormalValue);

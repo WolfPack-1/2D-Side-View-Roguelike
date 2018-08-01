@@ -126,13 +126,13 @@ public class Skill
     public Skill(string text, DataManager dataManager)
     {
         NPCSkillStruct skillStruct = dataManager.NPCData.Skill.Find(t => t.name == text);
-        TubeNPCStyleStruct style = dataManager.NPCTubeData.StyleData.Find(t => t.name == skillStruct.styleTube);
-        TubeNPCEnhancerStruct enhancer = dataManager.NPCTubeData.EnhancerData.Find(t => t.name == skillStruct.enhancerTube);
-        TubeNPCCoolerStruct cooler = dataManager.NPCTubeData.CoolerData.Find(t => t.name == skillStruct.coolerTube);
+        TubeStyleStruct style = dataManager.NPCTubeData.StyleData.Find(t => t.name == skillStruct.styleTube);
+        TubeEnhancerStruct enhancer = dataManager.NPCTubeData.EnhancerData.Find(t => t.name == skillStruct.enhancerTube);
+        TubeCoolerStruct cooler = dataManager.NPCTubeData.CoolerData.Find(t => t.name == skillStruct.coolerTube);
         
-        styleStructs = new[] { new TubeStyleStruct(style)};
-        enhancerStruct = new TubeEnhancerStruct(enhancer);
-        coolerStruct = new TubeCoolerStruct(cooler);
+        styleStructs = new[] { style };
+        enhancerStruct = enhancer;
+        coolerStruct = cooler;
         lastSkillTime = float.MinValue;
         currentSkillIndex = 0;
         InitFxs();

@@ -9,9 +9,9 @@ using UnityEditor;
 
 public class NPCTubeData : ScriptableObject
 {
-    public List<TubeNPCStyleStruct> StyleData { get; private set; }
-    public List<TubeNPCCoolerStruct> CoolerData { get; private set; }
-    public List<TubeNPCEnhancerStruct> EnhancerData { get; private set; }
+    public List<TubeStyleStruct> StyleData { get; private set; }
+    public List<TubeCoolerStruct> CoolerData { get; private set; }
+    public List<TubeEnhancerStruct> EnhancerData { get; private set; }
 
 #if UNITY_EDITOR
     [MenuItem("Assets/Data/NPCTube")]
@@ -28,26 +28,26 @@ public class NPCTubeData : ScriptableObject
         EnhancerData = LoadEnhancer();
     }
 
-    public List<TubeNPCStyleStruct> LoadStyle()
+    public List<TubeStyleStruct> LoadStyle()
     {
-        StyleData = CSVParser.LoadObjects<TubeNPCStyleStruct>("NPCTubeStyle");
+        StyleData = CSVParser.LoadObjects<TubeStyleStruct>("NPCTubeStyle");
         return StyleData;
     }
 
-    public List<TubeNPCCoolerStruct> LoadCooler()
+    public List<TubeCoolerStruct> LoadCooler()
     {
-        CoolerData = CSVParser.LoadObjects<TubeNPCCoolerStruct>("NPCTubeCooler");
+        CoolerData = CSVParser.LoadObjects<TubeCoolerStruct>("NPCTubeCooler");
         return CoolerData;
     }
 
-    public List<TubeNPCEnhancerStruct> LoadEnhancer()
+    public List<TubeEnhancerStruct> LoadEnhancer()
     {
-        EnhancerData = CSVParser.LoadObjects<TubeNPCEnhancerStruct>("NPCTubeEnhancer");
+        EnhancerData = CSVParser.LoadObjects<TubeEnhancerStruct>("NPCTubeEnhancer");
         return EnhancerData;
     }
 
 
-    public TubeNPCStyleStruct FindStyleStruct(int cid)
+    public TubeStyleStruct FindStyleStruct(int cid)
     {
         return StyleData.Find(t => t.cid == cid);
     }
