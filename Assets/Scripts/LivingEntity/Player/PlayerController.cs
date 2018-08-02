@@ -42,6 +42,8 @@ public class PlayerController : Controller2D
             RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, 0.5f, Vector2.up);
             float distance = float.MaxValue;
             float temp;
+            IInteractable before = currentInteractable;
+            currentInteractable = null;
             foreach (RaycastHit2D hit in hits)
             {
                 temp = Vector2.Distance(transform.position, hit.transform.position);
@@ -52,10 +54,15 @@ public class PlayerController : Controller2D
                 if (interactable == null)
                     continue;
 
-                Debug.Log(interactable);
+                if (currentInteractable != null && currentInteractable != interactable)
+                {
+                    currentInteractable.Reset();
+                }
                 currentInteractable = interactable;
                 distance = temp;
             }
+            if(currentInteractable == null && before != null)
+                before.Reset();
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -88,6 +95,7 @@ public class PlayerController : Controller2D
         if (collisions.above || collisions.below)
             velocity.y = 0;
         SetAnimationParameters();
+        ContactCurrentInteractable();
     }
 
     void SetAnimationParameters()
@@ -144,9 +152,9 @@ public class PlayerController : Controller2D
             playerSkillSlot.Use(PlayerSkillSlot.PlayerSkillKeySlotEnum.R);
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && currentInteractable != null)
         {
-            currentInteractable.Interact();
+            currentInteractable.Interact(player);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -163,6 +171,14 @@ public class PlayerController : Controller2D
         {
             player.CloseAllUI();
         }
+    }
+
+    void ContactCurrentInteractable()
+    {
+        if (currentInteractable == null)
+            return;
+        
+        currentInteractable.Contact();
     }
 
     void OnJumpDown()

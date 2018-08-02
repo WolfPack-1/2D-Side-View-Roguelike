@@ -10,7 +10,6 @@ public class LivingEntity : MonoBehaviour
     public delegate void LivingEntityFloatDelegate(float value);
     public event LivingEntityFloatDelegate OnGetDamaged;    
     
-    
     float currentHp;
     float currentSteam;
 

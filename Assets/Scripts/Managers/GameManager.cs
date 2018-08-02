@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] StateUIController stateController;
     [SerializeField] InventoryUiController inventoryController;
     [SerializeField] CraftingUIController craftingController;
+    [SerializeField] IconUIController iconUIController;
     Player player;
 
     public DataManager DataManager { get { return dataManager; } }
@@ -82,5 +83,15 @@ public class GameManager : MonoBehaviour
 //        }
 
         return null;
+    }
+
+    public void SetInteractableIcon(Vector2 position)
+    {
+        iconUIController.SetIcon(position);
+    }
+
+    public void ResetInteractableIcon()
+    {
+        iconUIController.DisableIcon();
     }
 }

@@ -6,9 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class TubeItem : MonoBehaviour, IInteractable
 {
-    static Sprite tubeItemSprite = null;
+    static Sprite tubeItemSprite;
+    static GameManager gameManager;
     Tube tube;
     SpriteRenderer spriteRenderer;
+    BoxCollider2D boxCollider;
+
+    bool canInteractable;
+    public bool CanInteractable { get { return canInteractable;} private set { canInteractable = value; } }
 
     void Awake()
     {
@@ -17,14 +22,23 @@ public class TubeItem : MonoBehaviour, IInteractable
             tubeItemSprite = Resources.Load<Sprite>("Textures/ItemTube");
         }
 
+        if (gameManager == null)
+        {
+            gameManager = FindObjectOfType<GameManager>();
+        }
+
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = tubeItemSprite;
+        spriteRenderer.sortingOrder = 15;
+        
+        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider.size = spriteRenderer.bounds.size;
     }
     
     public TubeItem Init(Tube tube)
     {
         this.tube = tube;
-        spriteRenderer.sprite = tubeItemSprite;
-        spriteRenderer.sortingOrder = 15;
+        CanInteractable = true;
         return this;
     }
 
@@ -43,13 +57,25 @@ public class TubeItem : MonoBehaviour, IInteractable
         return this;
     }
 
-    public void Interact()
+    public void Interact(Player player)
     {
+        if(!CanInteractable)
+            return;
         
+        player.GetTube(tube);
+        Destroy(gameObject);
+        CanInteractable = false;
     }
 
     public void Contact()
     {
-        
+        if(!CanInteractable)
+            return;
+        gameManager.SetInteractableIcon(transform.position);
+    }
+
+    public void Reset()
+    {
+        gameManager.ResetInteractableIcon();
     }
 }
