@@ -127,9 +127,12 @@ public class Projectile : MonoBehaviour
     {
         Transform fx;
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {        
-            fx = Instantiate(onHitFxs[Random.Range(0, onHitFxs.Count)], transform.position, Quaternion.identity);
-            fx.localScale = owner.transform.localScale;
+        {
+            if (onHitFxs != null)
+            {
+                fx = Instantiate(onHitFxs[Random.Range(0, onHitFxs.Count)], transform.position, Quaternion.identity);
+                fx.localScale = owner.transform.localScale;   
+            }
             Destroy(gameObject);
         }
 

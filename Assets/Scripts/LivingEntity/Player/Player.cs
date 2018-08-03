@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Linq;
 using UnityEngine;
 
@@ -41,9 +41,9 @@ public class Player : LivingEntity
     void DebugCreateSkill()
     {
         // Debug Tubes
-        Tube styleTube = new Tube(dataManager.TubeData.StyleData[15]);
-        Tube enhancerTube = new Tube(dataManager.TubeData.EnhancerData[26]);
-        Tube coolerTube = new Tube(dataManager.TubeData.CoolerData[5]);
+        Tube styleTube = new Tube(dataManager.TubeData.StyleData[0]);
+        Tube enhancerTube = new Tube(dataManager.TubeData.EnhancerData[0]);
+        Tube coolerTube = new Tube(dataManager.TubeData.CoolerData[0]);
 
         GetTube(styleTube);
         GetTube(enhancerTube);
