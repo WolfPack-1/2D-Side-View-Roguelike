@@ -30,7 +30,7 @@ public class SoVat : NPC
     void IdleBT_Enter()
     {
         if (!targetEntity)
-            targetEntity = FindObjectOfType<Player>(); //Todo : 나중에 빼야함
+            targetEntity = FindObjectOfType<Player>(); //Todo : 나중에 빼야함 데미지 핸들러에 Struct를 받게 수정해야됨
         
         IsBattle = true;
         float distance = Vector2.Distance(targetEntity.transform.position, transform.position);
