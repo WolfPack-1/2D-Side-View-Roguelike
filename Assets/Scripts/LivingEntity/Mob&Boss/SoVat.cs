@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoVat : NPC
@@ -19,7 +18,7 @@ public class SoVat : NPC
 
     IEnumerator Idle_Enter()
     {
-        Debug.Log("Idle Enter");
+        this.Log("Idle Enter");
         IsBattle = false;
         targetEntity = null;
         yield return new WaitForSeconds(Random.Range(1f, 2f));
@@ -27,10 +26,7 @@ public class SoVat : NPC
     }
 
     void IdleBT_Enter()
-    {
-        if (!targetEntity)
-            targetEntity = FindObjectOfType<Player>(); //Todo : 나중에 빼야함 데미지 핸들러에 Struct를 받게 수정해야됨
-        
+    {      
         IsBattle = true;
         float distance = Vector2.Distance(targetEntity.transform.position, transform.position);
         if (distance <= Skills["19_DeadlyAttack"].CurrentRange + 1)
@@ -54,9 +50,9 @@ public class SoVat : NPC
 
     IEnumerator DeadlyAttack_Enter()
     {
-        Debug.Log("Skill Start");
+        this.Log("Skill Start");
         yield return Controller.UseSkill(Skills["19_DeadlyAttack"], true);
-        Debug.Log("Skill End");
+        this.Log("Skill End");
         fsm.ChangeState(State.IdleBT);
     }
     
@@ -75,7 +71,10 @@ public class SoVat : NPC
         }
 
         if (!IsBattle)
+        {
             fsm.ChangeState(State.IdleBT);
+            targetEntity = info.From;
+        }
     }
 
     void OnNPCFoundPlayerHandle(NPC npc)

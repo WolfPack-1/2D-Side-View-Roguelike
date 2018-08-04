@@ -52,7 +52,7 @@ public class TubeItem : MonoBehaviour, IInteractable
         }
         else
         {
-            Debug.LogWarning("아이템으로 드롭된 " + tube.NameKor + " 튜브가 땅을 못찾았어요");
+            this.Log("아이템으로 드롭된 " + tube.NameKor + " 튜브가 땅을 못찾았어요");
         }
         return this;
     }

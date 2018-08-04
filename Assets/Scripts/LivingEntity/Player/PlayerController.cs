@@ -108,7 +108,7 @@ public class PlayerController : Controller2D
 
     void CalculateVelocity(float speed)
     {
-        velocity.x = CanWalk ? input.x * moveSpeed : 0;
+        velocity.x = CanWalk ? input.x * speed : 0;
         velocity.y += gravity * Time.deltaTime;
     }
 

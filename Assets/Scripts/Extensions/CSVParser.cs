@@ -55,7 +55,7 @@ public static class CSVParser
             }
             else if (strict)
             {
-                Debug.LogWarning(string.Format("CSVParser : {0}번째 줄을 파싱하는데 Fields가 충분하지 않습니다.", line));
+                LogExtension.Warning(string.Format("CSVParser : {0}번째 줄을 파싱하는데 Fields가 충분하지 않습니다.", line));
             }
         }
         return setAny;

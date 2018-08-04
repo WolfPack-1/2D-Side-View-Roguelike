@@ -13,7 +13,7 @@ public class GimmickTile : TileBase
 
     public void Action()
     {
-        Debug.Log("Actoin");
+        this.Log("Actoin");
     }
     
     #if UNITY_EDITOR

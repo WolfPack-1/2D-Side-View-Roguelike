@@ -111,7 +111,7 @@ public class LivingEntity : MonoBehaviour
         if (positionsDic.ContainsKey(positionName))
             return positionsDic[positionName].position;
         
-        Debug.LogWarning(transform.name + " : " + positionName + "이 Positions 내에 없습니다");
+        this.Warning(transform.name + " : " + positionName + "이 Positions 내에 없습니다");
         return Vector2.zero;
     }
 }

@@ -141,7 +141,7 @@ public class Inventory : MonoBehaviour
             return false;
         }
         
-        Debug.Log("Drop : " + tube.NameKor);
+        this.Log("Drop : " + tube.NameKor);
         new GameObject(tube.NameKor).AddComponent<TubeItem>().Init(tube).Drop(transform.position);
 
         tubes.Remove(tube);
@@ -168,7 +168,7 @@ public class Inventory : MonoBehaviour
             return false;
         }
         
-        Debug.Log("Delete : " + tube.NameKor);
+        this.Log("Delete : " + tube.NameKor);
         tubes.Remove(tube);
         if (OnDeleteTube != null)
             OnDeleteTube(tube, true);
@@ -196,7 +196,7 @@ public class Inventory : MonoBehaviour
         {
             if (styleStruct.combo == 0)
                 break;
-            Debug.Log(styleStruct.combo);
+            this.Log(styleStruct.combo);
             styleStruct = tubeData.FindStyleStruct(styleStruct.combo);
             styleStructs.Add(styleStruct);
         }

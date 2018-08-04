@@ -213,7 +213,7 @@ public class Skill
                         continue;
                     livingEntity.GetDamaged(new DamageInfo(owner, styleStructs[currentSkillIndex].damage, owner.transform.position, livingEntity.transform.position));
                     SpawnRandomSkill(SkillFxEnum.OnHit);
-                    Debug.Log(livingEntity.name + "에게 " + styleStructs[currentSkillIndex].damage + "의 데미지를 주었습니다.");
+                    owner.Log(livingEntity.name + "에게 " + styleStructs[currentSkillIndex].damage + "의 데미지를 주었습니다.");
                 }
                 area.Delete();
                 break;
@@ -232,7 +232,7 @@ public class Skill
                 GameObject bounceFx = SpawnRandomSkill(SkillFxEnum.Projectile);
                 if (!bounceFx)
                     break;
-                Debug.Log(worldPosition);
+                owner.Log(worldPosition);
                 Projectile
                     .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range, owner, bounceFx)
                     .SetHitFx(onHitFxs)
@@ -292,7 +292,7 @@ public class Skill
 
     public void AnimationFinished()
     {
-        Debug.Log(owner.transform.name + " : Skill Finished");
+        owner.Log(owner.transform.name + " : Skill Finished");
         isAnimationFinished = true;
     }
 
@@ -317,7 +317,7 @@ public class Skill
 
         if (fx == null)
         {
-            Debug.LogWarning(owner.transform.name + " : " +skillFxEnum + " Fx가 없습니다.");
+            owner.Log(owner.transform.name + " : " +skillFxEnum + " Fx가 없습니다.");
             return null;
         }
 
