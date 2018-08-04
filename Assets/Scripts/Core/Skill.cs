@@ -211,7 +211,7 @@ public class Skill
                     LivingEntity livingEntity = col.GetComponent<LivingEntity>();
                     if (livingEntity == null)
                         continue;
-                    livingEntity.GetDamaged(styleStructs[currentSkillIndex].damage);
+                    livingEntity.GetDamaged(new DamageInfo(owner, styleStructs[currentSkillIndex].damage, owner.transform.position, livingEntity.transform.position));
                     SpawnRandomSkill(SkillFxEnum.OnHit);
                     Debug.Log(livingEntity.name + "에게 " + styleStructs[currentSkillIndex].damage + "의 데미지를 주었습니다.");
                 }

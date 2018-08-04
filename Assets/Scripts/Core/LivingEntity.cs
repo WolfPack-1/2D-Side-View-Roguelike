@@ -7,7 +7,7 @@ public class LivingEntity : MonoBehaviour
     protected DataManager dataManager;
     
     Dictionary<string, Transform> positionsDic;
-    public delegate void LivingEntityFloatDelegate(float value);
+    public delegate void LivingEntityFloatDelegate(DamageInfo info);
     public event LivingEntityFloatDelegate OnGetDamaged;    
     
     float currentHp;
@@ -50,12 +50,12 @@ public class LivingEntity : MonoBehaviour
     {
     }
     
-    public virtual bool GetDamaged(float damage)
+    public virtual bool GetDamaged(DamageInfo info)
     {
-        currentHp = Mathf.Clamp(currentHp - damage, 0, float.MaxValue);
+        currentHp = Mathf.Clamp(currentHp - info.Damage, 0, float.MaxValue);
         
         if (OnGetDamaged != null)
-            OnGetDamaged(damage);
+            OnGetDamaged(info);
         return CurrentHp <= 0;
     }
 

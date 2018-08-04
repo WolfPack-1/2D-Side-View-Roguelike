@@ -6,11 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerSkillSlot))]
 public class PlayerController : Controller2D
 {
-    [SerializeField] float minJumpHeight = 4;
-    [SerializeField] float maxJumpHeight = 4;
-    [SerializeField] float timeToJumpapex = 0.4f;
-    [SerializeField] float moveSpeed = 2;
-    [SerializeField] float jumpCoolTime = 1f;
+    [SerializeField] float minJumpHeight;
+    [SerializeField] float maxJumpHeight;
+    [SerializeField] float timeToJumpapex;
+    [SerializeField] float moveSpeed;
+    [SerializeField] float jumpCoolTime;
 
     float gravity;
     float maxJumpVelocity;

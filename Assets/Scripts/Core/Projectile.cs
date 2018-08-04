@@ -142,12 +142,12 @@ public class Projectile : MonoBehaviour
 
         if (owner.GetType() == typeof(Player) && livingEntity.GetType() != typeof(Player))
         {
-            livingEntity.GetDamaged(damage);
+            livingEntity.GetDamaged(new DamageInfo(owner, damage, transform.position, livingEntity.transform.position));
             Destroy(gameObject);
         }
         else if (owner.GetType() != typeof(Player) && livingEntity.GetType() == typeof(Player))
         {
-            livingEntity.GetDamaged(damage);
+            livingEntity.GetDamaged(new DamageInfo(owner, damage, transform.position, livingEntity.transform.position));
             Destroy(gameObject);
         }
 

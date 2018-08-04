@@ -13,8 +13,7 @@ public class SoVat : NPC
         base.Init(npc);
         OnGetDamaged += OnGetDamagedHandle;
         OnNPCFoundPlayer += OnNPCFoundPlayerHandle;
-        fsm = StateMachine<State>.Initialize(this);
-        fsm.ChangeState(State.Idle);
+        fsm = StateMachine<State>.Initialize(this, State.Idle);
         StartCoroutine("PlayerFinder");
     }
 
@@ -67,11 +66,11 @@ public class SoVat : NPC
         Destroy(gameObject);
     }
 
-    void OnGetDamagedHandle(float damage)
+    void OnGetDamagedHandle(DamageInfo info)
     {
         if (IsDead)
         {
-            fsm.ChangeState(State.Die);
+            fsm.ChangeState(State.Die, StateTransition.Overwrite);
             return;
         }
 
