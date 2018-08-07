@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 2569400267332070448}
   - component: {fileID: 114779092179110562}
   m_Layer: 0
-  m_Name: 19_100
+  m_Name: 19_091
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1452,12 +1452,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 7
   dir: 0
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19106
     name: Mingkies
     nameKor: "\uBC0D\uD0A4\uC988"
-    hp: 50
-    EntityGrade: 0
+    grade: 0
     recognize: 1
     recognizeValue: 30
     skillValue: '{(19_mingkies)}'
@@ -1475,12 +1475,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 2
   dir: 0
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19102
     name: Jake_B
     nameKor: "\uB7AB\uBCF4\uC774"
-    hp: 30
-    EntityGrade: 0
+    grade: 0
     recognize: 1
     recognizeValue: 5
     skillValue: '{(19_jakebounce)}'

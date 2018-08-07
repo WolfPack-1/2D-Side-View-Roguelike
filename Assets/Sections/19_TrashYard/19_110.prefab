@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 2569400268199637222}
   - component: {fileID: 114016762894081996}
   m_Layer: 0
-  m_Name: 19-102
+  m_Name: 19_110
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1244,6 +1244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 0
   dir: 0
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19100
     name: SoVat
@@ -1266,6 +1267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 3
   dir: 0
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19103
     name: Rat Man
@@ -1288,6 +1290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 3
   dir: 0
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19103
     name: Rat Man
@@ -1310,6 +1313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 1
   dir: 0
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19101
     name: KoVat
