@@ -20,11 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4954477427267652}
   - component: {fileID: 212666366476590070}
-  - component: {fileID: 114249867406752286}
   - component: {fileID: 114828431477627400}
   - component: {fileID: 61602391918969222}
   - component: {fileID: 114409789753583690}
   - component: {fileID: 95054554408294322}
+  - component: {fileID: 114511233030582538}
   m_Layer: 18
   m_Name: SoVat
   m_TagString: Untagged
@@ -145,31 +145,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114249867406752286
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1325337559472872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdb8461f88ec8fc4dbcc0d6965906eee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseHp: 100
-  baseMoveSpeed: 1
-  baseSteam: 100
-  npcStruct:
-    cid: 0
-    name: 
-    nameKor: 
-    grade: 0
-    recognize: 0
-    recognizeValue: 0
-    skillValue: 
-    dropTable: 
-  state: 0
-  targetEntity: {fileID: 0}
 --- !u!114 &114409789753583690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,6 +163,29 @@ MonoBehaviour:
   maxDescendAngle: 80
   jumpHeight: 4
   timeToJumpapex: 0.4
+--- !u!114 &114511233030582538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1325337559472872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e1f4d3ba694644b68dd7383c83ae0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHp: 100
+  baseMoveSpeed: 1
+  baseSteam: 100
+  npcStruct:
+    cid: 0
+    name: 
+    nameKor: 
+    grade: 0
+    recognize: 0
+    recognizeValue: 0
+    skillValue: 
+    dropTable: 
 --- !u!114 &114828431477627400
 MonoBehaviour:
   m_ObjectHideFlags: 1

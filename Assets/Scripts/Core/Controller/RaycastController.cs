@@ -18,6 +18,7 @@ public class RaycastController : MonoBehaviour
     {
         public Vector2 topLeft, topRight;
         public Vector2 bottomLeft, bottomRight;
+        public Vector2 offset;
     }
 
     protected virtual void Awake()
@@ -45,6 +46,7 @@ public class RaycastController : MonoBehaviour
         raycastOrigins.bottomRight = new Vector2(bounds.max.x, bounds.min.y);
         raycastOrigins.topLeft = new Vector2(bounds.min.x, bounds.max.y);
         raycastOrigins.topRight = new Vector2(bounds.max.x, bounds.max.y);
+        raycastOrigins.offset = collider.offset;
     }
 
     protected void CalculateRaySpacing()

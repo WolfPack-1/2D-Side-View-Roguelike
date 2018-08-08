@@ -14,7 +14,7 @@ public class LivingEntity : MonoBehaviour
     float currentSteam;
 
     [SerializeField] float baseHp = 100;
-    [SerializeField] float baseMoveSpeed = 5;
+    [SerializeField] float baseMoveSpeed = 1;
     [SerializeField] float baseSteam = 100;
     
     public float CurrentHp { get { return currentHp; } }
