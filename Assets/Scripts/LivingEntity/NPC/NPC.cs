@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(NPCController))]
@@ -9,8 +10,9 @@ public class NPC : LivingEntity
     NPCController controller;
     Animator animator;
     [SerializeField] NPCStruct npcStruct;
+    List<Skill> skills;
     
-    public Dictionary<string, Skill> Skills { get; private set; }
+    public List<Skill> Skills { get { return skills; } }
     public NPCStruct NPCStruct { get { return npcStruct; } }
     public NPCController Controller { get { return controller; } }
 
@@ -64,10 +66,10 @@ public class NPC : LivingEntity
 
     public virtual void Init(NPCStruct npc)
     {
-        this.npcStruct = npc;
+        npcStruct = npc;
         transform.name = npc.nameKor;
-        Skills = FunctionParser.ParsingSkillTable(npc.skillValue, dataManager);
-        foreach (Skill skill in Skills.Values)
+        skills = FunctionParser.ParsingSkillTable(npc.skillValue, dataManager);
+        foreach (Skill skill in Skills)
         {
             skill.SetOwner(this);
         }

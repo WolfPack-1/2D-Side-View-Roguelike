@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -15,9 +16,9 @@ public static class FunctionParser
         return Parse(text).Select(data => new DropStruct(data)).ToArray();
     }
 
-    public static Dictionary<string, Skill> ParsingSkillTable(string text, DataManager dataManager)
+    public static List<Skill> ParsingSkillTable(string text, DataManager dataManager)
     {
-        return Parse(text).ToDictionary(name => name, name => new Skill(name, dataManager));
+        return Parse(text).Select(name => new Skill(name, dataManager)).ToList();
     }
 
     static IEnumerable<string> Parse(string text)

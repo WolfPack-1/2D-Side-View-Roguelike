@@ -161,7 +161,13 @@ public class Controller2D : RaycastController
                         continue;
 
                     if (collisions.fallingThrough)
-                        continue;
+                    {
+                        if (hit.distance < skinWidth)
+                        {
+                            continue;
+                        }
+                        collisions.fallingThrough = false;
+                    }
 
                     if (playerInput.y == -1)
                     {
