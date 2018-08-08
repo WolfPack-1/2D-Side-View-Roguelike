@@ -94,6 +94,11 @@ public class NPCController : Controller2D
 
     public void AnimationFinished()
     {
-        currentSkill.AnimationFinished();
+        currentSkill.AnimationFinishedEvent();
+    }
+
+    public void AnimationAttackEvent()
+    {
+        currentSkill.AttackEvent();
     }
 }
