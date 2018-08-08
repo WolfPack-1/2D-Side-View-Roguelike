@@ -7,6 +7,15 @@ public class NPCAI : NPC
 
     Skill currentSkill;
     StateMachine<State> fsm;
+
+    public float ProperRange
+    {
+        get
+        {
+            Skill properSkill = FindProperSkill();
+            return properSkill == null ? 0.5f : properSkill.CurrentRange - 0.5f;
+        }
+    }
     
     public override void Init(NPCStruct npc)
     {
@@ -29,17 +38,11 @@ public class NPCAI : NPC
     void IdleBT_Enter()
     {      
         IsBattle = true;
-        float distance = Vector2.Distance(targetEntity.transform.position, transform.position);
-        foreach (Skill skill in Skills)
-        {
-            if (distance <= skill.CurrentRange + 1 && skill.CanUseSkill)
-            {
-                currentSkill = skill;
-                fsm.ChangeState(State.Attack);
-                return;
-            }   
-        }
-        fsm.ChangeState(State.Move);
+        currentSkill = FindProperSkill();
+        if(currentSkill == null)
+            fsm.ChangeState(State.Move);
+        
+        fsm.ChangeState(currentSkill == null ? State.Move : State.Attack);
     }
 
     IEnumerator Move_Enter()
@@ -48,13 +51,14 @@ public class NPCAI : NPC
         if (targetEntity == null)
             yield return Controller.MoveToRandomPosition();
         else
-            yield return Controller.MoveToTarget(targetEntity, 0.5f); // Todo : 원거리 일때 생각
+            yield return Controller.MoveToTarget(targetEntity, this);
         IsWalk = false;
         fsm.ChangeState(IsBattle ? State.IdleBT : State.Idle);
     }
 
     IEnumerator Attack_Enter()
     {
+        Controller.SetDirToTarget(targetEntity);
         if (currentSkill == null)
         {
             this.Error("아니 스킬을 쓰려했는데 선택된 스킬이 없다니?");
@@ -91,5 +95,24 @@ public class NPCAI : NPC
     void OnNPCFoundPlayerHandle(NPC npc)
     {
         fsm.ChangeState(State.IdleBT);
+    }
+
+    Skill FindProperSkill()
+    {
+        if (targetEntity == null)
+            return null;
+        
+        float distance = Vector2.Distance(targetEntity.transform.position, transform.position);
+        float range = float.MaxValue;
+        Skill properSkill = null;
+        foreach (Skill skill in Skills)
+        {
+            if(!skill.CanUseSkill || skill.CurrentRange > range || skill.CurrentRange < distance)
+                continue;
+
+            properSkill = skill;
+            range = properSkill.CurrentRange;
+        }
+        return properSkill;
     }
 }

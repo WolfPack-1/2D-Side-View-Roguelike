@@ -20,7 +20,7 @@ AnimatorController:
     m_DefaultInt: 100
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: SkillNum
+  - m_Name: StyelNum
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -95,8 +95,8 @@ AnimatorStateTransition:
     m_ConditionEvent: DoSkill
     m_EventTreshold: 0
   - m_ConditionMode: 6
-    m_ConditionEvent: SkillNum
-    m_EventTreshold: 0
+    m_ConditionEvent: StyelNum
+    m_EventTreshold: 19107
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102307542586937650}
   m_Solo: 0

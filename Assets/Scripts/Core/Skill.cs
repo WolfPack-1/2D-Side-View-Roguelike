@@ -71,7 +71,27 @@ public class Skill
     public bool IsDoingCombo { get { return currentSkillIndex < styleStructs.Length; } }
     public bool IsAnimationFinished { get { return isAnimationFinished; } }
     public int CurrentSkillIndex { get { return currentSkillIndex; } }
-    public float CurrentRange { get { return styleStructs[currentSkillIndex].range; } }
+    public AttackTypeEnum MainAttackType { get { return styleStructs[0].attackType; } }
+
+    public float CurrentRange
+    {
+        get
+        {
+
+            switch (styleStructs[currentSkillIndex].attackType)
+            {
+                case AttackTypeEnum.MELEE:
+                    return enhancerStruct.range;
+                case AttackTypeEnum.RANGE:
+                    return styleStructs[currentSkillIndex].range;
+                case AttackTypeEnum.BOUNCE:
+                    return styleStructs[currentSkillIndex].range;
+                default:
+                    return 0;
+            }
+            
+        }
+    }
 
     List<Transform> onStartFXs;
     List<Transform> onHitFxs;

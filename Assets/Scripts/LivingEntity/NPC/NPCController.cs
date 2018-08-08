@@ -76,12 +76,12 @@ public class NPCController : Controller2D
         input = Vector2.zero;
     }
 
-    public IEnumerator MoveToTarget(LivingEntity target, float distance)
+    public IEnumerator MoveToTarget(LivingEntity target, NPCAI npc)
     {
         while (true)
         {
             float targetDistance = Vector2.Distance(transform.position, target.transform.position);
-            if (targetDistance <= distance)
+            if (targetDistance <= npc.ProperRange)
                 break;
             float directionX = Mathf.Sign((target.transform.position - transform.position).x);
 
@@ -100,5 +100,10 @@ public class NPCController : Controller2D
     public void AnimationAttackEvent()
     {
         currentSkill.AttackEvent();
+    }
+
+    public void SetDirToTarget(LivingEntity target)
+    {
+        SetDir(target.transform.position);
     }
 }

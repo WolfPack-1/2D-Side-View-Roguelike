@@ -517,6 +517,58 @@ Transform:
   m_Father: {fileID: 916790917}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &155051446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 155051447}
+  - component: {fileID: 155051448}
+  m_Layer: 0
+  m_Name: "NPC Spawn Point : \uB7AB\uB9E8"
+  m_TagString: NPC Spawn Point
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &155051447
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 155051446}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.5, y: -3.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1552497136}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &155051448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 155051446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcStructIndex: 3
+  dir: 0
+  spawnOnAwake: 1
+  CurrentNpcStruct:
+    cid: 19103
+    name: Rat Man
+    nameKor: "\uB7AB\uB9E8"
+    grade: 2
+    recognize: 1
+    recognizeValue: 5
+    skillValue: '{(19_jakerange)}'
+    dropTable: '{(1101,2),(1107,2),(2101,2),(2103,2),(3100,1),(3101,1),(3102,1),(3103,1),(3104,1),(3105,1)}'
 --- !u!1 &173803003
 GameObject:
   m_ObjectHideFlags: 0
@@ -3423,7 +3475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 0
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19100
     name: SoVat
@@ -7083,7 +7135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 5
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19104
     name: Neat Sweep
@@ -7206,7 +7258,7 @@ Prefab:
     - target: {fileID: 224379218095377874, guid: 88b5fb903dd56ed47b19ce4005fbadbd,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224379218095377874, guid: 88b5fb903dd56ed47b19ce4005fbadbd,
         type: 2}
@@ -7686,9 +7738,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 0
+  npcStructIndex: 5
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19100
     name: SoVat
@@ -10521,7 +10573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 0
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19100
     name: SoVat
@@ -12420,7 +12472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 0
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19100
     name: SoVat
@@ -12925,9 +12977,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 0
+  npcStructIndex: 5
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19100
     name: SoVat
@@ -13216,7 +13268,7 @@ Prefab:
     - target: {fileID: 224539865091109656, guid: 4e15408b2b8a3fb469bd0a05e1d0a790,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224539865091109656, guid: 4e15408b2b8a3fb469bd0a05e1d0a790,
         type: 2}
@@ -13475,7 +13527,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1373766348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.4444447, y: 4.725, z: -0.5}
+  m_LocalPosition: {x: 3.023, y: 4.725, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 313770651}
@@ -14396,7 +14448,7 @@ Prefab:
     - target: {fileID: 224718343981537546, guid: 203ded915757a3e4983753e1463d4c8d,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224718343981537546, guid: 203ded915757a3e4983753e1463d4c8d,
         type: 2}
@@ -14643,7 +14695,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 155051447}
   m_Father: {fileID: 1240167745}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16505,7 +16558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 0
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19100
     name: SoVat
@@ -19463,17 +19516,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 0
+  npcStructIndex: 5
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19100
-    name: 
+    name: SoVat
     nameKor: "\uC18C\uBC43"
     grade: 2
     recognize: 1
     recognizeValue: 3
-    skillValue: '{(19_deadlyattack)}'
+    skillValue: '{(19_DeadlyAttack)}'
     dropTable: '{(1100,2),(1106,2),(2100,2),(2101,2),(3100,1),(3101,1),(3102,1),(3103,1),(3104,1),(3105,1)}'
 --- !u!1 &1917089114
 GameObject:

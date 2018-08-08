@@ -268,4 +268,10 @@ public class Controller2D : RaycastController
         transform.localScale = scale;
     }
 
+    public void SetDir(Vector3 position)
+    {
+        Vector2 dir = position - transform.position;
+        Flip(dir);
+    }
+
 }

@@ -8,7 +8,7 @@ AnimatorController:
   m_Name: doncina
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: HPRatio
+  - m_Name: HpRatio
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 100
@@ -44,7 +44,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: SkillNum
+  - m_Name: StyleNum
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 1
@@ -623,8 +623,8 @@ AnimatorStateTransition:
     m_ConditionEvent: DoSkill
     m_EventTreshold: 0
   - m_ConditionMode: 6
-    m_ConditionEvent: SkillNum
-    m_EventTreshold: 1
+    m_ConditionEvent: StyleNum
+    m_EventTreshold: 19201
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102556240677286546}
   m_Solo: 0
@@ -884,7 +884,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: HPRatio
+    m_ConditionEvent: HpRatio
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102599005653056130}
@@ -1121,8 +1121,8 @@ AnimatorStateTransition:
     m_ConditionEvent: DoSkill
     m_EventTreshold: 0
   - m_ConditionMode: 6
-    m_ConditionEvent: SkillNum
-    m_EventTreshold: 0
+    m_ConditionEvent: StyleNum
+    m_EventTreshold: 19200
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102161133304526312}
   m_Solo: 0
