@@ -51,12 +51,12 @@ GameObject:
   - component: {fileID: 4564287403427780}
   - component: {fileID: 212892117516313524}
   - component: {fileID: 95178404911880988}
-  - component: {fileID: 114764895320467764}
   - component: {fileID: 114496671826932736}
   - component: {fileID: 61004544766489810}
   - component: {fileID: 114933282915837570}
+  - component: {fileID: 114215366428152350}
   m_Layer: 18
-  m_Name: Jake_R
+  m_Name: Rat Man
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1377379363296338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.027, y: 4.49, z: 0}
+  m_LocalPosition: {x: 9.140437, y: -8.261077, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4556327656997242}
@@ -145,6 +145,29 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114215366428152350
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1377379363296338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e1f4d3ba694644b68dd7383c83ae0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHp: 100
+  baseMoveSpeed: 1
+  baseSteam: 100
+  npcStruct:
+    cid: 0
+    name: 
+    nameKor: 
+    grade: 0
+    recognize: 0
+    recognizeValue: 0
+    skillValue: 
+    dropTable: 
 --- !u!114 &114496671826932736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,29 +181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tubes: []
   skills: []
---- !u!114 &114764895320467764
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1377379363296338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71ee40dfba59ec94c9ec9ea35e8074d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseHp: 100
-  baseMoveSpeed: 5
-  baseSteam: 100
-  npcStruct:
-    cid: 0
-    name: 
-    nameKor: 
-    grade: 0
-    recognize: 0
-    recognizeValue: 0
-    skillValue: 
-    dropTable: 
 --- !u!114 &114933282915837570
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -32,7 +32,7 @@ public class NPCAI : NPC
         float distance = Vector2.Distance(targetEntity.transform.position, transform.position);
         foreach (Skill skill in Skills)
         {
-            if (distance <= skill.CurrentRange + 1)
+            if (distance <= skill.CurrentRange + 1 && skill.CanUseSkill)
             {
                 currentSkill = skill;
                 fsm.ChangeState(State.Attack);
@@ -48,7 +48,7 @@ public class NPCAI : NPC
         if (targetEntity == null)
             yield return Controller.MoveToRandomPosition();
         else
-            yield return Controller.MoveToTarget(targetEntity, 0.5f);
+            yield return Controller.MoveToTarget(targetEntity, 0.5f); // Todo : 원거리 일때 생각
         IsWalk = false;
         fsm.ChangeState(IsBattle ? State.IdleBT : State.Idle);
     }

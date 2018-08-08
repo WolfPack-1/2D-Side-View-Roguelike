@@ -26,13 +26,13 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: SkillNum
+  - m_Name: StyleNum
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: HPRatio
+  - m_Name: HpRatio
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 100
@@ -68,8 +68,8 @@ AnimatorStateTransition:
     m_ConditionEvent: DoSkill
     m_EventTreshold: 0
   - m_ConditionMode: 6
-    m_ConditionEvent: SkillNum
-    m_EventTreshold: 0
+    m_ConditionEvent: StyleNum
+    m_EventTreshold: 5103
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102108878187419882}
   m_Solo: 0
