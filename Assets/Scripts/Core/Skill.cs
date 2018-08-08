@@ -21,6 +21,7 @@ public class Skill
 
     int currentSkillIndex;
     bool isAnimationFinished;
+    bool isAttackEvent;
     
 //    public string Name 
 //    {
@@ -191,12 +192,17 @@ public class Skill
         callback(true);
         if (animator != null)
         {
+            owner.Log(owner.transform.name + " : Set Skill Animation Parameters");
             animator.SetInteger("StyleNum", styleStructs[currentSkillIndex].cid);
             animator.SetTrigger("DoSkill");
         }
 
         // OnStart Fx 출력
         SpawnRandomSkill(SkillFxEnum.OnStart);
+        
+        owner.Log(owner.transform.name + " : Waiting for Attack Event");
+        yield return new WaitUntil(() => isAttackEvent);
+        isAttackEvent = false;
         
         Vector2 areaPosition = owner.GetPosition(styleStructs[currentSkillIndex].position);
         // AttackType을 SubClass로 나누지 않고 그냥 switch 돌림
@@ -286,14 +292,21 @@ public class Skill
         skillUpdator = null;
         comboUpdator = null;
         isAnimationFinished = false;
+        isAttackEvent = false;
         lastSkillTime = Time.time;
         callback(false);
     }
 
-    public void AnimationFinished()
+    public void AnimationFinishedEvent()
     {
         owner.Log(owner.transform.name + " : Skill Finished");
         isAnimationFinished = true;
+    }
+
+    public void AttackEvent()
+    {
+        owner.Log(owner.transform.name + " : Skill Attack Event");
+        isAttackEvent = true;
     }
 
     GameObject SpawnRandomSkill(SkillFxEnum skillFxEnum)
