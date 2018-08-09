@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114301434662397976}
   - component: {fileID: 61666229683474590}
   - component: {fileID: 114086815272823064}
+  - component: {fileID: 114894804969048644}
   m_Layer: 18
   m_Name: Rat Boy
   m_TagString: Untagged
@@ -176,6 +177,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tubes: []
   skills: []
+--- !u!114 &114894804969048644
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1408664518056678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e1f4d3ba694644b68dd7383c83ae0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHp: 100
+  baseMoveSpeed: 1
+  baseSteam: 100
+  npcStruct:
+    cid: 0
+    name: 
+    nameKor: 
+    grade: 0
+    recognize: 0
+    recognizeValue: 0
+    skillValue: 
+    dropTable: 
 --- !u!114 &114959652314938670
 MonoBehaviour:
   m_ObjectHideFlags: 1

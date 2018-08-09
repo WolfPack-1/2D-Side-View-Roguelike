@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 114343804073023348}
   - component: {fileID: 61350687339353038}
   - component: {fileID: 114866723413509116}
+  - component: {fileID: 114299413163736858}
   m_Layer: 18
   m_Name: Mingkies
   m_TagString: Untagged
@@ -158,6 +159,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHp: 100
   baseMoveSpeed: 5
+  baseSteam: 100
+  npcStruct:
+    cid: 0
+    name: 
+    nameKor: 
+    grade: 0
+    recognize: 0
+    recognizeValue: 0
+    skillValue: 
+    dropTable: 
+--- !u!114 &114299413163736858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1970504194128710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e1f4d3ba694644b68dd7383c83ae0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHp: 50
+  baseMoveSpeed: 0
   baseSteam: 100
   npcStruct:
     cid: 0

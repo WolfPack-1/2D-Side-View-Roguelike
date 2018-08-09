@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 70869404745527618}
   - component: {fileID: 61534873173259486}
   - component: {fileID: 114210887266400360}
+  - component: {fileID: 114405444209320884}
   m_Layer: 18
   m_Name: doncina
   m_TagString: Untagged
@@ -142,6 +143,29 @@ MonoBehaviour:
   maxDescendAngle: 80
   jumpHeight: 4
   timeToJumpapex: 0.4
+--- !u!114 &114405444209320884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1377379363296338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e1f4d3ba694644b68dd7383c83ae0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHp: 100
+  baseMoveSpeed: 1
+  baseSteam: 100
+  npcStruct:
+    cid: 0
+    name: 
+    nameKor: 
+    grade: 0
+    recognize: 0
+    recognizeValue: 0
+    skillValue: 
+    dropTable: 
 --- !u!114 &114810854391668976
 MonoBehaviour:
   m_ObjectHideFlags: 1

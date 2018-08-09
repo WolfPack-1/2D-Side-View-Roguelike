@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114931020850759792}
   - component: {fileID: 61489357274412152}
   - component: {fileID: 114273924193868304}
+  - component: {fileID: 114409070070541250}
   m_Layer: 18
   m_Name: KoVat
   m_TagString: Untagged
@@ -176,6 +177,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHp: 100
   baseMoveSpeed: 5
+  baseSteam: 100
+  npcStruct:
+    cid: 0
+    name: 
+    nameKor: 
+    grade: 0
+    recognize: 0
+    recognizeValue: 0
+    skillValue: 
+    dropTable: 
+--- !u!114 &114409070070541250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1301310305187072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e1f4d3ba694644b68dd7383c83ae0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHp: 100
+  baseMoveSpeed: 1
   baseSteam: 100
   npcStruct:
     cid: 0
