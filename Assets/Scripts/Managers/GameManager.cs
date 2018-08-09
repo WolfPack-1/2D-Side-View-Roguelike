@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public InventoryUiController InventoryController { get { return inventoryController; } }
     public CraftingUIController CraftingController { get { return craftingController; } }
     public Player Player { get { return player; } set { player = value; } }
+    
+    float deltaTime = 0.0f;
 
     void Awake()
     {
@@ -28,6 +30,27 @@ public class GameManager : MonoBehaviour
         stateController.Init(player);
         inventoryController.Init(player);
         craftingController.Init(player);
+    }
+    
+    void Update()
+    {
+        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
+    }
+    
+    void OnGUI()
+    {
+        int w = Screen.width, h = Screen.height;
+ 
+        GUIStyle style = new GUIStyle();
+ 
+        Rect rect = new Rect(0, 0, w, h * 2 / 100);
+        style.alignment = TextAnchor.UpperLeft;
+        style.fontSize = h * 2 / 100;
+        style.normal.textColor = Color.yellow;
+        float msec = deltaTime * 1000.0f;
+        float fps = 1.0f / deltaTime;
+        string text = string.Format("Build 0.02 {0:0.0} ms ({1:0.} fps)", msec, fps);
+        GUI.Label(rect, text, style);
     }
 
     public Tube FindTubeByCid(int cid)
