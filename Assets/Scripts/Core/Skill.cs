@@ -317,13 +317,13 @@ public class Skill
         callback(false);
     }
 
-    public void AnimationFinishedEvent()
+    public void AnimationFinished()
     {
         owner.Log(owner.transform.name + " : Skill Finished");
         isAnimationFinished = true;
     }
 
-    public void AttackEvent()
+    public void AnimationAttackStart()
     {
         owner.Log(owner.transform.name + " : Skill Attack Event");
         isAttackEvent = true;

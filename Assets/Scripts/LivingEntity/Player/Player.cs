@@ -35,7 +35,7 @@ public class Player : LivingEntity
     {
         // Debug
         base.Start();
-        DebugCreateSkill();
+        //DebugCreateSkill();
     }
 
     void DebugCreateSkill()

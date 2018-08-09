@@ -94,12 +94,12 @@ public class NPCController : Controller2D
 
     public void AnimationFinished()
     {
-        currentSkill.AnimationFinishedEvent();
+        currentSkill.AnimationFinished();
     }
 
     public void AnimationAttackEvent()
     {
-        currentSkill.AttackEvent();
+        currentSkill.AnimationAttackStart();
     }
 
     public void SetDirToTarget(LivingEntity target)

@@ -8,6 +8,7 @@ public class TubeItem : MonoBehaviour, IInteractable
 {
     static Sprite tubeItemSprite;
     static GameManager gameManager;
+    [SerializeField] int cid = 0; // Todo : Editor로 빼기
     Tube tube;
     SpriteRenderer spriteRenderer;
     BoxCollider2D boxCollider;
@@ -34,9 +35,21 @@ public class TubeItem : MonoBehaviour, IInteractable
         boxCollider = GetComponent<BoxCollider2D>();
         boxCollider.size = spriteRenderer.bounds.size;
     }
+
+    void Start()
+    {
+        if (cid != 0)
+        {
+            Tube tube = gameManager.FindTubeByCid(cid);
+            if (tube != null)
+                Init(tube).Drop(transform.position);
+        }
+    }
     
     public TubeItem Init(Tube tube)
     {
+        this.Log(tube.NameKor + " : Init Tube");
+        gameManager.name = tube.NameKor;
         this.tube = tube;
         CanInteractable = true;
         return this;

@@ -36,7 +36,6 @@ GameObject:
   - component: {fileID: 4589192579580188}
   - component: {fileID: 212426923597871698}
   - component: {fileID: 95478702674805960}
-  - component: {fileID: 114282792709071730}
   - component: {fileID: 114931020850759792}
   - component: {fileID: 61489357274412152}
   - component: {fileID: 114273924193868304}
@@ -97,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1301310305187072}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.42, y: 4.48, z: 0}
+  m_LocalPosition: {x: 78.19538, y: -6.7827826, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4058829702463044}
@@ -127,7 +126,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1}
+  m_Size: {x: 0.4, y: 0.83}
   m_EdgeRadius: 0
 --- !u!95 &95478702674805960
 Animator:
@@ -164,29 +163,6 @@ MonoBehaviour:
   maxDescendAngle: 80
   jumpHeight: 4
   timeToJumpapex: 0.4
---- !u!114 &114282792709071730
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1301310305187072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71ee40dfba59ec94c9ec9ea35e8074d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseHp: 100
-  baseMoveSpeed: 5
-  baseSteam: 100
-  npcStruct:
-    cid: 0
-    name: 
-    nameKor: 
-    grade: 0
-    recognize: 0
-    recognizeValue: 0
-    skillValue: 
-    dropTable: 
 --- !u!114 &114409070070541250
 MonoBehaviour:
   m_ObjectHideFlags: 1

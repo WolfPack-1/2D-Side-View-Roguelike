@@ -94,6 +94,11 @@ public class PlayerSkillSlot : MonoBehaviour
 
     public void AnimationFinished()
     {
-        currentSkill.AnimationFinishedEvent();
+        currentSkill.AnimationFinished();
+    }
+    
+    public void AnimationAttackStart()
+    {
+        currentSkill.AnimationAttackStart();;
     }
 }

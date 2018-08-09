@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         index = dataManager.TubeData.EnhancerData.FindIndex(t => t.cid == cid);
         if (index != -1)
         {
-            return new Tube(dataManager.TubeData.StyleData[index]);
+            return new Tube(dataManager.TubeData.EnhancerData[index]);
         }
         
         index = dataManager.TubeData.CoolerData.FindIndex(t => t.cid == cid);
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         index = dataManager.NPCTubeData.EnhancerData.FindIndex(t => t.cid == cid);
         if (index != -1)
         {
-            return new Tube(dataManager.NPCTubeData.StyleData[index]);
+            return new Tube(dataManager.NPCTubeData.EnhancerData[index]);
         }
         
         index = dataManager.NPCTubeData.CoolerData.FindIndex(t => t.cid == cid);
