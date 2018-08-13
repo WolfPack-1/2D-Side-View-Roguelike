@@ -38,11 +38,6 @@ public class Controller2D : RaycastController
         collisions.faceDir = 1;
     }
 
-    protected override void Update()
-    {
-
-    }
-
     public void Move(Vector2 moveAmount, bool standingOnPlatform = false)
     {
         Move(moveAmount, Vector2.zero, standingOnPlatform);

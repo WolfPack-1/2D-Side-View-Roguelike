@@ -24,6 +24,7 @@ public class PlayerController : Controller2D
     
     bool isSit;
     bool isDamaged;
+    int jumpCount;
     float lastJumpTime;
     
     public bool IsWalk { get { return input.x != 0 && velocity.x != 0; } }
@@ -32,8 +33,9 @@ public class PlayerController : Controller2D
     public bool IsDoingCombo { get { return playerSkillSlot.IsDoingCombo; } }
     public bool IsGrounded { get { return collisions.below; } }
     public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit && !player.IsDead && !isDamaged; } }
-    public bool CanJump { get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime && !player.IsDead && !isDamaged; } }
-
+    public bool CanJump { get { return (IsGrounded || CanDoubleJump) && Time.time - lastJumpTime >= jumpCoolTime && !player.IsDead && !isDamaged; } }
+    public bool CanDoubleJump { get { return jumpCount == 1; } }
+    
     IInteractable currentInteractable;
 
     IEnumerator InteractableFinder()
@@ -89,6 +91,10 @@ public class PlayerController : Controller2D
     protected override void Update()
     {
         base.Update();
+
+        if (IsGrounded)
+            jumpCount = 0;
+        
         float speed = playerSkillSlot.IsUsingSkill ? moveSpeed * 0.3f : moveSpeed;
         KeyInput();
         CalculateVelocity(speed);
@@ -184,6 +190,7 @@ public class PlayerController : Controller2D
 
     void OnJumpDown()
     {
+        jumpCount++;
         velocity.y = maxJumpVelocity;
         animator.SetTrigger("DoJump");
     }
