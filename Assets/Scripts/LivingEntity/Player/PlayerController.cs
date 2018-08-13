@@ -23,6 +23,7 @@ public class PlayerController : Controller2D
     Animator animator;
     
     bool isSit;
+    bool isDamaged;
     float lastJumpTime;
     
     public bool IsWalk { get { return input.x != 0 && velocity.x != 0; } }
@@ -30,8 +31,8 @@ public class PlayerController : Controller2D
     public bool IsUsingSkill { get { return playerSkillSlot.IsUsingSkill; } }
     public bool IsDoingCombo { get { return playerSkillSlot.IsDoingCombo; } }
     public bool IsGrounded { get { return collisions.below; } }
-    public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit && !player.IsDead; } }
-    public bool CanJump { get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime && !player.IsDead; } }
+    public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit && !player.IsDead && !isDamaged; } }
+    public bool CanJump { get { return IsGrounded && Time.time - lastJumpTime >= jumpCoolTime && !player.IsDead && !isDamaged; } }
 
     IInteractable currentInteractable;
 
@@ -196,5 +197,19 @@ public class PlayerController : Controller2D
     void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, 0.5f);
+    }
+
+    public void GetDamaged(DamageInfo info)
+    {
+        StopCoroutine("DamagedUpdator");
+        StartCoroutine("DamagedUpdator");
+    }
+
+    IEnumerator DamagedUpdator()
+    {
+        animator.SetTrigger("IsDamaged");
+        isDamaged = true;
+        yield return new WaitForSeconds(0.1f);
+        isDamaged = false;
     }
 }

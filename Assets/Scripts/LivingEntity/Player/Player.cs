@@ -9,6 +9,7 @@ public class Player : LivingEntity
     GameManager gameManager;
     PlayerInventory playerInventory;
     PlayerSkillSlot skillSlot;
+    PlayerController playerController;
     AudioSource audioSource;
 
     public PlayerInventory Inventory { get { return playerInventory; }}
@@ -29,6 +30,7 @@ public class Player : LivingEntity
         playerInventory = GetComponent<PlayerInventory>();
         skillSlot = GetComponent<PlayerSkillSlot>();
         audioSource = GetComponent<AudioSource>();
+        playerController = GetComponent<PlayerController>();
     }
 
     public override void Start()
@@ -107,13 +109,22 @@ public class Player : LivingEntity
 
     #endregion
 
-    #region UnityEvent
+    #region Event
     
+    /// <summary>
+    /// Unity Animation Event
+    /// </summary>
     public void PlaySound(string name)
     {
         audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/" + name));
     }
-    
+
+    public override bool GetDamaged(DamageInfo info)
+    {
+        playerController.GetDamaged(info);
+        return base.GetDamaged(info);
+    }
+
     #endregion
     
     #region UI
