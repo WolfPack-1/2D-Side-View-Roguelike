@@ -295,91 +295,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a303c1e855bbcc4d93d4dd0965fbb24, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &521383406 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1701643566638892, guid: 02f057c5ebf0f3f44acfa4d561fce832,
-    type: 2}
-  m_PrefabInternal: {fileID: 1963536211}
---- !u!82 &521383407
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 521383406}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!224 &570341996 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224539865091109656, guid: 4e15408b2b8a3fb469bd0a05e1d0a790,
@@ -782,6 +697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 0
   dir: 0
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19100
     name: SoVat
@@ -4861,28 +4777,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 61631236093896680, guid: 02f057c5ebf0f3f44acfa4d561fce832,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: -0.011763096
-      objectReference: {fileID: 0}
-    - target: {fileID: 61631236093896680, guid: 02f057c5ebf0f3f44acfa4d561fce832,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 0.6035261
-      objectReference: {fileID: 0}
-    - target: {fileID: 61631236093896680, guid: 02f057c5ebf0f3f44acfa4d561fce832,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 0.13776214
-      objectReference: {fileID: 0}
-    - target: {fileID: 61631236093896680, guid: 02f057c5ebf0f3f44acfa4d561fce832,
-        type: 2}
-      propertyPath: m_Offset.x
-      value: 0.03
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114923612474835630, guid: 02f057c5ebf0f3f44acfa4d561fce832, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02f057c5ebf0f3f44acfa4d561fce832, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1963536221 stripped
