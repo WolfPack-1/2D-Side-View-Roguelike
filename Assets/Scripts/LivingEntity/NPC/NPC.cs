@@ -92,7 +92,7 @@ public class NPC : LivingEntity
             if (IsBattle)
                 yield return new WaitForSeconds(0.1f);
             //탐색 범위 안으로 들어오면 OnNPCFoundPlayer 호출
-            foreach (Collider2D col in GetEntity(transform.position, (int) Recognize, 5, "Player"))
+            foreach (Collider2D col in GetEntity(transform.position, (int) Recognize, 2, "Player"))
             {
                 this.Log("Find");
                 targetEntity = col.GetComponent<LivingEntity>();

@@ -3302,7 +3302,6 @@ GameObject:
   m_Component:
   - component: {fileID: 200523919}
   - component: {fileID: 200523922}
-  - component: {fileID: 200523921}
   - component: {fileID: 200523920}
   m_Layer: 0
   m_Name: SlatePlatform-1
@@ -3345,25 +3344,6 @@ MonoBehaviour:
   cyclic: 1
   waitTime: 0
   easeAmount: 1
---- !u!251 &200523921
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 251941847716283620, guid: 067aab48816022a41bd4288d98fe4cee,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 200523918}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!61 &200523922
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3435,7 +3415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 3
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19103
     name: Rat Man
@@ -6941,7 +6921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcStructIndex: 3
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19103
     name: Rat Man
@@ -7390,9 +7370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 0
+  npcStructIndex: 3
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19100
     name: SoVat
@@ -10180,9 +10160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 1
+  npcStructIndex: 3
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19101
     name: KoVat
@@ -11854,9 +11834,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 5
+  npcStructIndex: 3
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19104
     name: Neat Sweep
@@ -11876,7 +11856,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1151130788}
   - component: {fileID: 1151130791}
-  - component: {fileID: 1151130790}
   - component: {fileID: 1151130789}
   m_Layer: 0
   m_Name: SlatePlatform-2
@@ -11919,25 +11898,6 @@ MonoBehaviour:
   cyclic: 1
   waitTime: 0
   easeAmount: 1
---- !u!251 &1151130790
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 251337946706862668, guid: 067aab48816022a41bd4288d98fe4cee,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1151130787}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!61 &1151130791
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12361,9 +12321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 1
+  npcStructIndex: 3
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19101
     name: KoVat
@@ -12451,7 +12411,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1275098139}
   - component: {fileID: 1275098142}
-  - component: {fileID: 1275098141}
   - component: {fileID: 1275098140}
   m_Layer: 0
   m_Name: DrumPlaform
@@ -12494,25 +12453,6 @@ MonoBehaviour:
   cyclic: 1
   waitTime: 0
   easeAmount: 1
---- !u!251 &1275098141
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 251140771169551456, guid: 067aab48816022a41bd4288d98fe4cee,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1275098138}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!61 &1275098142
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12991,7 +12931,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1373766348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.4444447, y: 4.725, z: -0.5}
+  m_LocalPosition: {x: 3.023, y: 4.725, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 313770651}
@@ -13743,7 +13683,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1412426034}
   - component: {fileID: 1412426037}
-  - component: {fileID: 1412426036}
   - component: {fileID: 1412426035}
   m_Layer: 0
   m_Name: BigSlate-1
@@ -13786,25 +13725,6 @@ MonoBehaviour:
   cyclic: 1
   waitTime: 0
   easeAmount: 1
---- !u!251 &1412426036
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 251942118953145136, guid: 067aab48816022a41bd4288d98fe4cee,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1412426033}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!61 &1412426037
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14403,7 +14323,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1995794567}
   m_Father: {fileID: 1240167745}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15715,7 +15636,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1607904765}
   - component: {fileID: 1607904768}
-  - component: {fileID: 1607904767}
   - component: {fileID: 1607904766}
   m_Layer: 0
   m_Name: RedTowerPlatform
@@ -15758,25 +15678,6 @@ MonoBehaviour:
   cyclic: 1
   waitTime: 0
   easeAmount: 1
---- !u!251 &1607904767
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 251852035683456494, guid: 067aab48816022a41bd4288d98fe4cee,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1607904764}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!61 &1607904768
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15844,7 +15745,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1619492866}
   - component: {fileID: 1619492869}
-  - component: {fileID: 1619492868}
   - component: {fileID: 1619492867}
   m_Layer: 0
   m_Name: RedTowerPlatform
@@ -15887,25 +15787,6 @@ MonoBehaviour:
   cyclic: 1
   waitTime: 0
   easeAmount: 1
---- !u!251 &1619492868
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 251039609558526028, guid: 067aab48816022a41bd4288d98fe4cee,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1619492865}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!61 &1619492869
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16375,9 +16256,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 0
+  npcStructIndex: 3
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19100
     name: SoVat
@@ -19335,9 +19216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 5
+  npcStructIndex: 3
   dir: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   CurrentNpcStruct:
     cid: 19104
     name: Neat Sweep
@@ -19459,6 +19340,11 @@ Prefab:
     - target: {fileID: 4318024176779226, guid: 02f057c5ebf0f3f44acfa4d561fce832, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967789105056468, guid: 02f057c5ebf0f3f44acfa4d561fce832,
+        type: 2}
+      propertyPath: groundMask.m_Bits
+      value: 768
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02f057c5ebf0f3f44acfa4d561fce832, type: 2}
@@ -20210,6 +20096,58 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1995794566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1995794567}
+  - component: {fileID: 1995794568}
+  m_Layer: 0
+  m_Name: "NPC Spawn Point : \uB7AB\uBCF4\uC774"
+  m_TagString: NPC Spawn Point
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1995794567
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1995794566}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.5, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1552497136}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1995794568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1995794566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcStructIndex: 2
+  dir: 0
+  spawnOnAwake: 1
+  CurrentNpcStruct:
+    cid: 19102
+    name: Rat Boy
+    nameKor: "\uB7AB\uBCF4\uC774"
+    grade: 2
+    recognize: 1
+    recognizeValue: 5
+    skillValue: '{(19_jakebounce)}'
+    dropTable: '{(1102,2),(1108,2),(2106,2),(2107,2),(3100,1),(3101,1),(3102,1),(3103,1),(3104,1),(3105,1)}'
 --- !u!1 &2004753275
 GameObject:
   m_ObjectHideFlags: 0

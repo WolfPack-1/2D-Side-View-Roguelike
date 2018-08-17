@@ -5,14 +5,17 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     static PhysicsMaterial2D projectileMaterial;
-    
+
+    int bounce, maxBound;
     Rigidbody2D rigid;
+    GameObject helper;
     CircleCollider2D circleCollider;
     SpriteRenderer spriteRenderer;
     
     [SerializeField] float speed;
     [SerializeField] float damage;
     [SerializeField] LivingEntity owner;
+    [SerializeField] ProjectileTypeEnum projectileType;
     
     public float Speed { get { return speed; } }
     public float Damage { get { return damage; } }
@@ -30,13 +33,12 @@ public class Projectile : MonoBehaviour
             rigid = gameObject.AddComponent<Rigidbody2D>();
             rigid.sharedMaterial = projectileMaterial;
         }
+        rigid.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
         {
             spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-//            // 임시로 Knob 사용
-//            spriteRenderer.sprite = Resources.GetBuiltinResource<Sprite>("UI/Skin/Knob.psd");
             spriteRenderer.sortingOrder = 500;
         }
         
@@ -54,6 +56,8 @@ public class Projectile : MonoBehaviour
         this.damage = damage;
         this.speed = speed;
         this.owner = owner;
+        maxBound = (int)speed;
+        bounce = 0;
     }
 
     public void Fire(Vector3 target)
@@ -61,23 +65,24 @@ public class Projectile : MonoBehaviour
         rigid.gravityScale = 0;
         Vector2 diriection = (target - transform.position).normalized;
         rigid.AddForce(diriection * speed, ForceMode2D.Impulse);
+        projectileType = ProjectileTypeEnum.PROJECTILE;
     }
 
     public void Launch(Vector3 target)
     {
-        GameObject bounceHelper = new GameObject("Bounce Helper");
-        bounceHelper.AddComponent<CircleCollider2D>().radius = circleCollider.radius;
-        bounceHelper.layer = LayerMask.NameToLayer("Bounce");
-        bounceHelper.transform.SetParent(transform, false);
+        helper = new GameObject("Bounce Helper");
+        helper.AddComponent<CircleCollider2D>().radius = circleCollider.radius;
+        helper.layer = LayerMask.NameToLayer("FirstBounce");
+        helper.transform.SetParent(transform, false);
         
         rigid.gravityScale = 1;
         Vector3 velocity = CalculateThrowVelocity(transform.position, target);
         rigid.AddForce(velocity, ForceMode2D.Impulse);
+        projectileType = ProjectileTypeEnum.BOUNCE;
     }
 
     public static Projectile Create(Vector2 position, float damage, float speed, LivingEntity owner, GameObject fx)
     {
-        // Todo : Sprite를 인자로 받아서 처리, 필요하다면 오브젝트풀 사용
         Projectile projectile = fx.AddComponent<Projectile>();
         projectile.Init(damage, speed, owner);
         projectile.transform.position = position;
@@ -126,18 +131,25 @@ public class Projectile : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Transform fx;
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Platform"))
         {
-            if (onHitFxs != null && onHitFxs.Count > 0)
+            bounce++;
+            if(helper != null && bounce != 1)
+                helper.layer = LayerMask.NameToLayer("Bounce");
+            if (projectileType == ProjectileTypeEnum.PROJECTILE ||
+                (projectileType == ProjectileTypeEnum.BOUNCE && bounce > maxBound))
             {
-                fx = Instantiate(onHitFxs[Random.Range(0, onHitFxs.Count)], transform.position, Quaternion.identity);
-                fx.localScale = owner.transform.localScale;   
+                if (onHitFxs != null && onHitFxs.Count > 0)
+                {
+                    fx = Instantiate(onHitFxs[Random.Range(0, onHitFxs.Count)], transform.position, Quaternion.identity);
+                    fx.localScale = owner.transform.localScale;   
+                }   
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
 
         LivingEntity livingEntity = other.GetComponent<LivingEntity>();
-        if(!livingEntity)
+        if(!livingEntity || livingEntity.GetType() == owner.GetType())
             return;
 
         if (owner.GetType() == typeof(Player) && livingEntity.GetType() != typeof(Player))

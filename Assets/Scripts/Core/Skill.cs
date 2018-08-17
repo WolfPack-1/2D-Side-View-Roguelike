@@ -12,6 +12,7 @@ public class Skill
     Coroutine comboUpdator;
     
     [SerializeField] LivingEntity owner;
+    [SerializeField] LivingEntity target; // Bounce 전용
     [SerializeField] Animator animator;
     [SerializeField] TubeStyleStruct[] styleStructs;
     [SerializeField] TubeEnhancerStruct enhancerStruct;
@@ -172,11 +173,13 @@ public class Skill
         animator = owner.GetComponent<Animator>();
     }
 
-    public LivingEntity GetOwner()
+    public void SetTarget(LivingEntity target)
     {
-        return owner;
+        if (!target)
+            return;
+        this.target = target;
     }
-    
+        
     public void Use(Action<bool> callback, bool firstSkill)
     {
         if (!IsCoolTimeAvailable || !owner || owner.IsDead)
@@ -262,7 +265,7 @@ public class Skill
                 Projectile
                     .Create(areaPosition, styleStructs[currentSkillIndex].damage, enhancerStruct.range, owner, bounceFx)
                     .SetHitFx(onHitFxs)
-                    .Launch(areaPosition + Mathf.Sign(owner.transform.localScale.x) * Vector2.left);
+                    .Launch(target.transform.position);
                 break;
         }
         if(comboUpdator != null)

@@ -53,9 +53,10 @@ public class NPCController : Controller2D
         return input;
     }
 
-    public IEnumerator UseSkill(Skill skill, bool canStop)
+    public IEnumerator UseSkill(Skill skill, LivingEntity targetEntity, bool canStop)
     {
         currentSkill = skill;
+        skill.SetTarget(targetEntity);
         skill.Use(b => isUsingSkill = b, skill.IsFirstSkill);
         yield return new WaitUntil(() => !isUsingSkill);
         currentSkill = null;

@@ -39,7 +39,7 @@ public class PlatformController : RaycastController
 	{
 		base.Start();
 		gameObject.tag = "Through";
-		gameObject.layer = LayerMask.NameToLayer("Ground");
+		gameObject.layer = LayerMask.NameToLayer("Platform");
 		globalWaypoints = new Vector3[localWaypoints.Length];
 		for (int i = 0; i < localWaypoints.Length; i++)
 		{

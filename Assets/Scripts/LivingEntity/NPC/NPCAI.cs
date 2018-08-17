@@ -65,7 +65,7 @@ public class NPCAI : NPC
             fsm.ChangeState(State.IdleBT);
         }
         this.Log("Skill Start");
-        yield return Controller.UseSkill(currentSkill, true);
+        yield return Controller.UseSkill(currentSkill, targetEntity, true);
         this.Log("Skill End");
         currentSkill = null;
         fsm.ChangeState(State.IdleBT);
