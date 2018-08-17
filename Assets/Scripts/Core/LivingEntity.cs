@@ -16,6 +16,8 @@ public class LivingEntity : MonoBehaviour
     [SerializeField] float baseHp = 100;
     [SerializeField] float baseMoveSpeed = 1;
     [SerializeField] float baseSteam = 100;
+    [SerializeField] float baseHPGeneration = 0;
+    [SerializeField] float baseSteamGeneration = 7;
     
     public float CurrentHp { get { return currentHp; } }
     public float MaxHp { get { return baseHp; } }
@@ -48,6 +50,13 @@ public class LivingEntity : MonoBehaviour
 
     public virtual void Start()
     {
+    }
+
+    public virtual void Update()
+    {
+        //Todo : 나중에 hp, steam 생성하는거 함수 따로 빼야함
+        currentSteam = Mathf.Clamp(currentSteam + baseSteamGeneration * Time.deltaTime, 0, MaxSteam);
+        Debug.Log(currentSteam);
     }
     
     public virtual bool GetDamaged(DamageInfo info)
@@ -102,6 +111,14 @@ public class LivingEntity : MonoBehaviour
         }
 
         return area.GetEntity(Area.AreaModeEnum.Box, layerName);
+    }
+
+    public virtual bool UseSteam(float amount)
+    {
+        if (currentSteam < amount)
+            return false;
+        currentSteam = Mathf.Clamp(currentSteam - amount, 0, float.MaxValue);
+        return true;
     }
 
     public Vector2 GetPosition(string positionName)

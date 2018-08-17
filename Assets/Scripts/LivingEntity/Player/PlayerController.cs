@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VR;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(PlayerSkillSlot))]
@@ -24,6 +25,7 @@ public class PlayerController : Controller2D
     
     bool isSit;
     bool isDamaged;
+    bool isDashing;
     int jumpCount;
     float lastJumpTime;
     
@@ -34,7 +36,8 @@ public class PlayerController : Controller2D
     public bool IsGrounded { get { return collisions.below; } }
     public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit && !player.IsDead && !isDamaged; } }
     public bool CanJump { get { return (IsGrounded || CanDoubleJump) && Time.time - lastJumpTime >= jumpCoolTime && !player.IsDead && !isDamaged; } }
-    public bool CanDoubleJump { get { return jumpCount == 1; } }
+    public bool CanDash { get { return player.CurrentSteam >= 20f; } }
+    public bool CanDoubleJump { get { return jumpCount == 1 && player.CurrentSteam >= 20f; } }
     
     IInteractable currentInteractable;
 
@@ -96,6 +99,9 @@ public class PlayerController : Controller2D
             jumpCount = 0;
         
         float speed = playerSkillSlot.IsUsingSkill ? moveSpeed * 0.3f : moveSpeed;
+        speed = isDashing ? moveSpeed * 3f : moveSpeed;
+        if (isDashing)
+            velocity.y = 0;
         KeyInput();
         CalculateVelocity(speed);
         Move(velocity * Time.deltaTime, input);
@@ -121,7 +127,8 @@ public class PlayerController : Controller2D
 
     void KeyInput()
     {
-        input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if(!isDashing)
+            input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         isSit = false;
 
         if (Input.GetKey(KeyCode.DownArrow))
@@ -137,6 +144,11 @@ public class PlayerController : Controller2D
         if (Input.GetKeyUp(KeyCode.Space))
         {
             OnJumpUp();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && CanDash)
+        {
+            Dash();
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -192,7 +204,14 @@ public class PlayerController : Controller2D
     {
         jumpCount++;
         velocity.y = maxJumpVelocity;
-        animator.SetTrigger("DoJump");
+        if (jumpCount == 1)
+        {
+            animator.SetTrigger("DoJump");
+        }
+        else if (jumpCount == 2 && player.UseSteam(20))
+        {
+            animator.SetTrigger("DoDoubleJump");
+        }
     }
 
     void OnJumpUp()
@@ -218,5 +237,33 @@ public class PlayerController : Controller2D
         isDamaged = true;
         yield return new WaitForSeconds(0.1f);
         isDamaged = false;
+    }
+
+    void Dash()
+    {
+        if (player.UseSteam(20))
+        {
+            animator.SetTrigger("DoDash");
+            StopCoroutine("DashUpdator");
+            StartCoroutine("DashUpdator");   
+        }
+    }
+
+    IEnumerator DashUpdator()
+    {
+        isDashing = true;
+        while (true)
+        {
+            if (isDashing == false)
+                break;
+            input = new Vector2(Mathf.Sign(transform.localScale.x) * -1f, 0);
+            Debug.Log(input);
+            yield return null;
+        }
+    }
+
+    public void OnDashEnd()
+    {
+        isDashing = false;
     }
 }
