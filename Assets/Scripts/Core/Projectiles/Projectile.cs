@@ -33,6 +33,7 @@ public class Projectile : MonoBehaviour
             rigid = gameObject.AddComponent<Rigidbody2D>();
             rigid.sharedMaterial = projectileMaterial;
         }
+
         rigid.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -41,7 +42,7 @@ public class Projectile : MonoBehaviour
             spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
             spriteRenderer.sortingOrder = 500;
         }
-        
+
         circleCollider = GetComponent<CircleCollider2D>();
         if (circleCollider == null)
         {
@@ -76,6 +77,7 @@ public class Projectile : MonoBehaviour
         helper.transform.SetParent(transform, false);
         
         rigid.gravityScale = 1;
+        rigid.AddTorque(-3, ForceMode2D.Impulse);
         Vector3 velocity = CalculateThrowVelocity(transform.position, target);
         rigid.AddForce(velocity, ForceMode2D.Impulse);
         projectileType = ProjectileTypeEnum.BOUNCE;
