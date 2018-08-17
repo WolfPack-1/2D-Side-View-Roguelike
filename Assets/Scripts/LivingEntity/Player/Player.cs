@@ -121,6 +121,8 @@ public class Player : LivingEntity
 
     public override bool GetDamaged(DamageInfo info)
     {
+        if (playerController.IsDashing)
+            return false;
         playerController.GetDamaged(info);
         return base.GetDamaged(info);
     }

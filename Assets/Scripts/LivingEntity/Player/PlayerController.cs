@@ -34,6 +34,7 @@ public class PlayerController : Controller2D
     public bool IsUsingSkill { get { return playerSkillSlot.IsUsingSkill; } }
     public bool IsDoingCombo { get { return playerSkillSlot.IsDoingCombo; } }
     public bool IsGrounded { get { return collisions.below; } }
+    public bool IsDashing { get { return isDashing; } }
     public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit && !player.IsDead && !isDamaged; } }
     public bool CanJump { get { return (IsGrounded || CanDoubleJump) && Time.time - lastJumpTime >= jumpCoolTime && !player.IsDead && !isDamaged; } }
     public bool CanDash { get { return player.CurrentSteam >= 20f; } }
