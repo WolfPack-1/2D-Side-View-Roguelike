@@ -18,18 +18,18 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: DoSkill
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: StyleNum
     m_Type: 3
     m_DefaultFloat: 0
-    m_DefaultInt: 0
+    m_DefaultInt: 5112
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: HpRatio
@@ -229,6 +229,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: StyleNum
     m_EventTreshold: 5112
+  - m_ConditionMode: 1
+    m_ConditionEvent: DoSkill
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102013998414562662}
   m_Solo: 0
