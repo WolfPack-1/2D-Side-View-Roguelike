@@ -56,7 +56,6 @@ public class LivingEntity : MonoBehaviour
     {
         //Todo : 나중에 hp, steam 생성하는거 함수 따로 빼야함
         currentSteam = Mathf.Clamp(currentSteam + baseSteamGeneration * Time.deltaTime, 0, MaxSteam);
-        Debug.Log(currentSteam);
     }
     
     public virtual bool GetDamaged(DamageInfo info)

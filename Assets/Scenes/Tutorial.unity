@@ -9921,6 +9921,11 @@ Prefab:
       propertyPath: iconUIController
       value: 
       objectReference: {fileID: 1836527361}
+    - target: {fileID: 82849953982985216, guid: 6a303c1e855bbcc4d93d4dd0965fbb24,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a303c1e855bbcc4d93d4dd0965fbb24, type: 2}
   m_IsPrefabParent: 0
@@ -20101,7 +20106,7 @@ GameObject:
   - component: {fileID: 1995794567}
   - component: {fileID: 1995794568}
   m_Layer: 0
-  m_Name: "NPC Spawn Point : \uB7AB\uBCF4\uC774"
+  m_Name: "NPC Spawn Point : \uBD88\uB7C9\uD55C \uCCAD\uC18C\uBD80 "
   m_TagString: NPC Spawn Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20131,18 +20136,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 2
+  npcStructIndex: 6
   dir: 0
   spawnOnAwake: 1
   CurrentNpcStruct:
-    cid: 19102
-    name: Rat Boy
-    nameKor: "\uB7AB\uBCF4\uC774"
+    cid: 19105
+    name: Bad Cleaner
+    nameKor: "\uBD88\uB7C9\uD55C \uCCAD\uC18C\uBD80 "
     grade: 2
     recognize: 1
     recognizeValue: 5
-    skillValue: '{(19_jakebounce)}'
-    dropTable: '{(1102,2),(1108,2),(2106,2),(2107,2),(3100,1),(3101,1),(3102,1),(3103,1),(3104,1),(3105,1)}'
+    skillValue: '{(19_CleanerR)}'
+    dropTable: '{(1101,2),(1107,2),(2101,2),(2103,2),(3100,1),(3101,1),(3102,1),(3103,1),(3104,1),(3105,1)}'
 --- !u!1 &2004753275
 GameObject:
   m_ObjectHideFlags: 0
