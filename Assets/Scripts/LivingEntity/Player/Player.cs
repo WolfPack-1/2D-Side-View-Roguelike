@@ -11,6 +11,8 @@ public class Player : LivingEntity
     PlayerSkillSlot skillSlot;
     PlayerController playerController;
     AudioSource audioSource;
+    
+    public bool IsUIOpen { get { return gameManager.InventoryController.IsOpen || gameManager.CraftingController.IsOpen; } }
 
     public PlayerInventory Inventory { get { return playerInventory; }}
     public PlayerSkillSlot SkillSlot { get { return skillSlot; } }

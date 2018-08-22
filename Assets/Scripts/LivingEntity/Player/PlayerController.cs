@@ -35,10 +35,10 @@ public class PlayerController : Controller2D
     public bool IsDoingCombo { get { return playerSkillSlot.IsDoingCombo; } }
     public bool IsGrounded { get { return collisions.below; } }
     public bool IsDashing { get { return isDashing; } }
-    public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit && !player.IsDead && !isDamaged; } }
-    public bool CanJump { get { return (IsGrounded || CanDoubleJump) && Time.time - lastJumpTime >= jumpCoolTime && !player.IsDead && !isDamaged; } }
-    public bool CanDash { get { return player.CurrentSteam >= 20f; } }
-    public bool CanDoubleJump { get { return jumpCount == 1 && player.CurrentSteam >= 20f; } }
+    public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit && !player.IsDead && !isDamaged && !player.IsUIOpen; } }
+    public bool CanJump { get { return (IsGrounded || CanDoubleJump) && Time.time - lastJumpTime >= jumpCoolTime && !player.IsDead && !isDamaged && !player.IsUIOpen; } }
+    public bool CanDash { get { return player.CurrentSteam >= 20f && !player.IsUIOpen; } }
+    public bool CanDoubleJump { get { return jumpCount == 1 && player.CurrentSteam >= 20f && !player.IsUIOpen; } }
     
     IInteractable currentInteractable;
 
