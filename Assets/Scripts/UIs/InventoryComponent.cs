@@ -11,6 +11,8 @@ public class InventoryComponent : MonoBehaviour
 
     Skill skill;
     
+    public Skill Skill { get { return skill; } }
+    
     public void Init(Skill skill)
     {
         this.skill = skill;

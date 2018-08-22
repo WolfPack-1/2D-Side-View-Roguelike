@@ -11,19 +11,28 @@ public class TubeSlotUI : MonoBehaviour
     [SerializeField] GameObject discription;
     [SerializeField] TextMeshProUGUI tubeName;
     [SerializeField] TextMeshProUGUI tubeInfo;
-    List<Tube> tubes = new List<Tube>();
+    List<Tube> tubes;
     int index;
     SocketEnum socket;
 
     public int Index { get { return index; } }
-    public Tube CurrentTube { get { return tubes[index]; } }
+
+    public Tube CurrentTube
+    {
+        get
+        {
+            if (tubes != null && tubes.Count > index && tubes.Count > 0) return tubes[index];
+            return null;
+        }
+    }
 
     public void Init(List<Tube> tubes, SocketEnum socket)
     {
         this.tubes = tubes;
-        if (tubes.Count <= 0)
+        if (tubes == null || tubes.Count <= 0)
         {
-            index = -1;
+            tubeIcon.Init(null);
+            discription.SetActive(false);
             return;
         }
 
@@ -35,8 +44,12 @@ public class TubeSlotUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        if (tubes.Count <= 0)
+        if (tubes == null || tubes.Count <= 0)
+        {
+            tubeIcon.Init(null);
+            discription.SetActive(false);
             return;
+        }
         tubeIcon.Init(CurrentTube);
         tubeIcon.UpdateUI();
 
@@ -77,6 +90,7 @@ public class TubeSlotUI : MonoBehaviour
     {
         highlight.SetActive(false);
         discription.SetActive(false);
+        UpdateUI();
     }
 
     public void Left()

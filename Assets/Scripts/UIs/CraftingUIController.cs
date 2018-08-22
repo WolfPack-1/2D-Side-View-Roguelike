@@ -38,6 +38,7 @@ public class CraftingUIController : MonoBehaviour
         activeSlot = 0;
         canTransition = true;
         inventory = player.Inventory;
+        UpdateUI();
     }
 
     void Update()
@@ -55,27 +56,31 @@ public class CraftingUIController : MonoBehaviour
             activeSlot = Mathf.Clamp(activeSlot+1, 0, 3);
             UpdateUI();
         }
-        if(Input.GetKeyDown(KeyCode.LeftAlt))
+        if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
             CurrentSlot.Left();
         }
-        if(Input.GetKeyDown(KeyCode.RightAlt))
+        if(Input.GetKeyDown(KeyCode.RightArrow))
         {
             CurrentSlot.Right();
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            CreateSkill();
         }
     }
 
     void UpdateUI()
     {
+        tubeSlots[0].Init(inventory.Tubes.FindAll(t => t.Socket == SocketEnum.STYLE), SocketEnum.STYLE);
+        tubeSlots[1].Init(inventory.Tubes.FindAll(t => t.Socket == SocketEnum.ENHANCER), SocketEnum.ENHANCER);
+        tubeSlots[2].Init(inventory.Tubes.FindAll(t => t.Socket == SocketEnum.COOLER), SocketEnum.COOLER);        
+        tubeSlots[3].Init(inventory.Tubes.FindAll(t => t.Socket == SocketEnum.RELIC), SocketEnum.RELIC);
         foreach (TubeSlotUI slot in tubeSlots)
         {
             slot.UpdateUI();
             slot.Disalbe();
         }
-        tubeSlots[0].Init(inventory.Tubes.FindAll(t => t.Socket == SocketEnum.STYLE), SocketEnum.STYLE);
-        tubeSlots[1].Init(inventory.Tubes.FindAll(t => t.Socket == SocketEnum.ENHANCER), SocketEnum.ENHANCER);
-        tubeSlots[2].Init(inventory.Tubes.FindAll(t => t.Socket == SocketEnum.COOLER), SocketEnum.COOLER);        
-        tubeSlots[3].Init(inventory.Tubes.FindAll(t => t.Socket == SocketEnum.RELIC), SocketEnum.RELIC);
         CurrentSlot.Enable();   
     }
 
@@ -85,28 +90,45 @@ public class CraftingUIController : MonoBehaviour
         {
             if (isOpen)
             {
+                inventoryController.EnableCurrentSkill();
                 CurrentSlot.Disalbe();
                 canTransition = false;
                 animator.SetTrigger("DoClose");
             }
             else
             {
+                inventoryController.DisalbeCurrentSkill();
+                UpdateUI();
                 activeSlot = 0;
                 canTransition = false;
                 animator.SetTrigger("DoOpen");	
             }	
         }
-        UpdateUI();
     }
 
     public void Close()
     {
         if (canTransition && isOpen && inventoryController.IsOpen && inventoryController.CanTransition)
         {
+            inventoryController.EnableCurrentSkill();
             CurrentSlot.Disalbe();
             canTransition = false;
             animator.SetTrigger("DoClose");	
         }
+    }
+
+    void CreateSkill()
+    {
+        Tube styleTube = tubeSlots[0].CurrentTube;
+        Tube enhancerTube = tubeSlots[1].CurrentTube;
+        Tube coolerTube = tubeSlots[2].CurrentTube;
+
+        if (styleTube == null || enhancerTube == null || coolerTube == null)
+            return;
+        
+        inventory.CreateSkill(styleTube.Cid, enhancerTube.Cid, coolerTube.Cid);
+        UpdateUI();
+        inventoryController.UpdateUI();
     }
 
     public void FinishAnimation()

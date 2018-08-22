@@ -9,7 +9,6 @@ public class PlayerInventory : Inventory
     {
         base.Awake();
         player = GetComponent<Player>();
-    }    
-    
+    }
     
 }
