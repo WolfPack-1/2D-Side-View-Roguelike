@@ -229,6 +229,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsBattle
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsWalk
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102822120184574832}
   m_Solo: 0
