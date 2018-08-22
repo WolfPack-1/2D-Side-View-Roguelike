@@ -232,7 +232,8 @@ public class Skill
         switch (styleStructs[currentSkillIndex].attackType)
         {
             case AttackTypeEnum.MELEE:
-                Area area = Area.Create(areaPosition, enhancerStruct.range / 2f, enhancerStruct.range);
+                areaPosition.x -= (enhancerStruct.range / 2f - 0.5f) * Mathf.Sign(owner.transform.localScale.x);
+                Area area = Area.Create(areaPosition, enhancerStruct.range, 1f);
                 string layerName = owner.GetType() == typeof(Player) ? "NPC" : "Player";
                 Collider2D[] colliders = area.GetEntity(Area.AreaModeEnum.Box, layerName);
                 foreach(Collider2D col in colliders)
