@@ -1,149 +1,117 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using TMPro;
 using UnityEngine;
 
 public class CraftingUIController : MonoBehaviour
 {
     PlayerInventory inventory;
+    TubeSlotUI[] tubeSlots;
 
-    [SerializeField] Transform styleTubeHolder;
-    [SerializeField] Transform enhancerTubeHolder;
-    [SerializeField] Transform coolerTubeHolder;
-    [SerializeField] Transform relicTubeHolder;
-    [SerializeField] SkillUI skillIcon;
-    [SerializeField] TextMeshProUGUI tubeDiscription;
-    [SerializeField] TextMeshProUGUI skillDiscription;
+    Animator animator;
+    bool isOpen, canTransition;
+    InventoryUiController inventoryController;
 
-    int styleIndex, enhancerIndex, coolerIndex, relicIndex;
+    int activeSlot;
+    
+    public bool IsOpen { get { return isOpen; } }
+    public bool CanTransition { get { return canTransition; } }
+    public TubeSlotUI CurrentSlot { get { return tubeSlots[activeSlot]; } }
 
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+        inventoryController = FindObjectOfType<InventoryUiController>();
+        tubeSlots = new[]
+        {
+            transform.Find("TubeSlots").GetChild(0).GetComponent<TubeSlotUI>(),
+            transform.Find("TubeSlots").GetChild(1).GetComponent<TubeSlotUI>(),
+            transform.Find("TubeSlots").GetChild(2).GetComponent<TubeSlotUI>(),
+            transform.Find("TubeSlots").GetChild(3).GetComponent<TubeSlotUI>()
+        };
+    }
+    
     public void Init(Player player)
     {
+        activeSlot = 0;
+        canTransition = true;
         inventory = player.Inventory;
+    }
+
+    void Update()
+    {
+        if (!isOpen)
+            return;
+        
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            activeSlot = Mathf.Clamp(activeSlot-1, 0, 3);
+            UpdateUI();
+        }
+        if(Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            activeSlot = Mathf.Clamp(activeSlot+1, 0, 3);
+            UpdateUI();
+        }
+        if(Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            CurrentSlot.Left();
+        }
+        if(Input.GetKeyDown(KeyCode.RightAlt))
+        {
+            CurrentSlot.Right();
+        }
     }
 
     void UpdateUI()
     {
-        
-        styleIndex = Math.Min(styleIndex, inventory.GetCount(SocketEnum.STYLE) - 1);
-        enhancerIndex = Math.Min(enhancerIndex, inventory.GetCount(SocketEnum.ENHANCER) - 1);
-        coolerIndex = Math.Min(coolerIndex, inventory.GetCount(SocketEnum.COOLER) - 1);
-        relicIndex = Math.Min(relicIndex, inventory.GetCount(SocketEnum.RELIC) - 1);
-
-        styleIndex = Math.Max(styleIndex, 0);
-        enhancerIndex = Math.Max(enhancerIndex, 0);
-        coolerIndex = Math.Max(coolerIndex, 0);
-        relicIndex = Math.Max(relicIndex, 0);
-        
-        
-        List<Tube> styleTubes = inventory.Tubes.FindAll(t => t.Socket == SocketEnum.STYLE);
-        List<Tube> enhancerTubes = inventory.Tubes.FindAll(t => t.Socket == SocketEnum.ENHANCER);
-        List<Tube> coolerTubes = inventory.Tubes.FindAll(t => t.Socket == SocketEnum.COOLER);
-        List<Tube> relicTubes = inventory.Tubes.FindAll(t => t.Socket == SocketEnum.RELIC);
-
-        if (styleTubes.Count > 0)
-            styleTubeHolder.GetChild(0).GetComponent<TubeUI>().SetTube(styleTubes[styleIndex]);
-        else
-            styleTubeHolder.GetChild(0).GetComponent<TubeUI>().Disable();
-
-        if (enhancerTubes.Count > 0)
-            enhancerTubeHolder.GetChild(0).GetComponent<TubeUI>().SetTube(enhancerTubes[enhancerIndex]);
-        else
-            enhancerTubeHolder.GetChild(0).GetComponent<TubeUI>().Disable();
-
-        if (coolerTubes.Count > 0)
-            coolerTubeHolder.GetChild(0).GetComponent<TubeUI>().SetTube(coolerTubes[coolerIndex]);
-        else
-            coolerTubeHolder.GetChild(0).GetComponent<TubeUI>().Disable();
-
-        if (relicTubes.Count > 0)
-            relicTubeHolder.GetChild(0).GetComponent<TubeUI>().SetTube(relicTubes[relicIndex]);
-        else
-            relicTubeHolder.GetChild(0).GetComponent<TubeUI>().Disable();
-
-        tubeDiscription.text = "Style Tube " + styleTubes.Count + " Counts\n" +
-                               "Enhancer Tube " + enhancerTubes.Count + " Counts\n" +
-                               "Cooler Tube " + coolerTubes.Count + " Counts\n" +
-                               "Relic Tube " + relicTubes.Count + " Counts";
-
-        if (styleTubes.Count > 0 && enhancerTubes.Count > 0 && coolerTubes.Count > 0)
+        foreach (TubeSlotUI slot in tubeSlots)
         {
-            skillDiscription.text = "Current Selected Tubes\n" +
-                                    styleTubes[styleIndex].Name + "\n" +
-                                    enhancerTubes[enhancerIndex].Name + "\n" +
-                                    coolerTubes[coolerIndex].Name;
-            skillIcon.SetTube(styleTubes[styleIndex], enhancerTubes[enhancerIndex], coolerTubes[coolerIndex]);
+            slot.UpdateUI();
+            slot.Disalbe();
         }
-        else
-        {
-            skillDiscription.text = "Need More Tubes";
-            skillIcon.Disable();
-        }
+        tubeSlots[0].Init(inventory.Tubes.FindAll(t => t.Socket == SocketEnum.STYLE), SocketEnum.STYLE);
+        tubeSlots[1].Init(inventory.Tubes.FindAll(t => t.Socket == SocketEnum.ENHANCER), SocketEnum.ENHANCER);
+        tubeSlots[2].Init(inventory.Tubes.FindAll(t => t.Socket == SocketEnum.COOLER), SocketEnum.COOLER);        
+        tubeSlots[3].Init(inventory.Tubes.FindAll(t => t.Socket == SocketEnum.RELIC), SocketEnum.RELIC);
+        CurrentSlot.Enable();   
     }
 
     public void Open()
     {
-        if (gameObject.activeSelf)
+        if (canTransition && inventoryController.IsOpen && inventoryController.CanTransition)
         {
-            Close();
-            return;
+            if (isOpen)
+            {
+                CurrentSlot.Disalbe();
+                canTransition = false;
+                animator.SetTrigger("DoClose");
+            }
+            else
+            {
+                activeSlot = 0;
+                canTransition = false;
+                animator.SetTrigger("DoOpen");	
+            }	
         }
-
-        gameObject.SetActive(true);
         UpdateUI();
     }
 
     public void Close()
     {
-        gameObject.SetActive(false);
-        styleIndex = enhancerIndex = coolerIndex = relicIndex = 0;
-    }
-
-    public void CraftingLeftButton(int socket)
-    {
-        switch ((SocketEnum) socket)
+        if (canTransition && isOpen && inventoryController.IsOpen && inventoryController.CanTransition)
         {
-            case SocketEnum.STYLE:
-                styleIndex = Math.Max(styleIndex - 1, 0);
-                break;
-            case SocketEnum.ENHANCER:
-                enhancerIndex = Math.Max(enhancerIndex - 1, 0);
-                break;
-            case SocketEnum.COOLER:
-                coolerIndex = Math.Max(coolerIndex - 1, 0);
-                break;
-            case SocketEnum.RELIC:
-                relicIndex = Math.Max(relicIndex - 1, 0);
-                break;
+            CurrentSlot.Disalbe();
+            canTransition = false;
+            animator.SetTrigger("DoClose");	
         }
-        UpdateUI();
     }
 
-    public void CraftingRightButton(int socket)
+    public void FinishAnimation()
     {
-        switch ((SocketEnum) socket)
-        {
-            case SocketEnum.STYLE:
-                styleIndex = Math.Min(styleIndex + 1, inventory.GetCount((SocketEnum) socket) - 1);
-                break;
-            case SocketEnum.ENHANCER:
-                enhancerIndex = Math.Min(enhancerIndex + 1, inventory.GetCount((SocketEnum) socket) - 1);
-                break;
-            case SocketEnum.COOLER:
-                coolerIndex = Math.Min(coolerIndex + 1, inventory.GetCount((SocketEnum) socket) - 1);
-                break;
-            case SocketEnum.RELIC:
-                relicIndex = Math.Min(relicIndex + 1, inventory.GetCount((SocketEnum) socket) - 1);
-                break;
-        }
-        UpdateUI();
-    }
-
-    public void CraftSkill()
-    {
-        if (!skillIcon.IsInitByTube && !skillIcon.IsInitBySkill) return;
-        inventory.CreateSkill(skillIcon.StyleCid, skillIcon.EnhancerCid, skillIcon.CoolerCid);
-        UpdateUI();
+        isOpen =! isOpen;
+        canTransition = true;
     }
 }

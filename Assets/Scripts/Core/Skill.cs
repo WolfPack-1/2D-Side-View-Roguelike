@@ -24,30 +24,30 @@ public class Skill
     bool isAnimationFinished;
     bool isAttackEvent;
     
-//    public string Name 
-//    {
-//        get
-//        {
-//            // Todo : 임시로 grade 를 한글로 직접 바꿔줌
-//            string grade = "";
-//            switch (styleStruct.grade)
-//            {
-//                case TubeGradeEnum.WEAKNESS:
-//                    grade = "애송이의";
-//                    break;
-//                case TubeGradeEnum.GANGSTER:
-//                    grade = "길거리의";
-//                    break;
-//                case TubeGradeEnum.FIGHT:
-//                    grade = "무술가의";
-//                    break;
-//                case TubeGradeEnum.MASTER:
-//                    grade = "달인의";
-//                    break;
-//            }
-//            return grade + " " + enhancerStruct.nameKor + " " + styleStruct.nameKor;
-//        } 
-//    }
+    public string Name 
+    {
+        get
+        {
+            // Todo : 임시로 grade 를 한글로 직접 바꿔줌
+            string grade = "";
+            switch (styleStructs[0].grade)
+            {
+                case TubeGradeEnum.WEAKNESS:
+                    grade = "애송이의";
+                    break;
+                case TubeGradeEnum.GANGSTER:
+                    grade = "길거리의";
+                    break;
+                case TubeGradeEnum.FIGHT:
+                    grade = "무술가의";
+                    break;
+                case TubeGradeEnum.MASTER:
+                    grade = "달인의";
+                    break;
+            }
+            return grade + " " + enhancerStruct.nameKor + " " + styleStructs[0].nameKor;
+        } 
+    }
     
     public TubeStyleStruct[] StyleStructs { get { return styleStructs; } set { styleStructs = value; } }
     public TubeEnhancerStruct EnhancerStruct { get { return enhancerStruct; } set { enhancerStruct = value; } }

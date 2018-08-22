@@ -1,95 +1,92 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class InventoryUiController : MonoBehaviour
 {
 	PlayerInventory inventory;
 	PlayerSkillSlot skillSlot;
+	Animator animator;
+	bool isOpen;
+	bool canTransition;
+	CraftingUIController craftringController;
 
-	[SerializeField] Transform skillSlotHolder;
-	[SerializeField] Transform skillInventoryHolder;
-	[SerializeField] TextMeshProUGUI skillDiscription;
+	[SerializeField] Transform SkillHolder;
+	[SerializeField] InventoryComponent _referenceComponent;
+	
+	public bool IsOpen { get { return isOpen; } }
+	public bool CanTransition { get { return canTransition; } }
+
+	void Awake()
+	{
+		animator = GetComponent<Animator>();
+		craftringController = FindObjectOfType<CraftingUIController>();
+	}
 	
 	public void Init(Player player)
 	{
+	    canTransition = true;
 		inventory = player.Inventory;
 		skillSlot = player.SkillSlot;
 	}
 
 	void UpdateUI()
 	{
-		skillDiscription.text = "";
-		foreach (Transform skillHolder in skillInventoryHolder)
+		foreach (Transform holder in SkillHolder)
 		{
-			skillHolder.GetComponent<SkillUI>().Disable();
+			holder.gameObject.SetActive(false);
 		}
-		
-		for (int i = 0; i < 4; i++)
+
+		List<Skill> skills = inventory.Skills;
+		for (int i = 0; i < skills.Count; i++)
 		{
-			if (skillSlot.IsSlotEmpty((PlayerSkillSlot.PlayerSkillKeySlotEnum) i))
+			InventoryComponent inventoryComponent;
+			if (SkillHolder.childCount > i)
 			{
-				skillSlotHolder.GetChild(i).GetComponent<SkillUI>().Disable();
-				continue;
+				inventoryComponent = SkillHolder.GetChild(i).GetComponent<InventoryComponent>();
 			}
-			
-			skillSlotHolder.GetChild(i).GetComponent<SkillUI>().SetSkill(skillSlot.GetSkill((PlayerSkillSlot.PlayerSkillKeySlotEnum)i));
-		}
-		
-		for (int i = 0; i < inventory.Skills.Count; i++)
-		{
-			skillInventoryHolder.GetChild(i).GetComponent<SkillUI>().SetSkill(inventory.Skills[i]);
-			skillDiscription.text += inventory.Skills[i].StyleStructs[0].name + "\n";
+			else
+			{
+				inventoryComponent = Instantiate(_referenceComponent, SkillHolder);
+			}
+			inventoryComponent.gameObject.SetActive(true);
+			inventoryComponent.Init(skills[i]);
+			inventoryComponent.UpdateUI();
 		}
 	}
 
 	public void Open()
 	{
-		if (gameObject.activeSelf)
+		if (canTransition)
 		{
-			Close();
-			return;
+			if (isOpen)
+			{
+				if (!craftringController.IsOpen && craftringController.CanTransition)
+				{
+					canTransition = false;
+					animator.SetTrigger("DoClose");	
+				}
+			}
+			else
+			{
+				canTransition = false;
+				animator.SetTrigger("DoOpen");	
+			}	
 		}
-
-		gameObject.SetActive(true);
 		UpdateUI();
 	}
 
 	public void Close()
 	{
-		gameObject.SetActive(false);
+		if (canTransition && isOpen && !craftringController.IsOpen && craftringController.CanTransition)
+		{
+			canTransition = false;
+			animator.SetTrigger("DoClose");	
+		}
 	}
 
-	public void SlotButton(int slot)
+	public void FinishAnimation()
 	{
-		skillSlot.DeleteSlot((PlayerSkillSlot.PlayerSkillKeySlotEnum)slot);
-		UpdateUI();
-	}
-
-	public void InventorySkillButton()
-	{
-		SkillUI skill = EventSystem.current.currentSelectedGameObject.GetComponent<SkillUI>();
-		if (skillSlot.IsSlotEmpty(PlayerSkillSlot.PlayerSkillKeySlotEnum.Q))
-		{
-			skillSlot.SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.Q, inventory.GetSkill(skill.StyleStructs, skill.EnhancerStruct, skill.CoolerStruct, true));
-			UpdateUI();
-			return;
-		}
-
-		if (skillSlot.IsSlotEmpty(PlayerSkillSlot.PlayerSkillKeySlotEnum.W))
-		{
-			skillSlot.SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.W, inventory.GetSkill(skill.StyleStructs, skill.EnhancerStruct, skill.CoolerStruct, true));
-			UpdateUI();
-			return;
-		}
-
-		if (skillSlot.IsSlotEmpty(PlayerSkillSlot.PlayerSkillKeySlotEnum.E))
-		{
-			skillSlot.SetSlot(PlayerSkillSlot.PlayerSkillKeySlotEnum.E, inventory.GetSkill(skill.StyleStructs, skill.EnhancerStruct, skill.CoolerStruct, true));
-			UpdateUI();
-			return;
-		}
+		isOpen =! isOpen;
+		canTransition = true;
 	}
 }
