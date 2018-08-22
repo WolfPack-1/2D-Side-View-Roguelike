@@ -21,8 +21,9 @@ GameObject:
   - component: {fileID: 4428387199915712}
   - component: {fileID: 212315957724377366}
   - component: {fileID: 95569130927909668}
+  - component: {fileID: 114151029269842344}
   m_Layer: 0
-  m_Name: 6107_Projectile0
+  m_Name: 6107_OnStart0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,8 +35,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1400904650248280}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.408, y: -3.915, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 17.926174, y: -0.026320457, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,6 +59,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114151029269842344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400904650248280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed8ff4864a15a94784ca7c890571745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212315957724377366
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -92,7 +104,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 32767
-  m_Sprite: {fileID: 21300010, guid: b764eecacd0de9a4b8202c9119e1b442, type: 3}
+  m_Sprite: {fileID: 21300026, guid: b764eecacd0de9a4b8202c9119e1b442, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

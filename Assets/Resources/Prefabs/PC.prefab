@@ -129,7 +129,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13776214, y: 0.6035261}
+  m_Size: {x: 0.45, y: 1}
   m_EdgeRadius: 0
 --- !u!82 &82537972055515062
 AudioSource:
@@ -322,6 +322,8 @@ MonoBehaviour:
   baseHp: 100
   baseMoveSpeed: 5
   baseSteam: 100
+  baseHPGeneration: 0
+  baseSteamGeneration: 7
 --- !u!114 &114211784433599116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -363,7 +365,7 @@ MonoBehaviour:
   maxClimbAngle: 80
   maxDescendAngle: 75
   minJumpHeight: 1
-  maxJumpHeight: 3
+  maxJumpHeight: 2.5
   timeToJumpapex: 0.4
   moveSpeed: 3
   jumpCoolTime: 1
