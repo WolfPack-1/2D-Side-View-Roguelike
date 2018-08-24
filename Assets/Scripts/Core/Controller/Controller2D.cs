@@ -28,7 +28,7 @@ public class Controller2D : RaycastController
     [SerializeField] float maxDescendAngle;
 
     Vector2 playerInput;
-
+    bool jumpInput;
     
     protected CollisionInfo collisions;
 
@@ -43,12 +43,14 @@ public class Controller2D : RaycastController
         Move(moveAmount, Vector2.zero, standingOnPlatform);
     }
 
-    public void Move(Vector2 moveAmount, Vector2 input, bool standingOnPlatform = false)
+    public void Move(Vector2 moveAmount, Vector2 input, bool jump = false, bool standingOnPlatform = false)
     {
         UpdateRaycastOrigins();
         collisions.Reset();
         collisions.moveAmountOld = moveAmount;
         playerInput = input;
+        if(!jumpInput)
+            jumpInput = jump;
         
         if (moveAmount.x != 0)
         {
@@ -164,7 +166,7 @@ public class Controller2D : RaycastController
                         collisions.fallingThrough = false;
                     }
 
-                    if (playerInput.y == -1)
+                    if (jumpInput)
                     {
                         collisions.fallingThrough = true;
                         Invoke("ResetFallingThroughPlatform", 0.2f);
@@ -250,6 +252,7 @@ public class Controller2D : RaycastController
 
     void ResetFallingThroughPlatform()
     {
+        jumpInput = false;
         collisions.fallingThrough = false;
     }
 

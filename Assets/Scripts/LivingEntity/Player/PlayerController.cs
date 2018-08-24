@@ -26,18 +26,20 @@ public class PlayerController : Controller2D
     bool isSit;
     bool isDamaged;
     bool isDashing;
+    bool downJump;
     int jumpCount;
     float lastJumpTime;
     
     public bool IsWalk { get { return input.x != 0 && velocity.x != 0; } }
-    public bool IsSit { get { return isSit && collisions.below && !player.IsDead; } }
+    public bool IsSit { get { return isSit; } }
     public bool IsUsingSkill { get { return playerSkillSlot.IsUsingSkill; } }
     public bool IsDoingCombo { get { return playerSkillSlot.IsDoingCombo; } }
     public bool IsGrounded { get { return collisions.below; } }
     public bool IsDashing { get { return isDashing; } }
     public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit && !player.IsDead && !isDamaged && !player.IsUIOpen; } }
-    public bool CanJump { get { return (IsGrounded || CanDoubleJump) && Time.time - lastJumpTime >= jumpCoolTime && !player.IsDead && !isDamaged && !player.IsUIOpen; } }
+    public bool CanJump { get { return (IsGrounded || CanDoubleJump) && Time.time - lastJumpTime >= jumpCoolTime && !IsSit && !player.IsDead && !isDamaged && !player.IsUIOpen; } }
     public bool CanDash { get { return player.CurrentSteam >= 20f && !player.IsUIOpen; } }
+    public bool CanSit { get { return collisions.below && !player.IsDead && !player.IsUIOpen; } }
     public bool CanDoubleJump { get { return jumpCount == 1 && player.CurrentSteam >= 20f && !player.IsUIOpen; } }
     
     IInteractable currentInteractable;
@@ -105,7 +107,8 @@ public class PlayerController : Controller2D
             velocity.y = 0;
         KeyInput();
         CalculateVelocity(speed);
-        Move(velocity * Time.deltaTime, input);
+        Move(velocity * Time.deltaTime, input, downJump);
+        downJump = false;
         if (collisions.above || collisions.below)
             velocity.y = 0;
         SetAnimationParameters();
@@ -132,14 +135,17 @@ public class PlayerController : Controller2D
             input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         isSit = false;
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) && CanSit)
         {
             isSit = true;
         }
         
-        if (Input.GetKeyDown(KeyCode.Space) && CanJump)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            OnJumpDown();
+            if(CanJump)
+                OnJumpDown();
+            if(IsSit)
+                downJump = true;
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
