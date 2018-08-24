@@ -73,6 +73,7 @@ public class NPCAI : NPC
     
     IEnumerator Die_Enter()
     {
+        Controller.Stop();
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }

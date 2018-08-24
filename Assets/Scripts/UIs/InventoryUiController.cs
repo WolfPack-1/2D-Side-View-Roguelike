@@ -45,6 +45,9 @@ public class InventoryUiController : MonoBehaviour
 
 	void Update()
 	{
+		if (!IsOpen)
+			return;
+		
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
 			index--;
@@ -79,7 +82,7 @@ public class InventoryUiController : MonoBehaviour
 	}
 
 	public void UpdateUI()
-	{
+	{	
 		foreach (Transform holder in SkillHolder)
 		{
 			holder.gameObject.SetActive(false);

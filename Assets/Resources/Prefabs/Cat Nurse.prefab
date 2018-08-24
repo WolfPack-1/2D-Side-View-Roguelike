@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4218620178167160}
   - component: {fileID: 212765366671495282}
   - component: {fileID: 95010290719070862}
-  - component: {fileID: 114484043596971380}
   - component: {fileID: 114328814833692564}
   - component: {fileID: 61015639339115404}
   - component: {fileID: 114738092263890606}
@@ -184,31 +183,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tubes: []
   skills: []
---- !u!114 &114484043596971380
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1212901172091860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71ee40dfba59ec94c9ec9ea35e8074d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseHp: 100
-  baseMoveSpeed: 5
-  baseSteam: 100
-  baseHPGeneration: 0
-  baseSteamGeneration: 7
-  npcStruct:
-    cid: 0
-    name: 
-    nameKor: 
-    grade: 0
-    recognize: 0
-    recognizeValue: 0
-    skillValue: 
-    dropTable: 
 --- !u!114 &114738092263890606
 MonoBehaviour:
   m_ObjectHideFlags: 1

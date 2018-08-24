@@ -47,6 +47,12 @@ public class NPCController : Controller2D
         velocity.y += gravity * Time.deltaTime;
     }
 
+    public void Stop()
+    {
+        SetInput(Vector2.zero);
+        StopAllCoroutines();
+    }
+
     public Vector2 SetInput(Vector2 input)
     {
         this.input = input;

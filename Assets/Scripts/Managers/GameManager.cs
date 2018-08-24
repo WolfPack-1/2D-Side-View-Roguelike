@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         style.normal.textColor = Color.yellow;
         float msec = deltaTime * 1000.0f;
         float fps = 1.0f / deltaTime;
-        string text = string.Format("Build 0.02 {0:0.0} ms ({1:0.} fps)", msec, fps);
+        string text = string.Format("Build 0.03 {0:0.0} ms ({1:0.} fps)", msec, fps);
         GUI.Label(rect, text, style);
     }
 

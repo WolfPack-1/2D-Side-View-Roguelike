@@ -36,6 +36,7 @@ public class PlayerController : Controller2D
     public bool IsDoingCombo { get { return playerSkillSlot.IsDoingCombo; } }
     public bool IsGrounded { get { return collisions.below; } }
     public bool IsDashing { get { return isDashing; } }
+    public bool CanUseSkill { get { return !IsDashing && !IsSit && !player.IsDead; } }
     public bool CanWalk { get { return (!IsUsingSkill || IsDoingCombo) && !IsSit && !player.IsDead && !isDamaged && !player.IsUIOpen; } }
     public bool CanJump { get { return (IsGrounded || CanDoubleJump) && Time.time - lastJumpTime >= jumpCoolTime && !IsSit && !player.IsDead && !isDamaged && !player.IsUIOpen; } }
     public bool CanDash { get { return player.CurrentSteam >= 20f && !player.IsUIOpen; } }
@@ -158,22 +159,22 @@ public class PlayerController : Controller2D
             Dash();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && CanUseSkill)
         {
             playerSkillSlot.Use(PlayerSkillSlot.PlayerSkillKeySlotEnum.Q);
         }
         
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && CanUseSkill)
         {
             playerSkillSlot.Use(PlayerSkillSlot.PlayerSkillKeySlotEnum.W);
         }
         
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && CanUseSkill)
         {
             playerSkillSlot.Use(PlayerSkillSlot.PlayerSkillKeySlotEnum.E);
         }
         
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && CanUseSkill)
         {
             playerSkillSlot.Use(PlayerSkillSlot.PlayerSkillKeySlotEnum.R);
         }
@@ -240,7 +241,8 @@ public class PlayerController : Controller2D
 
     IEnumerator DamagedUpdator()
     {
-        animator.SetTrigger("IsDamaged");
+        if(!IsUsingSkill)
+            animator.SetTrigger("IsDamaged");
         isDamaged = true;
         yield return new WaitForSeconds(0.1f);
         isDamaged = false;

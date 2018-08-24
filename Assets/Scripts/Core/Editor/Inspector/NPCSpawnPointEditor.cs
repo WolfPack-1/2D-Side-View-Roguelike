@@ -41,7 +41,7 @@ public class NPCSpawnPointEditor : Editor
 
     public override void OnInspectorGUI()
     {               
-        base.serializedObject.Update();
+        serializedObject.Update();
 
         selectNPCInt = EditorGUILayout.Popup("NPC 선택", selectNPCInt, npcCategory, EditorStyles.popup);
         npcDir.intValue = EditorGUILayout.Popup("방향 선택", npcDir.intValue, dirCategory, EditorStyles.popup);

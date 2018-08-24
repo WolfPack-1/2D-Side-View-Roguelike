@@ -36,7 +36,6 @@ GameObject:
   - component: {fileID: 4871563693024600}
   - component: {fileID: 212364622626364324}
   - component: {fileID: 95954323515625152}
-  - component: {fileID: 114630805830213084}
   - component: {fileID: 114310710771390384}
   - component: {fileID: 61686516522786222}
   - component: {fileID: 114671138630738698}
@@ -172,31 +171,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHp: 100
   baseMoveSpeed: 1
-  baseSteam: 100
-  baseHPGeneration: 0
-  baseSteamGeneration: 7
-  npcStruct:
-    cid: 0
-    name: 
-    nameKor: 
-    grade: 0
-    recognize: 0
-    recognizeValue: 0
-    skillValue: 
-    dropTable: 
---- !u!114 &114630805830213084
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1488099660257702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71ee40dfba59ec94c9ec9ea35e8074d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseHp: 100
-  baseMoveSpeed: 5
   baseSteam: 100
   baseHPGeneration: 0
   baseSteamGeneration: 7

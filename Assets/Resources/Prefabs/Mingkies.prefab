@@ -51,7 +51,6 @@ GameObject:
   - component: {fileID: 4263752342475640}
   - component: {fileID: 95335546380715682}
   - component: {fileID: 212498005612995764}
-  - component: {fileID: 114207846996748994}
   - component: {fileID: 114343804073023348}
   - component: {fileID: 61350687339353038}
   - component: {fileID: 114866723413509116}
@@ -146,29 +145,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114207846996748994
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1970504194128710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71ee40dfba59ec94c9ec9ea35e8074d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseHp: 100
-  baseMoveSpeed: 5
-  baseSteam: 100
-  npcStruct:
-    cid: 0
-    name: 
-    nameKor: 
-    grade: 0
-    recognize: 0
-    recognizeValue: 0
-    skillValue: 
-    dropTable: 
 --- !u!114 &114299413163736858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,6 +159,8 @@ MonoBehaviour:
   baseHp: 50
   baseMoveSpeed: 0
   baseSteam: 100
+  baseHPGeneration: 0
+  baseSteamGeneration: 7
   npcStruct:
     cid: 0
     name: 
