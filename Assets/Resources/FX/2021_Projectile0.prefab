@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4937189777624792}
   - component: {fileID: 212780819861021564}
   - component: {fileID: 95756397465147986}
+  - component: {fileID: 114201291490638986}
   m_Layer: 0
   m_Name: 2021_Projectile0
   m_TagString: Untagged
@@ -58,6 +59,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114201291490638986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1966083970516252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed8ff4864a15a94784ca7c890571745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212780819861021564
 SpriteRenderer:
   m_ObjectHideFlags: 1

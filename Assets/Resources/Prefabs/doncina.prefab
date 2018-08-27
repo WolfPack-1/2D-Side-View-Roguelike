@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 114918379951502394}
   - component: {fileID: 114810854391668976}
   - component: {fileID: 50754230124259476}
-  - component: {fileID: 70869404745527618}
   - component: {fileID: 61534873173259486}
   - component: {fileID: 114210887266400360}
   - component: {fileID: 114405444209320884}
@@ -93,21 +92,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 2}
   m_EdgeRadius: 0
---- !u!70 &70869404745527618
-CapsuleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1377379363296338}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.3, y: -0.11}
-  m_Size: {x: 1.07, y: 1.53}
-  m_Direction: 0
 --- !u!95 &95178404911880988
 Animator:
   serializedVersion: 3
@@ -157,6 +141,8 @@ MonoBehaviour:
   baseHp: 100
   baseMoveSpeed: 1
   baseSteam: 100
+  baseHPGeneration: 0
+  baseSteamGeneration: 7
   npcStruct:
     cid: 0
     name: 
@@ -193,6 +179,8 @@ MonoBehaviour:
   baseHp: 100
   baseMoveSpeed: 5
   baseSteam: 100
+  baseHPGeneration: 0
+  baseSteamGeneration: 7
   npcStruct:
     cid: 0
     name: 

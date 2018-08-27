@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4412607655786012}
   - component: {fileID: 212852786813681680}
   - component: {fileID: 95357340233636270}
+  - component: {fileID: 114980889619683750}
   m_Layer: 0
   m_Name: 2008_OnHit2
   m_TagString: Untagged
@@ -58,6 +59,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114980889619683750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1819821276354828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed8ff4864a15a94784ca7c890571745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212852786813681680
 SpriteRenderer:
   m_ObjectHideFlags: 1
