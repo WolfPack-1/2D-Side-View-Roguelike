@@ -8,7 +8,7 @@ public class NPC : LivingEntity
 {
 
     NPCController controller;
-    Animator animator;
+    protected Animator animator;
     [SerializeField] NPCStruct npcStruct;
     List<Skill> skills;
     

@@ -1,22 +1,15 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCAI : NPC
+public class Doncina : NPC
 {
-    enum State { Idle, IdleBT, Move, Attack, Die }
-
-    Skill currentSkill;
-    StateMachine<State> fsm;
-
-    public float ProperRange
-    {
-        get
-        {
-            Skill properSkill = FindProperSkill();
-            return properSkill == null ? 0.5f : properSkill.CurrentRange - 0.5f;
-        }
-    }
     
+    enum State { Idle, IdleBT, Move, Chain, Pull, Jump, Die}
+
+    StateMachine<State> fsm;
+    Skill currentSkill;
+
     public override void Init(NPCStruct npc)
     {
         base.Init(npc);
@@ -25,7 +18,7 @@ public class NPCAI : NPC
         fsm = StateMachine<State>.Initialize(this, State.Idle);
         StartCoroutine("PlayerFinder");
     }
-    
+
     IEnumerator Idle_Enter()
     {
         this.Log("Idle Enter");
@@ -34,29 +27,29 @@ public class NPCAI : NPC
         yield return new WaitForSeconds(Random.Range(1f, 2f));
         fsm.ChangeState(State.Move);
     }
-
+    
     void IdleBT_Enter()
     {      
         IsBattle = true;
         currentSkill = FindProperSkill();
-        if(currentSkill == null)
+        if (currentSkill == null)
+        {
             fsm.ChangeState(State.Move);
-        
-        fsm.ChangeState(currentSkill == null ? State.Move : State.Attack);
+            return;
+        }
+
+        switch (currentSkill.StyleStructs[0].cid)
+        {
+            case 5104:
+                fsm.ChangeState(State.Chain);
+                return;
+            case 5105:
+                fsm.ChangeState(State.Pull);
+                return;
+        }
     }
 
-    IEnumerator Move_Enter()
-    {
-        IsWalk = true;
-        if (targetEntity == null)
-            yield return Controller.MoveToRandomPosition();
-        else
-            yield return Controller.MoveToTarget(targetEntity, this);
-        IsWalk = false;
-        fsm.ChangeState(IsBattle ? State.IdleBT : State.Idle);
-    }
-
-    IEnumerator Attack_Enter()
+    IEnumerator Chain_Enter()
     {
         Controller.SetDirToTarget(targetEntity);
         if (currentSkill == null)
@@ -70,12 +63,17 @@ public class NPCAI : NPC
         currentSkill = null;
         fsm.ChangeState(State.IdleBT);
     }
-    
-    IEnumerator Die_Enter()
+
+    IEnumerator Pull_Enter()
     {
-        Controller.Stop();
-        yield return new WaitForSeconds(3f);
-        Destroy(gameObject);
+        Controller.SetDirToTarget(targetEntity);
+        if (currentSkill == null)
+        {
+            this.Error("아니 스킬을 쓰려했는데 선택된 스킬이 없다니?");
+            fsm.ChangeState(State.IdleBT);
+        }
+        // Todo : Projectile 관련한거 먼저 손봐야함
+        yield return null;
     }
     
     void OnGetDamagedHandle(DamageInfo info)
@@ -88,8 +86,8 @@ public class NPCAI : NPC
 
         if (!IsBattle)
         {
-            targetEntity = info.From;
             fsm.ChangeState(State.IdleBT);
+            targetEntity = info.From;
         }
     }
 

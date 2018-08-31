@@ -46,6 +46,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1100860016543216
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4365811493761242}
+  m_Layer: 0
+  m_Name: LeftPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1114882050605564
 GameObject:
   m_ObjectHideFlags: 1
@@ -104,7 +119,7 @@ GameObject:
   - component: {fileID: 4490109458578602}
   - component: {fileID: 114387677734888604}
   m_Layer: 0
-  m_Name: "NPC Spawn Point : \uB3C8\uC2DC\uB098"
+  m_Name: "NPC Spawn Point : \uD604\uC0C1\uAE08 \uC0AC\uB0E5\uAFBC \uC5D0\uC77C\uB9AC"
   m_TagString: NPC Spawn Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -283,6 +298,36 @@ GameObject:
   - component: {fileID: 114659164314410580}
   m_Layer: 0
   m_Name: RedTowerPlatform-1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1575471338812056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4610736227917656}
+  m_Layer: 0
+  m_Name: Boss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1587518589194246
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4396802952811280}
+  m_Layer: 0
+  m_Name: RightPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -536,6 +581,19 @@ Transform:
   m_Father: {fileID: 4779949994945300}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0.16000001, z: 4.1330004}
+--- !u!4 &4365811493761242
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1100860016543216}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.5, y: 4.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4610736227917656}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4383251342818408
 Transform:
   m_ObjectHideFlags: 1
@@ -563,6 +621,19 @@ Transform:
   m_Father: {fileID: 4585337132844802}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!4 &4396802952811280
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587518589194246}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 26.5, y: 4.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4610736227917656}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4402263380868294
 Transform:
   m_ObjectHideFlags: 1
@@ -583,7 +654,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199516453537558}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.9, z: 0}
+  m_LocalPosition: {x: 9.5, y: -3.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759625169812860}
@@ -612,6 +683,21 @@ Transform:
   m_Father: {fileID: 4688015828319168}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4610736227917656
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1575471338812056}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4365811493761242}
+  - {fileID: 4396802952811280}
+  m_Father: {fileID: 4688015828319168}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4688015828319168
 Transform:
   m_ObjectHideFlags: 1
@@ -619,7 +705,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1012259035278122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: 36.4456, y: 0.26474762, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4214019183666792}
@@ -631,6 +717,7 @@ Transform:
   - {fileID: 4779949994945300}
   - {fileID: 4585337132844802}
   - {fileID: 4383251342818408}
+  - {fileID: 4610736227917656}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1835,17 +1922,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2902cf71fd6347342bd841a57fed2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcStructIndex: 4
+  npcStructIndex: 9
   dir: 0
   spawnOnAwake: 0
   CurrentNpcStruct:
-    cid: 19200
-    name: doncina
-    nameKor: "\uB3C8\uC2DC\uB098"
-    grade: 0
+    cid: 19108
+    name: Head Hunter Ailliy
+    nameKor: "\uD604\uC0C1\uAE08 \uC0AC\uB0E5\uAFBC \uC5D0\uC77C\uB9AC"
+    grade: 3
     recognize: 1
-    recognizeValue: 10
-    skillValue: '{(19_MustleMustle),(19_HustleHustle)}'
+    recognizeValue: 20
+    skillValue: '{(19_Ailliy_ready_00), (19_Ailliy_ready_01), (19_Ailliy_00), (19_Ailliy_01)}'
     dropTable: '{(1103,2),(1105,2),(2105,2),(2106,2),(2108,2),(3100,1),(3101,1),(3102,1),(3103,1),(3104,1),(3105,1),(3106,1),(3107,1),(3108,1),(3109,1),(3110,1),(3111,1)}'
 --- !u!114 &114659164314410580
 MonoBehaviour:

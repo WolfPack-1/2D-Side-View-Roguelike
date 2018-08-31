@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 114849433727069436}
   - component: {fileID: 61925126758918764}
   - component: {fileID: 114681831503329266}
-  - component: {fileID: 114451668804808526}
+  - component: {fileID: 114344301140728316}
   m_Layer: 18
   m_Name: Head Hunter Ailliy
   m_TagString: Untagged
@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1422020446735404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.419752, y: 4.390009, z: 0}
+  m_LocalPosition: {x: 60.96792, y: 5.497223, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4403897187074736}
@@ -174,7 +174,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114451668804808526
+--- !u!114 &114344301140728316
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1422020446735404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52e1f4d3ba694644b68dd7383c83ae0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 26664a73c58485346aeeea14511b96fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseHp: 94
@@ -194,7 +194,7 @@ MonoBehaviour:
     cid: 0
     name: 
     nameKor: 
-    grade: 3
+    grade: 0
     recognize: 0
     recognizeValue: 0
     skillValue: 

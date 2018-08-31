@@ -198,6 +198,22 @@ public class PlayerController : Controller2D
         {
             player.CloseAllUI();
         }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            Area area = Area.Create(transform.position, 3, 1);
+            Collider2D[] cols = area.GetEntity(Area.AreaModeEnum.Box, "NPC");
+            foreach (Collider2D col in cols)
+            {
+                LivingEntity livingEntity = col.GetComponent<LivingEntity>();
+                if (livingEntity == null)
+                    continue;
+
+                livingEntity.GetDamaged(new DamageInfo(player, 10, transform.position, livingEntity.transform.position));
+                this.Log(livingEntity.name + "에게 " + "10의 데미지를 주었습니다.");
+            }
+            area.Delete();
+        }
     }
 
     void ContactCurrentInteractable()
@@ -266,7 +282,6 @@ public class PlayerController : Controller2D
             if (isDashing == false)
                 break;
             input = new Vector2(Mathf.Sign(transform.localScale.x) * -1f, 0);
-            Debug.Log(input);
             yield return null;
         }
     }
