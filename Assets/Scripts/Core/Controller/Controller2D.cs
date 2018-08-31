@@ -79,7 +79,7 @@ public class Controller2D : RaycastController
             collisions.below = true;
         }
 
-        Flip(moveAmount);
+        Flip(collisions.moveAmountOld);
     }
     
     void HorizontalCollisions(ref Vector2 moveAmount)
