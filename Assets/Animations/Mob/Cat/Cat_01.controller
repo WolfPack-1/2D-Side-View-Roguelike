@@ -38,6 +38,12 @@ AnimatorController:
     m_DefaultInt: 100
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: Phase
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -139,6 +145,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: DoSkill
     m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Phase
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102410003972344930}
   m_Solo: 0
@@ -214,6 +223,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: DoSkill
     m_EventTreshold: 0
+  - m_ConditionMode: 7
+    m_ConditionEvent: Phase
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102034471949203524}
   m_Solo: 0
